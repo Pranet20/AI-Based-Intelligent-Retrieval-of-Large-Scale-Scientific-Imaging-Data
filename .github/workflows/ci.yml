@@ -49,8 +49,6 @@ jobs:
   python-tests:
     name: Platform Regression Tests
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -72,19 +70,7 @@ jobs:
         env:
           PYTHONPATH: .:platform/backend
         run: |
-          set -o pipefail
-          python -m pytest tests/ platform/tests/ -ra -v --tb=short 2>&1 | tee test_log.txt
-
-      - name: Post Failure Diagnostics to Commit
-        if: failure()
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          DIAG_MSG=$(python3 -c "import sys, json; print(json.dumps({'body': '### CI Pytest Failure Diagnostic\n\`\`\`\n' + open('test_log.txt').read()[-4000:] + '\n\`\`\`'}))")
-          curl -s -X POST -H "Authorization: token $GH_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }}/comments \
-            -d "$DIAG_MSG" || true
+          python -m pytest tests/ platform/tests/ -q -ra
 
   frontend-build:
     name: Frontend React Production Build
