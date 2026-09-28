@@ -1,0 +1,55 @@
+Phase,Subsystem_or_Experiment,Metric_Name,Domain_Dataset,Authoritative_Value,Reported_Master_Value,Match_Status,Authoritative_Source_File,Resolution_Action
+Phase 2,Visual Foundation Retrieval,Recall@1,HCCI (N=774),0.9819,0.9819,EXACT_MATCH,reports/phase2/tables/retrieval_hcci.csv,Maintain authoritative value
+Phase 2,Visual Foundation Retrieval,MRR,HCCI (N=774),0.9894,0.9894,EXACT_MATCH,reports/phase2/tables/retrieval_hcci.csv,Maintain authoritative value
+Phase 2,Visual Foundation Retrieval,Recall@5,HCCI (N=774),1.0000,1.0000,EXACT_MATCH,reports/phase2/tables/retrieval_hcci.csv,Maintain authoritative value
+Phase 2,Visual Foundation Retrieval,Precision@5,HCCI (N=774),0.9693,0.9693,EXACT_MATCH,reports/phase2/tables/retrieval_hcci.csv,Maintain authoritative value
+Phase 2,Visual Foundation Retrieval,Micro-Recall@1,Carinthia (N=4591),0.9952,0.9952,EXACT_MATCH,reports/phase2/tables/retrieval_carinthia.csv,Maintain authoritative value
+Phase 2,Visual Foundation Retrieval,Micro-MRR,Carinthia (N=4591),0.9965,0.9965,EXACT_MATCH,reports/phase2/tables/retrieval_carinthia.csv,Maintain authoritative value
+Phase 2,Visual Foundation Retrieval,Macro-Recall@1,Carinthia (6 classes),0.9090,0.9090,EXACT_MATCH,reports/phase2/tables/retrieval_carinthia.csv,Maintain authoritative value
+Phase 2,Visual Foundation Retrieval,Macro-MRR,Carinthia (6 classes),0.9310,0.9310,EXACT_MATCH,reports/phase2/tables/retrieval_carinthia.csv,Maintain authoritative value
+Phase 3,FAISS IndexFlatIP,Search Latency (ms),Combined Benchmark (N=5365 d=384 K=10),0.7348,0.0820,MISMATCH_TYPO_IN_TEXT,reports/phase3/latency_benchmark.csv,Correct Phase 7 text to cite authoritative 0.7348 ms
+Phase 3,FAISS IndexFlatIP,Throughput (QPS),Combined Benchmark (N=5365 d=384 K=10),1360.95,12200.0,MISMATCH_TYPO_IN_TEXT,reports/phase3/latency_benchmark.csv,Correct Phase 7 text to cite authoritative 1360.95 QPS
+Phase 3,FAISS IndexFlatIP,Recall@10,Combined Benchmark (N=5365 d=384 K=10),1.0000,1.0000,EXACT_MATCH,reports/phase3/latency_benchmark.csv,Maintain authoritative value
+Phase 3,FAISS IndexHNSWFlat,Search Latency (ms),Combined Benchmark (N=5365 d=384 K=10),0.3691,0.0180,MISMATCH_TYPO_IN_TEXT,reports/phase3/latency_benchmark.csv,Correct Phase 7 text to cite authoritative 0.3691 ms
+Phase 3,FAISS IndexHNSWFlat,Throughput (QPS),Combined Benchmark (N=5365 d=384 K=10),2709.01,55500.0,MISMATCH_TYPO_IN_TEXT,reports/phase3/latency_benchmark.csv,Correct Phase 7 text to cite authoritative 2709.01 QPS
+Phase 3,FAISS IndexHNSWFlat,Recall@10,Combined Benchmark (N=5365 d=384 K=10),0.9998,0.9998,EXACT_MATCH,reports/phase3/latency_benchmark.csv,Maintain authoritative value
+Phase 3,FAISS IndexHNSWFlat,Speedup Ratio,Combined Benchmark (N=5365 d=384 K=10),1.99x,4.5x,MISMATCH_DERIVED_FROM_TYPO,reports/phase3/latency_benchmark.csv,Correct speedup claim to 1.99x (0.7348 / 0.3691)
+Phase 4,Representation Invariance,DINOv2 Baseline Within-Acq Cosine,HCCI Cross-Acquisition Pairs,0.7973,0.8876,MISMATCH_TYPO_IN_TEXT,data/processed/phase4/metrics/phase4_evaluation_results.json,Correct Phase 7 narrative baseline to 0.7973
+Phase 4,Representation Invariance,DINOv2 Baseline Cross-Acq Cosine,HCCI Cross-Acquisition Pairs,0.5979,0.6882,MISMATCH_TYPO_IN_TEXT,data/processed/phase4/metrics/phase4_evaluation_results.json,Correct Phase 7 narrative baseline to 0.5979
+Phase 4,Representation Invariance,DINOv2 Baseline Acq Ratio (%),HCCI Cross-Acquisition Pairs,74.99%,77.53%,MISMATCH_TYPO_IN_TEXT,data/processed/phase4/metrics/phase4_evaluation_results.json,Correct Phase 7 baseline ratio to 74.99%
+Phase 4,Representation Invariance,DINOv2 Baseline Sim Gap,HCCI Cross-Acquisition Pairs,0.1994,0.1994,EXACT_MATCH,data/processed/phase4/metrics/phase4_evaluation_results.json,Maintain gap value 0.1994
+Phase 4,Representation Invariance,Proposed SupCon Within-Acq Cosine,HCCI Cross-Acquisition Pairs (Seed 42),0.9199,0.9199,EXACT_MATCH,data/processed/phase4/metrics/phase4_evaluation_results.json,Maintain authoritative value
+Phase 4,Representation Invariance,Proposed SupCon Cross-Acq Cosine,HCCI Cross-Acquisition Pairs (Seed 42),0.8564,0.8564,EXACT_MATCH,data/processed/phase4/metrics/phase4_evaluation_results.json,Maintain authoritative value
+Phase 4,Representation Invariance,Proposed SupCon Acq Ratio (%),HCCI Cross-Acquisition Pairs (Seed 42),93.10%,93.10%,EXACT_MATCH,data/processed/phase4/metrics/phase4_evaluation_results.json,Maintain authoritative value
+Phase 4,Representation Invariance,Proposed SupCon Sim Gap,HCCI Cross-Acquisition Pairs (Seed 42),0.0635,0.0635,EXACT_MATCH,data/processed/phase4/metrics/phase4_evaluation_results.json,Maintain authoritative value
+Phase 4,Representation Invariance,Relative Gap Reduction (%),HCCI Cross-Acquisition Pairs (Seed 42),68.15%,68.15%,EXACT_MATCH,data/processed/phase4/metrics/phase4_evaluation_results.json,Maintain authoritative value
+Phase 4,Representation Invariance,Multi-Seed Cross-Acq Cosine Mean,HCCI 5-Seed Evaluation,0.8541 +/- 0.0032,0.8541 +/- 0.0032,EXACT_MATCH,reports/phase4/tables/table4_multiseed.csv,Maintain authoritative value
+Phase 4,Representation Invariance,Linear Probe Accuracy,HCCI Cross-Acquisition Classifier,98.71%,98.71%,EXACT_MATCH,reports/phase4/tables/table4_linear_probe.csv,Maintain authoritative value
+Phase 5,Metadata-Guided Retrieval,Metadata-Only Recall@1,HCCI Test Split (N=212 queries),0.3349,0.3349,EXACT_MATCH,reports/phase5/tables/table_main_test_results.csv,Maintain authoritative value
+Phase 5,Metadata-Guided Retrieval,Metadata-Only MRR,HCCI Test Split (N=212 queries),0.3443,0.3443,EXACT_MATCH,reports/phase5/tables/table_main_test_results.csv,Maintain authoritative value
+Phase 5,Metadata-Guided Retrieval,Metadata-Only Recall@5,HCCI Test Split (N=212 queries),0.3349,0.3349,EXACT_MATCH,reports/phase5/tables/table_main_test_results.csv,Maintain authoritative value
+Phase 5,Metadata-Guided Retrieval,Metadata-Only Precision@5,HCCI Test Split (N=212 queries),0.3349,0.3349,EXACT_MATCH,reports/phase5/tables/table_main_test_results.csv,Maintain authoritative value
+Phase 5,Metadata-Guided Retrieval,Optimal Fusion Weight (alpha*),HCCI Validation Split (Groups A-F),1.0000,1.0000,EXACT_MATCH,reports/phase5/tables/table_alpha_ablation.csv,Maintain authoritative value (visual dominance)
+Phase 5,Metadata-Guided Retrieval,Visual-Only Recall@1,HCCI Test Split (N=212 queries),0.9858,0.9858,EXACT_MATCH,reports/phase5/tables/table_main_test_results.csv,Maintain authoritative value
+Phase 5,Metadata-Guided Retrieval,Visual-Only MRR,HCCI Test Split (N=212 queries),0.9912,0.9912,EXACT_MATCH,reports/phase5/tables/table_main_test_results.csv,Maintain authoritative value
+Phase 6,Data Curation & Redundancy,Total Redundancy Clusters,HCCI Dataset (N=774),769,769,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 6,Data Curation & Redundancy,Singleton Clusters (KEEP),HCCI Dataset (N=774),764,764,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 6,Data Curation & Redundancy,Pair Clusters (2 images each),HCCI Dataset (N=774),5,5,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 6,Data Curation & Redundancy,Redundancy Action Semantics,HCCI Redundancy Graph,769 KEEP / 5 REVIEW (764 singletons + 5 keepers + 5 duplicates),769 KEEP 5 REVIEW,EXACT_MATCH_SEMANTICALLY_CLARIFIED,reports/phase6/PHASE6_REPORT.md,Document non-mutually exclusive semantics explicitly
+Phase 6,Data Curation & Redundancy,Exported Natural Review Queue Depth,HCCI Natural Review Queue,50,100,MISMATCH_TYPO_IN_TEXT,configs/phase6.yaml,Correct Phase 7 text to top_n=50 exported queue
+Phase 6,Quality Risk Assessment,Synthetic Benchmark Degraded Count,Synthetic Controlled Evaluation,100,100,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 6,Quality Risk Assessment,Synthetic Benchmark Nominal Count,Synthetic Controlled Evaluation,20,20,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 6,Quality Risk Assessment,Composite Quality Risk AUROC,Controlled Synthetic Evaluation (N=120),0.8803,0.9124,MISMATCH_TYPO_IN_TEXT,reports/phase6/PHASE6_REPORT.md,Correct Phase 7 Table 6 AUROC to authoritative 0.8803
+Phase 6,Quality Risk Assessment,Composite Quality Risk AUPRC,Controlled Synthetic Evaluation (N=120),0.9618,0.9742,MISMATCH_TYPO_IN_TEXT,reports/phase6/PHASE6_REPORT.md,Correct Phase 7 Table 6 AUPRC to authoritative 0.9618
+Phase 6,Quality Risk Assessment,Focus/Blur Detector AUROC,Controlled Synthetic Evaluation,0.8925,0.8925,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 6,Quality Risk Assessment,Noise Anomaly AUROC,Controlled Synthetic Evaluation,0.9412,0.9412,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 6,Quality Risk Assessment,Contrast Anomaly AUROC,Controlled Synthetic Evaluation,0.8540,0.8540,EXACT_MATCH,reports/phase6/PHASE6_REPORT.md,Maintain authoritative value
+Phase 7,Cross-Domain Generalization,Zero-Shot Recall@1,SEM Nanoscience Benchmark,0.7420,0.7420,EXACT_MATCH,reports/phase7/tables/table_cross_domain.csv,Maintain authoritative value
+Phase 7,Cross-Domain Generalization,Zero-Shot Recall@1,atomagined Benchmark,0.6850,0.6850,EXACT_MATCH,reports/phase7/tables/table_cross_domain.csv,Maintain authoritative value
+Phase 7,Cross-Domain Generalization,Zero-Shot Recall@1,cigRockSEM Benchmark,0.7180,0.7180,EXACT_MATCH,reports/phase7/tables/table_cross_domain.csv,Maintain authoritative value
+Phase 7,Cross-Domain Generalization,Zero-Shot Recall@1,MicroAl Benchmark,0.8120,0.8120,EXACT_MATCH,reports/phase7/tables/table_cross_domain.csv,Maintain authoritative value
+Phase 7,Statistical Validation,SupCon vs DINOv2 Paired t-test p-value,HCCI Cross-Acquisition Invariance,1.42e-12,1.42e-12,EXACT_MATCH,reports/phase7/tables/table_statistical_tests.csv,Maintain authoritative value
+Phase 8,Platform Integration,Backend Automated Test Suite,FastAPI / PyTorch Platform Suite,218/218 Passed,218/218 Passed,EXACT_MATCH,reports/phase8/PHASE8_REPORT.md,Maintain authoritative value
+Phase 8,Platform Integration,Frozen Research Parity Checksum Count,Phases 1-7 Authoritative Checksums,110/110 Verified,110/110 Verified,EXACT_MATCH,artifacts/phase8/pre_phase8_frozen_checksums.json,Maintain authoritative value
+Phase 8,Platform Integration,DINOv2 Research-to-Platform L_inf,TorchScript Parity Evaluation,< 1.0e-6,< 1.0e-6,EXACT_MATCH,reports/phase8/PHASE8_REPORT.md,Maintain authoritative value
+Phase 8,Platform Integration,Phase 4 Research-to-Platform L_inf,TorchScript Parity Evaluation,< 1.0e-6,< 1.0e-6,EXACT_MATCH,reports/phase8/PHASE8_REPORT.md,Maintain authoritative value

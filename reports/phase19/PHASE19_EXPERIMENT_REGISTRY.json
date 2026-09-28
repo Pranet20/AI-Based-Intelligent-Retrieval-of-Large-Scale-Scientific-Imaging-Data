@@ -1,0 +1,218 @@
+{
+  "phase": "Phase 19 External Scientific Validation & Audited Registry",
+  "audit_timestamp": "2026-09-27T16:00:00Z",
+  "status": "VALIDATED_WITH_LIMITATIONS",
+  "physical_eds_status": "NOT_EXECUTED (Engineering Synthetic Only)",
+  "experiments": {
+    "P19-EXP-01": {
+      "experiment_id": "P19-EXP-01",
+      "hypothesis": "Frozen DINOv2 ViT-S/14 representations transfer zero-shot to external defect SEM micrographs without retraining.",
+      "dataset": "Carinthia Defect SEM",
+      "independence": "PREVIOUSLY_EVALUATED (Evaluated in Phase 2/14; unadapted in Phase 19)",
+      "protocol": "Nearest-neighbor class retrieval / class-consistency evaluation (leave-one-out query against 4590 gallery images)",
+      "model": "DINOv2 ViT-S/14 (Frozen, 22.0M parameters)",
+      "parameters": {"input_size": 224, "norm": "L2", "dim": 384, "metric": "cosine"},
+      "seed": 42,
+      "metrics": {
+        "micro_recall_at_1": 0.9952,
+        "macro_recall_at_1": 0.9090,
+        "mrr": 0.9961,
+        "precision_at_5": 0.9882,
+        "class_1_r1": 0.8545,
+        "class_2_r1": 0.8750,
+        "class_3_r1": 0.9988,
+        "class_4_r1": 0.9758,
+        "class_5_r1": 0.7500,
+        "class_6_r1": 1.0000
+      },
+      "result": "4569 of 4591 queries correctly matched to their ground-truth defect class.",
+      "statistical_method": "Wilson score 95% confidence intervals ([0.9928, 0.9971])",
+      "artifact": "reports/phase19/PHASE19_EXTERNAL_VALIDATION_RESULTS.csv",
+      "status": "SUPPORTED_WITH_LIMITATIONS"
+    },
+    "P19-EXP-02": {
+      "experiment_id": "P19-EXP-02",
+      "hypothesis": "Cross-domain representation shift across distinct microscopes and modalities is statistically significant.",
+      "dataset": "HCCI (In-Domain), Carinthia (Defect SEM), SEM Nanoscience, Bio-Image TEM",
+      "independence": "HCCI/Carinthia/TEM: PREVIOUSLY_EVALUATED; SEM Nanoscience: INDEPENDENT_EXTERNAL",
+      "protocol": "Maximum Mean Discrepancy (MMD^2) and centroid cosine distance between in-domain and target embeddings",
+      "model": "DINOv2 ViT-S/14 (Frozen)",
+      "parameters": {"kernel": "RBF", "bandwidth": "median_heuristic"},
+      "seed": 42,
+      "metrics": {
+        "carinthia_mmd2": 0.3842,
+        "nanoscience_mmd2": 0.3120,
+        "tem_mmd2": 0.5410,
+        "permutation_p_value": 0.0001
+      },
+      "result": "All cross-domain distribution shifts are statistically significant (p = 0.0001); TEM cross-modality shift is greatest.",
+      "statistical_method": "Two-sample non-parametric permutation test (10,000 resamples)",
+      "artifact": "reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json",
+      "status": "SUPPORTED"
+    },
+    "P19-EXP-03": {
+      "experiment_id": "P19-EXP-03",
+      "hypothesis": "Representation quality remains robust under moderate digital/optical perturbations but exhibits a breakdown threshold.",
+      "dataset": "Carinthia Defect SEM (Perturbed)",
+      "independence": "PREVIOUSLY_EVALUATED (Perturbed variants)",
+      "protocol": "Zero-shot class retrieval evaluated under Gaussian noise, defocus blur, and contrast perturbations",
+      "model": "DINOv2 ViT-S/14 (Frozen)",
+      "parameters": {"noise_sigmas": [0.05, 0.10, 0.20], "blur_sigmas": [1.0, 2.0, 3.0], "contrast_deltas": [-0.3, 0.3]},
+      "seed": 42,
+      "metrics": {
+        "clean_baseline_r1": 0.9952,
+        "noise_sigma_005_retention_pct": 96.66,
+        "blur_sigma_1_retention_pct": 92.85,
+        "blur_sigma_2_retention_pct": 83.50,
+        "blur_sigma_3_retention_pct": 69.83,
+        "contrast_30pct_retention_pct": 97.57
+      },
+      "result": "High retention under noise and contrast (>96%), but heavy defocus blur (sigma >= 2.0) degrades retrieval to 69.83%.",
+      "statistical_method": "Empirical accuracy retention percentage calculation across 8 perturbation levels",
+      "artifact": "reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json",
+      "status": "SUPPORTED_WITH_LIMITATIONS"
+    },
+    "P19-EXP-04": {
+      "experiment_id": "P19-EXP-04",
+      "hypothesis": "Perceptual hashing combined with cosine similarity screening identifies near-duplicate micrographs in external archives.",
+      "dataset": "SEM Images for Nanoscience",
+      "independence": "INDEPENDENT_EXTERNAL",
+      "protocol": "Dual-stage filtering: 64-bit dHash Hamming distance <= 5 followed by cosine similarity >= 0.985",
+      "model": "Perceptual dHash + DINOv2 ViT-S/14",
+      "parameters": {"dhash_bits": 64, "hamming_tau": 5, "cosine_tau": 0.985},
+      "seed": 42,
+      "metrics": {
+        "precision": 0.9740,
+        "recall": 0.9880,
+        "f1_score": 0.9810,
+        "false_positive_rate": 0.0120
+      },
+      "result": "Effective near-duplicate screening with 97.4% precision and 1.2% false positive rate.",
+      "statistical_method": "Standard binary classification evaluation against annotated pairs",
+      "artifact": "reports/phase19/PHASE19_EXTERNAL_VALIDATION_RESULTS.csv",
+      "status": "SUPPORTED"
+    },
+    "P19-EXP-05": {
+      "experiment_id": "P19-EXP-05",
+      "hypothesis": "Unsupervised gradient energy metrics discriminate sharp from defocused micrographs on external instruments.",
+      "dataset": "External SEM Quality Benchmark",
+      "independence": "INDEPENDENT_EXTERNAL / HELD_OUT",
+      "protocol": "Tenengrad / modified Laplacian variance computed over 2D grayscale intensity maps",
+      "model": "Tenengrad Gradient Energy Operator",
+      "parameters": {"sobel_kernel_size": 3, "blur_threshold": "unsupervised_median"},
+      "seed": 42,
+      "metrics": {
+        "focus_auroc": 0.8640,
+        "focus_auprc": 0.9320,
+        "brier_score": 0.0812
+      },
+      "result": "AUROC = 0.8640 (95% CI: [0.8420, 0.8850]), reliably separating sharp from defocused acquisitions.",
+      "statistical_method": "DeLong's method for non-parametric ROC curve standard error",
+      "artifact": "reports/phase19/PHASE19_EXTERNAL_VALIDATION_RESULTS.csv",
+      "status": "SUPPORTED"
+    },
+    "P19-EXP-06": {
+      "experiment_id": "P19-EXP-06",
+      "hypothesis": "k-NN embedding density detects morphological novelty and cross-domain distribution shifts.",
+      "dataset": "HCCI (In-Domain) vs Carinthia / Nanoscience (Cross-Domain)",
+      "independence": "Cross-domain evaluation",
+      "protocol": "Distance to k=5 nearest neighbors in in-domain reference memory bank",
+      "model": "DINOv2 ViT-S/14 k-NN Density Estimator",
+      "parameters": {"k": 5, "metric": "euclidean", "target_tpr": 0.95},
+      "seed": 42,
+      "metrics": {
+        "ood_auroc": 0.8910,
+        "ood_auprc": 0.9140,
+        "fpr_at_95_tpr": 0.2450
+      },
+      "result": "AUROC = 0.8910; FPR at 95% TPR is 24.50%, indicating human triage is required for borderline cases.",
+      "statistical_method": "Non-parametric ROC curve analysis and operating point evaluation",
+      "artifact": "reports/phase19/PHASE19_EXTERNAL_VALIDATION_RESULTS.csv",
+      "status": "SUPPORTED_WITH_LIMITATIONS"
+    },
+    "P19-EXP-07": {
+      "experiment_id": "P19-EXP-07",
+      "hypothesis": "Minimum distance to in-domain reference set (D_ref) provides a discriminative signal for domain shift.",
+      "dataset": "HCCI vs Carinthia vs SEM Nanoscience",
+      "independence": "Multi-corpus evaluation",
+      "protocol": "L2 distance computation to closest in-domain reference exemplar",
+      "model": "DINOv2 ViT-S/14 Latent Distance Metric",
+      "parameters": {"norm": "L2", "quantiles": 10},
+      "seed": 42,
+      "metrics": {
+        "in_domain_d_ref_mean": 0.2410,
+        "in_domain_d_ref_std": 0.0650,
+        "carinthia_d_ref_mean": 0.5120,
+        "carinthia_d_ref_std": 0.1180,
+        "nanoscience_d_ref_mean": 0.4850,
+        "nanoscience_d_ref_std": 0.1040,
+        "separation_ratio": 2.12
+      },
+      "result": "External corpora show clear rightward distance shift (2.12x in-domain); probability calibration not claimed.",
+      "statistical_method": "Two-sample t-test for difference in means (t=38.4, p < 1e-12)",
+      "artifact": "reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json",
+      "status": "SUPPORTED_WITH_LIMITATIONS"
+    },
+    "P19-EXP-08": {
+      "experiment_id": "P19-EXP-08",
+      "hypothesis": "Automated curation triage prioritization aligns with double-blinded expert review decisions.",
+      "dataset": "Curated Review Queue (120 stratified micrographs)",
+      "independence": "Independent expert annotators; zero label leakage to training",
+      "protocol": "Double-blinded review of 120 stratified cases by 2 independent domain experts",
+      "model": "Platform Curation Prioritization Pipeline",
+      "parameters": {"sample_size": 120, "stratification": "60_high_30_borderline_30_control"},
+      "seed": 42,
+      "metrics": {
+        "inter_annotator_kappa": 0.8420,
+        "expert_confirmed_cases": 110,
+        "actionable_curation_precision": 0.9167
+      },
+      "result": "Substantial agreement (kappa = 0.8420); 110 of 120 cases confirmed as actionable curation items.",
+      "statistical_method": "Unweighted Cohen's kappa (95% CI: [0.768, 0.916])",
+      "artifact": "reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json",
+      "status": "SUPPORTED"
+    },
+    "P19-EXP-09": {
+      "experiment_id": "P19-EXP-09",
+      "hypothesis": "The automated ingestion pipeline ingests held-out external micrographs with full provenance logging.",
+      "dataset": "Held-Out External SEM Micrographs (100 images)",
+      "independence": "Held-out batch from external SEM pool",
+      "protocol": "Automated pipeline ingestion: feature extraction, metadata validation, focus scoring, index insertion",
+      "model": "Platform End-to-End Ingestion Service",
+      "parameters": {"batch_size": 100, "async_workers": 4},
+      "seed": 42,
+      "metrics": {
+        "batch_size": 100,
+        "elapsed_seconds": 6.756,
+        "throughput_img_per_sec": 14.80,
+        "success_rate_pct": 100.0,
+        "error_count": 0,
+        "provenance_events": 100
+      },
+      "result": "100/100 images ingested with zero errors (14.80 img/s); 100 SHA-256 provenance records logged.",
+      "statistical_method": "Deterministic execution count and cryptographic hash verification",
+      "artifact": "reports/phase19/PHASE19_EXTERNAL_VALIDATION_RESULTS.csv",
+      "status": "SUPPORTED"
+    },
+    "P19-EXP-10": {
+      "experiment_id": "P19-EXP-10",
+      "hypothesis": "DINOv2 ViT-S/14 representations yield higher nearest-neighbor class consistency than CLIP and ResNet-50.",
+      "dataset": "Carinthia Defect SEM (Previously Evaluated Corpus)",
+      "independence": "PREVIOUSLY_EVALUATED benchmark",
+      "protocol": "Comparative evaluation of DINOv2 vs CLIP ViT-B/32 and ImageNet ResNet-50",
+      "model": "DINOv2 ViT-S/14 vs CLIP ViT-B/32 vs ResNet-50",
+      "parameters": {"dinov2_dim": 384, "clip_dim": 512, "resnet_dim": 2048},
+      "seed": 42,
+      "metrics": {
+        "dinov2_micro_r1": 0.9952,
+        "clip_micro_r1": 0.7840,
+        "resnet50_micro_r1": 0.6420,
+        "random_baseline_r1": 0.1667
+      },
+      "result": "DINOv2 achieved higher Micro R@1 (0.9952) than CLIP (0.7840) and ResNet-50 (0.6420) on SEM defect data.",
+      "statistical_method": "Descriptive point estimates; inferential p-value demoted due to absence of persisted paired query arrays",
+      "artifact": "reports/phase19/external_validation/P19_CLIP_BASELINE_CARD.md",
+      "status": "DESCRIPTIVE_ONLY"
+    }
+  }
+}

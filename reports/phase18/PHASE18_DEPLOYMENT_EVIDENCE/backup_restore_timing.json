@@ -1,0 +1,38 @@
+{
+  "timestamp_utc": "2026-09-27T09:49:11.889768+00:00",
+  "database_type": "SQLite3 (Local / Edge / Testing)",
+  "source_db_size_bytes": 200704,
+  "backup_duration_seconds": 0.01,
+  "backup_throughput_mb_per_sec": 19.23,
+  "restore_duration_seconds": 0.0077,
+  "restore_throughput_mb_per_sec": 24.86,
+  "backup_sha256": "8e1f95108086d0f25b5ff01bc47d38c314c275494a1b3474cf4f5f78018d0239",
+  "integrity_verified": true,
+  "tables_verified": {
+    "users": 7,
+    "model_versions": 2,
+    "processing_runs": 0,
+    "projects": 0,
+    "audit_logs": 0,
+    "images": 1,
+    "image_metadata": 1,
+    "embeddings": 2,
+    "quality_profiles": 1,
+    "duplicate_profiles": 1,
+    "provenance_events": 6,
+    "retrieval_queries": 0,
+    "review_items": 0,
+    "retrieval_results": 0
+  },
+  "rpo_policy": {
+    "target_seconds": 3600,
+    "target_human": "1 hour (scheduled automated hourly snapshots)",
+    "compliance_status": "COMPLIANT"
+  },
+  "rto_policy": {
+    "target_seconds": 300,
+    "target_human": "< 5 minutes (automated cold/warm restore)",
+    "achieved_seconds": 0.0077,
+    "compliance_status": "COMPLIANT"
+  }
+}

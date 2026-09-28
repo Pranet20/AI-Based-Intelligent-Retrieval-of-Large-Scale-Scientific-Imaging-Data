@@ -1,0 +1,4 @@
+method_id,method_name,mathematical_formulation,auroc_correctness,auprc_correctness,brier_score,high_confidence_acc,low_confidence_acc,delta_auroc_vs_margin,method_verdict
+UNC-01,Raw Score Margin Heuristic,S1 - S2 (Cosine Difference),0.5146,0.9482,0.0491,0.9528,0.9340,Baseline,Near-random discrimination (Compressed space)
+UNC-02,Softmax Entropy (T=0.1),Negative Shannon Entropy over Top-10,0.6845,0.9678,0.0421,0.9717,0.9245,+0.1699,Moderate discriminative improvement
+UNC-03,Latent Distance-to-Reference Centroid,Negative Euclidean Distance to Cluster Centroid,0.7412,0.9784,0.0365,0.9811,0.9151,+0.2266,Statistically superior discrimination (H3 Supported)

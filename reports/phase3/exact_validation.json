@@ -1,0 +1,36 @@
+{
+  "hcci": {
+    "top1_agreement_rate": 1.0,
+    "top5_agreement_rate": 1.0,
+    "top10_agreement_rate": 1.0,
+    "reference_metrics": {
+      "total_queries": 774,
+      "evaluated_queries": 774,
+      "no_valid_positive_queries": 0,
+      "mrr": 0.9894487510766581,
+      "recall_at_1": 0.9819121447028424,
+      "precision_at_1": 0.9819121447028424,
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.9692506459948321,
+      "recall_at_10": 1.0,
+      "precision_at_10": 0.9465116279069767
+    }
+  },
+  "carinthia": {
+    "top1_agreement_rate": 1.0,
+    "top5_agreement_rate": 1.0,
+    "top10_agreement_rate": 1.0,
+    "reference_metrics": {
+      "total_queries": 4591,
+      "evaluated_queries": 4591,
+      "no_valid_positive_queries": 0,
+      "mrr": 0.9964919865021451,
+      "recall_at_1": 0.9952080156828578,
+      "precision_at_1": 0.9952080156828578,
+      "recall_at_5": 0.9978218253103899,
+      "precision_at_5": 0.9930298409932476,
+      "recall_at_10": 0.998257460248312,
+      "precision_at_10": 0.9913090829884558
+    }
+  }
+}

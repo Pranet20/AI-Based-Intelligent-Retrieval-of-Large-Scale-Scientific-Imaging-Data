@@ -1,0 +1,126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SciData Platform API",
+    "version": "1.0.0",
+    "description": "Production Research Platform for AI-Powered Scientific Image Data Management"
+  },
+  "paths": {
+    "/api/v1/auth/token": {
+      "methods": [
+        "POST"
+      ],
+      "description": "OAuth2 password bearer authentication token"
+    },
+    "/api/v1/auth/me": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Retrieve authenticated user identity and role"
+    },
+    "/api/v1/projects": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "description": "List all research projects or register a new project"
+    },
+    "/api/v1/projects/{id}": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Retrieve project details and micrograph statistics"
+    },
+    "/api/v1/images/upload": {
+      "methods": [
+        "POST"
+      ],
+      "description": "Execute 14-step idempotent scientific image ingestion"
+    },
+    "/api/v1/images": {
+      "methods": [
+        "GET"
+      ],
+      "description": "List micrographs with metadata, quality, and duplicate status"
+    },
+    "/api/v1/images/{id}": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Get complete image profile with 6-indicator quality risk and duplicate cascade"
+    },
+    "/api/v1/images/{id}/file": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Serve immutable high-resolution original image"
+    },
+    "/api/v1/images/{id}/thumbnail": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Serve 256x256 web display thumbnail"
+    },
+    "/api/v1/images/{id}/similar": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Retrieve top-K similar micrographs using exact FAISS index"
+    },
+    "/api/v1/search/vector": {
+      "methods": [
+        "POST"
+      ],
+      "description": "Exact cosine similarity vector search"
+    },
+    "/api/v1/search/hybrid": {
+      "methods": [
+        "POST"
+      ],
+      "description": "Hybrid visual + scientific metadata retrieval (Phase 5 fusion)"
+    },
+    "/api/v1/curation/review-queue": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Get prioritized curation queue sorted by composite diagnostic risk"
+    },
+    "/api/v1/curation/reviews": {
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "description": "Submit human curator decision or view completed reviews"
+    },
+    "/api/v1/models": {
+      "methods": [
+        "GET"
+      ],
+      "description": "List registered models with verified checkpoint SHA-256 hashes"
+    },
+    "/api/v1/provenance/image/{id}": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Complete cryptographic event history and audit trail"
+    },
+    "/api/v1/system/health": {
+      "methods": [
+        "GET"
+      ],
+      "description": "System health check and FAISS index count"
+    },
+    "/api/v1/system/version": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Pinned model versions and schema versions"
+    },
+    "/api/v1/dashboard/stats": {
+      "methods": [
+        "GET"
+      ],
+      "description": "Live database-derived dashboard statistics (no hardcoded metrics)"
+    }
+  }
+}

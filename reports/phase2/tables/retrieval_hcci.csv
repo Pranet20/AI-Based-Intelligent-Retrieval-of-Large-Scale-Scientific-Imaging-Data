@@ -1,0 +1,2 @@
+total_queries,evaluated_queries,no_valid_positive_queries,mrr,recall_at_1,precision_at_1,recall_at_5,precision_at_5,recall_at_10,precision_at_10,dataset,protocol
+774,774,0,0.9894487510766581,0.9819121447028424,0.9819121447028424,1.0,0.9692506459948321,1.0,0.9465116279069767,hcci,condition_invariance_same_specimen

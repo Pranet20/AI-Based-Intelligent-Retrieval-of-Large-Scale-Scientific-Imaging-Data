@@ -1,0 +1,12 @@
+failure_id,query_sample_id,true_instrument_split,retrieved_top1_id,failure_category,root_cause_description,visual_artifact_present,severity_impact
+F-01,SEM_Q_0042,Zeiss_Gemini_BSE,SEM_DB_0811,BSE_CONTRAST_CLIPPING,Detector gain over-saturation causing flattened intensity histogram,Over-saturation,High
+F-02,SEM_Q_0078,Zeiss_Gemini_BSE,SEM_DB_1204,BSE_CONTRAST_CLIPPING,Severe black clipping in low-atomic-number matrix,Clipping,Medium
+F-03,SEM_Q_0115,Zeiss_Gemini_BSE,SEM_DB_0492,BSE_CONTRAST_CLIPPING,Uneven illumination gradient across edge of field,Illumination Gradient,Medium
+F-04,SEM_Q_0023,Zeiss_Gemini_SE,SEM_DB_2109,CARBIDE_GRAIN_AMBIGUITY,Fine sub-micron carbide precipitate cluster resembling intergranular pore,Morphology Ambiguity,High
+F-05,SEM_Q_0089,Zeiss_Gemini_SE,SEM_DB_1740,CARBIDE_GRAIN_AMBIGUITY,Eutectic lamellar spacing variance across boundary,Morphology Ambiguity,Medium
+F-06,SEM_Q_0144,Zeiss_Gemini_SE,SEM_DB_0933,CARBIDE_GRAIN_AMBIGUITY,High-aspect-ratio platelet morphology confused with needle-like martensite,Morphology Ambiguity,Medium
+F-07,SEM_Q_0192,Zeiss_Gemini_SE,SEM_DB_1521,CARBIDE_GRAIN_AMBIGUITY,Dislocation cell wall network indistinguishable at 10000x from sub-grain boundary,Magnification Limit,Low
+F-08,SEM_Q_0056,Zeiss_Gemini_InLens,SEM_DB_0312,BEAM_DRIFT_ASTIGMATISM,Rapid scan line distortion and astigmatism elongation along x-axis,Beam Drift,High
+F-09,SEM_Q_0167,Zeiss_Gemini_InLens,SEM_DB_2201,BEAM_DRIFT_ASTIGMATISM,Charging-induced horizontal banding across lower third of image,Charging Striping,High
+F-10,SEM_Q_0012,Zeiss_Gemini_SE,SEM_DB_0155,SCALEBAR_OVERLAY_INCURSION,Burned-in measurement annotation banner overlapping specimen feature,Overlay Incursion,Medium
+F-11,SEM_Q_0138,Zeiss_Gemini_SE,SEM_DB_0784,SCALEBAR_OVERLAY_INCURSION,Micron scale font and tick marks altering top-1 patch embedding,Overlay Incursion,Low

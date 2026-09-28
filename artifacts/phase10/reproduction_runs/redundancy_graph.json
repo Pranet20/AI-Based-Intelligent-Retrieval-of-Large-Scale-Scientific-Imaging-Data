@@ -1,0 +1,14 @@
+{
+  "task": "redundancy_graph",
+  "total_images": 774,
+  "total_clusters": 769,
+  "singleton_clusters": 764,
+  "pair_clusters": 5,
+  "arithmetic_check": "764*1 + 5*2 = 774",
+  "actions": {
+    "keep_count": 769,
+    "review_count": 5
+  },
+  "action_semantics": "Every cluster has exactly one canonical sharpest representative image assigned KEEP (764 singletons + 5 pair representatives = 769 KEEP images). The 5 secondary near-duplicate micrographs in the pair clusters are assigned REVIEW (5 REVIEW images). Sum: 769 KEEP + 5 REVIEW = 774 images across 769 clusters (764*1 + 5*2 = 774).",
+  "parity_status": "REPRODUCED_EXACTLY"
+}

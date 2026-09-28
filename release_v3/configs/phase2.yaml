@@ -1,0 +1,50 @@
+phase: 2
+experiment_id: "phase2_dinov2_vits14_baseline_001"
+
+model:
+  name: "dinov2_vits14"
+  pretrained: true
+  trainable: false
+  source: "https://github.com/facebookresearch/dinov2"
+  hub_repo: "facebookresearch/dinov2"
+  weights: "dinov2_vits14_pretrain"
+  expected_embedding_dimension: 384
+  expected_parameter_count: 22056576
+
+preprocessing:
+  version: "1.0.0"
+  image_size: [224, 224]
+  interpolation: "bicubic"
+  antialias: true
+  grayscale_policy: "replicate_to_rgb"
+  color_policy: "preserve_rgb_strip_alpha"
+  normalization:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+  random_augmentation: false
+  preserve_source: true
+
+embedding:
+  normalize: true
+  batch_size: 16
+  storage_dir: "data/processed/embeddings"
+  manifest_path: "data/manifests/phase2_embedding_manifest.parquet"
+
+datasets:
+  - hcci
+  - carinthia
+
+evaluation:
+  metrics:
+    - recall_at_1
+    - recall_at_5
+    - recall_at_10
+    - mrr
+    - precision_at_k
+  k_values: [1, 5, 10]
+  hcci_group_field: "specimen_id"
+  hcci_condition_field: "acquisition_id"
+  carinthia_label_field: "label"
+
+reproducibility:
+  seed: 42

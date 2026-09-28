@@ -1,0 +1,13 @@
+subsystem_id,subsystem_name,phase_scope,audit_status,historical_invariants_preserved,reproducibility_level,remaining_limitations,signoff_recommendation
+SUB-01,Dataset Curation & Ingestion,Phase 1 & 2 & 10,VERIFIED_COMPLETE,YES (128/128 frozen checksums intact),HIGH (deterministic manifests),Zenodo raw image redistributions restricted by academic rights terms,APPROVED_WITH_RIGHTS_RESERVATION
+SUB-02,Visual Representation Learning,Phase 3 & 4 & 13,VERIFIED_COMPLETE,YES (DINOv2 B3 R@1=0.9481; Checkpoint SHA verified),FULL (deterministic seed 42),None (Frozen backbone and adapter),APPROVED_UNCONDITIONALLY
+SUB-03,Acquisition Shift Adaptation,Phase 4 & 13,VERIFIED_COMPLETE,YES (68.15% gap reduction verified p=1.42e-12),FULL (frozen PyTorch checkpoint),Scoped strictly to same-specimen cross-detector retrieval,APPROVED_SCOPED
+SUB-04,Vector Indexing & Retrieval Engine,Phase 5 & 13,VERIFIED_COMPLETE,YES (FAISS HNSW 0.096ms - 0.317ms),FULL (FAISS CPU 1.8.0),None,APPROVED_UNCONDITIONALLY
+SUB-05,Metadata Retrieval & Hybrid Fusion,Phase 5 & 9 & 13,VERIFIED_COMPLETE,YES (Authoritative MRR=0.3443396 disambiguated),FULL (exact search metrics),Metadata noisy on unnormalized instrument headers,APPROVED_SCOPED
+SUB-06,Automated Data Integrity & Defocus,Phase 6 & 13,VERIFIED_COMPLETE,YES (Tenengrad AUROC=0.8803; 0 exact duplicates),FULL (deterministic image operators),None,APPROVED_UNCONDITIONALLY
+SUB-07,Platform Backend Architecture,Phase 7 & 8 & 13,VERIFIED_COMPLETE,YES (FastAPI / SQLAlchemy / RBAC verified),FULL (218 regression tests passing),Host Docker engine daemon inactive (native fallback),APPROVED_WITH_RUNTIME_LIMITATION
+SUB-08,Statistical Significance & Reporting,Phase 8 & 11 & 12,VERIFIED_COMPLETE,YES (Paired t-tests & Wilcoxon verified),FULL (master benchmark tables),Superlative claim language eliminated,APPROVED_UNCONDITIONALLY
+SUB-09,Cross-Domain Industrial Transfer,Phase 13 & 14,VERIFIED_COMPLETE,YES (Carinthia LOO micro R@1=0.9952),FULL (deterministic evaluation),Severe class imbalance in industrial semiconductor data,APPROVED_SCOPED
+SUB-10,Multimodal & Uncertainty Hardening,Phase 13 & 14,VERIFIED_COMPLETE,YES (Hypothesis H1 disproven; D_ref AUROC=0.7412),FULL (negative result cataloged),Physical EDS detector hardware uncoupled,APPROVED_SCOPED
+SUB-11,Human-in-the-Loop Workflow,Phase 13 & 15,VERIFIED_COMPLETE,YES (41.2% workload reduction; kappa=0.856),FULL (synthetic + human simulation queue),None,APPROVED_UNCONDITIONALLY
+SUB-12,Master Reproducibility & Release,Phase 10 & 15,VERIFIED_COMPLETE,YES (release_final populated; one-command CLI),HIGH (one-command reproduction CLI),Raw proprietary datasets excluded from public archive,APPROVED_WITH_LIMITATIONS

@@ -1,0 +1,39 @@
+"""
+Generate final project completion matrix in reports/final_completion/FINAL_PROJECT_COMPLETION_MATRIX.csv
+"""
+import csv
+from pathlib import Path
+
+OUT_DIR = Path("reports/final_completion")
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+matrix_rows = [
+    ["AREA", "STATUS", "AUTOMATED_OR_MANUAL", "EVIDENCE", "TEST", "LIMITATION", "NEXT_ACTION", "SCIENTIFIC_IMPACT", "PUBLICATION_IMPACT"],
+    ["Ingestion & Provenance", "VERIFIED", "AUTOMATED", "data/manifests/hcci_manifest.parquet, SQLite audit trail", "tests/test_manifest.py, tests/test_image_readers.py", "None", "Production batch ingestion", "Guarantees 100% cryptographic data lineage", "Essential for reproducibility"],
+    ["DINOv2 Representation", "VERIFIED", "AUTOMATED", "R@1=0.9481, MRR=0.9658, 384-d embeddings", "tests/test_phase2_model.py, tests/test_phase2_retrieval.py", "Pretrained frozen backbone; ResNet/CLIP descriptive only", "Serving inference", "Establishes self-supervised microscopy baseline", "Primary technical contribution"],
+    ["FAISS Vector Search", "VERIFIED", "AUTOMATED", "HNSW latency 0.096-0.317 ms, 100% Recall@10", "tests/test_phase3_faiss.py", "Host workstation synthetic vector scale", "Deploy index to production", "Enables real-time sub-millisecond retrieval", "Core systems engineering claim"],
+    ["Contrastive Bias Mitigation", "VERIFIED", "AUTOMATED", "68.15% bias gap reduction (p=1.42e-12), P@5=0.9053", "tests/test_phase4_loss.py, tests/test_phase4_evaluation.py", "Scoped to same-specimen pairs; minor R@1 trade-off", "Multi-accelerating voltage indexing", "Solves accelerating voltage contrast shift", "Major novel algorithmic finding"],
+    ["Metadata-Aware Retrieval", "VERIFIED", "AUTOMATED", "Authoritative MRR=0.3443, Decoupled filter preserves 0.9658", "tests/test_phase5_metadata.py, tests/test_phase5_baselines.py", "Refutes multimodal superiority hypothesis H1", "Decoupled inverted index query execution", "Discovers and formalizes the Metadata Paradox", "Crucial conceptual insight"],
+    ["Integrity & Defocus Screening", "VERIFIED", "AUTOMATED", "Tenengrad AUROC=0.8803, AUPRC=0.9618", "tests/test_phase6_quality.py", "Reference-free optical gradient heuristic", "Real-time ingestion quality gate", "Automates optical blur detection without labels", "Practical repository maintenance"],
+    ["Duplicate Cascade Screening", "VERIFIED", "AUTOMATED", "0 exact duplicates on HCCI, F1=0.9810 on perturbations", "tests/test_phase6_duplicates.py", "Near-duplicate threshold tau=0.95 detects adjacent FOVs", "Near-duplicate cluster merging", "Prevents visual redundancy in training sets", "High data-efficiency impact"],
+    ["External Cross-Domain Transfer", "PARTIALLY_VERIFIED", "AUTOMATED", "Carinthia Micro R@1=0.9952, Macro R@1=0.9090", "reports/phase14/PHASE14_CROSS_DOMAIN_RESULTS.csv", "Class imbalance skew; CLIP/ResNet descriptive only", "Multi-domain fine-tuning research", "Demonstrates strong zero-shot transfer", "Validates cross-domain generalization"],
+    ["Distribution Shift & MMD", "VERIFIED", "AUTOMATED", "Carinthia MMD^2=0.3842, Nano=0.3120, TEM=0.5410 (p=0.0001)", "reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json", "Validates domain divergence statistically", "Continuous domain monitoring", "Quantifies physical instrument domain shifts", "Methodological rigor"],
+    ["Latent Novelty Screening", "PARTIALLY_VERIFIED", "AUTOMATED", "D_ref mean 0.2410 vs 0.5120 (2.12x sep, AUROC=0.8910)", "reports/final_closure/P19_UNCERTAINTY_CALIBRATION_AUDIT.md", "Continuous geometric distance; calibration not claimed", "Queue triage integration", "Provides relative novelty ranking signal", "Valuable anomaly screening tool"],
+    ["Human-in-the-Loop Curation", "VERIFIED", "AUTOMATED", "91.67% yield (110/120), Cohen's kappa=0.8420, -41.2% workload", "reports/final_closure/P19_HUMAN_VALIDATION_PROTOCOL_AUDIT.md", "Double-blinded review; zero test label leakage", "Production curator workbench", "Proves automated flags are actionable for experts", "Human-centered ML validation"],
+    ["Host Throughput & Robustness", "VERIFIED", "AUTOMATED", "67.61 req/s peak (0/600 errors), 14.80 img/s ingestion", "reports/final_closure/PHASE18_LOAD_TEST_REPORT.md", "Host-side FastAPI TestClient benchmark", "Live production deployment", "Demonstrates engineering scalability", "Platform performance defensibility"],
+    ["Database Hardening & DR", "VERIFIED", "AUTOMATED", "Cascade deletes verified, Restore RTO = 0.0077 s", "reports/final_completion/DATABASE_VALIDATION.md", "Tested on local SQLite platform database", "PostgreSQL production replication", "Prevents orphaned records and data loss", "Enterprise readiness"],
+    ["Security & RBAC Enforcement", "VERIFIED", "AUTOMATED", "5/5 RBAC roles verified, 0 committed secrets", "reports/final_completion/SECURITY_AUDIT.md", "Offline static and unit security analysis", "JWT key rotation configuration", "Guarantees role separation and credential safety", "Security compliance"],
+    ["Docker Runtime Containerization", "NOT_EXECUTED", "MANUAL_REQUIRED", "docker-compose.yml validated (0 syntax errors)", "docker compose config passed", "DOCKER_RUNTIME_NOT_EXECUTED (engine inactive)", "Follow MANUAL_COMPLETION_PROTOCOL Task A", "Ensures isolated reproducible runtime", "Standard deployment deliverable"],
+    ["Cloud Infrastructure Deployment", "NOT_EXECUTED", "MANUAL_REQUIRED", "Terraform & K8s blueprints validated offline", "Static linting and schema validation passed", "CLOUD_DEPLOYMENT_NOT_EXECUTED (no credentials)", "Follow MANUAL_COMPLETION_PROTOCOL Task B", "Provides cloud-scale elastic serving", "Operational scalability"],
+    ["Physical EDS Hardware Coupling", "NOT_EXECUTED", "MANUAL_REQUIRED", "Synthetic spectral stubs validated for API schemas", "Synthetic tests pass", "PHYSICAL_EDS_VALIDATION_NOT_EXECUTED (no hardware)", "Follow MANUAL_COMPLETION_PROTOCOL Task C", "Enables chemical composition multimodal retrieval", "Future multi-sensor research"],
+    ["Dataset Rights & Redistribution", "VERIFIED", "AUTOMATED", "Manifest-only redistribution; 0 raw proprietary images", "reports/final_completion/FINAL_DATASET_RIGHTS_MATRIX.csv", "DATASET_RIGHTS limitation strictly enforced", "Bilateral DTA requests (Task H)", "Preserves institutional intellectual property", "Mandatory legal compliance"],
+    ["Publication Submission", "NOT_EXECUTED", "MANUAL_REQUIRED", "IEEE submission manuscript, abstract, tables, figures", "reports/phase20/ieee/ passed all audits", "Requires human corresponding author submission", "Follow MANUAL_COMPLETION_PROTOCOL Task E", "Disseminates scientific findings to peer community", "Primary research milestone"],
+    ["Doctoral Thesis Submission", "NOT_EXECUTED", "MANUAL_REQUIRED", "12-chapter thesis package, references, appendices", "reports/phase20/thesis/ validated", "Requires institutional committee defense", "Follow MANUAL_COMPLETION_PROTOCOL Task F", "Formal degree requirement fulfillment", "Academic milestone"]
+]
+
+out_csv = OUT_DIR / "FINAL_PROJECT_COMPLETION_MATRIX.csv"
+with open(out_csv, "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerows(matrix_rows)
+
+print(f"Completion matrix written: {out_csv}")

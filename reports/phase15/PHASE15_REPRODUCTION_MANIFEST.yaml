@@ -1,0 +1,35 @@
+# Phase 15 Master Reproduction Manifest V2
+manifest_version: "2.0.0-final"
+generated_at: "2026-09-27T12:55:00+05:30"
+project_title: "AI-Powered Scientific Image Data Management Platform"
+submission_package_baseline: "v1.1.0-submission-ready"
+
+environment:
+  python_version: "3.11.9"
+  platform: "Windows-11-Enterprise-AMD64"
+  torch_version: "2.5.1+cpu"
+  faiss_version: "1.9.0"
+  fastapi_version: "0.115.0"
+
+baseline_immutability_status:
+  phase1_7_frozen_artifacts: "110/110 BYTE_FOR_BYTE_IDENTICAL"
+  phase9_manuscript_deliverables: "17/17 BYTE_FOR_BYTE_IDENTICAL"
+  phase12_submission_package: "FROZEN_AND_UNMODIFIED"
+  model_checkpoint_sha256: "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62"
+  phase8_regression_tests: "218/218 PASSING"
+
+phase14_deliverables:
+  docker_validation: "DOCKER_VALIDATION_NOT_EXECUTED (Host daemon inactive)"
+  cross_domain_generalization: "Macro R@1=0.9090 across 4591 Carinthia SEM defect images"
+  cross_domain_centroid_distance: "Cosine Sim=0.4018, Euclidean Dist=1.0938"
+  generalization_failure_taxonomy: "22 errors cataloged across 4 failure modes"
+  phase14_status: "PHASE14_COMPLETE_WITH_LIMITATIONS"
+
+phase15_deliverables:
+  multimodal_falsification: "Gated MLP R@1=0.5896, Cross-Attn R@1=0.6132 vs Visual R@1=0.9481 (Confirmed Negative Result)"
+  eds_spectral_integration: "EDS_INTEGRATION_NOT_EXECUTED (No raw EDS spectral data in studied corpora)"
+  uncertainty_calibration: "Latent Distance AUROC=0.7412 vs Margin AUROC=0.5146"
+  human_curation_workflow: "AI prioritization reduces curator workload by 41.2% (85.3% yield in 50% time)"
+  end_to_end_demonstration: "12-stage automated triage demonstration verified"
+  v2_manuscript_drafts: "10 chapters authored under reports/phase15/manuscript_v2/"
+  final_decision_gate: "PROJECT_V2_COMPLETE_WITH_LIMITATIONS"

@@ -1,0 +1,8 @@
+ablation_id,tested_variable,condition_description,r_at_1,mrr,p_at_5,relative_retention_vs_b0,scientific_implication
+ABL-01,Linear Weight Alpha,alpha = 0.90 (90% Visual / 10% Metadata),0.9151,0.9421,0.8358,96.5%,Mild degradation even with minimal metadata weight
+ABL-02,Linear Weight Alpha,alpha = 0.70 (70% Visual / 30% Metadata),0.8113,0.8674,0.7425,85.6%,Substantial degradation as metadata weight increases
+ABL-03,Linear Weight Alpha,alpha = 0.50 (50% Visual / 50% Metadata),0.6274,0.7289,0.5981,66.2%,Phase 5 authoritative late fusion baseline
+ABL-04,Linear Weight Alpha,alpha = 0.30 (30% Visual / 70% Metadata),0.3443,0.5218,0.3113,36.3%,Severe performance collapse toward metadata-only
+ABL-05,Missing Modality,Metadata dropped at test time (zero vector),0.9481,0.9658,0.8708,100.0%,System gracefully falls back to visual-only when metadata missing
+ABL-06,Metadata Normalization,Z-score scaling vs raw integer scalars,0.5896 vs 0.3113,0.7034 vs 0.4812,0.5745 vs 0.3208,62.2% vs 32.8%,Unnormalized metadata causes catastrophic scale distortion
+ABL-07,Cross-Attention Heads,Single-head vs 4-head cross-attention,0.6038 vs 0.6132,0.7092 vs 0.7180,0.5792 vs 0.5858,63.7% vs 64.7%,Additional attention heads cannot compensate for uninformative keys

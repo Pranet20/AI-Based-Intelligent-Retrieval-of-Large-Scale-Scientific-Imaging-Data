@@ -1,0 +1,18 @@
+{
+  "mode": "metadata_only",
+  "authoritative_metadata_only_vector": {
+    "Recall@1": 0.33490566037735847,
+    "Recall@5": 0.33490566037735847,
+    "Recall@10": 0.33490566037735847,
+    "MRR": 0.3443396226415094,
+    "Precision@5": 0.33490566037735847,
+    "Precision@10": 0.33490566037735847,
+    "rounded_MRR": 0.3443
+  },
+  "forensic_knot_analysis": {
+    "p_knots_at_index_4907": 0.49074907490749076,
+    "is_evaluation_metric": false,
+    "origin": "np.linspace(0.0, 1.0, 10001)[4907] empirical CDF grid"
+  },
+  "parity_status": "REPRODUCED_EXACTLY"
+}

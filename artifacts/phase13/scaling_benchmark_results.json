@@ -1,0 +1,47 @@
+[
+  {
+    "corpus_size_N": 5365,
+    "flat_latency_ms": 0.1497,
+    "hnsw_latency_ms": 0.0963,
+    "hnsw_build_time_s": 0.47,
+    "hnsw_throughput_qps": 10384.2,
+    "hnsw_recall_at_10": 0.7515,
+    "empirical_speedup": 1.55
+  },
+  {
+    "corpus_size_N": 10000,
+    "flat_latency_ms": 0.3462,
+    "hnsw_latency_ms": 0.121,
+    "hnsw_build_time_s": 1.24,
+    "hnsw_throughput_qps": 8266.2,
+    "hnsw_recall_at_10": 0.6005,
+    "empirical_speedup": 2.86
+  },
+  {
+    "corpus_size_N": 25000,
+    "flat_latency_ms": 0.916,
+    "hnsw_latency_ms": 0.2281,
+    "hnsw_build_time_s": 5.15,
+    "hnsw_throughput_qps": 4384.5,
+    "hnsw_recall_at_10": 0.384,
+    "empirical_speedup": 4.02
+  },
+  {
+    "corpus_size_N": 50000,
+    "flat_latency_ms": 1.5435,
+    "hnsw_latency_ms": 0.4017,
+    "hnsw_build_time_s": 14.88,
+    "hnsw_throughput_qps": 2489.2,
+    "hnsw_recall_at_10": 0.23,
+    "empirical_speedup": 3.84
+  },
+  {
+    "corpus_size_N": 100000,
+    "flat_latency_ms": 4.9562,
+    "hnsw_latency_ms": 0.3169,
+    "hnsw_build_time_s": 33.42,
+    "hnsw_throughput_qps": 3155.2,
+    "hnsw_recall_at_10": 0.143,
+    "empirical_speedup": 15.64
+  }
+]

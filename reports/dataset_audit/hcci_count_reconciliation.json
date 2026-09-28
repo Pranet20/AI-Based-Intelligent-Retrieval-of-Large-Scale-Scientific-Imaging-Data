@@ -1,0 +1,50 @@
+{
+  "dataset_id": "hcci",
+  "dataset_name": "High-Chromium Cast Iron SEM Dataset",
+  "official_image_count": 777,
+  "metadata_record_count": 777,
+  "discovered_image_count": 774,
+  "manifest_image_count": 774,
+  "missing_image_records": [
+    "10",
+    "20",
+    "30"
+  ],
+  "missing_records_metadata": [
+    {
+      "file_name": 10,
+      "sem": "Helios G4 PFIB CXe",
+      "detector": "BSE",
+      "voltage_v": 5000,
+      "magnification": 5000,
+      "etching": "Vilella",
+      "sample": "AsCast",
+      "kind": "Detail"
+    },
+    {
+      "file_name": 20,
+      "sem": "Helios G4 PFIB CXe",
+      "detector": "SE",
+      "voltage_v": 10000,
+      "magnification": 5000,
+      "etching": "Vilella",
+      "sample": "AsCast",
+      "kind": "Detail"
+    },
+    {
+      "file_name": 30,
+      "sem": "Helios G4 PFIB CXe",
+      "detector": "InLens",
+      "voltage_v": 20000,
+      "magnification": 1000,
+      "etching": "Vilella",
+      "sample": "AsCast",
+      "kind": "Overview"
+    }
+  ],
+  "unexpected_image_files": [],
+  "duplicate_records": 0,
+  "corrupt_files": 0,
+  "unsupported_files": 0,
+  "explanation": "The official HCCI publication metadata (Metadata_All_Samples.xlsx) contains 777 tabulated acquisition records ranging from index 1 to 830. A systematic file audit of the source archive ('HCCI Dataset .zip') reveals exactly 774 valid PNG image files in the Images/ directory. Micrographs corresponding to sample IDs 10 (5kV BSE), 20 (10kV SE), and 30 (20kV InLens) are absent from both Images/ and Masks/ in the author-distributed archive. No files were lost during extraction. Because the source archive itself omits these three micrographs, the Phase 1 manifest strictly records the 774 verified physical image files without fabricating dummy images or placeholder data, while documenting the three omitted samples for reproducibility and provenance."
+}

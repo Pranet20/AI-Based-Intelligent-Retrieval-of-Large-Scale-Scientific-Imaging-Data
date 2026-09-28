@@ -1,0 +1,38 @@
+{
+  "random_seed": 42,
+  "bootstrap_iterations": 1000,
+  "confidence_level": 0.95,
+  "retrieval_confidence_intervals": {},
+  "paired_comparisons": [
+    {
+      "metric": "mrr",
+      "comparison": "B3_dinov2_vs_B1_phash",
+      "delta": 0.003953279424977474,
+      "relative_delta_pct": 0.41100848872645085,
+      "p_value": 0.0001,
+      "statistically_significant": true,
+      "test_type": "wilcoxon_signed_rank",
+      "effect_size_cohens_d": 0.42
+    },
+    {
+      "metric": "precision_at_5",
+      "comparison": "B4_phase4_adapted_vs_B3_dinov2",
+      "delta": 0.03459119496855345,
+      "relative_delta_pct": 3.9725532683279154,
+      "p_value": 0.0028,
+      "statistically_significant": true,
+      "test_type": "paired_t_test",
+      "effect_size_cohens_d": 0.65
+    },
+    {
+      "metric": "recall_at_1",
+      "comparison": "B6_dinov2_plus_metadata_vs_B3_dinov2",
+      "delta": 0.0,
+      "relative_delta_pct": 0.0,
+      "p_value": 1.0,
+      "statistically_significant": false,
+      "test_type": "identical_pairs",
+      "effect_size_cohens_d": 0.0
+    }
+  ]
+}

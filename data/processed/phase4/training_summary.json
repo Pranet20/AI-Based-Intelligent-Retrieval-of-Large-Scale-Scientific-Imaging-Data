@@ -1,0 +1,42 @@
+[
+  {
+    "run_name": "proposed",
+    "seed": 42,
+    "best_epoch": 1,
+    "best_val_metric": 1.0,
+    "checkpoint_path": "data\\processed\\phase4\\checkpoints\\best_checkpoint_seed42.pt",
+    "embeddings_path": "data\\processed\\phase4\\embeddings\\hcci_adapted_proposed_seed42.parquet"
+  },
+  {
+    "run_name": "proposed",
+    "seed": 123,
+    "best_epoch": 1,
+    "best_val_metric": 1.0,
+    "checkpoint_path": "data\\processed\\phase4\\checkpoints\\best_checkpoint_seed123.pt",
+    "embeddings_path": "data\\processed\\phase4\\embeddings\\hcci_adapted_proposed_seed123.parquet"
+  },
+  {
+    "run_name": "proposed",
+    "seed": 2024,
+    "best_epoch": 1,
+    "best_val_metric": 1.0,
+    "checkpoint_path": "data\\processed\\phase4\\checkpoints\\best_checkpoint_seed2024.pt",
+    "embeddings_path": "data\\processed\\phase4\\embeddings\\hcci_adapted_proposed_seed2024.parquet"
+  },
+  {
+    "run_name": "ablation_standard_supcon",
+    "seed": 42,
+    "best_epoch": 1,
+    "best_val_metric": 1.0,
+    "checkpoint_path": "data\\processed\\phase4\\checkpoints\\best_checkpoint_seed42.pt",
+    "embeddings_path": "data\\processed\\phase4\\embeddings\\hcci_adapted_ablation_standard_supcon_seed42.parquet"
+  },
+  {
+    "run_name": "ablation_linear_head",
+    "seed": 42,
+    "best_epoch": 1,
+    "best_val_metric": 1.0,
+    "checkpoint_path": "data\\processed\\phase4\\checkpoints\\best_checkpoint_seed42.pt",
+    "embeddings_path": "data\\processed\\phase4\\embeddings\\hcci_adapted_ablation_linear_head_seed42.parquet"
+  }
+]

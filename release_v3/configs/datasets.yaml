@@ -1,0 +1,187 @@
+datasets:
+  hcci:
+    dataset_id: "hcci"
+    name: "High-Chromium Cast Iron SEM Dataset"
+    source_url: "https://zenodo.org/records/21931379"
+    doi: "10.5281/zenodo.21931379"
+    version: "1.0.0"
+    license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    license_status: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    repository_license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    dataset_license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    commercial_use: "UNKNOWN"
+    redistribution_allowed: "UNKNOWN"
+    access_notes: "Open research deposit on Zenodo. The record does not visibly display an explicit license badge; authoritative terms must be verified."
+    approximate_image_count: 777
+    modality: "SEM"
+    domain: "metallurgy_cast_iron"
+    role: "robustness_and_metadata"
+    metadata_available: true
+    labels_available: true
+    retrieval_labels_available: false
+    intended_use: "Acquisition robustness evaluation, scientific instrument metadata normalization, metallurgy microscopy representation."
+    citation: "High-Chromium Cast Iron SEM Dataset, Zenodo, DOI: 10.5281/zenodo.21931379"
+    archive_size_if_known: "4.3 GB"
+    local_path: "data/raw/hcci"
+    enabled: true
+    acquisition_status: "FULLY_INGESTED_AVAILABLE_FILES"
+    notes: "Local archive ingested: 774 valid physical images discovered; 3 planned samples (10, 20, 30) omitted in author-provided source archive. Official metadata lists 777 records."
+
+  carinthia:
+    dataset_id: "carinthia"
+    name: "Carinthia SEM Dataset"
+    source_url: "https://zenodo.org/records/10715190"
+    doi: "10.5281/zenodo.10715190"
+    version: "1.0.0"
+    license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    license_status: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    repository_license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    dataset_license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    commercial_use: "UNKNOWN"
+    redistribution_allowed: "UNKNOWN"
+    access_notes: "Open research deposit on Zenodo. The record does not visibly display an explicit license badge; authoritative terms must be confirmed."
+    approximate_image_count: 4591
+    modality: "SEM"
+    domain: "semiconductor_materials_defects"
+    role: "defect_anomaly_evaluation"
+    metadata_available: false
+    labels_available: true
+    retrieval_labels_available: false
+    intended_use: "SEM defect classification, anomaly detection benchmark, and retrieval evaluation across defect classes."
+    citation: "Carinthia SEM Dataset, Zenodo, DOI: 10.5281/zenodo.10715190"
+    archive_size_if_known: "136 MB"
+    local_path: "data/raw/carinthia"
+    enabled: true
+    acquisition_status: "FULLY_INGESTED"
+    notes: "Local archive ingested: 4,591 physical images with 6 defect classes from carinthia.csv."
+
+  sem_nanoscience:
+    dataset_id: "sem_nanoscience"
+    name: "The First Annotated Set of Scanning Electron Microscopy Images for Nanoscience"
+    source_url: "https://www.nature.com/articles/sdata2018172"
+    doi: "10.1038/sdata.2018.172"
+    version: "1.0.0"
+    license: "CC-BY-4.0"
+    license_status: "VERIFIED_OPEN_ACCESS"
+    repository_license: "CC-BY-4.0"
+    dataset_license: "CC-BY-4.0"
+    commercial_use: "YES_WITH_ATTRIBUTION"
+    redistribution_allowed: "YES_WITH_ATTRIBUTION"
+    access_notes: "Scientific Data publication explicitly grants CC BY 4.0. Note: Images are JPEG-compressed; original instrument TIFF header metadata is absent."
+    approximate_image_count: 18577
+    modality: "SEM"
+    domain: "nanoscience"
+    role: "general_sem_representation"
+    metadata_available: false
+    labels_available: true
+    retrieval_labels_available: false
+    intended_use: "Large-scale general SEM visual representation learning and zero-shot retrieval."
+    citation: "Aversa, R., Modarres, M.H., Cozzini, S. et al. The first annotated set of scanning electron microscopy images for nanoscience. Sci Data 5, 180172 (2018); Author Correction: Sci Data 6, 190018 (2019). DOI: 10.1038/sdata.2018.172"
+    archive_size_if_known: "approx. 3.5 GB"
+    local_path: "data/raw/sem_nanoscience"
+    enabled: true
+    acquisition_status: "NOT_YET_DOWNLOADED"
+    dataset_family: "SEM_Nanoscience"
+    dataset_variant: "Original_SEM_Dataset"
+    variants_available:
+      Original_SEM_Dataset:
+        name: "Original SEM Dataset"
+        description: "Full set of SEM micrographs with initial annotations (18,577 images)"
+        image_count: 18577
+      Hierarchical_Dataset:
+        name: "Hierarchical Dataset"
+        description: "Micrographs organized into multi-level hierarchical taxonomies (1,038 images)"
+        image_count: 1038
+      Majority_Dataset:
+        name: "Majority Dataset"
+        description: "Subset filtered by majority crowd-annotator consensus agreement (21,272 images, corrected 2019)"
+        image_count: 21272
+      100_Percent_Dataset:
+        name: "100% Dataset"
+        description: "Gold-standard curated subset with 100% annotator agreement (21,169 images, corrected 2019)"
+        image_count: 21169
+    notes: "Authoritative counts from Sci Data 5, 180172 (2018) and Author Correction Sci Data 6, 190018 (2019) which corrected Majority and 100% dataset counts and removed duplicate-image replicates. Not yet downloaded."
+
+  atomagined:
+    dataset_id: "atomagined"
+    name: "atomagined"
+    source_url: "https://github.com/MaterialEyes/atomagined"
+    doi: "10.18126/szeq-yde5"
+    version: "1.0.0"
+    license: "REPOSITORY_MIT_DATASET_UNKNOWN"
+    license_status: "REPOSITORY_MIT_DATASET_TERMS_REQUIRE_CONFIRMATION"
+    repository_license: "MIT"
+    dataset_license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    commercial_use: "SOFTWARE_PERMITTED_DATA_UNKNOWN"
+    redistribution_allowed: "UNKNOWN"
+    access_notes: "GitHub repository code is licensed under MIT. Synthetic HAADF-STEM benchmark dataset terms on Materials Data Facility require separate confirmation."
+    approximate_image_count: 16000
+    modality: "HAADF-STEM_synthetic"
+    domain: "atomic_crystal_structures"
+    role: "retrieval_benchmark"
+    metadata_available: true
+    labels_available: true
+    retrieval_labels_available: true
+    intended_use: "Fine-grained retrieval benchmark evaluating invariance to probe distortions and crystal orientations."
+    citation: "atomagined, Materials Data Facility, DOI: 10.18126/szeq-yde5"
+    archive_size_if_known: "approx. 12 GB"
+    local_path: "data/raw/atomagined"
+    enabled: true
+    acquisition_status: "NOT_YET_DOWNLOADED"
+    notes: "Adapter implemented. Dataset not yet downloaded."
+
+  cigrocksem:
+    dataset_id: "cigrocksem"
+    name: "cigRockSEM"
+    source_url: "https://zenodo.org/records/14988631"
+    doi: "10.5281/zenodo.14988631"
+    version: "1.0.0"
+    license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    license_status: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    repository_license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    dataset_license: "UNKNOWN_VERIFY_SOURCE_TERMS"
+    commercial_use: "UNKNOWN"
+    redistribution_allowed: "UNKNOWN"
+    access_notes: "Rock microstructure SEM imagery from Zenodo. Authoritative license terms must be confirmed before redistribution."
+    approximate_image_count: 1500
+    modality: "SEM"
+    domain: "geological_microstructure"
+    role: "cross_domain_validation"
+    metadata_available: false
+    labels_available: false
+    retrieval_labels_available: false
+    intended_use: "Cross-domain out-of-distribution evaluation; verify generalizability of scientific visual representations."
+    citation: "cigRockSEM, Zenodo, DOI: 10.5281/zenodo.14988631"
+    archive_size_if_known: "approx. 1.2 GB"
+    local_path: "data/raw/cigrocksem"
+    enabled: true
+    acquisition_status: "NOT_YET_DOWNLOADED"
+    notes: "Adapter implemented. Dataset not yet downloaded."
+
+  microal:
+    dataset_id: "microal"
+    name: "MicroAl-Dataset"
+    source_url: "https://github.com/neulmc/MicroAl-Dataset"
+    doi: "UNKNOWN"
+    version: "1.0.0"
+    license: "ACADEMIC_USE_SUBSET_RESTRICTED"
+    license_status: "ACADEMIC_RESTRICTIONS_SUBSETS_PENDING_AUTHORIZATION"
+    repository_license: "Academic Use / Restricted"
+    dataset_license: "SUBSET_DEPENDENT"
+    commercial_use: "PROHIBITED_OR_RESTRICTED"
+    redistribution_allowed: "RESTRICTED"
+    access_notes: "Materials microscopy repository containing Optical, SEM, and TEM subsets. Not all subsets carry identical authorization; restricted/pending-authorization subsets tracked separately."
+    approximate_image_count: 800
+    modality: "multi_modal_microscopy"
+    domain: "aluminum_alloys"
+    role: "materials_microscopy_extension"
+    metadata_available: false
+    labels_available: true
+    retrieval_labels_available: false
+    intended_use: "Multi-modality extension evaluating cross-modality representation transfer (OM, SEM, TEM)."
+    citation: "MicroAl-Dataset, GitHub neulmc/MicroAl-Dataset"
+    archive_size_if_known: "approx. 500 MB"
+    local_path: "data/raw/microal"
+    enabled: true
+    acquisition_status: "NOT_YET_DOWNLOADED"
+    notes: "Adapter implemented. Dataset not yet downloaded."

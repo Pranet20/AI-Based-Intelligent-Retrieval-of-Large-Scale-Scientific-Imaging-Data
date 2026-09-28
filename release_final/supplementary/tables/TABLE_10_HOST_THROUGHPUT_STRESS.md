@@ -1,0 +1,9 @@
+### Table 10: Host-Side API Throughput and Stress Concurrency Benchmark
+
+| Concurrency Tier | Total Requests | Successful Requests | Error Rate (%) | Throughput (req/s) | p95 Latency (ms) |
+| --- | --- | --- | --- | --- | --- |
+| Concurrency 10 | 100 | 100 | 0.0% | 34.20 req/s | 28.4 ms |
+| Concurrency 50 | 150 | 150 | 0.0% | 52.80 req/s | 39.1 ms |
+| Concurrency 100 | 150 | 150 | 0.0% | 64.10 req/s | 51.2 ms |
+| Concurrency 250 | 200 | 200 | 0.0% | 67.61 req/s (Peak) | 68.5 ms |
+| Held-Out Batch Ingestion | 100 Images | 100 | 0.0% | 14.80 img/s | 100% Provenance Logging |

@@ -1,0 +1,81 @@
+# Phase 6 Configuration: Scientific Image Redundancy, Quality Anomaly and Novelty Intelligence
+experiment:
+  id: "phase6_scientific_redundancy_anomaly_001"
+  name: "scientific_redundancy_anomaly_novelty"
+  description: "Research-grade scientific image redundancy, measurable quality risk, and distributional novelty intelligence platform."
+  random_seed: 42
+
+data:
+  dataset: "hcci"
+  manifest_path: "data/manifests/hcci_manifest.parquet"
+  splits_path: "data/processed/phase4/splits/hcci_instrument_splits.json"
+  carinthia_manifest_path: "data/manifests/carinthia_manifest.parquet"
+
+embeddings:
+  hcci_phase2_path: "data/processed/embeddings/hcci_dinov2_vits14_embeddings.parquet"
+  carinthia_phase2_path: "data/processed/embeddings/carinthia_dinov2_vits14_embeddings.parquet"
+  hcci_phase4_seed42: "data/processed/phase4/embeddings/hcci_adapted_proposed_seed42.parquet"
+  hcci_phase4_seed123: "data/processed/phase4/embeddings/hcci_adapted_proposed_seed123.parquet"
+  hcci_phase4_seed2024: "data/processed/phase4/embeddings/hcci_adapted_proposed_seed2024.parquet"
+
+duplicates:
+  hash_size: 8 # 8x8 = 64-bit hash
+  phash_hamming_threshold: 6
+  dhash_hamming_threshold: 6
+  dinov2_cosine_threshold: 0.985
+  adapted_cosine_threshold: 0.985
+  verification:
+    min_ssim: 0.95
+    max_mae: 5.0 # on 0-255 scale
+    min_ncc: 0.98
+
+quality:
+  metrics:
+    - "laplacian_variance"
+    - "edge_density"
+    - "shannon_entropy"
+    - "dynamic_range"
+    - "clipping_ratio"
+    - "high_freq_fft_ratio"
+  fft_cutoff_fraction: 0.25 # radius fraction for high frequency
+  clip_low_thresh: 0
+  clip_high_thresh: 255
+
+novelty:
+  methods:
+    - "knn"
+    - "mean_knn"
+    - "lof"
+    - "isolation_forest"
+    - "centroid_distance"
+  knn_k_values: [1, 3, 5, 10, 20]
+  default_k: 5
+  lof_neighbors: 20
+  iforest_estimators: 100
+  threshold_percentiles: [95.0, 99.0]
+  safety_prohibited_fields:
+    - "specimen_id"
+    - "sample"
+    - "sample_id"
+    - "acquisition_id"
+    - "roi_id"
+    - "image_id"
+    - "filename"
+    - "relative_path"
+    - "label"
+    - "source_label"
+    - "duplicate_group_id"
+    - "near_duplicate_group_id"
+
+diagnostic_matrix:
+  novelty_threshold_percentile: 90.0
+  quality_risk_threshold_percentile: 80.0
+
+review_queue:
+  top_n: 50
+  budget_eval_levels: [10, 25, 50, 100]
+
+output:
+  reports_dir: "reports/phase6"
+  figures_dir: "reports/phase6/figures"
+  artifacts_dir: "artifacts/phase6"

@@ -1,0 +1,10 @@
+{
+  "master_random_seed": 42,
+  "bootstrap_seed": 42,
+  "phase4_trainable_seeds": [
+    42,
+    123,
+    2024
+  ],
+  "evaluation_sampling_seed": 42
+}

@@ -1,0 +1,45 @@
+phase: 3
+experiment_id: "phase3_faiss_retrieval_001"
+
+embedding_dim: 384
+metric: "inner_product"
+
+datasets:
+  hcci:
+    embeddings_path: "data/processed/embeddings/hcci_dinov2_vits14_embeddings.parquet"
+    manifest_path: "data/manifests/hcci_manifest.parquet"
+    query_audit_path: "reports/phase2/hcci_query_audit.csv"
+  carinthia:
+    embeddings_path: "data/processed/embeddings/carinthia_dinov2_vits14_embeddings.parquet"
+    manifest_path: "data/manifests/carinthia_manifest.parquet"
+
+index_storage_dir: "data/processed/indexes"
+reports_dir: "reports/phase3"
+
+exact_index:
+  type: "IndexFlatIP"
+
+ivf:
+  enabled: true
+  nlist_values: [16, 32, 64]
+  nprobe_values: [1, 4, 8, 16]
+
+hnsw:
+  enabled: true
+  M: 16
+  efSearch_values: [16, 32, 64, 128]
+
+evaluation:
+  k_values: [1, 5, 10]
+
+benchmark:
+  warmup_queries: 20
+  repetitions: 3
+
+scaling:
+  enabled: true
+  synthetic: false
+  sizes: [5365, 10730, 21460, 42920, 85840]
+
+reproducibility:
+  seed: 42

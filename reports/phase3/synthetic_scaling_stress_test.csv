@@ -1,0 +1,11 @@
+benchmark_type,index_type,corpus_size,dimension,build_time_sec,mean_latency_ms,median_latency_ms,qps
+engineering_scalability_stress_test,IndexFlatIP,5365,384,0.0218,2.3096,2.2642,432.97
+engineering_scalability_stress_test,"IndexHNSWFlat(M=16,efSearch=32)",5365,384,0.2833,0.4201,0.3807,2380.33
+engineering_scalability_stress_test,IndexFlatIP,10730,384,0.0462,3.6131,3.3913,276.77
+engineering_scalability_stress_test,"IndexHNSWFlat(M=16,efSearch=32)",10730,384,0.5719,0.4621,0.4136,2164.04
+engineering_scalability_stress_test,IndexFlatIP,21460,384,0.0845,5.6218,5.6374,177.88
+engineering_scalability_stress_test,"IndexHNSWFlat(M=16,efSearch=32)",21460,384,1.2895,0.4499,0.4173,2222.71
+engineering_scalability_stress_test,IndexFlatIP,42920,384,0.1527,9.4544,9.2388,105.77
+engineering_scalability_stress_test,"IndexHNSWFlat(M=16,efSearch=32)",42920,384,3.198,0.4771,0.4294,2095.98
+engineering_scalability_stress_test,IndexFlatIP,85840,384,0.32,18.7325,18.7168,53.38
+engineering_scalability_stress_test,"IndexHNSWFlat(M=16,efSearch=32)",85840,384,7.1445,0.4809,0.438,2079.61

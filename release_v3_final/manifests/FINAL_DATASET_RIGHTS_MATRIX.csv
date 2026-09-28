@@ -1,0 +1,9 @@
+dataset,source,DOI,license,research_use,redistribution,commercial_restriction,raw_data_retained,manifest_retained,external_dependency,rights_governance_status
+HCCI In-Domain Metallurgy,Internal Metallurgy Archive,None (Internal Lab),Restricted Research License,PERMITTED,PROHIBITED,COMMERCIAL_PROHIBITED,YES (Local Workstation Only),YES,NONE,MANIFEST_ONLY_DUE_TO_RIGHTS
+Carinthia Defect SEM,Carinthia Semiconductor Defect Benchmark,None (Industrial Benchmark),Academic Research Only,PERMITTED,PROHIBITED,COMMERCIAL_PROHIBITED,YES (Local Workstation Only),YES,NONE,MANIFEST_ONLY_DUE_TO_RIGHTS
+SEM Images for Nanoscience,Nature Scientific Data / Figshare,10.1038/sdata.2018.172,CC BY 4.0,PERMITTED,PERMITTED_WITH_ATTRIBUTION,NONE (OPEN COMMERCIAL/NON-COMMERCIAL),NO (External Download On Demand),YES,Figshare / Nature,FULLY_OPEN_CC_BY_4_0
+Bio-Image TEM,Open Scientific Archive,Phase 14 Modality Shift Archive,Open Academic Research,PERMITTED,RESTRICTED,COMMERCIAL_PROHIBITED,NO (Evaluated in Phase 14),YES,Open Scientific Archive,MANIFEST_ONLY_DUE_TO_RIGHTS
+atomagined HAADF-STEM,Materials Data Facility / GitHub,10.18126/szeq-yde5,Code MIT / Data Terms Restricted,PERMITTED,PROHIBITED,RESTRICTED,NO,YES,MDF Globus,RIGHTS_RESTRICTED_EXCLUDED
+cigRockSEM,Zenodo Deposition,10.5281/zenodo.14988631,Unknown / Unverified,PERMITTED,PROHIBITED,RESTRICTED,NO,YES,Zenodo,RIGHTS_UNVERIFIED_EXCLUDED
+MicroAl-Dataset,GitHub (neulmc/MicroAl-Dataset),None,Academic Non-Commercial Restricted,PERMITTED,PROHIBITED,COMMERCIAL_PROHIBITED,NO,YES,GitHub neulmc,RIGHTS_RESTRICTED_EXCLUDED
+Physical EDS Spectra,Hardware Spectrometer,None,Not Applicable,NOT_APPLICABLE,NOT_APPLICABLE,NOT_APPLICABLE,NO,NO,None,NOT_EXECUTED

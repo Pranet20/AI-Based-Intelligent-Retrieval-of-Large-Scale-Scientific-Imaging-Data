@@ -1,0 +1,21 @@
+check_id,check_name,target_subsystem,test_method,expected_outcome,empirical_result,status,environment_limitation,resolution_plan
+C-01,Docker Image Build,Container Image,docker build -t scientific-platform .,Clean image build exit code 0,Build unexecuted (daemon inactive),NOT_EXECUTED,Docker Desktop Linux engine not running,Execute in Linux CI/CD cloud staging
+C-02,Compose Configuration,Orchestration,docker compose config,Valid YAML config parsed,Static YAML syntax validated valid,STATIC_VALID,None (CLI parser works),Verified config syntax
+C-03,PostgreSQL Startup,Database,docker compose up -d db,PostgreSQL healthy on port 5432,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-04,FastAPI Startup,Backend API,docker compose up -d web,FastAPI uvicorn worker running,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-05,Frontend/Nginx Startup,Web Gateway,docker compose up -d nginx,Port 80/443 serving HTTP 200,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-06,Internal Networking,Network,Docker bridge network ping,Subnet DNS resolution passing,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-07,Database Initialization,Schema,alembic upgrade head in container,Schema migrations applied,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-08,API Health Endpoint,Health Check,curl http://localhost:8000/health,HTTP 200 JSON status ok,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-09,Authentication,Security,POST /api/v1/auth/token,Valid JWT returned,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-10,JWT Validation,Security,GET /api/v1/protected with Bearer,HTTP 200 with claims,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-11,RBAC Enforcement,Security,Curator role route restriction,HTTP 403 on viewer role,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-12,Metadata Extraction,Pipeline,POST /api/v1/ingest sample TIFF,Metadata extracted and stored,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-13,Provenance Logging,Audit,Query audit log table in DB,Structured event appended,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-14,Research Retrieval,Search,POST /api/v1/search/similarity,Top-k nearest neighbors returned,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-15,Model Checkpoint Loading,ML Model,SHA-256 match on container load,Model weights loaded in RAM,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-16,Container Restart,Reliability,docker compose restart,Zero data loss on restart,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-17,Database Persistence,Storage,Volume inspection after restart,Postgres data directory intact,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-18,Application Persistence,Storage,FAISS index reload from disk,Vector index restored,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-19,Graceful Shutdown,Lifecycle,docker compose down (SIGTERM),Clean process exit within 10s,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging
+C-20,Clean Recovery,Resilience,Simulate unexpected kill,Container restarts automatically,Daemon inactive,NOT_EXECUTED,Daemon unavailable,Execute in cloud staging

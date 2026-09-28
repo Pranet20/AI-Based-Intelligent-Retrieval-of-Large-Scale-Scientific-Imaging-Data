@@ -1,0 +1,3 @@
+dataset_id,name,modality,domain,physical_images,missing_upstream_records,evaluated_queries,evaluation_task
+hcci,High-Chromium Cast Iron SEM,SEM,Metallurgy / Wear-resistant cast iron,774,"10, 20, 30",774,Cross-acquisition condition invariance (same ROI/specimen)
+carinthia,Carinthia SEM Dataset,SEM,Semiconductor defect inspection,4591,None,4591,Defect classification retrieval across 6 defect classes

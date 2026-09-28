@@ -1,0 +1,26 @@
+{
+  "embedding_dimension": 384,
+  "hcci_samples": 774,
+  "carinthia_samples": 4591,
+  "hcci_within_cosine_similarity": {
+    "mean": 0.5388842821121216,
+    "std": 0.12827201187610626,
+    "min": 0.16482830047607422,
+    "max": 1.000000238418579,
+    "median": 0.5324923992156982
+  },
+  "carinthia_within_cosine_similarity": {
+    "mean": 0.6540348529815674,
+    "std": 0.1691138595342636,
+    "min": 0.03030437044799328,
+    "max": 0.9673779010772705,
+    "median": 0.694172739982605
+  },
+  "cross_dataset_cosine_similarity": {
+    "mean": 0.23751895129680634,
+    "std": 0.09956740587949753,
+    "min": -0.05189366638660431,
+    "max": 0.6161519289016724,
+    "median": 0.2268206775188446
+  }
+}

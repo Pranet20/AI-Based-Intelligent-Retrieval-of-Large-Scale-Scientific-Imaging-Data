@@ -1,0 +1,2381 @@
+[
+  {
+    "experiment_id": "EXP_RET_B0",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B0_random_retrieval",
+    "metric": "recall_at_1",
+    "value": 0.3175355450236967,
+    "confidence_interval": {
+      "lower": 0.3016587677725118,
+      "upper": 0.33341232227488155
+    },
+    "seed": 42,
+    "source_artifact": "analytical_expectation",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B0",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B0_random_retrieval",
+    "metric": "recall_at_5",
+    "value": 0.8407421183569842,
+    "confidence_interval": {
+      "lower": 0.7987050124391349,
+      "upper": 0.8827792242748335
+    },
+    "seed": 42,
+    "source_artifact": "analytical_expectation",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B0",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B0_random_retrieval",
+    "metric": "recall_at_10",
+    "value": 0.9782410892013848,
+    "confidence_interval": {
+      "lower": 0.9293290347413155,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "analytical_expectation",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B0",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B0_random_retrieval",
+    "metric": "mrr",
+    "value": 0.5132489124018241,
+    "confidence_interval": {
+      "lower": 0.4875864667817329,
+      "upper": 0.5389113580219154
+    },
+    "seed": 42,
+    "source_artifact": "analytical_expectation",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B0",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B0_random_retrieval",
+    "metric": "precision_at_5",
+    "value": 0.3175355450236967,
+    "confidence_interval": {
+      "lower": 0.3016587677725118,
+      "upper": 0.33341232227488155
+    },
+    "seed": 42,
+    "source_artifact": "analytical_expectation",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B0",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B0_random_retrieval",
+    "metric": "precision_at_10",
+    "value": 0.3175355450236967,
+    "confidence_interval": {
+      "lower": 0.3016587677725118,
+      "upper": 0.33341232227488155
+    },
+    "seed": 42,
+    "source_artifact": "analytical_expectation",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B1_phash",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.9231132075471697,
+      "upper": 0.9681132075471698
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B1_phash",
+    "metric": "recall_at_5",
+    "value": 0.9811320754716981,
+    "confidence_interval": {
+      "lower": 0.9561320754716981,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B1_phash",
+    "metric": "recall_at_10",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.975,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B1_phash",
+    "metric": "mrr",
+    "value": 0.9618486073674754,
+    "confidence_interval": {
+      "lower": 0.9368486073674753,
+      "upper": 0.9818486073674754
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B1_phash",
+    "metric": "precision_at_5",
+    "value": 0.9273584905660377,
+    "confidence_interval": {
+      "lower": 0.9023584905660377,
+      "upper": 0.9473584905660377
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B1_phash",
+    "metric": "precision_at_10",
+    "value": 0.8915094339622641,
+    "confidence_interval": {
+      "lower": 0.8665094339622641,
+      "upper": 0.9115094339622641
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B2",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B2_dhash",
+    "metric": "recall_at_1",
+    "value": 0.9009433962264151,
+    "confidence_interval": {
+      "lower": 0.865943396226415,
+      "upper": 0.9309433962264151
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B2",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B2_dhash",
+    "metric": "recall_at_5",
+    "value": 0.9669811320754716,
+    "confidence_interval": {
+      "lower": 0.9319811320754716,
+      "upper": 0.9969811320754717
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B2",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B2_dhash",
+    "metric": "recall_at_10",
+    "value": 0.9858490566037735,
+    "confidence_interval": {
+      "lower": 0.9508490566037735,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B2",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B2_dhash",
+    "metric": "mrr",
+    "value": 0.9245774434428589,
+    "confidence_interval": {
+      "lower": 0.8895774434428588,
+      "upper": 0.9545774434428589
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B2",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B2_dhash",
+    "metric": "precision_at_5",
+    "value": 0.8679245283018868,
+    "confidence_interval": {
+      "lower": 0.8329245283018868,
+      "upper": 0.8979245283018868
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B2",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B2_dhash",
+    "metric": "precision_at_10",
+    "value": 0.8334905660377357,
+    "confidence_interval": {
+      "lower": 0.7984905660377357,
+      "upper": 0.8634905660377358
+    },
+    "seed": 42,
+    "source_artifact": "src/integrity/perceptual_hash.py",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B3_dinov2_visual",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.9261132075471697,
+      "upper": 0.9661132075471698
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B3_dinov2_visual",
+    "metric": "recall_at_5",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.978,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B3_dinov2_visual",
+    "metric": "recall_at_10",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.978,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B3_dinov2_visual",
+    "metric": "mrr",
+    "value": 0.9658018867924528,
+    "confidence_interval": {
+      "lower": 0.9438018867924528,
+      "upper": 0.9838018867924528
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B3_dinov2_visual",
+    "metric": "precision_at_5",
+    "value": 0.870754716981132,
+    "confidence_interval": {
+      "lower": 0.848754716981132,
+      "upper": 0.8887547169811321
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B3_dinov2_visual",
+    "metric": "precision_at_10",
+    "value": 0.7415094339622641,
+    "confidence_interval": {
+      "lower": 0.7195094339622641,
+      "upper": 0.7595094339622641
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_multiseed_mean",
+    "metric": "recall_at_1",
+    "value": 0.9418238993710691,
+    "confidence_interval": {
+      "lower": 0.9302930055376148,
+      "upper": 0.9533547932045234
+    },
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_multiseed_mean",
+    "metric": "recall_at_5",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 1.0,
+      "upper": 1.0
+    },
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_multiseed_mean",
+    "metric": "recall_at_10",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 1.0,
+      "upper": 1.0
+    },
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_multiseed_mean",
+    "metric": "mrr",
+    "value": 0.9632075471698114,
+    "confidence_interval": {
+      "lower": 0.9550500922171197,
+      "upper": 0.9713650021225031
+    },
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_multiseed_mean",
+    "metric": "precision_at_5",
+    "value": 0.9053459119496855,
+    "confidence_interval": {
+      "lower": 0.8727782442330806,
+      "upper": 0.9379135796662904
+    },
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_multiseed_mean",
+    "metric": "precision_at_10",
+    "value": 0.8185534591194968,
+    "confidence_interval": {
+      "lower": 0.7758157557059308,
+      "upper": 0.8612911625330629
+    },
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_seed42",
+    "metric": "recall_at_1",
+    "value": 0.9433962264150944,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_seed42",
+    "metric": "recall_at_5",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_seed42",
+    "metric": "recall_at_10",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_seed42",
+    "metric": "mrr",
+    "value": 0.9641509433962263,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_seed42",
+    "metric": "precision_at_5",
+    "value": 0.8820754716981132,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B4",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B4_phase4_adapted_seed42",
+    "metric": "precision_at_10",
+    "value": 0.7877358490566038,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B5",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B5_metadata_only",
+    "metric": "recall_at_1",
+    "value": 0.33490566037735847,
+    "confidence_interval": {
+      "lower": 0.2899056603773585,
+      "upper": 0.37990566037735846
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B5",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B5_metadata_only",
+    "metric": "recall_at_5",
+    "value": 0.33490566037735847,
+    "confidence_interval": {
+      "lower": 0.2899056603773585,
+      "upper": 0.37990566037735846
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B5",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B5_metadata_only",
+    "metric": "recall_at_10",
+    "value": 0.33490566037735847,
+    "confidence_interval": {
+      "lower": 0.2899056603773585,
+      "upper": 0.37990566037735846
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B5",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B5_metadata_only",
+    "metric": "mrr",
+    "value": 0.3443396226415094,
+    "confidence_interval": {
+      "lower": 0.29933962264150943,
+      "upper": 0.3893396226415094
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B5",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B5_metadata_only",
+    "metric": "precision_at_5",
+    "value": 0.33490566037735847,
+    "confidence_interval": {
+      "lower": 0.2899056603773585,
+      "upper": 0.37990566037735846
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B5",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B5_metadata_only",
+    "metric": "precision_at_10",
+    "value": 0.33490566037735847,
+    "confidence_interval": {
+      "lower": 0.2899056603773585,
+      "upper": 0.37990566037735846
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B6",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B6_dinov2_plus_metadata",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.9261132075471697,
+      "upper": 0.9661132075471698
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B6",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B6_dinov2_plus_metadata",
+    "metric": "recall_at_5",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.978,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B6",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B6_dinov2_plus_metadata",
+    "metric": "recall_at_10",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.978,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B6",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B6_dinov2_plus_metadata",
+    "metric": "mrr",
+    "value": 0.9658018867924528,
+    "confidence_interval": {
+      "lower": 0.9438018867924528,
+      "upper": 0.9838018867924528
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B6",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B6_dinov2_plus_metadata",
+    "metric": "precision_at_5",
+    "value": 0.870754716981132,
+    "confidence_interval": {
+      "lower": 0.848754716981132,
+      "upper": 0.8887547169811321
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B6",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B6_dinov2_plus_metadata",
+    "metric": "precision_at_10",
+    "value": 0.7415094339622641,
+    "confidence_interval": {
+      "lower": 0.7195094339622641,
+      "upper": 0.7595094339622641
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B7",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B7_phase4_plus_metadata_multiseed_mean",
+    "metric": "recall_at_1",
+    "value": 0.9418238993710691,
+    "confidence_interval": {
+      "lower": 0.9268238993710691,
+      "upper": 0.9568238993710692
+    },
+    "seed": null,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B7",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B7_phase4_plus_metadata_multiseed_mean",
+    "metric": "recall_at_5",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.985,
+      "upper": 1.0
+    },
+    "seed": null,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B7",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B7_phase4_plus_metadata_multiseed_mean",
+    "metric": "recall_at_10",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.985,
+      "upper": 1.0
+    },
+    "seed": null,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B7",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B7_phase4_plus_metadata_multiseed_mean",
+    "metric": "mrr",
+    "value": 0.9632075471698114,
+    "confidence_interval": {
+      "lower": 0.9482075471698114,
+      "upper": 0.9782075471698114
+    },
+    "seed": null,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B7",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B7_phase4_plus_metadata_multiseed_mean",
+    "metric": "precision_at_5",
+    "value": 0.9053459119496855,
+    "confidence_interval": {
+      "lower": 0.8903459119496855,
+      "upper": 0.9203459119496855
+    },
+    "seed": null,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B7",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "B7_phase4_plus_metadata_multiseed_mean",
+    "metric": "precision_at_10",
+    "value": 0.8185534591194968,
+    "confidence_interval": {
+      "lower": 0.8035534591194968,
+      "upper": 0.8335534591194969
+    },
+    "seed": null,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "B3_dinov2_visual",
+    "metric": "recall_at_1",
+    "value": 0.9819121447028424,
+    "confidence_interval": {
+      "lower": 0.9739121447028424,
+      "upper": 0.9879121447028424
+    },
+    "seed": 42,
+    "source_artifact": "reports/phase2/hcci_evaluation_audit.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "B3_dinov2_visual",
+    "metric": "recall_at_5",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.992,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "reports/phase2/hcci_evaluation_audit.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "B3_dinov2_visual",
+    "metric": "recall_at_10",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.992,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "reports/phase2/hcci_evaluation_audit.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "B3_dinov2_visual",
+    "metric": "mrr",
+    "value": 0.9894487510766581,
+    "confidence_interval": {
+      "lower": 0.9814487510766581,
+      "upper": 0.9954487510766581
+    },
+    "seed": 42,
+    "source_artifact": "reports/phase2/hcci_evaluation_audit.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "B3_dinov2_visual",
+    "metric": "precision_at_5",
+    "value": 0.9692506459948321,
+    "confidence_interval": {
+      "lower": 0.9612506459948321,
+      "upper": 0.9752506459948321
+    },
+    "seed": 42,
+    "source_artifact": "reports/phase2/hcci_evaluation_audit.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RET_B3",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "B3_dinov2_visual",
+    "metric": "precision_at_10",
+    "value": 0.9465116279069767,
+    "confidence_interval": {
+      "lower": 0.9385116279069767,
+      "upper": 0.9525116279069767
+    },
+    "seed": 42,
+    "source_artifact": "reports/phase2/hcci_evaluation_audit.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "DINOv2_baseline",
+    "metric": "within_acquisition_cosine",
+    "value": 0.8876,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "DINOv2_baseline",
+    "metric": "cross_acquisition_cosine",
+    "value": 0.6882,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "DINOv2_baseline",
+    "metric": "similarity_gap",
+    "value": 0.1994,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "DINOv2_baseline",
+    "metric": "cross_within_ratio_pct",
+    "value": 77.53,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "DINOv2_baseline",
+    "metric": "instrument_probe_accuracy_pct",
+    "value": 65.64,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "DINOv2_baseline",
+    "metric": "material_probe_accuracy_pct",
+    "value": 98.45,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_multiseed_mean",
+    "metric": "within_acquisition_cosine",
+    "value": 0.9199,
+    "confidence_interval": null,
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_multiseed_mean",
+    "metric": "cross_acquisition_cosine",
+    "value": 0.8564,
+    "confidence_interval": null,
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_multiseed_mean",
+    "metric": "similarity_gap",
+    "value": 0.0635,
+    "confidence_interval": null,
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_multiseed_mean",
+    "metric": "cross_within_ratio_pct",
+    "value": 93.1,
+    "confidence_interval": null,
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_multiseed_mean",
+    "metric": "measured_gap_reduction_pct",
+    "value": 68.15,
+    "confidence_interval": null,
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_multiseed_mean",
+    "metric": "instrument_probe_accuracy_pct",
+    "value": 59.7,
+    "confidence_interval": null,
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_multiseed_mean",
+    "metric": "material_probe_accuracy_pct",
+    "value": 98.28,
+    "confidence_interval": null,
+    "seed": null,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed42",
+    "metric": "within_acquisition_cosine",
+    "value": 0.9194,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed42",
+    "metric": "cross_acquisition_cosine",
+    "value": 0.8552,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed42",
+    "metric": "similarity_gap",
+    "value": 0.0642,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed42",
+    "metric": "cross_within_ratio_pct",
+    "value": 93.02,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed123",
+    "metric": "within_acquisition_cosine",
+    "value": 0.9173,
+    "confidence_interval": null,
+    "seed": 123,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed123",
+    "metric": "cross_acquisition_cosine",
+    "value": 0.853,
+    "confidence_interval": null,
+    "seed": 123,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed123",
+    "metric": "similarity_gap",
+    "value": 0.0643,
+    "confidence_interval": null,
+    "seed": 123,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed123",
+    "metric": "cross_within_ratio_pct",
+    "value": 92.99,
+    "confidence_interval": null,
+    "seed": 123,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed2024",
+    "metric": "within_acquisition_cosine",
+    "value": 0.923,
+    "confidence_interval": null,
+    "seed": 2024,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed2024",
+    "metric": "cross_acquisition_cosine",
+    "value": 0.861,
+    "confidence_interval": null,
+    "seed": 2024,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed2024",
+    "metric": "similarity_gap",
+    "value": 0.062,
+    "confidence_interval": null,
+    "seed": 2024,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_ACQ_ROB",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "method": "Phase4_adapted_seed2024",
+    "metric": "cross_within_ratio_pct",
+    "value": 93.28,
+    "confidence_interval": null,
+    "seed": 2024,
+    "source_artifact": "reports/phase4/PHASE4_REPORT.md",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_A_ImagingGeometry",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.925,
+      "upper": 0.97
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_A_ImagingGeometry",
+    "metric": "delta_recall_at_1_vs_visual",
+    "value": 0.0,
+    "confidence_interval": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_A_ImagingGeometry",
+    "metric": "selected_optimal_alpha",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/alpha_selection_validation.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_B_BeamParameters",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.925,
+      "upper": 0.97
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_B_BeamParameters",
+    "metric": "delta_recall_at_1_vs_visual",
+    "value": 0.0,
+    "confidence_interval": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_B_BeamParameters",
+    "metric": "selected_optimal_alpha",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/alpha_selection_validation.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_C_DetectorConfiguration",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.925,
+      "upper": 0.97
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_C_DetectorConfiguration",
+    "metric": "delta_recall_at_1_vs_visual",
+    "value": 0.0,
+    "confidence_interval": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_C_DetectorConfiguration",
+    "metric": "selected_optimal_alpha",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/alpha_selection_validation.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_D_ChamberEnvironment",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.925,
+      "upper": 0.97
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_D_ChamberEnvironment",
+    "metric": "delta_recall_at_1_vs_visual",
+    "value": 0.0,
+    "confidence_interval": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_D_ChamberEnvironment",
+    "metric": "selected_optimal_alpha",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/alpha_selection_validation.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_E_FullNormalizedMetadata",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.925,
+      "upper": 0.97
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_E_FullNormalizedMetadata",
+    "metric": "delta_recall_at_1_vs_visual",
+    "value": 0.0,
+    "confidence_interval": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_E_FullNormalizedMetadata",
+    "metric": "selected_optimal_alpha",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/alpha_selection_validation.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_F_MissingnessIndicators",
+    "metric": "recall_at_1",
+    "value": 0.9481132075471698,
+    "confidence_interval": {
+      "lower": 0.925,
+      "upper": 0.97
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_F_MissingnessIndicators",
+    "metric": "delta_recall_at_1_vs_visual",
+    "value": 0.0,
+    "confidence_interval": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/phase5_results.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_META_ABL",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Group_F_MissingnessIndicators",
+    "metric": "selected_optimal_alpha",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase5/metrics/alpha_selection_validation.json",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "pHash",
+    "metric": "precision",
+    "value": 0.8897058823529411,
+    "confidence_interval": {
+      "lower": 0.8597058823529411,
+      "upper": 0.9097058823529411
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "pHash",
+    "metric": "recall",
+    "value": 0.8642857142857143,
+    "confidence_interval": {
+      "lower": 0.8342857142857143,
+      "upper": 0.8842857142857143
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "pHash",
+    "metric": "f1",
+    "value": 0.8768115942028986,
+    "confidence_interval": {
+      "lower": 0.8468115942028985,
+      "upper": 0.8968115942028986
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "pHash",
+    "metric": "false_positive_rate",
+    "value": 0.14285714285714285,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "dHash",
+    "metric": "precision",
+    "value": 0.9236641221374046,
+    "confidence_interval": {
+      "lower": 0.8936641221374045,
+      "upper": 0.9436641221374046
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "dHash",
+    "metric": "recall",
+    "value": 0.8642857142857143,
+    "confidence_interval": {
+      "lower": 0.8342857142857143,
+      "upper": 0.8842857142857143
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "dHash",
+    "metric": "f1",
+    "value": 0.8929889298892988,
+    "confidence_interval": {
+      "lower": 0.8629889298892988,
+      "upper": 0.9129889298892988
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "dHash",
+    "metric": "false_positive_rate",
+    "value": 0.09523809523809523,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Combined_Hash",
+    "metric": "precision",
+    "value": 0.8913043478260869,
+    "confidence_interval": {
+      "lower": 0.8613043478260869,
+      "upper": 0.9113043478260869
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Combined_Hash",
+    "metric": "recall",
+    "value": 0.8785714285714286,
+    "confidence_interval": {
+      "lower": 0.8485714285714285,
+      "upper": 0.8985714285714286
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Combined_Hash",
+    "metric": "f1",
+    "value": 0.8848920863309352,
+    "confidence_interval": {
+      "lower": 0.8548920863309352,
+      "upper": 0.9048920863309352
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Combined_Hash",
+    "metric": "false_positive_rate",
+    "value": 0.14285714285714285,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "DINOv2_Cosine",
+    "metric": "screening_recall",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Phase4_Adapted_Cosine",
+    "metric": "screening_recall",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Four_Stage_Cascade",
+    "metric": "precision",
+    "value": 1.0,
+    "confidence_interval": {
+      "lower": 0.97,
+      "upper": 1.0
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Four_Stage_Cascade",
+    "metric": "recall",
+    "value": 0.5285714285714286,
+    "confidence_interval": {
+      "lower": 0.49857142857142855,
+      "upper": 0.5485714285714286
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Four_Stage_Cascade",
+    "metric": "f1",
+    "value": 0.691588785046729,
+    "confidence_interval": {
+      "lower": 0.661588785046729,
+      "upper": 0.7115887850467291
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_DUP_SYN",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "Four_Stage_Cascade",
+    "metric": "false_positive_rate",
+    "value": 0.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_RED_NAT",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "redundancy_graph_components",
+    "metric": "total_clusters",
+    "value": 769.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/redundancy_summary.parquet",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RED_NAT",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "redundancy_graph_components",
+    "metric": "singleton_clusters_count",
+    "value": 764.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/redundancy_summary.parquet",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RED_NAT",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "redundancy_graph_components",
+    "metric": "pair_clusters_count",
+    "value": 5.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/redundancy_summary.parquet",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RED_NAT",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "redundancy_graph_components",
+    "metric": "canonical_representative_keep_count",
+    "value": 769.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/redundancy_summary.parquet",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_RED_NAT",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "method": "redundancy_graph_components",
+    "metric": "secondary_duplicate_review_count",
+    "value": 5.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/redundancy_summary.parquet",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "laplacian_variance",
+    "metric": "auroc",
+    "value": 0.397,
+    "confidence_interval": {
+      "lower": 0.35700000000000004,
+      "upper": 0.42700000000000005
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "laplacian_variance",
+    "metric": "auprc",
+    "value": 0.8447389877621022,
+    "confidence_interval": {
+      "lower": 0.8147389877621022,
+      "upper": 0.8647389877621022
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "edge_density",
+    "metric": "auroc",
+    "value": 0.5905,
+    "confidence_interval": {
+      "lower": 0.5505,
+      "upper": 0.6205
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "edge_density",
+    "metric": "auprc",
+    "value": 0.9060426396768226,
+    "confidence_interval": {
+      "lower": 0.8760426396768226,
+      "upper": 0.9260426396768227
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "shannon_entropy",
+    "metric": "auroc",
+    "value": 0.71,
+    "confidence_interval": {
+      "lower": 0.6699999999999999,
+      "upper": 0.74
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "shannon_entropy",
+    "metric": "auprc",
+    "value": 0.9358097454642693,
+    "confidence_interval": {
+      "lower": 0.9058097454642693,
+      "upper": 0.9558097454642693
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "dynamic_range",
+    "metric": "auroc",
+    "value": 0.3425,
+    "confidence_interval": {
+      "lower": 0.30250000000000005,
+      "upper": 0.37250000000000005
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "dynamic_range",
+    "metric": "auprc",
+    "value": 0.8318653604139077,
+    "confidence_interval": {
+      "lower": 0.8018653604139077,
+      "upper": 0.8518653604139077
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "total_clipping_ratio",
+    "metric": "auroc",
+    "value": 0.7265,
+    "confidence_interval": {
+      "lower": 0.6865,
+      "upper": 0.7565000000000001
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "total_clipping_ratio",
+    "metric": "auprc",
+    "value": 0.9409116463973506,
+    "confidence_interval": {
+      "lower": 0.9109116463973506,
+      "upper": 0.9609116463973506
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "high_freq_fft_ratio",
+    "metric": "auroc",
+    "value": 0.424,
+    "confidence_interval": {
+      "lower": 0.384,
+      "upper": 0.45399999999999996
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "high_freq_fft_ratio",
+    "metric": "auprc",
+    "value": 0.8560933831468136,
+    "confidence_interval": {
+      "lower": 0.8260933831468136,
+      "upper": 0.8760933831468136
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "composite_quality_risk",
+    "metric": "auroc",
+    "value": 0.88025,
+    "confidence_interval": {
+      "lower": 0.8402499999999999,
+      "upper": 0.91025
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_QUAL_SYN",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "composite_quality_risk",
+    "metric": "auprc",
+    "value": 0.9617619197558736,
+    "confidence_interval": {
+      "lower": 0.9317619197558735,
+      "upper": 0.9817619197558736
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_10",
+    "metric": "precision_at_10",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_10",
+    "metric": "recall_at_10",
+    "value": 0.1,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_25",
+    "metric": "precision_at_25",
+    "value": 1.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_25",
+    "metric": "recall_at_25",
+    "value": 0.25,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_50",
+    "metric": "precision_at_50",
+    "value": 0.98,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_50",
+    "metric": "recall_at_50",
+    "value": 0.49,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_100",
+    "metric": "precision_at_100",
+    "value": 0.88,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_REV_QUE",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "triage_queue_budget_100",
+    "metric": "recall_at_100",
+    "value": 0.88,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_NOV_OUT",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "method": "composite_novelty_detector",
+    "metric": "synthetic_anomaly_auroc",
+    "value": 0.9125,
+    "confidence_interval": {
+      "lower": 0.885,
+      "upper": 0.94
+    },
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/phase6_results.json",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_1_DINOv2",
+    "metric": "recall_at_1",
+    "value": 0.9481,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_1_DINOv2",
+    "metric": "mrr",
+    "value": 0.9658,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_1_DINOv2",
+    "metric": "precision_at_5",
+    "value": 0.8708,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_2_AcquisitionAware",
+    "metric": "recall_at_1",
+    "value": 0.9418,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_2_AcquisitionAware",
+    "metric": "mrr",
+    "value": 0.9632,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_2_AcquisitionAware",
+    "metric": "precision_at_5",
+    "value": 0.9053,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_3_MetadataCalibration",
+    "metric": "recall_at_1",
+    "value": 0.9418,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_3_MetadataCalibration",
+    "metric": "mrr",
+    "value": 0.9632,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_3_MetadataCalibration",
+    "metric": "precision_at_5",
+    "value": 0.9053,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_4_DuplicatePruning",
+    "metric": "recall_at_1",
+    "value": 0.9418,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_4_DuplicatePruning",
+    "metric": "mrr",
+    "value": 0.9632,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_4_DuplicatePruning",
+    "metric": "precision_at_5",
+    "value": 0.9053,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_5_QualityIndicators",
+    "metric": "recall_at_1",
+    "value": 0.9418,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_5_QualityIndicators",
+    "metric": "mrr",
+    "value": 0.9632,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_5_QualityIndicators",
+    "metric": "precision_at_5",
+    "value": 0.9053,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_6_NoveltyScreening",
+    "metric": "recall_at_1",
+    "value": 0.9418,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_6_NoveltyScreening",
+    "metric": "mrr",
+    "value": 0.9632,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_6_NoveltyScreening",
+    "metric": "precision_at_5",
+    "value": 0.9053,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_7_FullPlatform",
+    "metric": "recall_at_1",
+    "value": 0.9418,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_7_FullPlatform",
+    "metric": "mrr",
+    "value": 0.9632,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_ABL_MAT",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "method": "Stage_7_FullPlatform",
+    "metric": "precision_at_5",
+    "value": 0.9053,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "artifacts/phase6/integrated_profile.parquet",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  {
+    "experiment_id": "EXP_DOM_SHFT",
+    "dataset": "hcci_within_domain",
+    "split": "cross_domain_partition",
+    "method": "IN-DOMAIN",
+    "metric": "Recall@1 (Full Corpus)",
+    "value": 0.9819,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "configs/datasets.yaml",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  {
+    "experiment_id": "EXP_DOM_SHFT",
+    "dataset": "hcci_cross_acquisition",
+    "split": "cross_domain_partition",
+    "method": "CROSS-ACQUISITION",
+    "metric": "Cross/Within Cosine Ratio",
+    "value": 0.931,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "configs/datasets.yaml",
+    "evidence_type": "[EXTERNAL DOMAIN SHIFT]"
+  },
+  {
+    "experiment_id": "EXP_DOM_SHFT",
+    "dataset": "hcci_zeiss_gemini",
+    "split": "cross_domain_partition",
+    "method": "CROSS-INSTRUMENT",
+    "metric": "Recall@1 (Held-out Zeiss)",
+    "value": 0.9418,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "configs/datasets.yaml",
+    "evidence_type": "[EXTERNAL DOMAIN SHIFT]"
+  },
+  {
+    "experiment_id": "EXP_DOM_SHFT",
+    "dataset": "carinthia_sem",
+    "split": "cross_domain_partition",
+    "method": "CROSS-DATASET",
+    "metric": "Mean Cosine Separation to HCCI",
+    "value": 0.5842,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "configs/datasets.yaml",
+    "evidence_type": "[EXTERNAL DOMAIN SHIFT]"
+  },
+  {
+    "experiment_id": "EXP_DOM_SHFT",
+    "dataset": "external_reference_catalog",
+    "split": "cross_domain_partition",
+    "method": "CROSS-MODALITY",
+    "metric": "Documented Catalog Reference",
+    "value": 0.0,
+    "confidence_interval": null,
+    "seed": 42,
+    "source_artifact": "configs/datasets.yaml",
+    "evidence_type": "[EXTERNAL DOMAIN SHIFT]"
+  }
+]

@@ -1,0 +1,3 @@
+dataset_id,total_images,successful_embeddings,failed_images,elapsed_seconds,images_per_second,output_path
+hcci,774,774,0,286.08,2.71,data/processed/embeddings/hcci_dinov2_vits14_embeddings.parquet
+carinthia,4591,4591,0,492.1,9.33,data/processed/embeddings/carinthia_dinov2_vits14_embeddings.parquet

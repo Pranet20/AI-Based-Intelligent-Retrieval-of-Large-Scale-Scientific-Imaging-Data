@@ -1,0 +1,34 @@
+[
+  {
+    "dataset": "carinthia",
+    "expected_count": 4591,
+    "successful_count": 4591,
+    "failed_count": 0,
+    "embedding_dimension": 384,
+    "nan_count": 0,
+    "inf_count": 0,
+    "duplicate_image_id_count": 0,
+    "zero_vector_count": 0,
+    "mean_norm": 1.0,
+    "std_norm": 0.0,
+    "min_norm": 1.0,
+    "max_norm": 1.0,
+    "validation_status": "PASSED"
+  },
+  {
+    "dataset": "hcci",
+    "expected_count": 774,
+    "successful_count": 774,
+    "failed_count": 0,
+    "embedding_dimension": 384,
+    "nan_count": 0,
+    "inf_count": 0,
+    "duplicate_image_id_count": 0,
+    "zero_vector_count": 0,
+    "mean_norm": 1.0,
+    "std_norm": 0.0,
+    "min_norm": 1.0,
+    "max_norm": 1.0,
+    "validation_status": "PASSED"
+  }
+]

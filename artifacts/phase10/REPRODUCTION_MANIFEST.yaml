@@ -1,0 +1,179 @@
+manifest_version: 1.0.0
+project: AI-Powered Scientific Image Data Management Platform
+verification_date: 2026-09
+reproduction_level: "LEVEL B \u2014 REPRODUCIBLE WITH AVAILABLE DATA"
+experiments:
+- experiment_id: EXP_RET_B0
+  phase: PHASE2
+  purpose: Uniform random ranking lower bound on HCCI retrieval
+  input_data: data/manifests/hcci_manifest.parquet
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: Uniform Random Generator
+  checkpoint: None (Analytical Baseline)
+  configuration: configs/phase2.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_retrieval.py --model random
+  expected_output: artifacts/phase10/reproduction_runs/retrieval_random.json
+  expected_metrics:
+    Recall@1: 0.0013
+    MRR: 0.0091
+  tolerance: 0.005
+  runtime: < 5 seconds
+  hardware: CPU (Single-Core)
+  status: REPRODUCED_EXACTLY
+- experiment_id: EXP_RET_B1
+  phase: PHASE2
+  purpose: Perceptual Hash (pHash, 64-bit DCT) retrieval baseline
+  input_data: data/raw/hcci/
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: pHash (ImageHash 4.3.2)
+  checkpoint: None (Heuristic Feature)
+  configuration: configs/phase2.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_retrieval.py --model phash
+  expected_output: artifacts/phase10/reproduction_runs/retrieval_phash.json
+  expected_metrics:
+    Recall@1: 0.021
+    MRR: 0.0489
+  tolerance: 0.005
+  runtime: ~ 20 seconds
+  hardware: CPU (Multi-Core)
+  status: REPRODUCED_EXACTLY
+- experiment_id: EXP_RET_B3
+  phase: PHASE2
+  purpose: Frozen DINOv2 ViT-S/14 baseline visual feature retrieval
+  input_data: data/processed/embeddings/hcci_dinov2_vits14_embeddings.parquet
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: DINOv2 ViT-S/14 (384-d, frozen)
+  checkpoint: Torch Hub facebookresearch/dinov2
+  configuration: configs/phase2.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_retrieval.py --model dinov2
+  expected_output: artifacts/phase10/reproduction_runs/retrieval_dinov2.json
+  expected_metrics:
+    Recall@1: 0.9819
+    MRR: 0.9894
+    Precision@5: 0.9693
+  tolerance: 0.0001
+  runtime: ~ 15 seconds
+  hardware: CPU (Multi-Core)
+  status: REPRODUCED_EXACTLY
+- experiment_id: EXP_FAISS_B3
+  phase: PHASE3
+  purpose: FAISS IndexFlatIP vs HNSW speedup and latency benchmarking
+  input_data: data/processed/embeddings/hcci_dinov2_vits14_embeddings.parquet
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: FAISS Vector Search Engine
+  checkpoint: None (Exact / Graph Index)
+  configuration: configs/phase3.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_faiss.py
+  expected_output: artifacts/phase10/reproduction_runs/faiss_benchmark.json
+  expected_metrics:
+    IndexFlatIP_latency_ms: 0.7348
+    IndexHNSW_latency_ms: 0.3691
+    Speedup: 1.99
+  tolerance: 0.2
+  runtime: ~ 10 seconds
+  hardware: CPU (Multi-Core)
+  status: REPRODUCED_WITHIN_TOLERANCE
+- experiment_id: EXP_RET_B4
+  phase: PHASE4
+  purpose: Acquisition-Aware Representation Adapter training and gap reduction
+  input_data: data/processed/phase4/splits/hcci_instrument_splits.json
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: Linear Projection Adapter (384 -> 384)
+  checkpoint: data/processed/phase4/checkpoints/best_checkpoint_seed42.pt
+  configuration: configs/phase4.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_adapter.py --eval
+  expected_output: artifacts/phase10/reproduction_runs/adapter_eval.json
+  expected_metrics:
+    baseline_within: 0.7973
+    baseline_cross: 0.5979
+    adapted_within: 0.9199
+    adapted_cross: 0.8564
+    gap_reduction_pct: 68.15
+  tolerance: 0.001
+  runtime: ~ 10 seconds
+  hardware: CPU (Multi-Core)
+  status: REPRODUCED_EXACTLY
+- experiment_id: EXP_RET_B5
+  phase: PHASE5
+  purpose: Authoritative metadata-only nearest neighbor retrieval verification
+  input_data: data/manifests/hcci_manifest.parquet
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: Normalized Gower Distance Metadata Matcher
+  checkpoint: None (Normalized Metadata Vector)
+  configuration: configs/phase5.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_metadata.py --mode metadata_only
+  expected_output: artifacts/phase10/reproduction_runs/metadata_retrieval.json
+  expected_metrics:
+    Recall@1: 0.33490566037735847
+    Recall@5: 0.33490566037735847
+    Recall@10: 0.33490566037735847
+    MRR: 0.3443396226415094
+  tolerance: 1.0e-06
+  runtime: < 5 seconds
+  hardware: CPU (Single-Core)
+  status: REPRODUCED_EXACTLY
+- experiment_id: EXP_RED_NAT
+  phase: PHASE6
+  purpose: Natural redundancy graph connected components partition
+  input_data: data/manifests/hcci_manifest.parquet
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: Multi-Stage Redundancy Graph Clustering
+  checkpoint: None (Graph Partitioning Algorithm)
+  configuration: configs/phase6.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_curation.py --task redundancy_graph
+  expected_output: artifacts/phase10/reproduction_runs/redundancy_graph.json
+  expected_metrics:
+    total_clusters: 769
+    singleton_clusters: 764
+    pair_clusters: 5
+    keep_count: 769
+    review_count: 5
+  tolerance: 0.0
+  runtime: < 5 seconds
+  hardware: CPU (Single-Core)
+  status: REPRODUCED_EXACTLY
+- experiment_id: EXP_QUAL_SYN
+  phase: PHASE6
+  purpose: Synthetic physical image-quality degradation benchmark
+  input_data: artifacts/phase6/quality_anomaly_results.json
+  input_manifest: data/manifests/hcci_manifest.parquet
+  model: Composite Quality Risk Evaluator
+  checkpoint: None (Calibrated Indicators)
+  configuration: configs/phase6.yaml
+  seed: 42
+  command: python scripts/reproduce/reproduce_curation.py --task quality
+  expected_output: artifacts/phase10/reproduction_runs/quality_benchmark.json
+  expected_metrics:
+    AUROC: 0.8803
+    AUPRC: 0.9618
+    N: 120
+  tolerance: 0.001
+  runtime: < 5 seconds
+  hardware: CPU (Single-Core)
+  status: REPRODUCED_EXACTLY
+- experiment_id: EXP_REP_AUD
+  phase: PHASE7
+  purpose: Cryptographic checksum verification of frozen research artifacts
+  input_data: artifacts/phase8/final_frozen_checksums.json
+  input_manifest: artifacts/phase10/PHASE10_FROZEN_ARTIFACT_REGISTRY.csv
+  model: SHA-256 Cryptographic Hasher
+  checkpoint: None
+  configuration: configs/phase7.yaml
+  seed: 42
+  command: python scripts/reproduce/validate_release.py --verify-only
+  expected_output: artifacts/phase10/PHASE10_CHECKSUM_VERIFICATION.json
+  expected_metrics:
+    phase1_7_verified: 110
+    mismatches: 0
+    missing: 0
+  tolerance: 0.0
+  runtime: < 5 seconds
+  hardware: CPU (Single-Core)
+  status: REPRODUCED_EXACTLY

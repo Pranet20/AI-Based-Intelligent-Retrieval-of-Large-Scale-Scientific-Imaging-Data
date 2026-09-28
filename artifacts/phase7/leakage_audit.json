@@ -1,0 +1,170 @@
+{
+  "check_A_image_overlap": {
+    "check_id": "A",
+    "check_name": "Image Overlap Across Splits",
+    "status": "PASSED",
+    "details": {
+      "train_count": 427,
+      "val_count": 135,
+      "test_count": 212,
+      "total_partitioned": 774,
+      "total_manifest": 774,
+      "train_val_overlap": 0,
+      "train_test_overlap": 0,
+      "val_test_overlap": 0
+    },
+    "description": "Images must be strictly partitioned across train, validation, and test sets with zero set intersection."
+  },
+  "check_B_sha256_overlap": {
+    "check_id": "B",
+    "check_name": "Exact SHA-256 Bitwise Overlap",
+    "status": "PASSED",
+    "details": {
+      "train_hashes_unique": 427,
+      "val_hashes_unique": 135,
+      "test_hashes_unique": 212,
+      "cross_split_hash_matches": 0
+    },
+    "description": "Exact bitwise SHA-256 duplicate content must not cross train/val/test split boundaries."
+  },
+  "check_C_decoded_pixel_overlap": {
+    "check_id": "C",
+    "check_name": "Decoded Pixel Duplicate Overlap",
+    "status": "PASSED",
+    "details": {
+      "pixel_identical_cross_split_pairs": 0
+    },
+    "description": "Decoded uncompressed pixel matrices must not contain identical duplicates crossing split boundaries."
+  },
+  "check_D_near_duplicate_overlap": {
+    "check_id": "D",
+    "check_name": "Near-Duplicate Split Leakage",
+    "status": "PASSED",
+    "details": {
+      "total_near_duplicate_pairs": 5,
+      "cross_split_near_duplicates": 0,
+      "distribution": {
+        "train_train": 0,
+        "val_val": 0,
+        "test_test": 5,
+        "cross_split": 0
+      },
+      "audit_note": "All 5 near-duplicate pairs are strictly intra-test (between Zeiss micrographs); 0 cross-split leakage."
+    },
+    "description": "Near-duplicate micrograph pairs detected by the 4-stage cascade must not bridge train and test splits."
+  },
+  "check_E_specimen_partition": {
+    "check_id": "E",
+    "check_name": "Specimen Partition Documentation & Audit",
+    "status": "PASSED",
+    "details": {
+      "train_specimens": [
+        "AsCast",
+        "Q980_0h_WC",
+        "Q980_9h_AC"
+      ],
+      "val_specimens": [
+        "AsCast",
+        "Q980_0h_WC",
+        "Q980_9h_AC"
+      ],
+      "test_specimens": [
+        "AsCast",
+        "Q980_0h_WC",
+        "Q980_9h_AC"
+      ],
+      "benchmark_semantics": "Cross-instrument domain generalization. All 3 alloy material states (AsCast, 1000C, 1100C) appear in each split, enabling evaluation of material-preserving retrieval under unseen instrument optics (Zeiss Gemini)."
+    },
+    "description": "Clarifies material/specimen distribution across splits: instrument-held-out benchmark evaluates cross-acquisition invariance on identical alloy compositions."
+  },
+  "check_F_acquisition_overlap": {
+    "check_id": "F",
+    "check_name": "Acquisition Condition Disjointness",
+    "status": "PASSED",
+    "details": {
+      "train_acquisitions": 37,
+      "val_acquisitions": 12,
+      "test_acquisitions": 18,
+      "total_unique_acquisitions": 67,
+      "cross_split_acquisition_overlap": 0,
+      "instruments_train": [
+        "Helios NanoLab",
+        "Helios G4 PFIB CXe"
+      ],
+      "instruments_val": [
+        "VEGA3 XMH"
+      ],
+      "instruments_test": [
+        "Zeiss Gemini"
+      ],
+      "instrument_overlap": 0
+    },
+    "description": "Acquisition conditions and instrument hardware configurations must be 100% disjoint across splits."
+  },
+  "check_G_metadata_identifier_prohibition": {
+    "check_id": "G",
+    "check_name": "Prohibition of Direct Metadata Identifiers",
+    "status": "PASSED",
+    "details": {
+      "forbidden_identifiers_checked": [
+        "specimen_id",
+        "roi_id",
+        "image_id",
+        "filename",
+        "duplicate_group",
+        "retrieval_label",
+        "acquisition_id",
+        "filepath"
+      ],
+      "violations_found": [],
+      "active_metadata_feature_count": 9,
+      "active_features_sample": [
+        "accelerating_voltage_kv",
+        "beam_current_na",
+        "chamber_pressure_pa",
+        "detector",
+        "dwell_time_us",
+        "etching_agent",
+        "magnification",
+        "pixel_size_nm"
+      ]
+    },
+    "description": "Direct identifiers (specimen_id, roi_id, image_id, filenames, duplicate labels, acquisition_id) must be strictly forbidden in representation or retrieval features."
+  },
+  "check_H_calibration_leakage": {
+    "check_id": "H",
+    "check_name": "Threshold and Calibration Isolation",
+    "status": "PASSED",
+    "details": {
+      "phase5_alpha_calibration_split": "validation",
+      "selected_alpha": 1.0,
+      "selection_criterion": "MRR on validation",
+      "test_set_exposure": "None (evaluated strictly post-calibration)"
+    },
+    "description": "Fusion weights (alpha), scaling parameters, and anomaly thresholds must be fitted strictly on train/val without test exposure."
+  },
+  "check_I_hyperparameter_leakage": {
+    "check_id": "I",
+    "check_name": "Hyperparameter Protocol Isolation",
+    "status": "PASSED",
+    "details": {
+      "phase4_learning_rate": 0.0001,
+      "phase4_margin": 0.3,
+      "phase4_weight_decay": 0.0001,
+      "phase4_selection_metric": "Validation loss / MRR on VEGA3 XMH split",
+      "test_evaluations_run_during_tuning": 0
+    },
+    "description": "Hyperparameters must be finalized before held-out test split evaluation."
+  },
+  "check_J_test_set_tuning": {
+    "check_id": "J",
+    "check_name": "Prohibition of Post-Hoc Test Set Tuning",
+    "status": "PASSED",
+    "details": {
+      "reproducibility_protocol": "Frozen checkpoint inference only",
+      "test_split_backpropagation": false,
+      "zero_shot_guarantee": "Zeiss Gemini test split evaluated without gradient updates or threshold re-fitting."
+    },
+    "description": "No iterative optimization, threshold adjustment, or retraining performed using test set metrics."
+  }
+}

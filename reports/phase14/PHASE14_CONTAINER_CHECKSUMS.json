@@ -1,0 +1,15 @@
+{
+  "Dockerfile": {
+    "sha256": "1a3d3905357ee16bb41b4898f9be225e07e24de4b2e7c3f7d89d1d4a29df5ffc",
+    "size_bytes": 874
+  },
+  "docker-compose.yml": {
+    "sha256": "90760a6b4ff58d86c49f1d9afc2df82f1d0983ec92a8649150c10090d72779fc",
+    "size_bytes": 1617
+  },
+  "requirements.txt": {
+    "sha256": "479390172fc705e62b760266ed659eb6ab617465ef552d480790ae242da42f0f",
+    "size_bytes": 825
+  },
+  ".dockerignore": "NOT_FOUND"
+}

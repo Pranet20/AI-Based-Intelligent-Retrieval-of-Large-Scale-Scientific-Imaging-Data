@@ -1,0 +1,7 @@
+dataset,source,DOI,license,license_verified,redistribution_allowed,commercial_use_allowed,local_research_allowed,attribution_required,raw_data_redistribution_status,manifest_redistribution_status,code_license,data_license,evidence
+HCCI,Zenodo / HCCI Authors,10.5281/zenodo.21931379,RIGHTS_UNVERIFIED,NO,NO,NO,YES,YES,DO_NOT_REDISTRIBUTE,ALLOWED,MIT,UNKNOWN,Zenodo record lacks visible explicit license badge; restricted to local research use
+Carinthia,Zenodo / Carinthian Tech Research,10.5281/zenodo.10715190,RIGHTS_UNVERIFIED,NO,NO,NO,YES,YES,DO_NOT_REDISTRIBUTE,ALLOWED,MIT,UNKNOWN,Zenodo record lacks visible explicit license badge; restricted to local research use
+SEM Nanoscience,Nature Scientific Data,10.1038/sdata.2018.172,CC BY 4.0,YES,YES,YES,YES,YES,ALLOWED_WITH_ATTRIBUTION,ALLOWED,MIT,CC BY 4.0,Nature Sci Data article 180172 open access terms
+atomagined,GitHub / Zenodo,GitHub atomagined,RIGHTS_UNVERIFIED,NO,NO,NO,YES,YES,DO_NOT_REDISTRIBUTE,ALLOWED,MIT,UNKNOWN,Repository code is MIT but dataset redistribution terms require separate author confirmation
+cigRockSEM,Zenodo / ResearchGate,10.5281/zenodo.5188204,RIGHTS_UNVERIFIED,NO,NO,NO,YES,YES,DO_NOT_REDISTRIBUTE,ALLOWED,MIT,UNKNOWN,Unknown terms requiring direct author rights confirmation
+MicroAl,Materials Data Facility,N/A,RIGHTS_UNVERIFIED,NO,NO,NO,YES,YES,DO_NOT_REDISTRIBUTE,ALLOWED,MIT,UNKNOWN,Academic research restriction pending formal authorization

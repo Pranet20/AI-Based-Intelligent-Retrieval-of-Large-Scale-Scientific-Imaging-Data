@@ -1,0 +1,6 @@
+config_id,architecture_name,fusion_type,input_modalities,r_at_1,r_at_5,r_at_10,mrr,p_at_5,p_at_10,delta_r1_vs_visual,statistical_verdict
+B0,Visual-Only (DINOv2 B3),None (Visual Only),Micrograph (d=384),0.9481,0.9906,0.9953,0.9658,0.8708,0.7958,Baseline,Optimal Top-1 Representation
+B1,Metadata-Only,None (Metadata Only),7 Acquisition Scalars,0.0519,0.2217,0.3679,0.3443,0.0632,0.0642,-0.8962,Near-Random Discrimination
+B2,Linear Late Fusion,Score Interpolation (alpha=0.5),Image + 7 Scalars,0.6274,0.8585,0.9104,0.7289,0.5981,0.5623,-0.3207,Statistically Degraded
+B3,Gated MLP (Phase 13),Non-Linear Gated Projection,Image + 7 Scalars,0.5896,0.8349,0.8962,0.7034,0.5745,0.5396,-0.3585,Statistically Degraded
+B4,Cross-Attention Fusion,Learned Multi-Head Cross-Attn,Image + 7 Scalars,0.6132,0.8491,0.9009,0.7180,0.5858,0.5481,-0.3349,Statistically Degraded

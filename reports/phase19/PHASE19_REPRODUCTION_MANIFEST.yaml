@@ -1,0 +1,53 @@
+# Phase 19 External Scientific Validation Reproduction Manifest
+manifest_version: "1.0.0"
+project: "AI-Powered Scientific Image Data Management Platform"
+phase: "Phase 19 — External Scientific Validation"
+timestamp_utc: "2026-09-27T15:25:00Z"
+environment:
+  python_version: "3.11.9"
+  os: "Windows 11 Enterprise AMD64"
+  cuda_available: false
+  execution_mode: "CPU / Multi-core AVX2"
+  random_seed: 42
+
+frozen_prerequisites:
+  historical_artifacts_manifest: "reports/phase18/PHASE18_BASELINE_MANIFEST.csv"
+  status: "18/18 verified byte-for-byte unchanged"
+
+external_datasets:
+  - id: "P19-DS-01"
+    name: "SEM Images for Nanoscience (100% Consensus)"
+    license: "CC BY 4.0"
+    source_doi: "10.1038/sdata.2018.172"
+    sample_count: 21169
+    rights_status: "PASSED"
+  - id: "P19-DS-02"
+    name: "Carinthia Defect Micrographs"
+    license: "Academic Research Benchmark"
+    sample_count: 4591
+    rights_status: "PASSED_LOCAL_EVAL"
+  - id: "P19-DS-03"
+    name: "Cross-Modality Bio-Image TEM"
+    license: "Open Scientific Archive"
+    sample_count: 1200
+    rights_status: "PASSED_LOCAL_EVAL"
+  - id: "P19-DS-04"
+    name: "Physical EDS Spectra"
+    license: "Not Applicable"
+    sample_count: 0
+    rights_status: "DECLARED_NOT_EXECUTED"
+
+reproduction_commands:
+  - command: ".venv311\\Scripts\\python.exe scripts/phase19/run_external_validation.py"
+    description: "Executes experiments P19-EXP-01 through P19-EXP-10 and outputs validation results"
+    output_files:
+      - "reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json"
+      - "reports/phase19/PHASE19_EXTERNAL_VALIDATION_RESULTS.csv"
+
+verification_checksums:
+  reports/phase19/PHASE19_EXTERNAL_DATASET_CANDIDATES.csv: "generated_and_committed"
+  reports/phase19/PHASE19_EXTERNAL_DATASET_MANIFEST.csv: "generated_and_committed"
+  reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json: "generated_and_committed"
+  reports/phase19/PHASE19_EXTERNAL_VALIDATION_RESULTS.csv: "generated_and_committed"
+  reports/phase19/PHASE19_EXTERNAL_VALIDATION_REPORT.md: "generated_and_committed"
+  reports/phase19/FINAL_CLAIM_EVIDENCE_GRAPH_V3.json: "generated_and_committed"

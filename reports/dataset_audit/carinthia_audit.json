@@ -1,0 +1,32 @@
+{
+  "dataset_id": "carinthia",
+  "name": "Carinthia SEM Dataset",
+  "source_url": "https://zenodo.org/records/10715190",
+  "doi": "10.5281/zenodo.10715190",
+  "version": "1.0.0",
+  "license": "CC-BY-4.0",
+  "role": "defect_anomaly_evaluation",
+  "total_images": 30,
+  "total_storage_bytes": 966721,
+  "total_storage_mb": 0.92,
+  "formats": {
+    "jpg": 30
+  },
+  "bit_depths": {
+    "8": 30
+  },
+  "channels": {
+    "1": 30
+  },
+  "labels_available": true,
+  "annotated_images_count": 30,
+  "metadata_available": false,
+  "exact_duplicate_records": 0,
+  "near_duplicate_records": 0,
+  "quality_status_breakdown": {
+    "REVIEW": 28,
+    "PASS": 2
+  },
+  "error_count": 0,
+  "errors": []
+}

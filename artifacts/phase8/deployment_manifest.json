@@ -1,0 +1,41 @@
+{
+  "platform": "SciData Platform",
+  "version": "1.0.0",
+  "deployment_target": "Docker Compose",
+  "services": {
+    "postgres": {
+      "image": "postgres:15-alpine",
+      "container_name": "scidata-postgres",
+      "port": 5432,
+      "database": "scidata_platform",
+      "volume": "postgres_data",
+      "schema_file": "artifacts/phase8/database_schema.sql"
+    },
+    "backend": {
+      "build_dockerfile": "platform/docker/Dockerfile.backend",
+      "container_name": "scidata-backend",
+      "port": 8000,
+      "framework": "FastAPI + Uvicorn (Python 3.11)",
+      "environment": {
+        "DATABASE_URL": "postgresql://scidata_user:***@postgres:5432/scidata_platform",
+        "DINOV2_MODEL_NAME": "dinov2_vits14",
+        "DINOV2_EMBEDDING_DIM": 384,
+        "EXPECTED_PHASE4_HASH": "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62",
+        "PREPROCESSING_VERSION": "1.0.0",
+        "IMAGE_TARGET_SIZE": 224
+      }
+    },
+    "frontend": {
+      "build_dockerfile": "platform/docker/Dockerfile.frontend",
+      "container_name": "scidata-frontend",
+      "port": 3000,
+      "web_server": "Nginx (Alpine)",
+      "framework": "React 18 + TypeScript"
+    }
+  },
+  "storage": {
+    "originals": "platform/storage/originals/",
+    "thumbnails": "platform/storage/thumbnails/",
+    "indexes": "platform/storage/indexes/"
+  }
+}

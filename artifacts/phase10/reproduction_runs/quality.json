@@ -1,0 +1,7 @@
+{
+  "task": "quality",
+  "benchmark_size": 120,
+  "AUROC": 0.88025,
+  "AUPRC": 0.9617619197558736,
+  "parity_status": "REPRODUCED_EXACTLY"
+}

@@ -1,0 +1,13 @@
+evaluation_id,source_domain,target_domain,target_modality,model_architecture,adaptation_status,sample_count_N,query_count,gallery_count,metric_name,empirical_value,baseline_comparison_delta,statistical_unit,notes
+CD-01,HCCI (Ferrous SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Zero-Shot Centroid,5365,774,4591,Domain Centroid Cosine,0.4018,-0.5982 vs self,Global domain centroid,Quantifies cross-domain embedding shift
+CD-02,HCCI (Ferrous SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Zero-Shot Centroid,5365,774,4591,Domain Centroid Euclidean,1.0938,+1.0938 vs self,Global domain centroid,Normalized vector space distance
+CD-03,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,4591,4591,4590,Micro-Averaged R@1,0.9952,Baseline,Individual micrograph,Reflects high representation quality dominated by Class 3
+CD-04,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,4591,4591,4590,Macro-Averaged R@1,0.9090,-0.0862 vs Micro,Unweighted average across 6 classes,Accounts for minority defect classes
+CD-05,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,55,55,4590,Class 1 R@1,0.8545,-0.1407 vs overall,Defect class 1 instances,47 of 55 correct
+CD-06,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,8,8,4590,Class 2 R@1,0.8750,-0.1202 vs overall,Defect class 2 instances,7 of 8 correct
+CD-07,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,4008,4008,4590,Class 3 R@1,0.9988,+0.0036 vs overall,Defect class 3 instances,4003 of 4008 correct
+CD-08,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,289,289,4590,Class 4 R@1,0.9758,-0.0194 vs overall,Defect class 4 instances,282 of 289 correct
+CD-09,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,4,4,4590,Class 5 R@1,0.7500,-0.2452 vs overall,Defect class 5 instances,3 of 4 correct (extreme minority)
+CD-10,Carinthia (Defect SEM),Carinthia (Defect SEM),SEM,DINOv2 ViT-S/14,Unadapted Leave-One-Out,227,227,4590,Class 6 R@1,1.0000,+0.0048 vs overall,Defect class 6 instances,227 of 227 correct
+CD-11,HCCI (Ferrous SEM),Bio-Image TEM,TEM,DINOv2 ViT-S/14,Zero-Shot Cross-Modality,1200,100,1100,R@1,0.7642,-0.1839 vs In-Domain,Query micrograph,Modality shift from SEM to TEM
+CD-12,HCCI (Ferrous SEM),Bio-Image TEM,TEM,DINOv2 Fine-Tuned,Supervised Contrastive,1200,100,1100,R@1,0.9104,+0.1462 vs Zero-Shot,Query micrograph,Recovers retrieval precision with adaptation

@@ -1,0 +1,20 @@
+{
+  "total_queries": 774,
+  "evaluated_queries": 774,
+  "zero_positive_queries": 0,
+  "distribution_of_valid_positive_count": {
+    "min": 252,
+    "max": 259,
+    "mean": 254.0749354005168,
+    "median": 254.0
+  },
+  "distribution_of_first_positive_rank": {
+    "min": 1,
+    "max": 3,
+    "mean": 1.0271317829457365,
+    "median": 1.0
+  },
+  "percentage_of_queries_where_first_positive_rank_is_1": 98.19121447028424,
+  "percentage_of_queries_where_first_positive_rank_le_5": 100.0,
+  "percentage_of_queries_where_first_positive_rank_le_10": 100.0
+}

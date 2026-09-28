@@ -1,0 +1,30 @@
+file,type,purpose,source,version,checksum_sha256,included_excluded,reason,author_action_required
+manuscript/REVISED_MASTER_MANUSCRIPT.md,Manuscript,Primary full scientific manuscript,reports/phase11/revised_manuscript/REVISED_MASTER_MANUSCRIPT.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Main submission manuscript,Replace author placeholders
+manuscript/REVISED_ABSTRACT.md,Abstract,Journal submission portal abstract,reports/phase11/revised_manuscript/REVISED_ABSTRACT.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Portal copy-paste metadata,None
+manuscript/REVISED_INTRODUCTION.md,Manuscript Component,Intro & Research Questions,reports/phase11/revised_manuscript/REVISED_INTRODUCTION.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+manuscript/REVISED_METHODOLOGY.md,Manuscript Component,Proposed framework architecture,reports/phase11/revised_manuscript/REVISED_METHODOLOGY.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+manuscript/REVISED_EXPERIMENTAL_PROTOCOL.md,Manuscript Component,Datasets & leakage controls,reports/phase11/revised_manuscript/REVISED_EXPERIMENTAL_PROTOCOL.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+manuscript/REVISED_RESULTS.md,Manuscript Component,Empirical benchmark results,reports/phase11/revised_manuscript/REVISED_RESULTS.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+manuscript/REVISED_DISCUSSION.md,Manuscript Component,Discussion & interpretation,reports/phase11/revised_manuscript/REVISED_DISCUSSION.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+manuscript/REVISED_LIMITATIONS.md,Manuscript Component,Limitations & threats to validity,reports/phase11/revised_manuscript/REVISED_LIMITATIONS.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+manuscript/REVISED_CONCLUSION.md,Manuscript Component,Conclusion & future directions,reports/phase11/revised_manuscript/REVISED_CONCLUSION.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+manuscript/REVISED_REPRODUCIBILITY.md,Manuscript Component,Reproducibility & FAIR governance,reports/phase11/revised_manuscript/REVISED_REPRODUCIBILITY.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Modular component,None
+tables/REVISED_TABLES.md,Tables,Tables 1 through 11 complete,reports/phase11/revised_manuscript/REVISED_TABLES.md,v1.1.0-submission-ready,DYNAMIC_MD,INCLUDED,Publication tables,None
+figures/fig1_system_architecture.png,Figure,Figure 1: Platform architecture,reports/phase7/figures/fig1_system_architecture.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,Review 300 DPI resolution
+figures/fig2_benchmark_topology.png,Figure,Figure 2: Benchmark leakage topology,reports/phase7/figures/fig2_benchmark_topology.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig3_retrieval_comparison.png,Figure,Figure 6: Retrieval comparison B0-B7,reports/phase7/figures/fig3_retrieval_comparison.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig4_acquisition_geometry.png,Figure,Figure 7: Geometry KDE gap,reports/phase7/figures/fig4_acquisition_geometry.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig5_metadata_calibration.png,Figure,Figure 8: Alpha calibration curves,reports/phase7/figures/fig5_metadata_calibration.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig6_duplicate_pr_curve.png,Figure,Figure 9: Duplicate cascade & graph,reports/phase7/figures/fig6_duplicate_pr_curve.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig7_quality_risk_roc.png,Figure,Figure 10: Quality risk ROC curves,reports/phase7/figures/fig7_quality_risk_roc.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig8_novelty_domain_shift.png,Figure,Figure 11: Domain shift & novelty,reports/phase7/figures/fig8_novelty_domain_shift.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig10_latency_vs_retention.png,Figure,Figure 12: FAISS scaling latency,reports/phase7/figures/fig10_latency_vs_retention.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+figures/fig11_curation_queue_yield.png,Figure,Figure 11: Curation yield curve,reports/phase7/figures/fig11_curation_queue_yield.png,v1.0.0,DYNAMIC_PNG,INCLUDED,Main text figure,None
+supplementary/PHASE12_SUPPLEMENTARY_MATERIALS_AUDIT.md,Supplementary,Supplementary information plan,reports/phase12/PHASE12_SUPPLEMENTARY_MATERIALS_AUDIT.md,v1.0.0,DYNAMIC_MD,INCLUDED,Reviewer supplementary guide,Assemble final PDF if required
+declarations/PHASE12_DATA_CODE_AVAILABILITY.md,Declarations,Data & code availability statement,reports/phase12/PHASE12_DATA_CODE_AVAILABILITY.md,v1.0.0,DYNAMIC_MD,INCLUDED,Mandatory journal declaration,Insert live repo URL
+declarations/PHASE12_AUTHOR_INPUT_REQUIRED.md,Declarations,Author metadata action register,reports/phase12/PHASE12_AUTHOR_INPUT_REQUIRED.md,v1.0.0,DYNAMIC_MD,INCLUDED,Author checklist,Fill before portal upload
+reproducibility/PHASE12_REPRODUCIBILITY_STATEMENT.md,Reproducibility,Certified reproducibility statement,reports/phase12/PHASE12_REPRODUCIBILITY_STATEMENT.md,v1.0.0,DYNAMIC_MD,INCLUDED,Mandatory reproducibility claim,None
+cover_letter/PHASE12_COVER_LETTER_DRAFT.md,Cover Letter,Formal submission cover letter,reports/phase12/PHASE12_COVER_LETTER_DRAFT.md,v1.0.0,DYNAMIC_MD,INCLUDED,Cover letter to Editor-in-Chief,Fill author/venue blanks
+README.md,Package Index,Submission package overview,reports/phase12/submission_package/README.md,v1.0.0,DYNAMIC_MD,INCLUDED,Package navigation guide,None
+raw_data/hcci_images.zip,Raw Dataset,Raw TIFF microscopy images,Zenodo DOI:10.5281/zenodo.21931379,Original,DYNAMIC_ZIP,EXCLUDED,Third-party CC-BY 4.0 data hosted on Zenodo,Fetch via download script
+models/phase4_adapter.pt,Model Weights,Trained SupCon adaptation weights,data/processed/phase4/checkpoints/phase4_adapter.pt,v1.0.0,53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62,EXCLUDED,Kept in release/v1.0.0 to avoid package bloat,Openly accessible via repo

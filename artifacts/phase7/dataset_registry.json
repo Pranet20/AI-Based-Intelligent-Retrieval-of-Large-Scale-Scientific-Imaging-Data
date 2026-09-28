@@ -1,0 +1,140 @@
+{
+  "hcci": {
+    "dataset_id": "hcci",
+    "name": "High-Chromium Cast Iron SEM Dataset",
+    "source_url": "https://zenodo.org/records/21931379",
+    "doi": "10.5281/zenodo.21931379",
+    "modality": "SEM",
+    "domain": "metallurgy_cast_iron",
+    "nominal_image_count": 777,
+    "physically_available_count": 774,
+    "physical_availability_status": "verified",
+    "license": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "license_status": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "metadata_available": true,
+    "acquisition_information": "Contains TIFF header metadata: accelerating voltage (kV), working distance (mm), beam current, instrument model (FEI Quanta, Zeiss Gemini).",
+    "labels_available": true,
+    "retrieval_labels_available": false,
+    "intended_experimental_role": "Primary in-domain retrieval benchmark, acquisition-aware adaptation, and metadata fusion.",
+    "known_limitations": [
+      "Modest corpus size (774 physical micrographs).",
+      "3 planned samples omitted in upstream Zenodo archive (records list 777).",
+      "Does NOT provide verified same-physical-ROI co-registration across acquisitions.",
+      "Instrument license terms not explicitly badged on repository deposit."
+    ],
+    "leakage_considerations": [
+      "Specimen ID (specimen_id) must be split-disjoint (no specimen leakage across train/test).",
+      "Zeiss Gemini instrument completely isolated to held-out test split.",
+      "roi_id is a 1-to-1 bijection with numeric specimen ID and must be strictly excluded from features.",
+      "Acquisition parameters must not encode specimen identity."
+    ],
+    "evidence_tag": "[NATURAL DATA]"
+  },
+  "carinthia": {
+    "dataset_id": "carinthia",
+    "name": "Carinthia SEM Dataset",
+    "source_url": "https://zenodo.org/records/10715190",
+    "doi": "10.5281/zenodo.10715190",
+    "modality": "SEM",
+    "domain": "semiconductor_materials_defects",
+    "nominal_image_count": 4591,
+    "physically_available_count": 4591,
+    "physical_availability_status": "verified",
+    "license": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "license_status": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "metadata_available": false,
+    "acquisition_information": "No embedded TIFF acquisition header metadata provided; defect class labels only.",
+    "labels_available": true,
+    "retrieval_labels_available": false,
+    "intended_experimental_role": "External domain shift, zero-shot embedding distribution analysis, and defect novelty screening.",
+    "known_limitations": [
+      "Lacks fine-grained acquisition metadata (kV, WD, magnification).",
+      "Pre-resized images without raw sensor calibration.",
+      "License terms require manual verification from source repository."
+    ],
+    "leakage_considerations": [
+      "Zero overlap with HCCI metallurgy domain.",
+      "Used exclusively for zero-shot inference and out-of-distribution screening; no training on Carinthia."
+    ],
+    "evidence_tag": "[EXTERNAL DOMAIN SHIFT]"
+  },
+  "sem_nanoscience": {
+    "dataset_id": "sem_nanoscience",
+    "name": "The First Annotated Set of Scanning Electron Microscopy Images for Nanoscience",
+    "source_url": "https://www.nature.com/articles/sdata2018172",
+    "doi": "10.1038/sdata.2018.172",
+    "modality": "SEM",
+    "domain": "nanoscience",
+    "nominal_image_count": 18577,
+    "physically_available_count": 0,
+    "physical_availability_status": "not_downloaded",
+    "license": "CC-BY-4.0",
+    "license_status": "VERIFIED_OPEN_ACCESS",
+    "metadata_available": false,
+    "acquisition_information": "JPEG-compressed micrographs; original instrument TIFF headers not provided in public deposit.",
+    "labels_available": true,
+    "retrieval_labels_available": false,
+    "intended_experimental_role": "External reference catalog; documented in provenance registry without downloading local terabyte archive.",
+    "known_limitations": [
+      "Original TIFF metadata absent.",
+      "High compression artifacts in public release.",
+      "Not physically ingested into local Phase 1\u20136 working storage."
+    ],
+    "leakage_considerations": [
+      "Completely disjoint from HCCI; no overlap."
+    ],
+    "evidence_tag": "[EXTERNAL REFERENCE]"
+  },
+  "cigrocksem": {
+    "dataset_id": "cigrocksem",
+    "name": "cigRockSEM",
+    "source_url": "https://zenodo.org/records/14988631",
+    "doi": "10.5281/zenodo.14988631",
+    "modality": "SEM",
+    "domain": "geology_rock_core",
+    "nominal_image_count": 1500,
+    "physically_available_count": 0,
+    "physical_availability_status": "not_downloaded",
+    "license": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "license_status": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "metadata_available": false,
+    "acquisition_information": "Geological core SEM; metadata availability variable across rock formations.",
+    "labels_available": false,
+    "retrieval_labels_available": false,
+    "intended_experimental_role": "Cross-domain geological reference.",
+    "known_limitations": [
+      "Unverified license.",
+      "Not downloaded locally."
+    ],
+    "leakage_considerations": [
+      "No overlap with HCCI."
+    ],
+    "evidence_tag": "[EXTERNAL REFERENCE]"
+  },
+  "atomagined": {
+    "dataset_id": "atomagined",
+    "name": "atomagined",
+    "source_url": "https://github.com/MaterialEyes/atomagined",
+    "doi": "10.18126/szeq-yde5",
+    "modality": "STEM/HRTEM",
+    "domain": "atomic_materials",
+    "nominal_image_count": 16000,
+    "physically_available_count": 0,
+    "physical_availability_status": "not_downloaded",
+    "license": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "license_status": "UNKNOWN_VERIFY_SOURCE_TERMS",
+    "metadata_available": true,
+    "acquisition_information": "Transmission electron microscopy / high-angle annular dark field (HAADF).",
+    "labels_available": true,
+    "retrieval_labels_available": false,
+    "intended_experimental_role": "Cross-modality reference (TEM vs SEM).",
+    "known_limitations": [
+      "Modality mismatch (TEM transmission vs SEM reflection).",
+      "Not downloaded locally."
+    ],
+    "leakage_considerations": [
+      "Completely disjoint from SEM datasets."
+    ],
+    "evidence_tag": "[EXTERNAL REFERENCE]"
+  }
+}

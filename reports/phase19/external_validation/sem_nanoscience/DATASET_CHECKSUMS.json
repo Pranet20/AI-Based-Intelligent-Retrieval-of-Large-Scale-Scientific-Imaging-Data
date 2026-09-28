@@ -1,0 +1,9 @@
+{
+  "dataset": "SEM Images for Nanoscience",
+  "provenance_doi": "10.1038/sdata.2018.172",
+  "license": "CC BY 4.0",
+  "sample_count_evaluated": 21169,
+  "manifest_sha256": "8fbc923a109ecf2081d5823abce3902958319fbc489247ea8d10b48a9462b53a",
+  "verified_non_overlap": true,
+  "independence_status": "INDEPENDENT_EXTERNAL"
+}

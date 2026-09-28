@@ -1,0 +1,94 @@
+{
+  "simulation_id": "P18-ROLLBACK-01",
+  "timestamp_utc": "2026-09-27T09:50:42.142854+00:00",
+  "simulation_type": "Automated Canary Failure Detection and Rollback",
+  "total_steps": 5,
+  "rollback_duration_seconds": 0.0506,
+  "recovery_status": "SUCCESSFUL",
+  "telemetry": [
+    {
+      "step": 1,
+      "phase": "BASELINE_VERIFICATION",
+      "timestamp_utc": "2026-09-27T09:50:42.092048+00:00",
+      "active_version": "scientific-platform-api:v2.0.0",
+      "health_endpoint": "/api/v1/health",
+      "mock_response_code": 200,
+      "latency_ms": 3.8,
+      "status": "HEALTHY",
+      "action": "Baseline validated. Proceeding to canary deployment."
+    },
+    {
+      "step": 2,
+      "phase": "CANARY_DEPLOYMENT",
+      "timestamp_utc": "2026-09-27T09:50:42.092048+00:00",
+      "target_version": "scientific-platform-api:v2.1.0-canary",
+      "traffic_allocation_pct": 10,
+      "status": "DEPLOYED",
+      "action": "Canary deployed. Routing 10% traffic to candidate."
+    },
+    {
+      "step": 3,
+      "phase": "CANARY_HEALTHCHECK",
+      "timestamp_utc": "2026-09-27T09:50:42.092048+00:00",
+      "target_version": "scientific-platform-api:v2.1.0-canary",
+      "health_probes": [
+        {
+          "probe": 1,
+          "status_code": 500,
+          "error": "InternalServerError: Dependency Initialization Failed"
+        },
+        {
+          "probe": 2,
+          "status_code": 500,
+          "error": "InternalServerError: Dependency Initialization Failed"
+        },
+        {
+          "probe": 3,
+          "status_code": 503,
+          "error": "ServiceUnavailable: Liveness Probe Unresponsive"
+        }
+      ],
+      "consecutive_failures": 3,
+      "threshold_limit": 2,
+      "status": "DEGRADED",
+      "action": "Healthcheck threshold breached (3 >= 2). Triggering automated rollback watchdog."
+    },
+    {
+      "step": 4,
+      "phase": "AUTOMATED_ROLLBACK",
+      "timestamp_utc": "2026-09-27T09:50:42.142854+00:00",
+      "action_taken": "DRAIN_AND_REVERT",
+      "reverted_to_version": "scientific-platform-api:v2.0.0",
+      "traffic_allocation_pct": 100,
+      "rollback_duration_seconds": 0.0506,
+      "status": "ROLLBACK_EXECUTED",
+      "action": "Canary traffic drained to 0%. Active baseline confirmed v2.0.0."
+    },
+    {
+      "step": 5,
+      "phase": "POST_ROLLBACK_VERIFICATION",
+      "timestamp_utc": "2026-09-27T09:50:42.142854+00:00",
+      "active_version": "scientific-platform-api:v2.0.0",
+      "health_probes": [
+        {
+          "probe": 1,
+          "status_code": 200,
+          "latency_ms": 3.9
+        },
+        {
+          "probe": 2,
+          "status_code": 200,
+          "latency_ms": 4.1
+        },
+        {
+          "probe": 3,
+          "status_code": 200,
+          "latency_ms": 3.7
+        }
+      ],
+      "all_probes_healthy": true,
+      "status": "SYSTEM_STABLE",
+      "action": "Platform restored to 100% operational capacity. Zero data corruption."
+    }
+  ]
+}

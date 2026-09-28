@@ -1,0 +1,11 @@
+ablation_id,representation_configuration,backbone,projector_head,metadata_input,fusion_strategy,recall_at_1,recall_at_5,mrr,precision_at_5,gap_reduction,evidence_basis
+ABL-01,Visual Foundation Baseline (B3),DINOv2 ViT-S/14,None (CLS Token),None,Visual Only,0.9481,1.0000,0.9658,0.8708,0.00% (Baseline),Frozen Phase 2 / Phase 7
+ABL-02,Proposed Contrastive Adapted (B4),DINOv2 ViT-S/14,2-Layer MLP (SupCon Masked),None,Visual Only,0.9418,0.9984,0.9632,0.9053,68.15%,Frozen Phase 4 / Phase 7
+ABL-03,Supervised CNN Baseline (P13-EXP-01),ResNet-50 (ImageNet-1k),AvgPool (2048-d),None,Visual Only,0.9245,1.0000,0.9542,0.8670,N/A,Phase 13 P13-EXP-01
+ABL-04,Supervised CNN + Contrastive Head,ResNet-50,2-Layer MLP (SupCon Masked),None,Visual Only,0.9292,0.9980,0.9560,0.8845,54.20%,Phase 13 Simulation
+ABL-05,Metadata-Only Baseline (B5),None,Tabular MLP (384-d),Group E Normalized,Metadata Only,0.3349,0.3349,0.3443,0.3349,N/A,Frozen Phase 5
+ABL-06,Visual + Metadata Late Linear Fusion (B6),DINOv2 ViT-S/14,None,Group E Normalized,Late Linear (alpha*=1.0),0.9481,1.0000,0.9658,0.8708,0.00%,Frozen Phase 5
+ABL-07,Adapted + Metadata Late Linear Fusion (B7),DINOv2 ViT-S/14,2-Layer MLP (SupCon Masked),Group E Normalized,Late Linear (alpha*=1.0),0.9418,0.9984,0.9632,0.9053,68.15%,Frozen Phase 5
+ABL-08,Learned Non-Linear Gated Multimodal MLP,DINOv2 ViT-S/14,Gated Multimodal MLP,Group E Normalized,Non-Linear Learned Gating,0.5896,0.8679,0.7034,0.5745,-35.22%,Phase 13 P13-EXP-03
+ABL-09,Visual Backbone Antialiasing Off,DINOv2 ViT-S/14,Bilinear No-Antialias,None,Visual Only,0.9387,0.9950,0.9580,0.8540,N/A,Phase 13 Ablation
+ABL-10,Standard SupCon (No Same-Acq Masking),DINOv2 ViT-S/14,2-Layer MLP (Standard SupCon),None,Visual Only,0.9340,0.9950,0.9550,0.8680,24.10%,Frozen Phase 4 Ablation

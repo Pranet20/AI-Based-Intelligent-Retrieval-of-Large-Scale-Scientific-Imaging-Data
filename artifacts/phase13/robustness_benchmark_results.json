@@ -1,0 +1,50 @@
+[
+  {
+    "perturbation": "Clean Baseline",
+    "simulated_noise_scale": 0.0,
+    "recall_at_1": 0.9433962264150944,
+    "mrr": 0.9641509433962263,
+    "precision_at_5": 0.8820754716981132,
+    "retention_percentage": 100.0
+  },
+  {
+    "perturbation": "JPEG Compression (Q=50)",
+    "simulated_noise_scale": 0.03,
+    "recall_at_1": 0.9056603773584906,
+    "mrr": 0.9473270440251571,
+    "precision_at_5": 0.8160377358490566,
+    "retention_percentage": 96.0
+  },
+  {
+    "perturbation": "Scale-Bar Masking Overlay",
+    "simulated_noise_scale": 0.04,
+    "recall_at_1": 0.8490566037735849,
+    "mrr": 0.9127358490566038,
+    "precision_at_5": 0.7452830188679245,
+    "retention_percentage": 90.0
+  },
+  {
+    "perturbation": "Contrast Attenuation (50%)",
+    "simulated_noise_scale": 0.06,
+    "recall_at_1": 0.7264150943396226,
+    "mrr": 0.8325658879904163,
+    "precision_at_5": 0.6141509433962263,
+    "retention_percentage": 76.99999999999999
+  },
+  {
+    "perturbation": "Gaussian Noise (sigma=15)",
+    "simulated_noise_scale": 0.08,
+    "recall_at_1": 0.6037735849056604,
+    "mrr": 0.7504980737292057,
+    "precision_at_5": 0.5056603773584907,
+    "retention_percentage": 64.0
+  },
+  {
+    "perturbation": "Objective Defocus Blur",
+    "simulated_noise_scale": 0.12,
+    "recall_at_1": 0.4528301886792453,
+    "mrr": 0.6457902815214135,
+    "precision_at_5": 0.4283018867924528,
+    "retention_percentage": 48.0
+  }
+]

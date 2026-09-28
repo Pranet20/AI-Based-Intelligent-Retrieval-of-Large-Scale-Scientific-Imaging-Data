@@ -1,0 +1,23 @@
+component_id,phase_source,asset_description,file_path,verified_hash_or_metric,immutability_status
+P1-INGEST,Phase 1,HCCI Raw Manifest Parquet,data/processed/phase1/manifest_hcci.parquet,774 physical records (4.21 GB),FROZEN_VERIFIED
+P1-CHECKSUMS,Phase 1,Phase 1 Pre-Frozen Manifest,artifacts/phase1/manifest_checksums.json,SHA-256 verified,FROZEN_VERIFIED
+P2-DINOV2,Phase 2,Frozen DINOv2 ViT-S/14 Model,src/models/dinov2_extractor.py,22056576 parameters (384-d),FROZEN_VERIFIED
+P2-HCCI-EMB,Phase 2,HCCI DINOv2 CLS Embeddings,artifacts/phase2/embeddings_hcci_cls.npy,Shape (774 384) unit L2,FROZEN_VERIFIED
+P2-RETRIEVAL,Phase 2,HCCI Baseline Retrieval Table,reports/phase2/tables/retrieval_hcci.csv,Recall@1=0.9819 MRR=0.9894,FROZEN_VERIFIED
+P3-FAISS-INDEX,Phase 3,FAISS HNSW Combined Index,artifacts/phase3/index_hnsw.faiss,M=32 efSearch=64 Recall=0.9998,FROZEN_VERIFIED
+P3-BENCHMARK,Phase 3,Vector Latency Benchmark,artifacts/phase3/benchmark_results.json,Flat=0.7348ms HNSW=0.3691ms,FROZEN_VERIFIED
+P4-CHECKPOINT,Phase 4,Trained SupCon Adapter Head,data/processed/phase4/checkpoints/phase4_adapter.pt,53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62,FROZEN_VERIFIED
+P4-METRICS,Phase 4,Acquisition Adaptation Results,data/processed/phase4/metrics/phase4_evaluation_results.json,Gap red=68.15% (p=1.42e-12),FROZEN_VERIFIED
+P4-ZEISS,Phase 4,Held-out Zeiss Test Retrieval,reports/phase7/PHASE7_REPORT.md,Precision@5=0.9053 vs 0.8708 (p=0.0028),FROZEN_VERIFIED
+P5-METADATA,Phase 5,Authoritative Metadata MRR,artifacts/phase5/evaluation_results.json,MRR=0.3443396226415094,FROZEN_VERIFIED
+P5-ABLATION,Phase 5,Late Fusion Ablation Matrix,reports/phase5/tables/table_main_test_results.csv,Delta R@1=0.0000 alpha*=1.0,FROZEN_VERIFIED
+P6-DEDUP,Phase 6,4-Stage Deduplication Cascade,reports/phase6/PHASE6_REPORT.md,Precision=1.0000 FPR=0.0000,FROZEN_VERIFIED
+P6-CLUSTERS,Phase 6,Natural Archive Partitioning,artifacts/phase6/redundancy_summary.parquet,769 clusters (769 KEEP 5 REVIEW),FROZEN_VERIFIED
+P6-QUALITY,Phase 6,Image-Derived Quality Risk,reports/phase6/PHASE6_REPORT.md,AUROC=0.8803 AUPRC=0.9618 (N=120),FROZEN_VERIFIED
+P7-RELEASE,Phase 7,Cryptographic Audit Manifest,artifacts/pre_phase9/PRE_PHASE9_AUDIT.md,110/110 SHA-256 verified,FROZEN_VERIFIED
+P8-PLATFORM,Phase 8,FastAPI/React Platform Tests,tests/ and platform/tests/,218/218 tests passing (L_inf<1e-6),FROZEN_VERIFIED
+P9-MANUSCRIPT,Phase 9,Certified Master Manuscript,reports/phase9/PHASE9_MASTER_MANUSCRIPT.md,17/17 files verified byte-exact,FROZEN_VERIFIED
+P10-ARCHIVE,Phase 10,Open-Source Release Package,release/v1.0.0/manifests/master_checksums.sha256,v1.0.0 release archive verified,FROZEN_VERIFIED
+P11-AUDIT,Phase 11,Independent Scientific Audit,reports/phase11/PHASE11_CLOSURE_CHECKLIST.md,PHASE11_AUDIT_CLOSED verified,FROZEN_VERIFIED
+P11-REVISED,Phase 11,Revised Manuscript v1.1.0,reports/phase11/revised_manuscript/,11/11 revised files verified,FROZEN_VERIFIED
+P12-SUBMISSION,Phase 12,Submission Package v1.1.0,reports/phase12/submission_package/,PHASE12_SUBMISSION_READY verified,FROZEN_VERIFIED

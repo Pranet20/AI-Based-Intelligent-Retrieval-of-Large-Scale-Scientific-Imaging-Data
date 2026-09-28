@@ -1,0 +1,9 @@
+{
+  "backup_type": "sqlite",
+  "timestamp": "20260927_083145",
+  "source_file": "C:\\Users\\Pranet\\Downloads\\Mini Project\\platform\\storage\\scidata_platform.db",
+  "backup_file": "db_backup_20260927_083145.sqlite",
+  "size_bytes": 200704,
+  "sha256": "5435b38cb60e50e991ad4315beb3f93a124757e3310d6542f09d0d60d9d2b42d",
+  "status": "COMPLETED"
+}

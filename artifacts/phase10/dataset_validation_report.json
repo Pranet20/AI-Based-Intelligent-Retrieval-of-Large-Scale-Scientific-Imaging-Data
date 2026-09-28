@@ -1,0 +1,114 @@
+{
+  "timestamp": "2026-09-27T07:42:15.435161+00:00",
+  "manifest_validation": {
+    "hcci": {
+      "exists": true,
+      "total_records": 774,
+      "unique_image_ids": 774,
+      "has_duplicate_ids": false,
+      "missing_required_columns": [
+        "dataset"
+      ],
+      "schema_valid": false
+    },
+    "carinthia": {
+      "exists": true,
+      "total_records": 4591,
+      "unique_image_ids": 4591,
+      "has_duplicate_ids": false,
+      "missing_required_columns": [
+        "dataset"
+      ],
+      "schema_valid": false
+    },
+    "sem_nanoscience": {
+      "exists": false,
+      "error": "Manifest not found: data\\manifests\\sem_nanoscience_manifest.parquet"
+    },
+    "atomagined": {
+      "exists": false,
+      "error": "Manifest not found: data\\manifests\\atomagined_manifest.parquet"
+    },
+    "cigrocksem": {
+      "exists": false,
+      "error": "Manifest not found: data\\manifests\\cigrocksem_manifest.parquet"
+    },
+    "microal": {
+      "exists": false,
+      "error": "Manifest not found: data\\manifests\\microal_manifest.parquet"
+    }
+  },
+  "dataset_physical_validation": {
+    "hcci": {
+      "dataset_id": "hcci",
+      "raw_directory": "data\\raw\\hcci",
+      "directory_exists": true,
+      "total_physical_files": 1548,
+      "readable_sample_count": 50,
+      "corrupted_sample_count": 0,
+      "manifest_alignment": {
+        "manifest_record_count": 774,
+        "matched_on_disk": 774,
+        "missing_from_disk_count": 0,
+        "extra_on_disk_count": 774
+      },
+      "status": "VALIDATED"
+    },
+    "carinthia": {
+      "dataset_id": "carinthia",
+      "raw_directory": "data\\raw\\carinthia",
+      "directory_exists": true,
+      "total_physical_files": 4591,
+      "readable_sample_count": 50,
+      "corrupted_sample_count": 0,
+      "manifest_alignment": {
+        "manifest_record_count": 4591,
+        "matched_on_disk": 4591,
+        "missing_from_disk_count": 0,
+        "extra_on_disk_count": 0
+      },
+      "status": "VALIDATED"
+    },
+    "sem_nanoscience": {
+      "dataset_id": "sem_nanoscience",
+      "raw_directory": "data\\raw\\sem_nanoscience",
+      "directory_exists": false,
+      "total_physical_files": 0,
+      "readable_sample_count": 0,
+      "corrupted_sample_count": 0,
+      "manifest_alignment": null,
+      "status": "DIR_NOT_FOUND"
+    },
+    "atomagined": {
+      "dataset_id": "atomagined",
+      "raw_directory": "data\\raw\\atomagined",
+      "directory_exists": false,
+      "total_physical_files": 0,
+      "readable_sample_count": 0,
+      "corrupted_sample_count": 0,
+      "manifest_alignment": null,
+      "status": "DIR_NOT_FOUND"
+    },
+    "cigrocksem": {
+      "dataset_id": "cigrocksem",
+      "raw_directory": "data\\raw\\cigrocksem",
+      "directory_exists": false,
+      "total_physical_files": 0,
+      "readable_sample_count": 0,
+      "corrupted_sample_count": 0,
+      "manifest_alignment": null,
+      "status": "DIR_NOT_FOUND"
+    },
+    "microal": {
+      "dataset_id": "microal",
+      "raw_directory": "data\\raw\\microal",
+      "directory_exists": false,
+      "total_physical_files": 0,
+      "readable_sample_count": 0,
+      "corrupted_sample_count": 0,
+      "manifest_alignment": null,
+      "status": "DIR_NOT_FOUND"
+    }
+  },
+  "overall_status": "PASSED"
+}

@@ -1,0 +1,13 @@
+{
+  "benchmarks": {
+    "dinov2_vit_s14_inference_ms": 2622.42,
+    "phase4_linear_adapter_inference_ms": 0.696,
+    "faiss_indexflatip_1000_vectors_top10_search_ms": 0.258,
+    "image_derived_quality_risk_evaluation_ms": 2329.08
+  },
+  "hardware": {
+    "device": "cpu",
+    "platform": "win32",
+    "python_version": "3.11.9"
+  }
+}

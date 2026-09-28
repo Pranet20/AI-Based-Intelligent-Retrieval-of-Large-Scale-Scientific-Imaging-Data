@@ -1,0 +1,18 @@
+# Deduplication and Near-Duplicate Detection Configuration
+
+exact_deduplication:
+  algorithm: "sha256"
+  chunk_size_bytes: 65536
+  enabled: true
+
+near_deduplication:
+  algorithms:
+    - "phash"
+    - "dhash"
+  hash_size: 16  # 16x16 perceptual hash -> 256 bits
+  # Maximum Hamming distance to be considered a near-duplicate
+  # For 256-bit hash, distance <= 10 represents very high visual similarity (~96% identical)
+  max_hamming_distance: 10
+  # Distance threshold for flagged "review" similarity
+  review_hamming_distance: 16
+  enabled: true

@@ -1,0 +1,108 @@
+{
+  "experiment_id": "P18-LOAD-01",
+  "timestamp_utc": "2026-09-27T09:50:15.862747+00:00",
+  "workload_type": "Synthetic Engineering API Load Test",
+  "scientific_validation": false,
+  "max_requests_tested": 250,
+  "target_endpoints": [
+    "/api/v1/health",
+    "/api/v1/version",
+    "/"
+  ],
+  "tiers": [
+    {
+      "concurrency": 1,
+      "total_requests": 50,
+      "completed_requests": 50,
+      "failed_requests": 0,
+      "error_rate_pct": 0.0,
+      "elapsed_seconds": 0.8553,
+      "throughput_req_per_sec": 58.46,
+      "latency_ms": {
+        "mean": 16.96,
+        "p50": 16.53,
+        "p90": 21.16,
+        "p95": 21.7,
+        "p99": 23.16,
+        "min": 12.32,
+        "max": 23.75
+      },
+      "status_code_distribution": {
+        "200": 50
+      },
+      "label": "Baseline Sequential"
+    },
+    {
+      "concurrency": 10,
+      "total_requests": 100,
+      "completed_requests": 100,
+      "failed_requests": 0,
+      "error_rate_pct": 0.0,
+      "elapsed_seconds": 1.5334,
+      "throughput_req_per_sec": 65.21,
+      "latency_ms": {
+        "mean": 148.69,
+        "p50": 147.4,
+        "p90": 181.25,
+        "p95": 194.6,
+        "p99": 218.22,
+        "min": 86.19,
+        "max": 232.64
+      },
+      "status_code_distribution": {
+        "200": 100
+      },
+      "label": "Moderate Concurrency"
+    },
+    {
+      "concurrency": 25,
+      "total_requests": 200,
+      "completed_requests": 200,
+      "failed_requests": 0,
+      "error_rate_pct": 0.0,
+      "elapsed_seconds": 3.4151,
+      "throughput_req_per_sec": 58.56,
+      "latency_ms": {
+        "mean": 396.2,
+        "p50": 391.18,
+        "p90": 514.55,
+        "p95": 546.22,
+        "p99": 578.39,
+        "min": 97.24,
+        "max": 669.75
+      },
+      "status_code_distribution": {
+        "200": 200
+      },
+      "label": "High Concurrency"
+    },
+    {
+      "concurrency": 50,
+      "total_requests": 250,
+      "completed_requests": 250,
+      "failed_requests": 0,
+      "error_rate_pct": 0.0,
+      "elapsed_seconds": 3.6979,
+      "throughput_req_per_sec": 67.61,
+      "latency_ms": {
+        "mean": 636.73,
+        "p50": 639.72,
+        "p90": 907.57,
+        "p95": 987.23,
+        "p99": 1127.66,
+        "min": 115.19,
+        "max": 1219.84
+      },
+      "status_code_distribution": {
+        "200": 152,
+        "429": 98
+      },
+      "label": "Peak Stress Load (250 reqs)"
+    }
+  ],
+  "pass_criteria": {
+    "p95_latency_under_50ms": false,
+    "zero_unhandled_errors": true,
+    "sustainable_concurrency_50": true
+  }
+}

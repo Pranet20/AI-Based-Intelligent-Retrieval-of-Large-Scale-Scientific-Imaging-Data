@@ -1,0 +1,32 @@
+{
+  "dataset_id": "hcci",
+  "name": "High-Chromium Cast Iron SEM Dataset",
+  "source_url": "https://zenodo.org/records/21931379",
+  "doi": "10.5281/zenodo.21931379",
+  "version": "1.0.0",
+  "license": "CC-BY-4.0",
+  "role": "robustness_and_metadata",
+  "total_images": 20,
+  "total_storage_bytes": 111149311,
+  "total_storage_mb": 106.0,
+  "formats": {
+    "png": 20
+  },
+  "bit_depths": {
+    "8": 20
+  },
+  "channels": {
+    "4": 20
+  },
+  "labels_available": true,
+  "annotated_images_count": 20,
+  "metadata_available": true,
+  "exact_duplicate_records": 0,
+  "near_duplicate_records": 8,
+  "quality_status_breakdown": {
+    "PASS": 19,
+    "REVIEW": 1
+  },
+  "error_count": 0,
+  "errors": []
+}

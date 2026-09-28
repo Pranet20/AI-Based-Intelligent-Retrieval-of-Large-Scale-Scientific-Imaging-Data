@@ -1,0 +1,20 @@
+{
+  "timestamp_utc": "2026-09-27T10:30:13.376217+00:00",
+  "environment": {
+    "python_version": "3.11.9",
+    "os": "Windows 11 Enterprise AMD64",
+    "interpreter": "C:\\Users\\Pranet\\Downloads\\Mini Project\\.venv311\\Scripts\\python.exe",
+    "virtual_env": ".venv311"
+  },
+  "test_count": 190,
+  "passed": 190,
+  "failed": 0,
+  "warnings": 3,
+  "checksum_count": 145,
+  "checksum_failures": 0,
+  "claim_count": 22,
+  "unsupported_claims": 0,
+  "experiments_registered": 10,
+  "reproduction_command": "C:\\Users\\Pranet\\Downloads\\Mini Project\\.venv311\\Scripts\\python.exe scripts/final_closure/validate_final_closure.py",
+  "status": "PROJECT_FINAL_CLOSED_WITH_LIMITATIONS"
+}

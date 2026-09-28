@@ -1,0 +1,12 @@
+experiment_id,dataset,metric_name,value,ci_95,p_value,status,notes
+P19-EXP-01,Carinthia Defect SEM,Micro R@1,0.9952,"[0.9928, 0.9971]",< 1e-15,VALIDATED,Zero-shot transfer; 4569 of 4591 correct top-1 retrievals
+P19-EXP-01,Carinthia Defect SEM,Macro R@1,0.909,"[0.8650, 0.9420]",< 1e-10,VALIDATED,Unweighted mean across 6 classes; minority class penalty observed
+P19-EXP-02,Carinthia vs HCCI,MMD^2 Shift,0.3842,"[0.362, 0.406]",0.0001,VALIDATED,Statistically significant cross-domain feature shift
+P19-EXP-03,Carinthia Perturbed,R@1 Retention (Noise s=0.05),0.9666,"[0.958, 0.974]",< 0.001,VALIDATED,96.66% accuracy retention under moderate acquisition noise
+P19-EXP-04,External SEM Archive,Duplicate F1,0.981,"[0.968, 0.992]",< 0.001,VALIDATED,Tau=0.985 screening yields 97.4% precision and 98.8% recall
+P19-EXP-05,External SEM Quality Set,Focus AUROC,0.864,"[0.842, 0.885]",< 1e-8,VALIDATED,Generalizes across external instruments without calibration
+P19-EXP-06,External Cross-Domain Set,OOD AUROC,0.891,"[0.871, 0.910]",< 1e-9,VALIDATED,k-NN distance separation of foreign microstructures
+P19-EXP-07,In-Domain vs External,D_ref Separation Ratio,2.12,"[2.01, 2.24]",< 1e-12,VALIDATED,External samples exhibit 2.12x greater distance to reference set
+P19-EXP-08,Curation Review Queue (120 samples),Curation Flag Precision,0.9167,"[0.865, 0.958]",< 1e-6,VALIDATED,110 of 120 flagged cases confirmed valid anomaly/quality flags
+P19-EXP-09,External Prospective Batch,Ingestion Throughput (img/s),14.8,"[13.9, 15.6]",N/A,VALIDATED,100/100 images ingested with zero schema or hashing failures
+P19-EXP-10,Carinthia Defect Benchmark,DINOv2 vs CLIP Delta R@1,0.2112,"[0.198, 0.224]",< 1e-15,VALIDATED,DINOv2 achieves 0.9952 vs CLIP 0.7840 on defect SEM retrieval

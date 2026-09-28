@@ -1,0 +1,111 @@
+{
+  "graph_version": "1.0.0",
+  "project": "AI-Powered Scientific Image Data Management Platform",
+  "audit_phase": "FINAL_MASTER_AUDIT",
+  "nodes": [
+    {
+      "id": "CLAIM-RQ1",
+      "type": "claim",
+      "text": "Self-supervised vision backbones (DINOv2 ViT-S/14) produce acquisition-robust SEM representations outperforming supervised ImageNet baselines.",
+      "status": "SUPPORTED",
+      "supporting_experiments": ["P1-EXP-01", "P3-EXP-01", "P4-EXP-01"],
+      "primary_metric": "R@1=0.9481, MRR=0.9658, P@5=0.8708",
+      "baseline_metric": "ResNet-50 R@1=0.9245, MRR=0.9542, P@5=0.8670",
+      "artifacts": [
+        "experiments/phase3/results/phase3_representation_benchmark_metrics.json",
+        "experiments/phase4/checkpoints/best_metric_checkpoint.pth"
+      ],
+      "manuscript_ref": "Section 4.1, Table 1"
+    },
+    {
+      "id": "CLAIM-RQ2",
+      "type": "claim",
+      "text": "Supervised Contrastive Fine-Tuning (SupCon) significantly mitigates cross-detector/cross-voltage acquisition bias in same-specimen retrieval.",
+      "status": "SUPPORTED_WITH_LIMITATIONS",
+      "supporting_experiments": ["P4-EXP-01", "P13-EXP-02"],
+      "primary_metric": "Gap reduction: 68.15% (paired t-test p=1.42e-12); SupCon P@5=0.9053 vs DINOv2 B3 P@5=0.8708",
+      "limitations": "Scoped strictly to same-specimen retrieval across distinct detector/beam voltage conditions on HCCI dataset.",
+      "artifacts": [
+        "experiments/phase4/results/acquisition_shift_analysis.json",
+        "experiments/phase13/p13_exp02_robustness_depth/p13_exp02_metrics.json"
+      ],
+      "manuscript_ref": "Section 4.2, Table 2, Figure 4"
+    },
+    {
+      "id": "CLAIM-RQ3",
+      "type": "claim",
+      "text": "FAISS HNSW sub-millisecond retrieval enables interactive scientific search with high recall preservation across vector scale.",
+      "status": "SUPPORTED",
+      "supporting_experiments": ["P5-EXP-01", "P13-EXP-03"],
+      "primary_metric": "Query latency: 0.096 ms (5k vectors) to 0.317 ms (100k vectors); Recall@10 retention > 0.99",
+      "artifacts": [
+        "experiments/phase5/results/retrieval_benchmark_metrics.json",
+        "experiments/phase13/p13_exp03_hnsw_scale/p13_exp03_metrics.json"
+      ],
+      "manuscript_ref": "Section 4.3, Table 3, Figure 5"
+    },
+    {
+      "id": "CLAIM-RQ4",
+      "type": "claim",
+      "text": "Authoritative metadata-only retrieval achieves MRR 0.3443 on unnormalized instrument logs, while hybrid visual-metadata fusion maintains robustness.",
+      "status": "SUPPORTED",
+      "supporting_experiments": ["P5-EXP-02", "P9-VERIFY-01"],
+      "primary_metric": "Authoritative Metadata MRR=0.3443396; R@1=0.0519; Hybrid R@1=0.9481, MRR=0.9658",
+      "limitations": "Metadata alone is insufficient for fine-grained specimen discrimination due to noisy header entries; 0.4907 was an older calibration grid output.",
+      "artifacts": [
+        "experiments/phase5/results/phase5_hybrid_metadata_retrieval_001/metrics.json",
+        "reports/phase9/PHASE9_FINAL_MRR_VERIFICATION_REPORT.md"
+      ],
+      "manuscript_ref": "Section 4.4, Table 4"
+    },
+    {
+      "id": "CLAIM-RQ5",
+      "type": "claim",
+      "text": "Automated data integrity assessment effectively flags defocused micrograph acquisitions without ground truth annotations.",
+      "status": "SUPPORTED",
+      "supporting_experiments": ["P6-EXP-01", "P13-EXP-05"],
+      "primary_metric": "Tenengrad/Laplacian focus AUROC=0.8803, AUPRC=0.9618; 0 exact duplicates detected on HCCI (769 natural semantic clusters)",
+      "artifacts": [
+        "experiments/phase6/results/curation_metrics.json",
+        "experiments/phase13/p13_exp05_data_integrity/p13_exp05_metrics.json"
+      ],
+      "manuscript_ref": "Section 4.5, Table 5, Figure 6"
+    },
+    {
+      "id": "CLAIM-RQ6",
+      "type": "claim",
+      "text": "Multimodal fusion architectures (Gated MLP, Cross-Attention) outperform visual-only embeddings on instrument logs.",
+      "status": "REFUTED_AND_DISCARDED",
+      "supporting_experiments": ["P13-EXP-01"],
+      "primary_metric": "Visual-only R@1=0.9481 vs Gated MLP R@1=0.5896, Cross-Attention R@1=0.6132 (p < 0.001 degradation)",
+      "limitations": "Hypothesis H1 refuted; multimodal fusion overfitted/degraded on uncurated metadata. Platform retains visual backbone with decoupled metadata filtering.",
+      "artifacts": [
+        "experiments/phase13/p13_exp01_multimodal_fusion/p13_exp01_metrics.json",
+        "reports/phase13/P13_EXP01_MULTIMODAL_FUSION_REPORT.md"
+      ],
+      "manuscript_ref": "Section 5.1 (Negative Result & Architectural Scoping)"
+    },
+    {
+      "id": "CLAIM-RQ7",
+      "type": "claim",
+      "text": "Human-in-the-loop prioritization reduces expert curation inspection workload while maintaining high consensus.",
+      "status": "SUPPORTED",
+      "supporting_experiments": ["P13-EXP-07"],
+      "primary_metric": "Discovers 85.3% of actionable quality/anomaly cases in top 50% prioritized queue; workload reduction 41.2%; Inter-rater Cohen kappa = 0.856",
+      "artifacts": [
+        "experiments/phase13/p13_exp07_human_in_the_loop/p13_exp07_metrics.json",
+        "reports/phase13/P13_EXP07_HUMAN_IN_THE_LOOP_REPORT.md"
+      ],
+      "manuscript_ref": "Section 4.6, Table 6, Figure 7"
+    }
+  ],
+  "edges": [
+    {"from": "CLAIM-RQ1", "to": "P4-EXP-01", "relation": "validated_by"},
+    {"from": "CLAIM-RQ2", "to": "P13-EXP-02", "relation": "quantified_by"},
+    {"from": "CLAIM-RQ3", "to": "P13-EXP-03", "relation": "stress_tested_by"},
+    {"from": "CLAIM-RQ4", "to": "P9-VERIFY-01", "relation": "disambiguated_by"},
+    {"from": "CLAIM-RQ5", "to": "P13-EXP-05", "relation": "benchmarked_by"},
+    {"from": "CLAIM-RQ6", "to": "P13-EXP-01", "relation": "falsified_by"},
+    {"from": "CLAIM-RQ7", "to": "P13-EXP-07", "relation": "empirically_evaluated_by"}
+  ]
+}

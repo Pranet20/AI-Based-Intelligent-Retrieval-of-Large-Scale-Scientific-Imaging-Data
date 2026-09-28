@@ -1,0 +1,94 @@
+{
+  "timestamp_utc": "2026-09-27T07:46:23.090903Z",
+  "final_project_status": "PROJECT_FINALIZED_WITH_LIMITATIONS",
+  "environment": {
+    "python_version": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+    "valid_python": true,
+    "packages": {
+      "torch": "2.14.0+cpu",
+      "torchvision": "0.29.0+cpu",
+      "faiss": "1.15.1",
+      "fastapi": "0.141.1",
+      "sqlalchemy": "2.1.1",
+      "pydantic": "2.13.5",
+      "PIL": "12.3.0",
+      "numpy": "2.4.6",
+      "pandas": "3.0.6"
+    }
+  },
+  "historical_integrity": {
+    "total_historical_records": 128,
+    "total_verified": 128,
+    "phase1_7_passed": 110,
+    "phase1_7_total": 110,
+    "phase9_passed": 17,
+    "phase9_total": 17,
+    "checkpoint_sha256_verified": true,
+    "all_checksums_passed": true
+  },
+  "dataset_reconciliation": {
+    "HCCI": {
+      "exists": true,
+      "actual_count": 774,
+      "expected_count": 774,
+      "matches_expected": true,
+      "note": "774 physical micrographs on disk in Images/ across 3 subsets (305+236+233). Specimen zip omitted 10, 20, 30 from original 777 planned sequence."
+    },
+    "Carinthia": {
+      "exists": true,
+      "actual_count": 4591,
+      "expected_count": 4591,
+      "matches_expected": true,
+      "note": "4,591 physical images across 14,037 annotated instances across clean/dry/contaminated surface conditions."
+    },
+    "SEM_Nanoscience": {
+      "exists": true,
+      "type": "EXTERNAL_ADAPTER",
+      "actual_count": 0,
+      "remote_count": 21272,
+      "matches_expected": true,
+      "note": "External adapter dataset (21,272 remote records under CC BY 4.0; 0 hosted locally)."
+    }
+  },
+  "platform_modules": {
+    "src.adaptation": "AVAILABLE",
+    "src.representation.dinov2_encoder": "AVAILABLE",
+    "src.retrieval": "AVAILABLE",
+    "src.quality": "AVAILABLE",
+    "src.deduplication": "AVAILABLE",
+    "src.metadata": "AVAILABLE",
+    "src.integrity": "AVAILABLE",
+    "src.evaluation.evaluator": "AVAILABLE",
+    "platform.backend.app.main": "AVAILABLE",
+    "platform.backend.app.core.config": "AVAILABLE",
+    "platform.backend.app.api.search": "AVAILABLE"
+  },
+  "container_status": {
+    "status": "DOCKER_RUNTIME_REMAINING_LIMITATION",
+    "message": "Docker CLI exists, but engine daemon is inactive on host (named pipe //./pipe/dockerDesktopLinuxEngine unavailable)."
+  },
+  "regression_tests": {
+    "status": "VERIFIED_PASSING",
+    "total_passing": 218,
+    "failing": 0,
+    "source": "Phase 8 & 13 audit records (218/218 passing)"
+  },
+  "scientific_invariants": {
+    "dinov2_b3_r1": 0.9481,
+    "resnet50_r1": 0.9245,
+    "supcon_b4_p5": 0.9053,
+    "acquisition_gap_reduction": "68.15% (p=1.42e-12)",
+    "authoritative_metadata_mrr": 0.3443396,
+    "faiss_hnsw_latency_ms": "0.096ms (5k) to 0.317ms (100k)",
+    "quality_focus_auroc": 0.8803,
+    "uncertainty_latent_auroc": 0.7412,
+    "human_curation_reduction": "41.2% workload reduction, kappa=0.856"
+  },
+  "explicit_limitations": [
+    "LIMITATION-01: Docker container runtime validation NOT_EXECUTED due to inactive host Docker Desktop daemon.",
+    "LIMITATION-02: Zenodo datasets (HCCI, Carinthia) lack redistributable CC licenses (RIGHTS_UNVERIFIED); omitted from public distribution tarball.",
+    "LIMITATION-03: EDS spectrum integration operates via physical synthetic bridge; physical microanalysis beamline coupling NOT_EXECUTED."
+  ]
+}

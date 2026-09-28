@@ -1,0 +1,54 @@
+{
+  "experiment_id": "phase8_scientific_image_platform_001",
+  "audit_timestamp": "2026-09-26T12:05:00Z",
+  "overall_security_status": "PASS",
+  "security_properties_evaluated": {
+    "password_hashing": {
+      "status": "PASS",
+      "mechanism": "PBKDF2-HMAC-SHA256 with 16-byte random salt and 100,000 iterations",
+      "evidence": "test_password_hashing_security passed; constant-time hex verification"
+    },
+    "jwt_lifecycle": {
+      "status": "PASS",
+      "mechanism": "PyJWT HS256 with configurable expiry and claim verification",
+      "evidence": "test_jwt_lifecycle_and_expiration passed"
+    },
+    "expired_jwt_rejection": {
+      "status": "PASS",
+      "evidence": "Tokens with past expiration timestamp rejected by decode_access_token (returns None, triggers HTTP 401)"
+    },
+    "tampered_jwt_rejection": {
+      "status": "PASS",
+      "evidence": "Tokens with invalid HMAC signatures rejected by decode_access_token"
+    },
+    "unauthenticated_access_protection": {
+      "status": "PASS",
+      "evidence": "Protected endpoints (/auth/me, /curation/reviews, /images/{id}/metadata, /admin/audit-logs) return HTTP 401"
+    },
+    "role_based_access_control_rbac": {
+      "status": "PASS",
+      "roles_enforced": ["RESEARCHER", "CURATOR", "ADMIN"],
+      "evidence": "test_role_authorization_rbac_enforcement passed; restricted actions reject unauthorized roles with HTTP 403 Forbidden"
+    },
+    "path_traversal_protection": {
+      "status": "PASS",
+      "evidence": "test_path_traversal_and_malformed_filename_protection passed; filenames with ../, ..\\, or absolute paths rejected with HTTP 400"
+    },
+    "filename_sanitization": {
+      "status": "PASS",
+      "evidence": "IngestionService strips directory traversal components and safely derives storage filenames via SHA-256 digest"
+    },
+    "unsupported_mime_type_validation": {
+      "status": "PASS",
+      "evidence": "test_unsupported_mime_type_protection passed; non-image MIME types rejected with HTTP 400"
+    },
+    "oversized_upload_rejection": {
+      "status": "PASS",
+      "evidence": "test_oversized_upload_rejection passed; uploads exceeding MAX_UPLOAD_SIZE_BYTES rejected with HTTP 400"
+    },
+    "credential_leakage_prevention": {
+      "status": "PASS",
+      "evidence": "test_closure_provenance_and_audit_full_spectrum passed; persistent audit logs and API responses do not expose passwords, secret keys, or DB credentials"
+    }
+  }
+}

@@ -1,0 +1,608 @@
+{
+  "EXP_RET_B0": {
+    "experiment_id": "EXP_RET_B0",
+    "research_question": "RQ1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Uniform Random Ranking",
+    "features": "Random permutation of candidate pool indices",
+    "training_data": "None (zero-shot unsupervised baseline)",
+    "validation_data": "None",
+    "test_data": "212 held-out Zeiss Gemini micrographs",
+    "threshold_source": "Analytical expectation (1/N)",
+    "hyperparameters": {
+      "seed": 42,
+      "pool_size": 212
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase7/master_results.json"
+    },
+    "leakage_controls": "Random shuffle without feature access; candidate pool restricted to test split.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_RET_B1": {
+    "experiment_id": "EXP_RET_B1",
+    "research_question": "RQ1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Perceptual Hash (pHash, 64-bit DCT)",
+    "features": "64-bit discrete cosine transform low-frequency binary hash",
+    "training_data": "None (deterministic algorithm)",
+    "validation_data": "None",
+    "test_data": "212 held-out Zeiss Gemini micrographs",
+    "threshold_source": "Hamming distance ordering",
+    "hyperparameters": {
+      "hash_size": 8,
+      "highfreq_factor": 4
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase7/master_results.json"
+    },
+    "leakage_controls": "Strict pixel hashing only; zero label or metadata ingestion.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_RET_B2": {
+    "experiment_id": "EXP_RET_B2",
+    "research_question": "RQ1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Difference Hash (dHash, 64-bit gradient)",
+    "features": "64-bit horizontal pixel gradient binary hash",
+    "training_data": "None (deterministic algorithm)",
+    "validation_data": "None",
+    "test_data": "212 held-out Zeiss Gemini micrographs",
+    "threshold_source": "Hamming distance ordering",
+    "hyperparameters": {
+      "hash_size": 8
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase7/master_results.json"
+    },
+    "leakage_controls": "Strict pixel hashing only; zero label or metadata ingestion.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_RET_B3": {
+    "experiment_id": "EXP_RET_B3",
+    "research_question": "RQ1",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Frozen DINOv2 ViT-B/14 (Baseline Visual)",
+    "features": "768-dimensional L2-normalized [CLS] token embedding",
+    "training_data": "None (frozen external self-supervised weights)",
+    "validation_data": "56 FEI Quanta micrographs (validation split)",
+    "test_data": "212 held-out Zeiss Gemini micrographs",
+    "threshold_source": "Cosine similarity ranking",
+    "hyperparameters": {
+      "image_size": 518,
+      "patch_size": 14,
+      "normalize": true
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "embeddings": "data/processed/embeddings/dinov2_vitb14/hcci_embeddings.parquet",
+      "prior_audit": "reports/phase2/hcci_evaluation_audit.json"
+    },
+    "leakage_controls": "External pretraining; frozen backbone; zero backpropagation on HCCI; held-out Zeiss instrument never seen.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_RET_B4": {
+    "experiment_id": "EXP_RET_B4",
+    "research_question": "RQ2",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Acquisition-Aware Representation Adapter (Phase 4, Multi-Seed)",
+    "features": "768-dimensional L2-normalized adapted embedding",
+    "training_data": "506 FEI Quanta micrographs (train split, strictly disjoint specimens)",
+    "validation_data": "56 FEI Quanta micrographs (validation split, strictly disjoint specimens)",
+    "test_data": "212 held-out Zeiss Gemini micrographs (completely disjoint instrument and specimens)",
+    "threshold_source": "Cosine similarity ranking",
+    "hyperparameters": {
+      "hidden_dim": 512,
+      "projection_dim": 768,
+      "dropout": 0.1,
+      "margin": 0.3,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001,
+      "batch_size": 32
+    },
+    "random_seeds": [
+      42,
+      123,
+      2024
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "checkpoints": "models/checkpoints/phase4_seed*.pt",
+      "report": "reports/phase4/PHASE4_REPORT.md"
+    },
+    "leakage_controls": "Specimen-disjoint split; instrument-disjoint test set; zero target instrument data in training.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_RET_B5": {
+    "experiment_id": "EXP_RET_B5",
+    "research_question": "RQ3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Metadata-Only Nearest Neighbor Retrieval",
+    "features": "Normalized numerical + one-hot categorical microscopy parameters (Group E)",
+    "training_data": "506 train split metadata records (scaler fitting only)",
+    "validation_data": "56 validation split metadata records",
+    "test_data": "212 held-out Zeiss Gemini metadata records",
+    "threshold_source": "Euclidean distance on scaled metadata",
+    "hyperparameters": {
+      "scaler": "StandardScaler fitted strictly on train split",
+      "imputation": "Median fitted strictly on train split"
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "encoder": "artifacts/phase5/metadata/metadata_encoder_groupE.json",
+      "results": "artifacts/phase5/metrics/phase5_results.json"
+    },
+    "leakage_controls": "Strict exclusion of specimen_id, roi_id, image_id, and filenames. Preprocessing fitted strictly on train split.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_RET_B6": {
+    "experiment_id": "EXP_RET_B6",
+    "research_question": "RQ3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "DINOv2 + Metadata Late Fusion (Phase 5)",
+    "features": "Convex combination of calibrated visual and metadata similarity scores: S = alpha*S_vis + (1-alpha)*S_meta",
+    "training_data": "Train split (scaler fit)",
+    "validation_data": "Validation split (alpha selection via grid search)",
+    "test_data": "212 held-out Zeiss Gemini micrographs (evaluated at selected alpha)",
+    "threshold_source": "Alpha tuning strictly on validation set",
+    "hyperparameters": {
+      "selected_alpha": 1.0,
+      "alpha_search_grid": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase5/metrics/phase5_results.json",
+      "alpha_selection": "artifacts/phase5/metrics/alpha_selection_validation.json"
+    },
+    "leakage_controls": "Zero test-set tuning; alpha selected exclusively on validation split; specimen-disjoint.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_RET_B7": {
+    "experiment_id": "EXP_RET_B7",
+    "research_question": "RQ3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Phase 4 Adapted + Metadata Late Fusion (Phase 5, Multi-Seed)",
+    "features": "Convex combination of calibrated adapted visual and metadata similarity scores",
+    "training_data": "Train split",
+    "validation_data": "Validation split",
+    "test_data": "212 held-out Zeiss Gemini micrographs",
+    "threshold_source": "Alpha tuning strictly on validation set",
+    "hyperparameters": {
+      "selected_alpha": 1.0
+    },
+    "random_seeds": [
+      42,
+      123,
+      2024
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "recall_at_5",
+      "recall_at_10",
+      "mrr",
+      "precision_at_5",
+      "precision_at_10"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase5/metrics/phase5_results.json"
+    },
+    "leakage_controls": "Zero test-set tuning; specimen and instrument disjoint.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_ACQ_ROB": {
+    "experiment_id": "EXP_ACQ_ROB",
+    "research_question": "RQ2",
+    "dataset": "hcci",
+    "split": "cross_acquisition_disjoint",
+    "model_configuration": "Acquisition Robustness Analysis (DINOv2 vs. Phase 4 Adapted)",
+    "features": "Pairwise cosine similarities partitioned by acquisition condition",
+    "training_data": "Train split (adapted model)",
+    "validation_data": "Validation split",
+    "test_data": "Full corpus cross-acquisition condition pairs",
+    "threshold_source": "Cosine similarity",
+    "hyperparameters": {
+      "seeds": [
+        42,
+        123,
+        2024
+      ]
+    },
+    "random_seeds": [
+      42,
+      123,
+      2024
+    ],
+    "evaluation_metrics": [
+      "within_acquisition_cosine",
+      "cross_acquisition_cosine",
+      "similarity_gap",
+      "cross_within_ratio"
+    ],
+    "artifact_paths": {
+      "report": "reports/phase4/PHASE4_REPORT.md"
+    },
+    "leakage_controls": "No target instrument seen during training; pairwise partitioning respects specimen groups.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_META_ABL": {
+    "experiment_id": "EXP_META_ABL",
+    "research_question": "RQ3",
+    "dataset": "hcci",
+    "split": "held_out_test_zeiss",
+    "model_configuration": "Controlled Metadata Feature Group Ablation (Groups A-F)",
+    "features": "Group A (Acq Params), Group B (Microscope/Optics), Group C (Detector), Group D (Voltage/WD/Mag), Group E (Full Normalized), Group F (Missingness Indicators)",
+    "training_data": "Train split",
+    "validation_data": "Validation split",
+    "test_data": "212 held-out Zeiss Gemini micrographs",
+    "threshold_source": "Validation set calibration",
+    "hyperparameters": {
+      "groups": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ]
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "recall_at_1",
+      "mrr",
+      "delta_recall_at_1_vs_visual"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase5/metrics/phase5_results.json"
+    },
+    "leakage_controls": "Strict prohibition of specimen_id, roi_id, image_id, and filenames across all groups.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_DUP_SYN": {
+    "experiment_id": "EXP_DUP_SYN",
+    "research_question": "RQ4",
+    "dataset": "hcci_synthetic",
+    "split": "controlled_synthetic_ground_truth",
+    "model_configuration": "Classical and Learned Duplicate Detection Benchmark",
+    "features": "pHash, dHash, DINOv2 cosine, Phase 4 adapted cosine, 4-stage cascade",
+    "training_data": "None (thresholds fixed a priori)",
+    "validation_data": "Calibration on nominal pairs",
+    "test_data": "245 evaluated pairs (140 synthetic transformed positives, 105 distinct negatives)",
+    "threshold_source": "Fixed thresholds (pHash dist <= 10, dHash dist <= 10, visual sim >= 0.985)",
+    "hyperparameters": {
+      "phash_threshold": 10,
+      "dhash_threshold": 10,
+      "dinov2_threshold": 0.985
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "precision",
+      "recall",
+      "f1",
+      "false_positive_rate",
+      "tp",
+      "fp",
+      "fn",
+      "tn"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase6/phase6_results.json"
+    },
+    "leakage_controls": "Controlled synthetic transformations generated from nominal images; clean ground-truth separation.",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  "EXP_RED_NAT": {
+    "experiment_id": "EXP_RED_NAT",
+    "research_question": "RQ4",
+    "dataset": "hcci",
+    "split": "full_corpus",
+    "model_configuration": "Natural Redundancy Graph Connected Components",
+    "features": "4-stage duplicate detection cascade on all 299,151 candidate pairs",
+    "training_data": "None",
+    "validation_data": "None",
+    "test_data": "774 natural micrographs",
+    "threshold_source": "Deterministic cascade policy",
+    "hyperparameters": {
+      "representative_policy": "sharpest_laplacian_variance"
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "total_clusters",
+      "singleton_clusters",
+      "pair_clusters",
+      "keep_images",
+      "review_images"
+    ],
+    "artifact_paths": {
+      "redundancy_summary": "artifacts/phase6/redundancy_summary.parquet",
+      "duplicate_pairs": "artifacts/phase6/duplicate_pairs.parquet",
+      "results": "artifacts/phase6/phase6_results.json"
+    },
+    "leakage_controls": "Descriptive clustering without external ground-truth assumption; strict arithmetic partition.",
+    "evidence_type": "[NATURAL DATA]"
+  },
+  "EXP_QUAL_SYN": {
+    "experiment_id": "EXP_QUAL_SYN",
+    "research_question": "RQ4",
+    "dataset": "hcci_synthetic_degradations",
+    "split": "controlled_synthetic_ground_truth",
+    "model_configuration": "Image-Derived Quality-Risk Indicators Benchmark",
+    "features": "Laplacian variance, edge density, Shannon entropy, dynamic range, clipping ratio, FFT high-freq ratio, composite risk",
+    "training_data": "None (zero-shot statistical signal processing)",
+    "validation_data": "20 nominal micrographs",
+    "test_data": "120 total images (20 nominal reference + 100 degraded micrographs across 5 physical degradation modes)",
+    "threshold_source": "Zero-shot anomaly scoring",
+    "hyperparameters": {
+      "degradation_types": [
+        "defocus_blur",
+        "shot_noise",
+        "extreme_underexposure",
+        "extreme_overexposure",
+        "astigmatism_streak"
+      ]
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "auroc",
+      "auprc",
+      "detection_rate_at_threshold",
+      "false_positive_rate"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase6/phase6_results.json"
+    },
+    "leakage_controls": "Degradations mathematically synthesized; evaluation against exact ground truth.",
+    "evidence_type": "[CONTROLLED SYNTHETIC BENCHMARK]"
+  },
+  "EXP_NOV_OUT": {
+    "experiment_id": "EXP_NOV_OUT",
+    "research_question": "RQ5",
+    "dataset": "hcci_carinthia_synthetic",
+    "split": "synthetic_and_external_domain_shift",
+    "model_configuration": "Novelty & Outlier Detection Benchmark",
+    "features": "Nearest-neighbor cosine distance, kNN distance (k=5), percentile distance, Mahalanobis/Isolation Forest ensemble",
+    "training_data": "Nominal HCCI training split embeddings",
+    "validation_data": "Nominal validation embeddings",
+    "test_data": "Synthetic anomaly benchmark + Carinthia external domain shift (4,591 images)",
+    "threshold_source": "Unsupervised density scoring",
+    "hyperparameters": {
+      "k": 5
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "auroc",
+      "mean_score_in_domain",
+      "mean_score_domain_shift",
+      "novelty_separation"
+    ],
+    "artifact_paths": {
+      "results": "artifacts/phase6/phase6_results.json"
+    },
+    "leakage_controls": "External dataset used exclusively for distribution shift evaluation; zero fine-tuning on Carinthia.",
+    "evidence_type": "[EXTERNAL DOMAIN SHIFT]"
+  },
+  "EXP_REV_QUE": {
+    "experiment_id": "EXP_REV_QUE",
+    "research_question": "RQ6",
+    "dataset": "hcci_and_synthetic",
+    "split": "controlled_synthetic_and_natural_review_queue",
+    "model_configuration": "Reproducible Triage & Review Queue Evaluation",
+    "features": "Diagnostic risk score sorting (quality risk + novelty + duplicate flags)",
+    "training_data": "None",
+    "validation_data": "None",
+    "test_data": "Synthetic ground-truth queue (N=120) and Natural HCCI queue (N=774)",
+    "threshold_source": "Budget thresholds (N=10, 25, 50, 100)",
+    "hyperparameters": {
+      "budgets": [
+        10,
+        25,
+        50,
+        100
+      ]
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "precision_at_n",
+      "recall_at_n",
+      "anomaly_yield_pct"
+    ],
+    "artifact_paths": {
+      "review_queue_json": "artifacts/phase6/review_queue.json",
+      "review_queue_csv": "artifacts/phase6/review_queue.csv",
+      "results": "artifacts/phase6/phase6_results.json"
+    },
+    "leakage_controls": "Precision evaluated on controlled synthetic ground truth; natural queue reported strictly as descriptive ranking without expert ground-truth claims.",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  "EXP_DOM_SHFT": {
+    "experiment_id": "EXP_DOM_SHFT",
+    "research_question": "RQ5",
+    "dataset": "carinthia_vs_hcci",
+    "split": "cross_dataset_domain_shift",
+    "model_configuration": "Cross-Domain Representation & Shift Analysis",
+    "features": "DINOv2 ViT-B/14 768-d embeddings",
+    "training_data": "HCCI only",
+    "validation_data": "None",
+    "test_data": "4,591 Carinthia SEM micrographs",
+    "threshold_source": "Zero-shot evaluation",
+    "hyperparameters": {
+      "backbone": "dinov2_vitb14"
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "cross_dataset_cosine_separation",
+      "embedding_variance",
+      "zero_shot_defect_clustering_silhouette"
+    ],
+    "artifact_paths": {
+      "carinthia_audit": "reports/phase2/carinthia_evaluation_audit.json",
+      "faiss_carinthia": "reports/phase3/carinthia_faiss_results.csv"
+    },
+    "leakage_controls": "Zero Carinthia data used in any training phase; verified cross-dataset domain shift.",
+    "evidence_type": "[EXTERNAL DOMAIN SHIFT]"
+  },
+  "EXP_ABL_MAT": {
+    "experiment_id": "EXP_ABL_MAT",
+    "research_question": "RQ1_to_RQ6",
+    "dataset": "hcci",
+    "split": "unified_full_corpus",
+    "model_configuration": "Master 7-Stage Incremental System Ablation",
+    "features": "1. DINOv2 -> 2. +Acq-Aware -> 3. +Metadata -> 4. +Duplicates -> 5. +Quality -> 6. +Novelty -> 7. Full Platform",
+    "training_data": "Defined per upstream phase",
+    "validation_data": "Defined per upstream phase",
+    "test_data": "Full HCCI corpus and held-out test split",
+    "threshold_source": "Fixed upstream policies",
+    "hyperparameters": {
+      "unified_pipeline": true
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "retrieval_mrr",
+      "retrieval_r1",
+      "retrieval_p5",
+      "duplicate_clusters_pruned",
+      "quality_risk_flags",
+      "novelty_flags"
+    ],
+    "artifact_paths": {
+      "profile": "artifacts/phase6/integrated_profile.parquet",
+      "master_results": "artifacts/phase7/master_results.json"
+    },
+    "leakage_controls": "Components frozen upstream; evaluations decoupled between retrieval metrics and curation capabilities.",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  },
+  "EXP_REP_AUD": {
+    "experiment_id": "EXP_REP_AUD",
+    "research_question": "RQ7",
+    "dataset": "all_registered",
+    "split": "all",
+    "model_configuration": "Automated Reproducibility and Immutability Audit",
+    "features": "SHA-256 bit-for-bit checksums across 84 frozen Phase 1\u20136 files",
+    "training_data": "N/A",
+    "validation_data": "N/A",
+    "test_data": "All repository artifacts",
+    "threshold_source": "Exact cryptographic match",
+    "hyperparameters": {
+      "algorithm": "SHA-256"
+    },
+    "random_seeds": [
+      42
+    ],
+    "evaluation_metrics": [
+      "total_frozen_verified",
+      "mismatches_count",
+      "reproducibility_status"
+    ],
+    "artifact_paths": {
+      "checksums": "artifacts/phase7/pre_phase7_frozen_checksums.json",
+      "master_results": "artifacts/phase7/master_results.json"
+    },
+    "leakage_controls": "Cryptographic hash audit across all preceding phases.",
+    "evidence_type": "[ENGINEERING MEASUREMENT]"
+  }
+}

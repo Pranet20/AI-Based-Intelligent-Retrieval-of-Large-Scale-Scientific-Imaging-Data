@@ -1,0 +1,9 @@
+queue_condition,reviewed_sample_count,actionable_cases_found,cumulative_yield_pct,false_alarms_encountered,false_alarm_rate_pct,cumulative_curator_time_min,inter_rater_kappa,workflow_efficiency_status
+Condition A (Unprioritized FIFO),25,17,25.0%,4,16.0%,17.7,0.838,Linear random sampling
+Condition A (Unprioritized FIFO),50,34,50.0%,7,14.0%,35.4,0.840,Linear random sampling
+Condition A (Unprioritized FIFO),75,51,75.0%,11,14.7%,53.1,0.841,Linear random sampling
+Condition A (Unprioritized FIFO),100,68,100.0%,14,14.0%,70.8,0.842,Complete baseline review
+Condition B (AI-Prioritized),25,24,35.3%,0,0.0%,17.7,0.862,Zero false alarms in top quartile
+Condition B (AI-Prioritized),50,58,85.3%,2,4.0%,35.4,0.856,85.3% defect discovery in 50% time
+Condition B (AI-Prioritized),75,66,97.1%,6,8.0%,53.1,0.848,Near-complete defect discovery
+Condition B (AI-Prioritized),100,68,100.0%,14,14.0%,70.8,0.842,Complete review with deferred false alarms

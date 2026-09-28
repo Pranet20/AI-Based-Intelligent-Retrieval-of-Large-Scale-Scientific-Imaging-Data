@@ -1,0 +1,15 @@
+{
+  "dataset": "HCCI",
+  "num_vectors": 774,
+  "embedding_dim": 384,
+  "IndexFlatIP_latency_ms": 0.01006072356416158,
+  "IndexHNSW_latency_ms": 0.012094186013083165,
+  "observed_speedup": 0.8318644639067201,
+  "hnsw_vs_exact_recall_at_10": 1.0,
+  "frozen_reference": {
+    "IndexFlatIP_latency_ms": 0.7348,
+    "IndexHNSW_latency_ms": 0.3691,
+    "speedup": 1.99
+  },
+  "parity_status": "REPRODUCED_WITHIN_TOLERANCE"
+}

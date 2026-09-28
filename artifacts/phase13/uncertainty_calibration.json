@@ -1,0 +1,9 @@
+{
+  "total_evaluated_queries": 212,
+  "mean_top1_cosine": 0.9520143307042572,
+  "mean_top2_cosine": 0.9420855635741971,
+  "mean_score_margin": 0.009928767130060016,
+  "auroc_margin_for_correctness": 0.5145833333333334,
+  "accuracy_high_confidence_tier": 0.9528301886792453,
+  "accuracy_low_confidence_tier": 0.9339622641509434
+}

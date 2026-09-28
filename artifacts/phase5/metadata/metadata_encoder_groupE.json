@@ -1,0 +1,95 @@
+{
+  "feature_group": "E",
+  "schema_hash": "b94ebf7a6ca214ca0789ebc6c601243e32be9a095ffe845259cc6f06deece82a",
+  "provenance": {
+    "feature_group": "E",
+    "active_fields": [
+      "magnification",
+      "pixel_size_nm",
+      "accelerating_voltage_kv",
+      "beam_current_na",
+      "dwell_time_us",
+      "detector",
+      "chamber_pressure_pa",
+      "working_distance_mm",
+      "etching_agent"
+    ],
+    "numerical_fields": [
+      "magnification",
+      "pixel_size_nm",
+      "accelerating_voltage_kv",
+      "beam_current_na",
+      "dwell_time_us",
+      "chamber_pressure_pa",
+      "working_distance_mm"
+    ],
+    "categorical_fields": [
+      "detector",
+      "etching_agent"
+    ],
+    "means": {
+      "magnification": 2452.4590163934427,
+      "pixel_size_nm": 5.111373864168618e-08,
+      "accelerating_voltage_kv": 11627.634660421545,
+      "beam_current_na": 1.4867096018735364e-09,
+      "dwell_time_us": 5.2690866510538646e-06,
+      "chamber_pressure_pa": 0.0006049749086651054,
+      "working_distance_mm": 6.736140281030445
+    },
+    "stds": {
+      "magnification": 1773.507168548177,
+      "pixel_size_nm": 3.710678228167344e-08,
+      "accelerating_voltage_kv": 6224.487772913147,
+      "beam_current_na": 1.1249722339152065e-10,
+      "dwell_time_us": 4.7697210342165754e-06,
+      "chamber_pressure_pa": 0.0004875814153427823,
+      "working_distance_mm": 0.7512595828115588
+    },
+    "medians": {
+      "magnification": 1000.0,
+      "pixel_size_nm": 3.3724e-08,
+      "accelerating_voltage_kv": 10000.0,
+      "beam_current_na": 1.375e-09,
+      "dwell_time_us": 1e-05,
+      "chamber_pressure_pa": 0.000461885,
+      "working_distance_mm": 6.5439
+    },
+    "vocabularies": {
+      "detector": [
+        "ABS",
+        "BSE",
+        "InLens",
+        "SE"
+      ],
+      "etching_agent": [
+        "Nital",
+        "Vilella"
+      ]
+    },
+    "feature_names": [
+      "magnification_scaled",
+      "magnification_missing",
+      "pixel_size_nm_scaled",
+      "pixel_size_nm_missing",
+      "accelerating_voltage_kv_scaled",
+      "accelerating_voltage_kv_missing",
+      "beam_current_na_scaled",
+      "beam_current_na_missing",
+      "dwell_time_us_scaled",
+      "dwell_time_us_missing",
+      "chamber_pressure_pa_scaled",
+      "chamber_pressure_pa_missing",
+      "working_distance_mm_scaled",
+      "working_distance_mm_missing",
+      "detector_ABS",
+      "detector_BSE",
+      "detector_InLens",
+      "detector_SE",
+      "detector_unknown",
+      "etching_agent_Nital",
+      "etching_agent_Vilella",
+      "etching_agent_unknown"
+    ],
+    "feature_dimension": 22
+  }
+}

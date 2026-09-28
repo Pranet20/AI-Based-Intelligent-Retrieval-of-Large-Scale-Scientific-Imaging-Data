@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this scientific platform or its methodology in your research, please cite it as below."
+authors:
+  - family-names: "Research Consortium"
+    given-names: "Scientific Image Management Team"
+title: "AI-Powered Scientific Image Data Management Platform for Metadata-Aware Retrieval, Acquisition-Robust Representation, Data Integrity Assessment, and Anomaly-Aware Curation"
+version: 4.0.0
+date-released: 2026-09-27
+url: "https://github.com/organization/scientific-image-platform"
+keywords:
+  - "Scanning Electron Microscopy"
+  - "Self-Supervised Learning"
+  - "DINOv2"
+  - "Scientific Image Retrieval"
+  - "FAISS HNSW"
+  - "Metadata Paradox"
+  - "Data Integrity"

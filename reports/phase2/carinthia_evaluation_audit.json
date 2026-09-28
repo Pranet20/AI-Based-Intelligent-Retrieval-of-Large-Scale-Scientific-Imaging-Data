@@ -1,0 +1,54 @@
+{
+  "benchmark_description": "Carinthia defect-class retrieval benchmark evaluating label-based retrieval, NOT universal semantic understanding.",
+  "total_queries": 4591,
+  "evaluated_queries": 4591,
+  "zero_positive_queries": 0,
+  "class_wise_positive_counts": {
+    "defect_class_1": 54,
+    "defect_class_2": 7,
+    "defect_class_3": 4007,
+    "defect_class_4": 288,
+    "defect_class_5": 3,
+    "defect_class_6": 226
+  },
+  "class_wise_recall_at_1": {
+    "defect_class_1": 0.8545454545454545,
+    "defect_class_2": 0.875,
+    "defect_class_3": 0.9987524950099801,
+    "defect_class_4": 0.9757785467128027,
+    "defect_class_5": 0.75,
+    "defect_class_6": 1.0
+  },
+  "class_wise_recall_at_5": {
+    "defect_class_1": 0.9272727272727272,
+    "defect_class_2": 1.0,
+    "defect_class_3": 1.0,
+    "defect_class_4": 0.9826989619377162,
+    "defect_class_5": 0.75,
+    "defect_class_6": 1.0
+  },
+  "class_wise_recall_at_10": {
+    "defect_class_1": 0.9272727272727272,
+    "defect_class_2": 1.0,
+    "defect_class_3": 1.0,
+    "defect_class_4": 0.986159169550173,
+    "defect_class_5": 1.0,
+    "defect_class_6": 1.0
+  },
+  "class_wise_mrr": {
+    "defect_class_1": 0.8885401823881448,
+    "defect_class_2": 0.9375,
+    "defect_class_3": 0.9993346640053227,
+    "defect_class_4": 0.9794694348327566,
+    "defect_class_5": 0.78125,
+    "defect_class_6": 1.0
+  },
+  "overall_recall_at_1": 0.9952080156828578,
+  "overall_recall_at_5": 0.9978218253103899,
+  "overall_recall_at_10": 0.998257460248312,
+  "overall_mrr": 0.9964919865021451,
+  "macro_recall_at_1": 0.9090127493780397,
+  "macro_recall_at_5": 0.9433286148684074,
+  "macro_recall_at_10": 0.9855719828038167,
+  "macro_mrr": 0.931015713537704
+}

@@ -1,0 +1,756 @@
+{
+  "experiment_id": "phase6_scientific_redundancy_anomaly_001",
+  "elapsed_seconds": 530.2362010478973,
+  "provenance_audit": {
+    "dataset_name": "HCCI",
+    "total_records": 774,
+    "stage_coordinates_found": [],
+    "has_stage_coordinates": false,
+    "roi_column": "roi_id",
+    "unique_rois": 774,
+    "is_roi_one_to_one": true,
+    "physical_linkage_status": "NOT AVAILABLE / UNVERIFIED",
+    "physical_linkage_notes": "No stage coordinates (X, Y, Z, tilt, rotation) or physical ROI bounding boxes exist in the dataset metadata. The 'roi_id' column contains 774 unique identifiers for 774 images (1-to-1 mapping with image_id), confirming that images cannot be grouped into physical sub-regions of a single field of view.",
+    "range_audit": {
+      "accelerating_voltage_kv": {
+        "present": true,
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "actual_min": 5000.0,
+        "actual_max": 20000.0,
+        "mean": 11608.527131782947,
+        "std": 6216.4893318580625,
+        "in_expected_range": true
+      },
+      "magnification": {
+        "present": true,
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "actual_min": 500.0,
+        "actual_max": 20000.0,
+        "mean": 3810.8527131782944,
+        "std": 5073.266416317058,
+        "in_expected_range": true
+      },
+      "pixel_size_nm": {
+        "present": true,
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "actual_min": 1.329e-08,
+        "actual_max": 1.04167e-07,
+        "mean": 4.756504444444444e-08,
+        "std": 3.4100900592063844e-08,
+        "in_expected_range": true
+      },
+      "beam_current_na": {
+        "present": true,
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "actual_min": 1.375e-09,
+        "actual_max": 7.99999999999999e-05,
+        "mean": 3.34808046834625e-05,
+        "std": 3.7446318816309026e-05,
+        "in_expected_range": true
+      },
+      "dwell_time_us": {
+        "present": true,
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "actual_min": 3e-07,
+        "actual_max": 2.5732421875e-05,
+        "mean": 5.824352692990952e-06,
+        "std": 5.157831697225796e-06,
+        "in_expected_range": true
+      },
+      "working_distance_mm": {
+        "present": true,
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "actual_min": 4.8378,
+        "actual_max": 10.055,
+        "mean": 6.893802067183463,
+        "std": 1.0788061731947114,
+        "in_expected_range": true
+      },
+      "chamber_pressure_pa": {
+        "present": true,
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "actual_min": 0.000111,
+        "actual_max": 0.011135,
+        "mean": 0.0023599512739018082,
+        "std": 0.003604363960626767,
+        "in_expected_range": true
+      }
+    },
+    "categorical_audit": {
+      "detector": {
+        "unique_count": 4,
+        "distribution": {
+          "SE": 283,
+          "BSE": 277,
+          "InLens": 212,
+          "ABS": 2
+        }
+      },
+      "etching_agent": {
+        "unique_count": 2,
+        "distribution": {
+          "Nital": 390,
+          "Vilella": 384
+        }
+      },
+      "microscope": {
+        "unique_count": 4,
+        "distribution": {
+          "Helios NanoLab": 215,
+          "Helios G4 PFIB CXe": 212,
+          "Zeiss Gemini": 212,
+          "VEGA3 XMH": 135
+        }
+      },
+      "instrument": {
+        "unique_count": 4,
+        "distribution": {
+          "Helios NanoLab": 215,
+          "Helios G4 PFIB CXe": 212,
+          "Zeiss Gemini": 212,
+          "VEGA3 XMH": 135
+        }
+      },
+      "sample_state": {
+        "unique_count": 2,
+        "distribution": {
+          "Overview": 390,
+          "Detail": 384
+        }
+      }
+    }
+  },
+  "diagnostic_summary": {
+    "Q1": {
+      "description": "High-Novelty / High-Quality Review Candidate (Screening Candidate for Expert Review)",
+      "count": 69,
+      "percentage": 8.914728682170542
+    },
+    "Q2": {
+      "description": "Quality-Risk Alert / Corrupted Acquisition Candidate (High Novelty with Elevated Quality Risk)",
+      "count": 1,
+      "percentage": 0.12919896640826875
+    },
+    "Q3": {
+      "description": "Nominal Reference Standard (Low Novelty, Low Quality Risk)",
+      "count": 700,
+      "percentage": 90.43927648578811
+    },
+    "Q4": {
+      "description": "Sub-nominal Acquisition Candidate (Low Novelty, Elevated Quality Risk)",
+      "count": 4,
+      "percentage": 0.516795865633075
+    }
+  },
+  "budget_simulation": {
+    "budget_10": {
+      "budget": 10,
+      "number_selected": 10,
+      "number_q1_candidates": 10,
+      "percentage_q1": 100.0,
+      "number_q2_alerts": 0,
+      "mean_novelty_score": 0.8537366601089509,
+      "mean_quality_risk_score": 0.010141913215658643,
+      "mean_rank": 5.5,
+      "redundancy_status": "All unique singleton records (KEEP)",
+      "interpretation_note": "Descriptive composition of top-N review queue under predefined matrix boundaries; does not establish ground-truth scientific discovery accuracy."
+    },
+    "budget_25": {
+      "budget": 25,
+      "number_selected": 25,
+      "number_q1_candidates": 25,
+      "percentage_q1": 100.0,
+      "number_q2_alerts": 0,
+      "mean_novelty_score": 0.7469178351687965,
+      "mean_quality_risk_score": 0.02768148226653282,
+      "mean_rank": 13.0,
+      "redundancy_status": "All unique singleton records (KEEP)",
+      "interpretation_note": "Descriptive composition of top-N review queue under predefined matrix boundaries; does not establish ground-truth scientific discovery accuracy."
+    },
+    "budget_50": {
+      "budget": 50,
+      "number_selected": 50,
+      "number_q1_candidates": 50,
+      "percentage_q1": 100.0,
+      "number_q2_alerts": 0,
+      "mean_novelty_score": 0.6558161183801193,
+      "mean_quality_risk_score": 0.020598361398584314,
+      "mean_rank": 25.5,
+      "redundancy_status": "All unique singleton records (KEEP)",
+      "interpretation_note": "Descriptive composition of top-N review queue under predefined matrix boundaries; does not establish ground-truth scientific discovery accuracy."
+    },
+    "budget_100": {
+      "budget": 100,
+      "number_selected": 50,
+      "number_q1_candidates": 50,
+      "percentage_q1": 100.0,
+      "number_q2_alerts": 0,
+      "mean_novelty_score": 0.6558161183801193,
+      "mean_quality_risk_score": 0.020598361398584314,
+      "mean_rank": 25.5,
+      "redundancy_status": "All unique singleton records (KEEP)",
+      "interpretation_note": "Descriptive composition of top-N review queue under predefined matrix boundaries; does not establish ground-truth scientific discovery accuracy."
+    }
+  },
+  "synthetic_review_queue_evaluation": {
+    "budget_10": {
+      "budget": 10,
+      "actual_reviewed": 10,
+      "known_synthetic_degradations_retrieved": 10,
+      "precision_at_n": 1.0,
+      "recall_at_n": 0.1,
+      "synthetic_artifact_detection_yield_pct": 100.0,
+      "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+    },
+    "budget_25": {
+      "budget": 25,
+      "actual_reviewed": 25,
+      "known_synthetic_degradations_retrieved": 25,
+      "precision_at_n": 1.0,
+      "recall_at_n": 0.25,
+      "synthetic_artifact_detection_yield_pct": 100.0,
+      "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+    },
+    "budget_50": {
+      "budget": 50,
+      "actual_reviewed": 50,
+      "known_synthetic_degradations_retrieved": 49,
+      "precision_at_n": 0.98,
+      "recall_at_n": 0.49,
+      "synthetic_artifact_detection_yield_pct": 98.0,
+      "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+    },
+    "budget_100": {
+      "budget": 100,
+      "actual_reviewed": 100,
+      "known_synthetic_degradations_retrieved": 88,
+      "precision_at_n": 0.88,
+      "recall_at_n": 0.88,
+      "synthetic_artifact_detection_yield_pct": 88.0,
+      "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+    }
+  },
+  "synthetic_duplicate_benchmark": {
+    "total_evaluated_pairs": 245,
+    "synthetic_positives": 140,
+    "negative_pairs": 105,
+    "phash_metrics": {
+      "precision": 0.8897058823529411,
+      "recall": 0.8642857142857143,
+      "f1": 0.8768115942028986,
+      "tp": 121,
+      "fp": 15,
+      "fn": 19,
+      "tn": 90
+    },
+    "dhash_metrics": {
+      "precision": 0.9236641221374046,
+      "recall": 0.8642857142857143,
+      "f1": 0.8929889298892988,
+      "tp": 121,
+      "fp": 10,
+      "fn": 19,
+      "tn": 95
+    },
+    "combined_hash_metrics": {
+      "precision": 0.8913043478260869,
+      "recall": 0.8785714285714286,
+      "f1": 0.8848920863309352,
+      "tp": 123,
+      "fp": 15,
+      "fn": 17,
+      "tn": 90
+    },
+    "pixel_ssim_metrics": {
+      "precision": 1.0,
+      "recall": 0.5285714285714286,
+      "f1": 0.691588785046729,
+      "tp": 74,
+      "fp": 0,
+      "fn": 66,
+      "tn": 105
+    },
+    "per_transform_results": {
+      "center_crop": {
+        "total": 20,
+        "phash_detected": 1,
+        "dhash_detected": 2,
+        "comb_detected": 3,
+        "ssim_detected": 0
+      },
+      "downscale_upscale": {
+        "total": 20,
+        "phash_detected": 20,
+        "dhash_detected": 20,
+        "comb_detected": 20,
+        "ssim_detected": 0
+      },
+      "jpeg_compression": {
+        "total": 20,
+        "phash_detected": 20,
+        "dhash_detected": 20,
+        "comb_detected": 20,
+        "ssim_detected": 3
+      },
+      "contrast_boost": {
+        "total": 20,
+        "phash_detected": 20,
+        "dhash_detected": 20,
+        "comb_detected": 20,
+        "ssim_detected": 20
+      },
+      "brightness_offset": {
+        "total": 20,
+        "phash_detected": 20,
+        "dhash_detected": 20,
+        "comb_detected": 20,
+        "ssim_detected": 20
+      },
+      "gaussian_noise": {
+        "total": 20,
+        "phash_detected": 20,
+        "dhash_detected": 19,
+        "comb_detected": 20,
+        "ssim_detected": 11
+      },
+      "scale_bar_overlay": {
+        "total": 20,
+        "phash_detected": 20,
+        "dhash_detected": 20,
+        "comb_detected": 20,
+        "ssim_detected": 20
+      }
+    },
+    "detailed_transform_table": [
+      {
+        "transformation_family": "geometric",
+        "transform_type": "center_crop",
+        "parameter": "90pct_center_crop",
+        "number_of_variants": 20,
+        "positive_pairs": 20,
+        "negative_pairs": 105,
+        "precision": 0.16666666666666666,
+        "recall": 0.15,
+        "f1": 0.15789473684210525,
+        "phash_recall": 0.05,
+        "dhash_recall": 0.1,
+        "ssim_pass_rate": 0.0
+      },
+      {
+        "transformation_family": "resolution",
+        "transform_type": "downscale_upscale",
+        "parameter": "50pct_down_up",
+        "number_of_variants": 20,
+        "positive_pairs": 20,
+        "negative_pairs": 105,
+        "precision": 0.5714285714285714,
+        "recall": 1.0,
+        "f1": 0.7272727272727273,
+        "phash_recall": 1.0,
+        "dhash_recall": 1.0,
+        "ssim_pass_rate": 0.0
+      },
+      {
+        "transformation_family": "compression",
+        "transform_type": "jpeg_compression",
+        "parameter": "q75_jpeg",
+        "number_of_variants": 20,
+        "positive_pairs": 20,
+        "negative_pairs": 105,
+        "precision": 0.5714285714285714,
+        "recall": 1.0,
+        "f1": 0.7272727272727273,
+        "phash_recall": 1.0,
+        "dhash_recall": 1.0,
+        "ssim_pass_rate": 0.15
+      },
+      {
+        "transformation_family": "photometric",
+        "transform_type": "contrast_boost",
+        "parameter": "1.2x_contrast",
+        "number_of_variants": 20,
+        "positive_pairs": 20,
+        "negative_pairs": 105,
+        "precision": 0.5714285714285714,
+        "recall": 1.0,
+        "f1": 0.7272727272727273,
+        "phash_recall": 1.0,
+        "dhash_recall": 1.0,
+        "ssim_pass_rate": 1.0
+      },
+      {
+        "transformation_family": "photometric",
+        "transform_type": "brightness_offset",
+        "parameter": "+15_offset",
+        "number_of_variants": 20,
+        "positive_pairs": 20,
+        "negative_pairs": 105,
+        "precision": 0.5714285714285714,
+        "recall": 1.0,
+        "f1": 0.7272727272727273,
+        "phash_recall": 1.0,
+        "dhash_recall": 1.0,
+        "ssim_pass_rate": 1.0
+      },
+      {
+        "transformation_family": "sensor_noise",
+        "transform_type": "gaussian_noise",
+        "parameter": "sigma5_noise",
+        "number_of_variants": 20,
+        "positive_pairs": 20,
+        "negative_pairs": 105,
+        "precision": 0.5714285714285714,
+        "recall": 1.0,
+        "f1": 0.7272727272727273,
+        "phash_recall": 1.0,
+        "dhash_recall": 0.95,
+        "ssim_pass_rate": 0.55
+      },
+      {
+        "transformation_family": "annotation",
+        "transform_type": "scale_bar_overlay",
+        "parameter": "100px_scale_bar",
+        "number_of_variants": 20,
+        "positive_pairs": 20,
+        "negative_pairs": 105,
+        "precision": 0.5714285714285714,
+        "recall": 1.0,
+        "f1": 0.7272727272727273,
+        "phash_recall": 1.0,
+        "dhash_recall": 1.0,
+        "ssim_pass_rate": 1.0
+      }
+    ],
+    "stage_metrics": {
+      "stage_1_perceptual_screening": {
+        "name": "pHash / dHash screening (Hamming <= 6)",
+        "screening_recall": 0.8785714285714286,
+        "false_positive_rate": 0.14285714285714285,
+        "precision": 0.8913043478260869
+      },
+      "stage_2_deep_feature_filtering": {
+        "name": "DINOv2 representation cosine screening",
+        "screening_recall": 1.0,
+        "candidate_pairs_retained": 245
+      },
+      "stage_3_adapted_representation": {
+        "name": "Phase 4 adapted representation screening",
+        "screening_recall": 1.0,
+        "candidate_pairs_retained": 245
+      },
+      "stage_4_pixel_verification": {
+        "name": "Standardized SSIM / MAE / NCC verification",
+        "final_cascade_recall": 0.5285714285714286,
+        "false_positive_rate": 0.0,
+        "precision": 1.0
+      }
+    }
+  },
+  "synthetic_anomaly_benchmark": {
+    "nominal_count": 20,
+    "degraded_count": 100,
+    "overall_indicator_aurocs": {
+      "laplacian_variance": 0.397,
+      "edge_density": 0.5905,
+      "shannon_entropy": 0.71,
+      "dynamic_range": 0.3425,
+      "total_clipping_ratio": 0.7265,
+      "high_freq_fft_ratio": 0.424,
+      "composite_quality_risk": 0.88025
+    },
+    "overall_indicator_auprcs": {
+      "laplacian_variance": 0.8447389877621022,
+      "edge_density": 0.9060426396768226,
+      "shannon_entropy": 0.9358097454642693,
+      "dynamic_range": 0.8318653604139077,
+      "total_clipping_ratio": 0.9409116463973506,
+      "high_freq_fft_ratio": 0.8560933831468136,
+      "composite_quality_risk": 0.9617619197558736
+    },
+    "overall_detection_rate_tau35": 0.15,
+    "per_artifact_table": [
+      {
+        "degradation_family": "defocus_blur",
+        "nominal_samples": 20,
+        "degraded_samples": 20,
+        "auroc_composite_risk": 1.0,
+        "auprc_composite_risk": 1.0000000000000002,
+        "detection_rate_tau35": 0.75,
+        "auroc_laplacian": 1.0,
+        "auroc_clipping": 0.2,
+        "auroc_entropy": 0.9825
+      },
+      {
+        "degradation_family": "detector_saturation",
+        "nominal_samples": 20,
+        "degraded_samples": 20,
+        "auroc_composite_risk": 1.0,
+        "auprc_composite_risk": 1.0000000000000002,
+        "detection_rate_tau35": 0.0,
+        "auroc_laplacian": 0.2925,
+        "auroc_clipping": 1.0,
+        "auroc_entropy": 1.0
+      },
+      {
+        "degradation_family": "beam_damage_burn",
+        "nominal_samples": 20,
+        "degraded_samples": 20,
+        "auroc_composite_risk": 0.50125,
+        "auprc_composite_risk": 0.525,
+        "detection_rate_tau35": 0.0,
+        "auroc_laplacian": 0.5575,
+        "auroc_clipping": 0.4325,
+        "auroc_entropy": 0.23
+      },
+      {
+        "degradation_family": "scanline_dropout",
+        "nominal_samples": 20,
+        "degraded_samples": 20,
+        "auroc_composite_risk": 0.95,
+        "auprc_composite_risk": 0.8735471728563835,
+        "detection_rate_tau35": 0.0,
+        "auroc_laplacian": 0.135,
+        "auroc_clipping": 1.0,
+        "auroc_entropy": 0.7775
+      },
+      {
+        "degradation_family": "charging_salt_pepper",
+        "nominal_samples": 20,
+        "degraded_samples": 20,
+        "auroc_composite_risk": 0.95,
+        "auprc_composite_risk": 0.8740493096085201,
+        "detection_rate_tau35": 0.0,
+        "auroc_laplacian": 0.0,
+        "auroc_clipping": 1.0,
+        "auroc_entropy": 0.56
+      }
+    ],
+    "synthetic_queue_evaluation": {
+      "budget_10": {
+        "budget": 10,
+        "actual_reviewed": 10,
+        "known_synthetic_degradations_retrieved": 10,
+        "precision_at_n": 1.0,
+        "recall_at_n": 0.1,
+        "synthetic_artifact_detection_yield_pct": 100.0,
+        "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+      },
+      "budget_25": {
+        "budget": 25,
+        "actual_reviewed": 25,
+        "known_synthetic_degradations_retrieved": 25,
+        "precision_at_n": 1.0,
+        "recall_at_n": 0.25,
+        "synthetic_artifact_detection_yield_pct": 100.0,
+        "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+      },
+      "budget_50": {
+        "budget": 50,
+        "actual_reviewed": 50,
+        "known_synthetic_degradations_retrieved": 49,
+        "precision_at_n": 0.98,
+        "recall_at_n": 0.49,
+        "synthetic_artifact_detection_yield_pct": 98.0,
+        "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+      },
+      "budget_100": {
+        "budget": 100,
+        "actual_reviewed": 100,
+        "known_synthetic_degradations_retrieved": 88,
+        "precision_at_n": 0.88,
+        "recall_at_n": 0.88,
+        "synthetic_artifact_detection_yield_pct": 88.0,
+        "evaluation_nature": "Independent evaluation against known ground-truth controlled synthetic degradations."
+      }
+    }
+  },
+  "ablation_studies": {
+    "ablation_1_cascade_efficiency": {
+      "total_corpus_images": 774,
+      "total_candidate_pairs": 299151,
+      "description": "Pruning power across cascade stages"
+    },
+    "ablation_2_hash_comparison": {
+      "phash_f1": 0.8768115942028986,
+      "dhash_f1": 0.8929889298892988,
+      "combined_hash_f1": 0.8848920863309352,
+      "phash_recall": 0.8642857142857143,
+      "dhash_recall": 0.8642857142857143,
+      "combined_recall": 0.8785714285714286
+    },
+    "ablation_3_dinov2_vs_adapted": {
+      "dinov2_dim": 384,
+      "adapted_dim": 384,
+      "mean_dinov2_self_sim": 1.0,
+      "mean_adapted_self_sim": 1.0
+    },
+    "ablation_4_quality_correlations": {
+      "laplacian_variance": {
+        "laplacian_variance": 1.0,
+        "edge_density": 0.8692033422327121,
+        "shannon_entropy": 0.5772547017737617,
+        "dynamic_range": 0.332805942971193,
+        "total_clipping_ratio": 0.19651956524826883,
+        "high_freq_fft_ratio": 0.9348931928971894
+      },
+      "edge_density": {
+        "laplacian_variance": 0.8692033422327121,
+        "edge_density": 1.0,
+        "shannon_entropy": 0.7239930422450374,
+        "dynamic_range": 0.48426326869105013,
+        "total_clipping_ratio": 0.18014638946268965,
+        "high_freq_fft_ratio": 0.9228868277871538
+      },
+      "shannon_entropy": {
+        "laplacian_variance": 0.5772547017737617,
+        "edge_density": 0.7239930422450374,
+        "shannon_entropy": 1.0,
+        "dynamic_range": 0.8216705495446218,
+        "total_clipping_ratio": 0.32427032997534183,
+        "high_freq_fft_ratio": 0.6277797263028564
+      },
+      "dynamic_range": {
+        "laplacian_variance": 0.332805942971193,
+        "edge_density": 0.48426326869105013,
+        "shannon_entropy": 0.8216705495446218,
+        "dynamic_range": 1.0,
+        "total_clipping_ratio": 0.46094759731589713,
+        "high_freq_fft_ratio": 0.37637519668400743
+      },
+      "total_clipping_ratio": {
+        "laplacian_variance": 0.19651956524826883,
+        "edge_density": 0.18014638946268965,
+        "shannon_entropy": 0.32427032997534183,
+        "dynamic_range": 0.46094759731589713,
+        "total_clipping_ratio": 1.0,
+        "high_freq_fft_ratio": 0.2077576304590078
+      },
+      "high_freq_fft_ratio": {
+        "laplacian_variance": 0.9348931928971894,
+        "edge_density": 0.9228868277871538,
+        "shannon_entropy": 0.6277797263028564,
+        "dynamic_range": 0.37637519668400743,
+        "total_clipping_ratio": 0.2077576304590078,
+        "high_freq_fft_ratio": 1.0
+      }
+    },
+    "ablation_5_novelty_detectors": {
+      "test_scores": {
+        "knn": {
+          "test_mean": 0.19774852122179642,
+          "test_std": 0.07145554066089425,
+          "test_p95": 0.3151584260860092
+        },
+        "mean_knn": {
+          "test_mean": 0.17198055465691592,
+          "test_std": 0.07040571290157491,
+          "test_p95": 0.2970193812931127
+        },
+        "lof": {
+          "test_mean": -0.31925012808991377,
+          "test_std": 0.20456264191569007,
+          "test_p95": 0.1310513244601727
+        },
+        "iforest": {
+          "test_mean": 0.4486457999632398,
+          "test_std": 0.020000318269058338,
+          "test_p95": 0.48552419826626386
+        },
+        "centroid": {
+          "test_mean": 0.29317063783555775,
+          "test_std": 0.07531056518177537,
+          "test_p95": 0.4475160934040635
+        }
+      },
+      "carinthia_scores": {
+        "knn": {
+          "carinthia_mean": 0.557094883054923,
+          "carinthia_std": 0.06867078622160826,
+          "carinthia_p95": 0.67008049703511
+        },
+        "mean_knn": {
+          "carinthia_mean": 0.5343265924071584,
+          "carinthia_std": 0.06979580735061629,
+          "carinthia_p95": 0.6530020670842178
+        },
+        "lof": {
+          "carinthia_mean": 0.5366561588635231,
+          "carinthia_std": 0.29265140610789875,
+          "carinthia_p95": 1.111962692158142
+        },
+        "iforest": {
+          "carinthia_mean": 0.5306389175881273,
+          "carinthia_std": 0.01397854632807271,
+          "carinthia_p95": 0.5533792514516147
+        },
+        "centroid": {
+          "carinthia_mean": 0.6985262439906904,
+          "carinthia_std": 0.07311828903122802,
+          "carinthia_p95": 0.8015732567022067
+        }
+      }
+    },
+    "ablation_6_knn_k_sensitivity": {
+      "k_1": {
+        "mean": 0.14122318781743384,
+        "std": 0.07231704210865236,
+        "p95": 0.27478334488730927,
+        "max": 0.3843583711554578
+      },
+      "k_3": {
+        "mean": 0.17362731929943026,
+        "std": 0.07137371984353555,
+        "p95": 0.3010663211423213,
+        "max": 0.40688691375547326
+      },
+      "k_5": {
+        "mean": 0.19774852122179642,
+        "std": 0.07145554066089425,
+        "p95": 0.3151584260860092,
+        "max": 0.411326766728641
+      },
+      "k_10": {
+        "mean": 0.23076800533331984,
+        "std": 0.06904899569687449,
+        "p95": 0.358732631066461,
+        "max": 0.43326662719936115
+      },
+      "k_20": {
+        "mean": 0.27328167459435315,
+        "std": 0.0672905999986289,
+        "p95": 0.39356608800703147,
+        "max": 0.4595303632161861
+      }
+    },
+    "ablation_7_normalization_impact": {
+      "raw_test_mean": 0.19774852122179642,
+      "normalized_test_mean": 0.4145930679534007,
+      "rank_correlation": 0.8619950049937468
+    },
+    "ablation_8_threshold_stability": {
+      "val_p95": 0.26933582669071165,
+      "val_p99": 0.3718017450202854,
+      "test_p95": 0.3151584260860092,
+      "test_p99": 0.3938103630980215,
+      "val_test_p95_diff_pct": 17.01318385983508
+    }
+  },
+  "redundancy_clusters_count": 769,
+  "total_images": 774,
+  "redundancy_graph_summary": {
+    "total_images": 774,
+    "total_clusters": 769,
+    "singleton_clusters_count": 764,
+    "pair_clusters_count": 5,
+    "canonical_representative_images_keep": 769,
+    "non_representative_near_duplicate_images_review": 5,
+    "action_semantics": "Every cluster has exactly one canonical sharpest representative image assigned KEEP (764 singletons + 5 pair representatives = 769 KEEP images). The 5 secondary near-duplicate micrographs in the pair clusters are assigned REVIEW (5 REVIEW images). Sum: 769 KEEP + 5 REVIEW = 774 images across 769 clusters (764*1 + 5*2 = 774)."
+  }
+}

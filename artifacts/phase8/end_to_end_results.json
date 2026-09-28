@@ -1,0 +1,113 @@
+{
+  "experiment_id": "phase8_scientific_image_platform_001",
+  "validation_timestamp": "2026-09-27T05:15:20.115012+00:00",
+  "steps_completed": 20,
+  "overall_status": "SUCCESS",
+  "steps": {
+    "1_create_user": {
+      "status": "SUCCESS",
+      "username": "canonical_user_1790486118",
+      "role": "CURATOR"
+    },
+    "2_login": {
+      "status": "SUCCESS",
+      "token_type": "bearer"
+    },
+    "3_create_project": {
+      "status": "SUCCESS",
+      "project_id": 2
+    },
+    "4_upload_image": {
+      "status": "SUCCESS",
+      "image_id": 1
+    },
+    "5_sha256": {
+      "status": "SUCCESS",
+      "sha256": "2a748a253ac850be622e6c3e9e1d464441ef42c768f450906499cac0b76c7e15"
+    },
+    "6_store_immutable_original": {
+      "status": "SUCCESS",
+      "path": "platform\\storage\\originals\\2a748a253ac850be622e6c3e9e1d464441ef42c768f450906499cac0b76c7e15.png"
+    },
+    "7_extract_metadata": {
+      "status": "SUCCESS",
+      "completeness": 0.5555555555555556,
+      "source": "embedded"
+    },
+    "8_create_thumbnail": {
+      "status": "SUCCESS",
+      "path": "platform\\storage\\thumbnails\\2a748a253ac850be622e6c3e9e1d464441ef42c768f450906499cac0b76c7e15_thumb.png"
+    },
+    "9_quality_analysis": {
+      "status": "SUCCESS",
+      "composite_quality_risk": 0.048465340055759504,
+      "label": "NOMINAL"
+    },
+    "10_exact_duplicate_check": {
+      "status": "SUCCESS",
+      "phash_computed": true
+    },
+    "11_near_duplicate_check": {
+      "status": "SUCCESS",
+      "duplicate_status": "NO_DECLARED_REDUNDANCY_DETECTED"
+    },
+    "12_dino_embedding": {
+      "status": "SUCCESS",
+      "dim": 384,
+      "normalized": true
+    },
+    "13_phase4_embedding": {
+      "status": "SUCCESS",
+      "dim": 384
+    },
+    "14_faiss_index": {
+      "status": "SUCCESS",
+      "total_indexed": 4
+    },
+    "15_novelty": {
+      "status": "SUCCESS",
+      "novelty_score": 0.39704281787495,
+      "novelty_percentile": 49.63035223436874
+    },
+    "16_image_profile": {
+      "status": "SUCCESS",
+      "filename": "canonical_sem_sample.png",
+      "processing_status": "READY"
+    },
+    "17_search": {
+      "status": "SUCCESS",
+      "mode": "frozen_visual_dinov2_vit_s14"
+    },
+    "18_retrieve_top_k": {
+      "status": "SUCCESS",
+      "results_count": 0
+    },
+    "19_review_queue": {
+      "status": "SUCCESS",
+      "queue_length": 1
+    },
+    "20_human_review": {
+      "status": "SUCCESS",
+      "decision": "KEEP",
+      "algorithmic_recommendation": "KEEP"
+    },
+    "provenance_verification": {
+      "status": "SUCCESS",
+      "event_count": 8,
+      "events": [
+        "UPLOAD",
+        "METADATA_EXTRACTION",
+        "QUALITY_ANALYSIS",
+        "EMBEDDING_GENERATION",
+        "DUPLICATE_ANALYSIS",
+        "INDEXING",
+        "SEARCH",
+        "REVIEW"
+      ]
+    },
+    "audit_log_verification": {
+      "status": "SUCCESS",
+      "total_audit_events": 6
+    }
+  }
+}

@@ -1,0 +1,69 @@
+claim_id,section,claim,value,unit,dataset,split,experiment,source_artifact,verified,notes
+QC_01,Abstract,HCCI physical micrograph count,774,micrographs,HCCI,Full Corpus,Ingestion,data/manifests/hcci_manifest.parquet,VERIFIED,Matches physical manifest file count
+QC_02,Abstract,HCCI acquisition setups,67,conditions,HCCI,Full Corpus,Ingestion,data/manifests/hcci_manifest.parquet,VERIFIED,67 distinct parameter combinations
+QC_03,Abstract,Carinthia physical micrograph count,4591,micrographs,Carinthia,Full Benchmark,Ingestion,data/manifests/carinthia_manifest.parquet,VERIFIED,Matches physical manifest file count
+QC_04,Abstract,DINOv2 embedding dimensionality,384,dimensions,All,N/A,Model Arch,configs/phase2.yaml,VERIFIED,dinov2_vits14 CLS token dimension
+QC_05,Abstract,DINOv2 parameter count,22056576,parameters,All,N/A,Model Arch,src/models/dinov2_extractor.py,VERIFIED,Exact PyTorch parameter count
+QC_06,Abstract,HCCI full corpus Recall@1,0.9819,score,HCCI,Full Corpus,Phase 2,reports/phase2/tables/retrieval_hcci.csv,VERIFIED,760/774 queries
+QC_07,Abstract,Carinthia Micro-Recall@1,0.9952,score,Carinthia,Full Benchmark,Phase 2,reports/phase2/tables/retrieval_carinthia.csv,VERIFIED,4569/4591 queries
+QC_08,Abstract,Relative acquisition gap reduction,68.15,percent,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,Gap reduced from 0.1994 to 0.0635
+QC_09,Abstract,Acquisition gap paired t-test p-value,1.42e-12,p-value,HCCI,Cross-Acquisition,Phase 4,reports/phase7/tables/table_statistical_tests.csv,VERIFIED,Statistically significant gap compression
+QC_10,Abstract,Linear material probe classification accuracy,98.71,percent,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,Linear probe on adapted features
+QC_11,Abstract,Held-out Zeiss Precision@5 adapted,0.9053,score,HCCI,Zeiss Gemini Test,Phase 4,reports/phase7/PHASE7_REPORT.md,VERIFIED,Multi-seed mean (SD=0.0166)
+QC_12,Abstract,Held-out Zeiss Precision@5 baseline,0.8708,score,HCCI,Zeiss Gemini Test,Phase 4,reports/phase7/PHASE7_REPORT.md,VERIFIED,Baseline DINOv2 precision
+QC_13,Abstract,Precision@5 improvement p-value,0.0028,p-value,HCCI,Zeiss Gemini Test,Phase 4,reports/phase7/PHASE7_REPORT.md,VERIFIED,"Paired t-test t=3.04, Cohen d=0.65"
+QC_14,Abstract,Late metadata fusion Delta R@1,0.0000,delta,HCCI,Zeiss Gemini Test,Phase 5,reports/phase5/tables/table_main_test_results.csv,VERIFIED,Zero gain over visual alone
+QC_15,Abstract,Optimal metadata fusion weight alpha*,1.0,weight,HCCI,Helios Val,Phase 5,reports/phase5/tables/table_alpha_ablation.csv,VERIFIED,Selected on validation split
+QC_16,Abstract,Duplicate cascade synthetic precision,1.0000,score,Synthetic,Duplicate Benchmark,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,74/74 true duplicates flagged
+QC_17,Abstract,Duplicate cascade synthetic false positive rate,0.0000,score,Synthetic,Duplicate Benchmark,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,0 false positives on N=245
+QC_18,Abstract,Natural redundancy graph total clusters,769,clusters,HCCI,Full Corpus,Phase 6,artifacts/phase6/redundancy_summary.parquet,VERIFIED,764 singletons + 5 pairs
+QC_19,Abstract,Natural redundancy singleton clusters,764,clusters,HCCI,Full Corpus,Phase 6,artifacts/phase6/redundancy_summary.parquet,VERIFIED,764 single-image clusters
+QC_20,Abstract,Natural redundancy pair clusters,5,clusters,HCCI,Full Corpus,Phase 6,artifacts/phase6/redundancy_summary.parquet,VERIFIED,5 two-image clusters (10 images)
+QC_21,Abstract,Redundancy action canonical KEEP,769,images,HCCI,Full Corpus,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,764 singletons + 5 exemplars
+QC_22,Abstract,Redundancy action duplicate REVIEW,5,images,HCCI,Full Corpus,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,5 secondary duplicate candidates
+QC_23,Abstract,Composite quality risk AUROC,0.8803,score,Synthetic,N=120 Evaluation,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,Lines 439-441 authoritative record
+QC_24,Abstract,Composite quality risk AUPRC,0.9618,score,Synthetic,N=120 Evaluation,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,Lines 439-441 authoritative record
+QC_25,Abstract,Platform automated test suite passed,218,tests,Platform,Full Suite,Phase 8,reports/phase8/PHASE8_REPORT.md,VERIFIED,218/218 passing tests
+QC_26,Abstract,Research-to-platform tensor parity Linf,1.0e-6,max error,Platform,Inference Parity,Phase 8,reports/phase8/PHASE8_REPORT.md,VERIFIED,Maximum difference < 1e-6
+QC_27,Abstract,Frozen research artifacts verified count,110,files,All,Phases 1-7,Phase 8/9,artifacts/phase8/pre_phase8_frozen_checksums.json,VERIFIED,110/110 bit-identical SHA-256
+QC_28,Section 4,HCCI payload uncompressed bytes,4211221382,bytes,HCCI,Full Corpus,Ingestion,data/manifests/dataset_versions.json,VERIFIED,Exact byte size on disk
+QC_29,Section 4,HCCI AsCast specimen count,305,images,HCCI,Full Corpus,Ingestion,data/manifests/hcci_manifest.parquet,VERIFIED,Manifest specimen_id value counts
+QC_30,Section 4,HCCI Q980_0h_WC specimen count,236,images,HCCI,Full Corpus,Ingestion,data/manifests/hcci_manifest.parquet,VERIFIED,Manifest specimen_id value counts
+QC_31,Section 4,HCCI Q980_9h_AC specimen count,233,images,HCCI,Full Corpus,Ingestion,data/manifests/hcci_manifest.parquet,VERIFIED,Manifest specimen_id value counts
+QC_32,Section 4,Carinthia payload bytes,146221688,bytes,Carinthia,Full Benchmark,Ingestion,data/manifests/dataset_versions.json,VERIFIED,Exact byte size on disk
+QC_33,Section 4,Carinthia defect classes count,6,classes,Carinthia,Full Benchmark,Ingestion,data/manifests/carinthia_manifest.parquet,VERIFIED,Class 0 to Class 5
+QC_34,Section 4,HCCI Training split image count,427,images,HCCI,Helios Train,Splits,data/processed/phase4/splits/hcci_instrument_splits.json,VERIFIED,Helios 36 conditions
+QC_35,Section 4,HCCI Validation split image count,135,images,HCCI,Helios Val,Splits,data/processed/phase4/splits/hcci_instrument_splits.json,VERIFIED,Helios 13 conditions
+QC_36,Section 4,HCCI Held-out Test split image count,212,images,HCCI,Zeiss Gemini Test,Splits,data/processed/phase4/splits/hcci_instrument_splits.json,VERIFIED,Zeiss 18 conditions
+QC_37,Section 7.1,HCCI Full Corpus MRR,0.9894,score,HCCI,Full Corpus,Phase 2,reports/phase2/tables/retrieval_hcci.csv,VERIFIED,Full corpus mean reciprocal rank
+QC_38,Section 7.1,HCCI Full Corpus Recall@5,1.0000,score,HCCI,Full Corpus,Phase 2,reports/phase2/tables/retrieval_hcci.csv,VERIFIED,774/774 queries
+QC_39,Section 7.1,HCCI Full Corpus Precision@5,0.9693,score,HCCI,Full Corpus,Phase 2,reports/phase2/tables/retrieval_hcci.csv,VERIFIED,3751/3870 candidates
+QC_40,Section 7.1,Carinthia Micro-MRR,0.9965,score,Carinthia,Full Benchmark,Phase 2,reports/phase2/tables/retrieval_carinthia.csv,VERIFIED,Overall micro MRR
+QC_41,Section 7.1,Carinthia Macro-Recall@1,0.9090,score,Carinthia,Full Benchmark,Phase 2,reports/phase2/tables/retrieval_carinthia.csv,VERIFIED,Unweighted macro average R@1
+QC_42,Section 7.1,Carinthia Macro-MRR,0.9310,score,Carinthia,Full Benchmark,Phase 2,reports/phase2/tables/retrieval_carinthia.csv,VERIFIED,Unweighted macro average MRR
+QC_43,Section 7.1,Held-out Zeiss DINOv2 Recall@1,0.9481,score,HCCI,Zeiss Gemini Test,Phase 2,artifacts/phase5/metrics/phase5_results.json,VERIFIED,201/212 queries
+QC_44,Section 7.1,Held-out Zeiss DINOv2 MRR,0.9658,score,HCCI,Zeiss Gemini Test,Phase 2,artifacts/phase5/metrics/phase5_results.json,VERIFIED,Held-out test MRR
+QC_45,Section 7.2,FAISS IndexFlatIP search latency,0.7348,ms/query,Combined,N=5365 d=384 K=10,Phase 3,reports/phase3/latency_benchmark.csv,VERIFIED,Exact inner product latency
+QC_46,Section 7.2,FAISS IndexFlatIP throughput,1360.95,QPS,Combined,N=5365 d=384 K=10,Phase 3,reports/phase3/latency_benchmark.csv,VERIFIED,Exact search throughput
+QC_47,Section 7.2,FAISS IndexHNSWFlat search latency,0.3691,ms/query,Combined,N=5365 d=384 K=10,Phase 3,reports/phase3/latency_benchmark.csv,VERIFIED,Graph ANN search latency
+QC_48,Section 7.2,FAISS IndexHNSWFlat throughput,2709.01,QPS,Combined,N=5365 d=384 K=10,Phase 3,reports/phase3/latency_benchmark.csv,VERIFIED,Graph ANN throughput
+QC_49,Section 7.2,FAISS IndexHNSWFlat speedup,1.99,x,Combined,N=5365 d=384 K=10,Phase 3,reports/phase3/latency_benchmark.csv,VERIFIED,0.7348 / 0.3691 = 1.99x
+QC_50,Section 7.2,FAISS IndexHNSWFlat Recall@10 retention,0.9998,score,Combined,N=5365 d=384 K=10,Phase 3,reports/phase3/latency_benchmark.csv,VERIFIED,Near-perfect recall retention
+QC_51,Section 7.3,Baseline within-acquisition cosine similarity,0.7973,sim,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,Exact value 0.797282
+QC_52,Section 7.3,Baseline cross-acquisition cosine similarity,0.5979,sim,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,Exact value 0.597896
+QC_53,Section 7.3,Baseline acquisition similarity gap,0.1994,gap,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,0.7973 - 0.5979 = 0.1994
+QC_54,Section 7.3,Baseline cross/within similarity ratio,74.99,percent,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,0.597896 / 0.797282 = 74.99%
+QC_55,Section 7.3,Adapted multi-seed within-acquisition similarity,0.9199,sim,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,"Mean over seeds 42, 123, 2024"
+QC_56,Section 7.3,Adapted multi-seed cross-acquisition similarity,0.8564,sim,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,"Mean over seeds 42, 123, 2024"
+QC_57,Section 7.3,Adapted multi-seed acquisition gap,0.0635,gap,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,Mean gap 0.063492
+QC_58,Section 7.3,Adapted multi-seed cross/within ratio,93.10,percent,HCCI,Cross-Acquisition,Phase 4,data/processed/phase4/metrics/phase4_evaluation_results.json,VERIFIED,Mean ratio 93.097%
+QC_59,Section 7.4,Metadata-only Recall@1,0.3349,score,HCCI,Zeiss Gemini Test,Phase 5,reports/phase5/tables/table_main_test_results.csv,VERIFIED,71/212 queries
+QC_60,Section 7.4,Metadata-only MRR,0.3443,score,HCCI,Zeiss Gemini Test,Phase 5,reports/phase5/tables/table_main_test_results.csv,VERIFIED,Isolated metadata MRR
+QC_61,Section 7.4,Metadata-only Precision@5,0.3349,score,HCCI,Zeiss Gemini Test,Phase 5,reports/phase5/tables/table_main_test_results.csv,VERIFIED,Isolated metadata P@5
+QC_62,Section 7.6,Noise anomaly indicator AUROC,0.9412,score,Synthetic,N=120 Evaluation,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,Noise sigma detector
+QC_63,Section 7.6,Laplacian defocus blur indicator AUROC,0.8925,score,Synthetic,N=120 Evaluation,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,Defocus blur detector
+QC_64,Section 7.6,Sensor clipping indicator AUROC,0.7265,score,Synthetic,N=120 Evaluation,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,Pixel clipping detector
+QC_65,Section 7.7,Carinthia to HCCI centroid cosine distance,0.5842,distance,Carinthia vs HCCI,Cross-Domain,Phase 7,reports/phase7/tables/table_cross_domain.csv,VERIFIED,Domain shift separation
+QC_66,Section 7.7,Novelty kNN anomaly detection AUROC,0.9125,score,Synthetic,Novelty Benchmark,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,kNN k=5 novelty detector
+QC_67,Section 7.7,Priority triage queue Precision@10,1.0000,score,Synthetic,Queue Triage,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,10/10 anomalies captured
+QC_68,Section 7.7,Priority triage queue Precision@25,1.0000,score,Synthetic,Queue Triage,Phase 6,reports/phase6/PHASE6_REPORT.md,VERIFIED,25/25 anomalies captured

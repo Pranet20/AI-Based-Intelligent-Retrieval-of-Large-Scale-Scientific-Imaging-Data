@@ -1,0 +1,11 @@
+file_path,flagged_phrase,audit_verdict,remediation_action,authoritative_scientific_phrasing
+reports/phase18/PHASE18_INFRASTRUCTURE_SPEC.md,production cloud deployment,AMBIGUOUS,REMEDIATED,cloud-deployable production architecture (CLOUD_DEPLOYMENT_NOT_EXECUTED)
+reports/phase18/PHASE18_DOCKER_RUNTIME_REPORT.md,container runtime,AMBIGUOUS,REMEDIATED,container specification validated on host (DOCKER_RUNTIME_NOT_EXECUTED)
+reports/phase18/PHASE18_DEPLOYMENT_EVIDENCE/load_test_metrics.json,production capacity,POTENTIALLY_MISLEADING,REMEDIATED,controlled host-side synthetic load test
+reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json,calibrated uncertainty,HYPERBOLIC,REMEDIATED,latent-distance uncertainty signal evaluation
+reports/phase19/PHASE19_EXPERIMENT_REGISTRY.json,prospective ingestion,UNVERIFIED_PROSPECTIVE,REMEDIATED,held-out external batch ingestion test
+reports/phase19/PHASE19_EXTERNAL_DATASET_MANIFEST.csv,independent external validation (Carinthia),HISTORICALLY_OVERLAPPING,REMEDIATED,previously evaluated cross-domain corpus
+reports/phase19/FINAL_CLAIM_EVIDENCE_GRAPH_V3.json,p < 1e-15 superiority,UNTRACEABLE_INFERENTIAL_STATISTIC,REMEDIATED,descriptive empirical superiority under evaluated protocol
+reports/phase19/PHASE19_EXTERNAL_VALIDATION_REPORT.md,genuine anomalies,SPECULATIVE_GROUND_TRUTH,REMEDIATED,expert-confirmed actionable curation cases under predefined review protocol
+reports/phase19/PHASE19_EXTERNAL_VALIDATION_REPORT.md,zero-shot image retrieval,CLASSIFICATION_OVERLAP,REMEDIATED,nearest-neighbor class retrieval / class-consistency evaluation
+reports/phase19/PHASE19_EXTERNAL_VALIDATION_REPORT.md,Random baseline R@1=0.1667,AMBIGUOUS_RANDOM_PROTOCOL,REMEDIATED,random guessing baseline under balanced uniform 6-class prior

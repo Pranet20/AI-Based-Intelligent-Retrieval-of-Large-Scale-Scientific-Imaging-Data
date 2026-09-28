@@ -1,0 +1,79 @@
+# Phase 13 Reproduction Manifest V2
+manifest_version: "2.0.0-phase13"
+generated_at: "2026-09-27T12:15:00+05:30"
+project_title: "AI-Powered Scientific Image Data Management Platform"
+baseline_freeze_version: "v1.1.0-submission-ready"
+
+environment:
+  python_version: "3.11.9"
+  platform: "Windows-11-AMD64"
+  torch_version: "2.5.1+cpu"
+  faiss_version: "1.9.0"
+
+baseline_invariants:
+  frozen_artifact_count: 110
+  frozen_artifacts_status: "VERIFIED_BYTE_FOR_BYTE_IDENTICAL"
+  phase8_tests_passing: 218
+  phase8_tests_total: 218
+  checkpoint_sha256: "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62"
+
+phase13_experiments:
+  - id: "P13-EXP-01"
+    name: "ResNet-50 Visual Representation Baseline"
+    status: "COMPLETE"
+    output_artifact: "artifacts/phase13/resnet50_benchmark_results.json"
+    key_metric: "R@1=0.9245, MRR=0.9542, P@5=0.8670"
+
+  - id: "P13-EXP-02"
+    name: "Feature Space Granular Ablations"
+    status: "COMPLETE"
+    output_artifact: "reports/phase13/PHASE13_ABLATION_MATRIX.csv"
+    key_metric: "Full DINOv2 R@1=0.9481, Patch-only=0.9151, CLS-only=0.8774"
+
+  - id: "P13-EXP-03"
+    name: "Non-Linear Multimodal Fusion Evaluation"
+    status: "COMPLETE"
+    output_artifact: "artifacts/phase13/nonlinear_fusion_results.json"
+    key_metric: "R@1=0.5896, MRR=0.7034 (Delta R@1 = -0.3522, Negative Result Preserved)"
+
+  - id: "P13-EXP-04"
+    name: "Cross-Domain Bio-Image Transferability"
+    status: "COMPLETE"
+    output_artifact: "reports/phase13/PHASE13_CROSS_DOMAIN_REPORT.md"
+    key_metric: "Zero-shot transfer R@1=0.7642, Fine-tuned R@1=0.9104"
+
+  - id: "P13-EXP-05"
+    name: "Acquisition-Robustness Stress Suite"
+    status: "COMPLETE"
+    output_artifact: "artifacts/phase13/robustness_benchmark_results.json"
+    key_metric: "Clean R@1=0.9434 (100%), Defocus Blur R@1=0.4528 (48%)"
+
+  - id: "P13-EXP-06"
+    name: "FAISS Scaling & Throughput Stress Test"
+    status: "COMPLETE"
+    output_artifact: "artifacts/phase13/scaling_benchmark_results.json"
+    key_metric: "N=100K Latency=0.3169ms, Speedup=15.64x"
+
+  - id: "P13-EXP-07"
+    name: "Forensic Failure Taxonomy Audit"
+    status: "COMPLETE"
+    output_artifact: "reports/phase13/PHASE13_FAILURE_TAXONOMY.csv"
+    key_metric: "11 Top-1 Errors cataloged across 4 failure modes"
+
+  - id: "P13-EXP-08"
+    name: "Expert-in-the-Loop Curation Agreement"
+    status: "COMPLETE"
+    output_artifact: "reports/phase13/PHASE13_HUMAN_CURATION_RESULTS.md"
+    key_metric: "Cohen's Kappa = 0.842, Consensus Agreement = 91.0%"
+
+  - id: "P13-EXP-09"
+    name: "Uncertainty Margin Calibration"
+    status: "COMPLETE"
+    output_artifact: "artifacts/phase13/uncertainty_calibration.json"
+    key_metric: "Mean margin = 0.0099, High-conf tier precision = 95.28%"
+
+  - id: "P13-EXP-10"
+    name: "Comprehensive Systems Hardening Audit"
+    status: "COMPLETE"
+    output_artifact: "reports/phase13/PHASE13_PLATFORM_HARDENING_REPORT.md"
+    key_metric: "14/15 PASS, 1/15 NOT_EXECUTED (Docker daemon)"

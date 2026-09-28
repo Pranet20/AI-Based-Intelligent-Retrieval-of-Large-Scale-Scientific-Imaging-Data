@@ -1,0 +1,12 @@
+{
+  "checkpoint_path": "data\\processed\\phase4\\checkpoints\\best_checkpoint_seed42.pt",
+  "actual_sha256": "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62",
+  "expected_sha256": "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62",
+  "hash_verified": true,
+  "baseline_within_similarity": 0.7973,
+  "baseline_cross_similarity": 0.5979,
+  "adapted_within_similarity": 0.9199,
+  "adapted_cross_similarity": 0.8564,
+  "gap_reduction_percent": 68.15,
+  "parity_status": "REPRODUCED_EXACTLY"
+}

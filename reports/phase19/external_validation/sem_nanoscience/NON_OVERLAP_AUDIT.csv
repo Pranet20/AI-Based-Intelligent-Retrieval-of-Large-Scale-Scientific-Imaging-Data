@@ -1,0 +1,4 @@
+comparator_dataset,phase_used,total_images_in_comparator,overlapping_filenames,overlapping_sha256,overlapping_dimensions_and_metadata,independence_finding
+HCCI In-Domain Dataset,Phase 1-17,774,0,0,0,COMPLETE_IMAGE_LEVEL_INDEPENDENCE
+Carinthia Defect SEM Dataset,Phase 2 and 14,4591,0,0,0,COMPLETE_IMAGE_LEVEL_INDEPENDENCE
+Bio-Image TEM Dataset,Phase 14,1200,0,0,0,COMPLETE_IMAGE_LEVEL_INDEPENDENCE

@@ -1,0 +1,15 @@
+{
+  "index_id": "test_phase16_val_idx",
+  "embedding_model": "dinov2_vits14_phase2",
+  "embedding_dimension": 384,
+  "metric": "INNER_PRODUCT_COSINE",
+  "index_type": "IndexFlatIP",
+  "training_configuration": {
+    "exact": true
+  },
+  "build_timestamp": "2026-09-27T08:39:38.450055+00:00",
+  "source_manifest_hash": "DIRECT_EMBEDDINGS",
+  "vector_count": 5,
+  "checksum": "1400f12440304111bdd5f54f114f05c0b57391f1fa102ceadb72f25d1970d1bb",
+  "id_map_checksum": "6282368581e21143caa858ab0c38d38f5ac87a5087a0017c659050cae5d9e065"
+}

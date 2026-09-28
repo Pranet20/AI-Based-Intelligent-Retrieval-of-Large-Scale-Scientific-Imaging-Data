@@ -1,0 +1,57 @@
+{
+  "platform_name": "SciData Platform",
+  "version": "1.0.0",
+  "models": [
+    {
+      "model_id": "dinov2_vits14_phase2",
+      "name": "Meta DINOv2 Vision Transformer Small",
+      "architecture": "ViT-S/14",
+      "embedding_dimension": 384,
+      "source": "facebookresearch/dinov2",
+      "parameter_count": 22056576,
+      "l2_normalized": true,
+      "status": "FROZEN_AND_ACTIVE",
+      "preprocessing": {
+        "image_size": [
+          224,
+          224
+        ],
+        "interpolation": "bicubic_antialias",
+        "mean": [
+          0.485,
+          0.456,
+          0.406
+        ],
+        "std": [
+          0.229,
+          0.224,
+          0.225
+        ],
+        "grayscale_policy": "replicate_to_rgb"
+      }
+    },
+    {
+      "model_id": "phase4_acquisition_adapter_seed42",
+      "name": "Acquisition-Aware Linear Projection Adapter",
+      "architecture": "LinearProjection (384 -> 384)",
+      "input_dimension": 384,
+      "output_dimension": 384,
+      "checkpoint_path": "data\\processed\\phase4\\checkpoints\\best_checkpoint_seed42.pt",
+      "checkpoint_sha256": "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62",
+      "loss_function": "acquisition_aware_supcon",
+      "temperature": 0.07,
+      "seed": 42,
+      "l2_normalized": true,
+      "status": "FROZEN_AND_ACTIVE"
+    },
+    {
+      "model_id": "faiss_exact_indexflatip",
+      "name": "Exact Inner-Product Vector Retrieval Index",
+      "architecture": "IndexFlatIP",
+      "dimension": 384,
+      "metric": "inner_product_cosine",
+      "recall_relative_to_exact": 1.0,
+      "status": "OPERATIONAL"
+    }
+  ]
+}
