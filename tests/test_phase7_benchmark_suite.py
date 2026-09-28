@@ -37,7 +37,7 @@ def test_01_frozen_artifacts_immutability():
     assert len(checksums) == 84, f"Expected 84 frozen artifacts, found {len(checksums)}"
     mismatches = []
     for rel_path, exp_hash in checksums.items():
-        p = Path(rel_path)
+        p = Path(rel_path.replace("\\", "/"))
         assert p.exists(), f"Frozen artifact missing: {rel_path}"
         with open(p, "rb") as f:
             act_hash = hashlib.sha256(f.read()).hexdigest()

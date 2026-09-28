@@ -35,7 +35,11 @@ def test_dinov2_numerical_consistency():
 
     df_man = pd.read_parquet(manifest_parquet)
     man_row = df_man[df_man["image_id"] == img_id].iloc[0]
-    img_path = Path("data/raw/hcci") / man_row["relative_path"]
+    rel_p = str(man_row["relative_path"]).replace("\\", "/")
+    img_path = Path("data/raw/hcci") / rel_p
+
+    if not img_path.exists():
+        pytest.skip("Raw micrograph image not present on disk")
 
     engine = DINOv2Engine()
     platform_vec = engine.embed_image(img_path)

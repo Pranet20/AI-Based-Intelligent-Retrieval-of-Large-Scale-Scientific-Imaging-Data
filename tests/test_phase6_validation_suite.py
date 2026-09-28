@@ -269,7 +269,7 @@ def test_22_frozen_phase1_5_checksum_verification():
     with open("reports/phase6/pre_phase6_frozen_checksums.json") as f:
         saved = json.load(f)
     for fpath, exp in saved.items():
-        p = Path(fpath)
+        p = Path(fpath.replace("\\", "/"))
         assert p.is_file(), f"Missing frozen file: {fpath}"
         act = hashlib.sha256(p.read_bytes()).hexdigest()
         assert act == exp, f"Corrupted frozen file: {fpath}"
