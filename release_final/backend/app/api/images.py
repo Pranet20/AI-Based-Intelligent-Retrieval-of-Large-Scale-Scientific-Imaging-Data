@@ -1,5 +1,6 @@
 """Image management, upload, metadata, and analytics endpoints."""
 
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse
@@ -170,7 +171,10 @@ def get_image_file(id: int, db: Session = Depends(get_db)):
     img = db.query(Image).filter(Image.id == id).first()
     if not img or not img.storage_path:
         raise HTTPException(status_code=404, detail="Image file not found")
-    return FileResponse(img.storage_path, media_type=img.mime_type)
+    file_path = Path(img.storage_path)
+    if not file_path.is_file():
+        raise HTTPException(status_code=404, detail="Image file missing from storage")
+    return FileResponse(file_path, media_type=img.mime_type)
 
 
 @router.get("/{id}/thumbnail")
@@ -178,7 +182,10 @@ def get_image_thumbnail(id: int, db: Session = Depends(get_db)):
     img = db.query(Image).filter(Image.id == id).first()
     if not img or not img.thumbnail_path:
         raise HTTPException(status_code=404, detail="Thumbnail not found")
-    return FileResponse(img.thumbnail_path, media_type="image/png")
+    thumb_path = Path(img.thumbnail_path)
+    if not thumb_path.is_file():
+        raise HTTPException(status_code=404, detail="Thumbnail missing from storage")
+    return FileResponse(thumb_path, media_type="image/png")
 
 
 @router.get("/{id}/metadata")

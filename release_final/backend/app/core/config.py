@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 
 
@@ -15,6 +16,16 @@ class Settings(BaseSettings):
         "DATABASE_URL",
         "sqlite:///./platform/storage/scidata_platform.db"  # Defaults to local SQLite for tests, overridable to Postgres
     )
+
+    # CORS
+    BACKEND_CORS_ORIGINS: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:80",
+        "http://localhost",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:80",
+        "http://127.0.0.1",
+    ]
 
     # Security
     SECRET_KEY: str = os.getenv("SECRET_KEY", "scidata-super-secret-production-key-phase8-2026")
@@ -43,9 +54,10 @@ class Settings(BaseSettings):
     MAX_UPLOAD_SIZE_BYTES: int = 50 * 1024 * 1024  # 50 MB
     ALLOWED_EXTENSIONS: set = {".tif", ".tiff", ".png", ".jpg", ".jpeg"}
 
-    class Config:
-        env_file = ".env"
-        extra = "allow"
+    model_config = ConfigDict(
+        env_file=".env",
+        extra="allow",
+    )
 
 
 settings = Settings()

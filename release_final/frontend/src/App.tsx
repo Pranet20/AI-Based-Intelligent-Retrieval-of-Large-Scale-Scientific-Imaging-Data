@@ -31,27 +31,48 @@ export const App: React.FC = () => {
   };
 
   if (loading) {
-    return <div style={{ padding: "40px", color: "#64748b" }}>Initializing SciData Platform...</div>;
+    return (
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        backgroundColor: "var(--bg-canvas)",
+        color: "var(--text-muted)",
+        fontSize: "14px"
+      }}>
+        Initializing SciData Research Platform...
+      </div>
+    );
   }
 
   return (
     <BrowserRouter>
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", backgroundColor: "var(--bg-canvas)" }}>
         <Navbar user={user} onLogout={handleLogout} />
         <div style={{ display: "flex", flex: 1 }}>
           <Sidebar />
-          <main style={{ flex: 1, padding: "24px", backgroundColor: "#f8fafc", overflowY: "auto" }}>
+          <main style={{
+            flex: 1,
+            padding: "28px 32px",
+            backgroundColor: "var(--bg-canvas)",
+            overflowY: "auto",
+            minHeight: "calc(100vh - var(--header-height))"
+          }}>
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/login" element={<Login onLoginSuccess={setUser} />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/explorer" element={<Projects />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/images/:id" element={<ImageDetail />} />
               <Route path="/search" element={<Search />} />
               <Route path="/curation" element={<Curation />} />
               <Route path="/reviews" element={<ReviewQueue />} />
+              <Route path="/workbench" element={<ReviewQueue />} />
               <Route path="/models" element={<ModelsView />} />
+              <Route path="/health" element={<SettingsView />} />
               <Route path="/settings" element={<SettingsView />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>

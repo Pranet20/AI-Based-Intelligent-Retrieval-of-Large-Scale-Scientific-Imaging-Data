@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LogIn, Microscope, Lock, User as UserIcon, ShieldAlert } from "lucide-react";
 import { ApiClient } from "../api/client";
 
 interface LoginProps {
@@ -28,10 +29,15 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       onLoginSuccess(user);
       navigate("/dashboard");
     } catch (err: any) {
-      setError(err.message || "Failed to sign in. Check your credentials.");
+      setError(err.message || "Failed to authenticate. Please check your credentials.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleFillDemo = (user: string, pass: string) => {
+    setUsername(user);
+    setPassword(pass);
   };
 
   return (
@@ -39,96 +45,134 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      minHeight: "80vh",
-      backgroundColor: "#f8fafc"
+      minHeight: "75vh",
+      padding: "20px"
     }}>
-      <div style={{
+      <div className="card" style={{
         width: "100%",
-        maxWidth: "400px",
-        backgroundColor: "#ffffff",
+        maxWidth: "420px",
         padding: "32px",
-        borderRadius: "8px",
-        border: "1px solid #e2e8f0",
-        boxShadow: "0 4px 6px -1px rgba(0,0,0,0.05)"
+        boxShadow: "var(--shadow-lg)"
       }}>
-        <h2 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "8px", color: "#0f172a" }}>
-          Platform Authentication
-        </h2>
-        <p style={{ fontSize: "13px", color: "#64748b", marginBottom: "24px" }}>
-          Sign in to access scientific image repositories, vector indices, and review queues.
-        </p>
+        {/* Brand Icon & Heading */}
+        <div style={{ textAlign: "center", marginBottom: "24px" }}>
+          <div style={{
+            width: "48px",
+            height: "48px",
+            borderRadius: "var(--radius-lg)",
+            background: "linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-cyan) 100%)",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#ffffff",
+            marginBottom: "12px",
+            boxShadow: "0 4px 12px rgba(59, 130, 246, 0.4)"
+          }}>
+            <Microscope size={26} />
+          </div>
+          <h2 style={{ fontSize: "20px", fontWeight: "700", color: "var(--text-primary)" }}>
+            SciData Authentication
+          </h2>
+          <p style={{ fontSize: "13px", color: "var(--text-muted)", marginTop: "4px" }}>
+            Sign in to access scientific image repositories, vector indices, and curator workbench.
+          </p>
+        </div>
 
         {error && (
           <div style={{
-            backgroundColor: "#fef2f2",
-            border: "1px solid #f87171",
-            color: "#991b1b",
-            padding: "10px",
-            borderRadius: "4px",
+            backgroundColor: "var(--status-risk-bg)",
+            border: "1px solid rgba(239, 68, 68, 0.3)",
+            color: "var(--status-risk)",
+            padding: "10px 14px",
+            borderRadius: "var(--radius-md)",
             fontSize: "13px",
-            marginBottom: "16px"
+            marginBottom: "16px",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px"
           }}>
-            {error}
+            <ShieldAlert size={16} style={{ flexShrink: 0 }} />
+            <span>{error}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div>
-            <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-              Username or Email
+            <label style={{ display: "block", fontSize: "12px", fontWeight: "600", color: "var(--text-secondary)", marginBottom: "6px" }}>
+              Username or Email *
             </label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              style={{
-                width: "100%",
-                padding: "8px 12px",
-                border: "1px solid #cbd5e1",
-                borderRadius: "4px",
-                fontSize: "14px"
-              }}
-            />
+            <div style={{ position: "relative" }}>
+              <UserIcon size={14} color="var(--text-muted)" style={{ position: "absolute", left: "10px", top: "12px" }} />
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                placeholder="curator or admin"
+                className="input-field"
+                style={{ paddingLeft: "32px" }}
+              />
+            </div>
           </div>
 
           <div>
-            <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-              Password
+            <label style={{ display: "block", fontSize: "12px", fontWeight: "600", color: "var(--text-secondary)", marginBottom: "6px" }}>
+              Password *
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{
-                width: "100%",
-                padding: "8px 12px",
-                border: "1px solid #cbd5e1",
-                borderRadius: "4px",
-                fontSize: "14px"
-              }}
-            />
+            <div style={{ position: "relative" }}>
+              <Lock size={14} color="var(--text-muted)" style={{ position: "absolute", left: "10px", top: "12px" }} />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="••••••••••••"
+                className="input-field"
+                style={{ paddingLeft: "32px" }}
+              />
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            style={{
-              marginTop: "8px",
-              padding: "10px 16px",
-              backgroundColor: "#2563eb",
-              color: "#ffffff",
-              border: "none",
-              borderRadius: "4px",
-              fontSize: "14px",
-              fontWeight: "600",
-              cursor: loading ? "not-allowed" : "pointer"
-            }}
+            className="btn btn-primary"
+            style={{ width: "100%", height: "42px", marginTop: "4px" }}
           >
-            {loading ? "Authenticating..." : "Sign In"}
+            <LogIn size={16} />
+            <span>{loading ? "Authenticating Session..." : "Sign In to Platform"}</span>
           </button>
         </form>
+
+        {/* Demo Fast-Fill Helper */}
+        <div style={{
+          marginTop: "24px",
+          paddingTop: "16px",
+          borderTop: "1px solid var(--border-subtle)",
+          textAlign: "center"
+        }}>
+          <span style={{ fontSize: "11px", color: "var(--text-muted)", display: "block", marginBottom: "8px" }}>
+            Platform Demo Role Credentials:
+          </span>
+          <div style={{ display: "flex", justifyContent: "center", gap: "8px" }}>
+            <button
+              type="button"
+              onClick={() => handleFillDemo("admin", "admin_secure_pass_2026")}
+              className="btn btn-secondary btn-sm"
+              style={{ fontSize: "11px" }}
+            >
+              Fill Admin
+            </button>
+            <button
+              type="button"
+              onClick={() => handleFillDemo("curator", "curator_pass_2026")}
+              className="btn btn-secondary btn-sm"
+              style={{ fontSize: "11px" }}
+            >
+              Fill Curator
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

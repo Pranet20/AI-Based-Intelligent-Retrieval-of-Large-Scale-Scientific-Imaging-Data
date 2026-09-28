@@ -1,36 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-interface ReviewQueueItem {
-  image_id: number;
-  original_filename: string;
-  duplicate_status: string;
-  composite_quality_risk: number;
-  quality_label: string;
-  novelty_score: number;
-  novelty_percentile: number;
-  priority: number;
-  algorithmic_recommendation: string;
-  microscope?: string;
-}
+import React, { useEffect, useState, useCallback } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import {
+  CheckSquare,
+  Keyboard,
+  Eye,
+  AlertTriangle,
+  Info,
+  CheckCircle2,
+  XCircle,
+  Sparkles,
+  ArrowRight,
+  ArrowLeft
+} from "lucide-react";
+import { ApiClient, ReviewQueueItem } from "../api/client";
 
 export const ReviewQueue: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [queue, setQueue] = useState<ReviewQueueItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<ReviewQueueItem | null>(null);
-  const [decision, setDecision] = useState("KEEP");
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const [decision, setDecision] = useState<string>("KEEP");
   const [comment, setComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
 
   const fetchQueue = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/v1/curation/review-queue");
-      if (res.ok) {
-        const data = await res.json();
-        setQueue(data);
+      setLoading(true);
+      const data = await ApiClient.getReviewQueue(100);
+      setQueue(data);
+
+      // Pre-select if URL param image_id provided
+      const targetId = searchParams.get("image_id");
+      if (targetId) {
+        const idx = data.findIndex((item) => item.image_id === Number(targetId));
+        if (idx !== -1) {
+          setSelectedIndex(idx);
+          setDecision(data[idx].algorithmic_recommendation);
+        }
+      } else if (data.length > 0 && selectedIndex === -1) {
+        setSelectedIndex(0);
+        setDecision(data[0].algorithmic_recommendation);
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
+      setMessage({ text: e.message || "Failed to load triage queue", type: "error" });
     } finally {
       setLoading(false);
     }
@@ -40,217 +54,368 @@ export const ReviewQueue: React.FC = () => {
     fetchQueue();
   }, []);
 
-  const handleSubmitReview = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedImage) return;
+  const currentItem: ReviewQueueItem | null =
+    selectedIndex >= 0 && selectedIndex < queue.length ? queue[selectedIndex] : null;
+
+  const handleSubmitReview = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!currentItem) return;
 
     setSubmitting(true);
+    setMessage(null);
     try {
-      const token = localStorage.getItem("scidata_token");
-      const res = await fetch("http://localhost:8000/api/v1/curation/reviews", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "",
-        },
-        body: JSON.stringify({
-          image_id: selectedImage.image_id,
-          decision,
-          comment,
-        }),
+      await ApiClient.submitReview({
+        image_id: currentItem.image_id,
+        decision: decision as any,
+        comment: comment || undefined,
       });
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || "Review submission failed");
-      }
-
-      setSelectedImage(null);
+      setMessage({ text: `Review committed for micrograph #${currentItem.image_id} (${decision})`, type: "success" });
       setComment("");
-      fetchQueue();
+
+      // Remove from queue locally and advance
+      const nextQueue = queue.filter((_, i) => i !== selectedIndex);
+      setQueue(nextQueue);
+      if (nextQueue.length > 0) {
+        const nextIdx = Math.min(selectedIndex, nextQueue.length - 1);
+        setSelectedIndex(nextIdx);
+        setDecision(nextQueue[nextIdx].algorithmic_recommendation);
+      } else {
+        setSelectedIndex(-1);
+      }
     } catch (err: any) {
-      alert("Error submitting review: " + err.message);
+      setMessage({ text: "Review submission error: " + err.message, type: "error" });
     } finally {
       setSubmitting(false);
     }
   };
 
+  // Keyboard Shortcuts Handler
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    // Only handle if not focused in textarea/input
+    if (["INPUT", "TEXTAREA", "SELECT"].includes((e.target as HTMLElement).tagName)) {
+      return;
+    }
+
+    if (e.key === "j" || e.key === "J") {
+      // Next image
+      if (queue.length > 0) {
+        setSelectedIndex((prev) => {
+          const next = Math.min(queue.length - 1, prev + 1);
+          setDecision(queue[next].algorithmic_recommendation);
+          return next;
+        });
+      }
+    } else if (e.key === "k" || e.key === "K") {
+      // Previous image
+      if (queue.length > 0) {
+        setSelectedIndex((prev) => {
+          const next = Math.max(0, prev - 1);
+          setDecision(queue[next].algorithmic_recommendation);
+          return next;
+        });
+      }
+    } else if (e.key === "d" || e.key === "D") {
+      setDecision("DUPLICATE");
+    } else if (e.key === "l" || e.key === "L") {
+      setDecision("LOW_QUALITY");
+    } else if (e.key === "n" || e.key === "N") {
+      setDecision("INTERESTING_NOVEL");
+    } else if (e.key === "m" || e.key === "M") {
+      setDecision("KEEP");
+    } else if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+      handleSubmitReview();
+    }
+  }, [queue, selectedIndex, currentItem, decision, comment]);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-      <div>
-        <h1 style={{ fontSize: "24px", fontWeight: "700", color: "#0f172a" }}>Curation Review Queue</h1>
-        <p style={{ fontSize: "14px", color: "#64748b" }}>
-          Human-in-the-loop triage prioritized by composite diagnostic risk: quality defects, redundancy alerts, and high-novelty micrographs.
-        </p>
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
+        <div>
+          <h1 style={{ fontSize: "22px", fontWeight: "700", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "10px" }}>
+            <CheckSquare size={22} color="var(--accent-primary)" />
+            <span>Curator Workbench & Triage Queue</span>
+          </h1>
+          <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+            Diagnostic-risk prioritized operational triage queue. Rapid keyboard-assisted curation for defect inspection and anomaly validation.
+          </p>
+        </div>
+
+        {/* Keyboard Shortcuts Pill */}
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          backgroundColor: "var(--bg-surface)",
+          border: "1px solid var(--border-default)",
+          padding: "6px 12px",
+          borderRadius: "var(--radius-md)",
+          fontSize: "12px",
+          color: "var(--text-secondary)"
+        }}>
+          <Keyboard size={14} color="var(--accent-cyan)" />
+          <span>Hotkeys:</span>
+          <span className="font-mono" style={{ color: "var(--text-primary)" }}>[J/K] Nav</span>
+          <span className="font-mono" style={{ color: "var(--text-primary)" }}>[M] Keep</span>
+          <span className="font-mono" style={{ color: "var(--text-primary)" }}>[D] Dup</span>
+          <span className="font-mono" style={{ color: "var(--text-primary)" }}>[L] LowQ</span>
+          <span className="font-mono" style={{ color: "var(--text-primary)" }}>[N] Novel</span>
+        </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: selectedImage ? "1fr 400px" : "1fr", gap: "24px" }}>
-        {/* Table */}
-        <div style={{ backgroundColor: "#ffffff", borderRadius: "8px", border: "1px solid #e2e8f0", overflow: "hidden" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
-            <thead>
-              <tr style={{ backgroundColor: "#f8fafc", borderBottom: "1px solid #e2e8f0", textAlign: "left", color: "#64748b" }}>
-                <th style={{ padding: "10px 14px" }}>Priority</th>
-                <th style={{ padding: "10px 14px" }}>Image ID</th>
-                <th style={{ padding: "10px 14px" }}>Filename</th>
-                <th style={{ padding: "10px 14px" }}>Quality Risk</th>
-                <th style={{ padding: "10px 14px" }}>Redundancy</th>
-                <th style={{ padding: "10px 14px" }}>Novelty %</th>
-                <th style={{ padding: "10px 14px" }}>Recommendation</th>
-                <th style={{ padding: "10px 14px" }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
-                <tr><td colSpan={8} style={{ padding: "24px", textAlign: "center", color: "#64748b" }}>Loading review queue...</td></tr>
-              ) : queue.length === 0 ? (
-                <tr><td colSpan={8} style={{ padding: "24px", textAlign: "center", color: "#16a34a" }}>All micrographs reviewed! No items pending.</td></tr>
-              ) : (
-                queue.map((item) => (
-                  <tr key={item.image_id} style={{ borderBottom: "1px solid #f1f5f9" }}>
-                    <td style={{ padding: "10px 14px", fontWeight: "700", color: "#ea580c" }}>
-                      {item.priority.toFixed(3)}
+      {/* Scientific Limitation Disclaimer */}
+      <div style={{
+        padding: "10px 16px",
+        borderRadius: "var(--radius-md)",
+        backgroundColor: "rgba(2, 132, 199, 0.08)",
+        border: "1px solid rgba(2, 132, 199, 0.2)",
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        fontSize: "12px",
+        color: "var(--text-secondary)"
+      }}>
+        <Info size={16} color="var(--accent-cyan)" style={{ flexShrink: 0 }} />
+        <span>
+          <strong>Operational Triage Notice:</strong> Triage priority is calculated by algorithmic composite diagnostic risk
+          (<code>priority = 0.5 × quality_risk + 0.3 × novelty_pct + 0.2 × redundancy_weight</code>).
+          Rankings are descriptive algorithmic triage outputs and not claimed as confirmed clinical/metallurgical diagnostic labels.
+        </span>
+      </div>
+
+      {message && (
+        <div className={`card`} style={{
+          padding: "12px 16px",
+          borderLeft: `4px solid ${message.type === "success" ? "var(--status-nominal)" : "var(--status-risk)"}`,
+          color: message.type === "success" ? "var(--status-nominal)" : "var(--status-risk)",
+          fontSize: "13px"
+        }}>
+          {message.text}
+        </div>
+      )}
+
+      {/* Main Two-Column Workbench Layout */}
+      <div style={{ display: "grid", gridTemplateColumns: currentItem ? "1.1fr 0.9fr" : "1fr", gap: "20px" }}>
+        {/* Left: Triage Table */}
+        <div className="card" style={{ padding: "0", overflow: "hidden" }}>
+          <div style={{ padding: "14px 16px", backgroundColor: "var(--bg-surface-elevated)", borderBottom: "1px solid var(--border-default)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
+              Active Queue ({queue.length} pending)
+            </span>
+            <button onClick={fetchQueue} className="btn btn-secondary btn-sm">
+              Refresh Queue
+            </button>
+          </div>
+
+          <div className="table-container">
+            <table className="scientific-table">
+              <thead>
+                <tr>
+                  <th>Priority</th>
+                  <th>ID</th>
+                  <th>Filename</th>
+                  <th>Quality Risk</th>
+                  <th>Redundancy</th>
+                  <th>Novelty %</th>
+                  <th>Algorithmic Rec</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr><td colSpan={8} style={{ padding: "30px", textAlign: "center", color: "var(--text-muted)" }}>Loading queue...</td></tr>
+                ) : queue.length === 0 ? (
+                  <tr>
+                    <td colSpan={8} style={{ padding: "40px", textAlign: "center", color: "var(--status-nominal)" }}>
+                      <CheckCircle2 size={32} style={{ margin: "0 auto 8px auto", display: "block" }} />
+                      All triage candidates reviewed! No pending items in operational queue.
                     </td>
-                    <td style={{ padding: "10px 14px" }}>
-                      <Link to={`/images/${item.image_id}`} style={{ color: "#2563eb", fontWeight: "600" }}>
-                        #{item.image_id}
-                      </Link>
-                    </td>
-                    <td style={{ padding: "10px 14px" }}>{item.original_filename}</td>
-                    <td style={{ padding: "10px 14px" }}>
-                      <span style={{
-                        fontSize: "12px",
-                        padding: "2px 6px",
-                        borderRadius: "4px",
-                        backgroundColor: item.quality_label === "NOMINAL" ? "#dcfce7" : "#fee2e2",
-                        color: item.quality_label === "NOMINAL" ? "#166534" : "#991b1b"
-                      }}>
-                        {item.composite_quality_risk.toFixed(3)}
-                      </span>
-                    </td>
-                    <td style={{ padding: "10px 14px", fontSize: "12px" }}>
-                      {item.duplicate_status === "NO_DECLARED_REDUNDANCY_DETECTED" ? "None" : item.duplicate_status}
-                    </td>
-                    <td style={{ padding: "10px 14px" }}>{item.novelty_percentile.toFixed(1)}%</td>
-                    <td style={{ padding: "10px 14px", fontWeight: "600" }}>
-                      <span style={{
-                        fontSize: "12px",
-                        padding: "2px 8px",
-                        borderRadius: "4px",
-                        backgroundColor: item.algorithmic_recommendation === "KEEP" ? "#f1f5f9" : "#fef3c7",
-                        color: item.algorithmic_recommendation === "KEEP" ? "#475569" : "#92400e"
-                      }}>
-                        {item.algorithmic_recommendation}
-                      </span>
-                    </td>
-                    <td style={{ padding: "10px 14px" }}>
-                      <button
+                  </tr>
+                ) : (
+                  queue.map((item, idx) => {
+                    const isSelected = idx === selectedIndex;
+                    return (
+                      <tr
+                        key={item.image_id}
                         onClick={() => {
-                          setSelectedImage(item);
+                          setSelectedIndex(idx);
                           setDecision(item.algorithmic_recommendation);
                         }}
                         style={{
-                          padding: "4px 10px",
-                          backgroundColor: "#3b82f6",
-                          color: "#ffffff",
-                          border: "none",
-                          borderRadius: "4px",
-                          fontSize: "12px",
+                          backgroundColor: isSelected ? "var(--bg-surface-active)" : undefined,
                           cursor: "pointer"
                         }}
                       >
-                        Review
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                        <td className="font-mono" style={{ fontWeight: 700, color: "var(--accent-primary)" }}>
+                          {item.priority.toFixed(3)}
+                        </td>
+                        <td className="font-mono">#{item.image_id}</td>
+                        <td style={{ fontWeight: 600, maxWidth: "160px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.original_filename}>
+                          {item.original_filename}
+                        </td>
+                        <td>
+                          <span className={`badge ${item.composite_quality_risk >= 0.60 ? "badge-risk" : "badge-nominal"}`}>
+                            {(item.composite_quality_risk * 100).toFixed(1)}%
+                          </span>
+                        </td>
+                        <td>
+                          <span className={`badge ${item.duplicate_status === "NO_DECLARED_REDUNDANCY_DETECTED" ? "badge-nominal" : "badge-warning"}`}>
+                            {item.duplicate_status === "NO_DECLARED_REDUNDANCY_DETECTED" ? "UNIQUE" : "REDUNDANT"}
+                          </span>
+                        </td>
+                        <td className="font-mono">{item.novelty_percentile.toFixed(1)}%</td>
+                        <td>
+                          <span className={`badge ${item.algorithmic_recommendation === "KEEP" ? "badge-nominal" : "badge-warning"}`}>
+                            {item.algorithmic_recommendation}
+                          </span>
+                        </td>
+                        <td>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedIndex(idx);
+                              setDecision(item.algorithmic_recommendation);
+                            }}
+                            className="btn btn-secondary btn-sm"
+                          >
+                            Inspect
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {/* Modal / Sidebar Review Panel */}
-        {selectedImage && (
-          <div style={{
-            backgroundColor: "#ffffff",
-            padding: "20px",
-            borderRadius: "8px",
-            border: "1px solid #cbd5e1",
-            boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)"
-          }}>
-            <h3 style={{ fontSize: "16px", fontWeight: "700", marginBottom: "8px", color: "#0f172a" }}>
-              Submit Review: #{selectedImage.image_id}
-            </h3>
-            <p style={{ fontSize: "12px", color: "#64748b", marginBottom: "16px" }}>
-              File: {selectedImage.original_filename}
-            </p>
+        {/* Right: Inspection & Decision Panel */}
+        {currentItem && (
+          <div className="card" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <h2 style={{ fontSize: "16px", fontWeight: 700, color: "var(--text-primary)" }}>
+                Curate Micrograph #{currentItem.image_id}
+              </h2>
+              <div style={{ display: "flex", gap: "6px" }}>
+                <button
+                  disabled={selectedIndex <= 0}
+                  onClick={() => {
+                    const prev = Math.max(0, selectedIndex - 1);
+                    setSelectedIndex(prev);
+                    setDecision(queue[prev].algorithmic_recommendation);
+                  }}
+                  className="btn btn-secondary btn-sm"
+                  title="Previous (K)"
+                >
+                  <ArrowLeft size={14} />
+                </button>
+                <button
+                  disabled={selectedIndex >= queue.length - 1}
+                  onClick={() => {
+                    const next = Math.min(queue.length - 1, selectedIndex + 1);
+                    setSelectedIndex(next);
+                    setDecision(queue[next].algorithmic_recommendation);
+                  }}
+                  className="btn btn-secondary btn-sm"
+                  title="Next (J)"
+                >
+                  <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
 
+            {/* Micrograph Preview */}
+            <div style={{ height: "220px", backgroundColor: "#000", borderRadius: "var(--radius-md)", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img
+                src={ApiClient.getImageThumbnailUrl(currentItem.image_id)}
+                alt={currentItem.original_filename}
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                onError={(e: any) => {
+                  e.target.src = ApiClient.getImageUrl(currentItem.image_id);
+                }}
+              />
+            </div>
+
+            <div style={{ fontSize: "12px", color: "var(--text-secondary)", display: "flex", justifyContent: "space-between" }}>
+              <span className="font-mono">{currentItem.original_filename}</span>
+              <Link to={`/images/${currentItem.image_id}`} target="_blank" className="btn btn-secondary btn-sm" style={{ padding: "2px 8px" }}>
+                <Eye size={12} /> Full Profile
+              </Link>
+            </div>
+
+            {/* Diagnostics Summary Card */}
+            <div style={{ padding: "12px", backgroundColor: "var(--bg-canvas)", borderRadius: "var(--radius-md)", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", fontSize: "12px" }}>
+              <div>
+                <span style={{ color: "var(--text-muted)", display: "block" }}>Composite Risk:</span>
+                <span className="font-mono" style={{ fontWeight: 600, color: currentItem.composite_quality_risk >= 0.60 ? "var(--status-risk)" : "var(--status-nominal)" }}>
+                  {(currentItem.composite_quality_risk * 100).toFixed(1)}% ({currentItem.quality_label})
+                </span>
+              </div>
+              <div>
+                <span style={{ color: "var(--text-muted)", display: "block" }}>Redundancy:</span>
+                <span className="font-mono" style={{ fontWeight: 600 }}>{currentItem.duplicate_status}</span>
+              </div>
+              <div>
+                <span style={{ color: "var(--text-muted)", display: "block" }}>Relative Novelty:</span>
+                <span className="font-mono" style={{ fontWeight: 600, color: "var(--accent-cyan)" }}>
+                  {currentItem.novelty_percentile.toFixed(1)}th percentile
+                </span>
+              </div>
+              <div>
+                <span style={{ color: "var(--text-muted)", display: "block" }}>Algorithmic Rec:</span>
+                <span className="badge badge-info">{currentItem.algorithmic_recommendation}</span>
+              </div>
+            </div>
+
+            {/* Decision Submission Form */}
             <form onSubmit={handleSubmitReview} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <div>
-                <label style={{ display: "block", fontSize: "12px", fontWeight: "600", color: "#334155", marginBottom: "4px" }}>
-                  Curator Decision
+                <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                  Curator Verdict *
                 </label>
                 <select
                   value={decision}
                   onChange={(e) => setDecision(e.target.value)}
-                  style={{ width: "100%", padding: "8px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "13px" }}
+                  className="input-field"
                 >
-                  <option value="KEEP">KEEP (Retain in active repository)</option>
-                  <option value="REVIEW_LATER">REVIEW_LATER (Defer decision)</option>
-                  <option value="DUPLICATE">DUPLICATE (Flag redundant record)</option>
-                  <option value="LOW_QUALITY">LOW_QUALITY (Quality risk verified)</option>
-                  <option value="INTERESTING_NOVEL">INTERESTING_NOVEL (Novel microstructure)</option>
-                  <option value="INCORRECT_METADATA">INCORRECT_METADATA (Metadata audit needed)</option>
+                  <option value="KEEP">KEEP — Retain verified micrograph in repository</option>
+                  <option value="REVIEW_LATER">REVIEW_LATER — Defer for specialist panel</option>
+                  <option value="DUPLICATE">DUPLICATE — Mark as redundant acquisition</option>
+                  <option value="LOW_QUALITY">LOW_QUALITY — Mark as severe quality defect</option>
+                  <option value="INTERESTING_NOVEL">INTERESTING_NOVEL — Flag novel microstructure</option>
+                  <option value="INCORRECT_METADATA">INCORRECT_METADATA — Flag metadata discrepancy</option>
                 </select>
               </div>
 
               <div>
-                <label style={{ display: "block", fontSize: "12px", fontWeight: "600", color: "#334155", marginBottom: "4px" }}>
-                  Curator Rationale / Notes
+                <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                  Curator Rationale / Observation Notes
                 </label>
                 <textarea
+                  rows={3}
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
-                  rows={4}
-                  placeholder="Document specific physical reasons for the decision..."
-                  style={{ width: "100%", padding: "8px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "13px" }}
+                  placeholder="Document physical justification (e.g. defocus blur verified, identical inclusion cluster)..."
+                  className="input-field"
+                  style={{ resize: "vertical" }}
                 />
               </div>
 
-              <div style={{ display: "flex", gap: "8px", marginTop: "8px" }}>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  style={{
-                    flex: 1,
-                    padding: "8px 16px",
-                    backgroundColor: "#16a34a",
-                    color: "#ffffff",
-                    border: "none",
-                    borderRadius: "4px",
-                    fontWeight: "600",
-                    cursor: submitting ? "not-allowed" : "pointer",
-                    fontSize: "13px"
-                  }}
-                >
-                  {submitting ? "Saving..." : "Commit Decision"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedImage(null)}
-                  style={{
-                    padding: "8px 14px",
-                    backgroundColor: "#f1f5f9",
-                    color: "#475569",
-                    border: "1px solid #cbd5e1",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                    fontSize: "13px"
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="btn btn-primary"
+                style={{ width: "100%", height: "40px" }}
+              >
+                {submitting ? "Committing Verdict..." : `Commit Decision (${decision})`}
+              </button>
             </form>
           </div>
         )}

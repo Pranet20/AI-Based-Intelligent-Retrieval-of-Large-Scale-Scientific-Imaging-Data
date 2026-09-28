@@ -81,7 +81,7 @@ class ProductionObservabilityMiddleware(BaseHTTPMiddleware):
 app.add_middleware(ProductionObservabilityMiddleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.BACKEND_CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -92,7 +92,6 @@ app.include_router(auth.router, prefix=settings.API_V1_STR)
 app.include_router(projects.router, prefix=settings.API_V1_STR)
 app.include_router(images.router, prefix=settings.API_V1_STR)
 app.include_router(search.router, prefix=settings.API_V1_STR)
-app.include_router(curation.router, prefix=settings.API_V1_STR)
 app.include_router(curation.router, prefix=f"{settings.API_V1_STR}/curation")
 app.include_router(models.router, prefix=settings.API_V1_STR)
 app.include_router(provenance.router, prefix=settings.API_V1_STR)

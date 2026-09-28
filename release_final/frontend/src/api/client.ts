@@ -1,6 +1,131 @@
-import { Project, ScientificImage, ReviewItem, SearchResult, ModelVersion, SystemHealth, User } from "../types";
+import {
+  Project,
+  ScientificImage,
+  ReviewItem,
+  SearchResult,
+  ModelVersion,
+  SystemHealth,
+  User,
+} from "../types";
 
-const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000/api/v1";
+const API_BASE = process.env.REACT_APP_API_URL || "/api/v1";
+
+export interface ReviewQueueItem {
+  image_id: number;
+  original_filename: string;
+  duplicate_status: string;
+  composite_quality_risk: number;
+  quality_label: string;
+  novelty_score: number;
+  novelty_percentile: number;
+  priority: number;
+  algorithmic_recommendation: string;
+  microscope?: string;
+}
+
+export interface ReviewSubmission {
+  image_id: number;
+  decision: "KEEP" | "REVIEW_LATER" | "DUPLICATE" | "LOW_QUALITY" | "INTERESTING_NOVEL" | "INCORRECT_METADATA";
+  comment?: string;
+}
+
+export interface DashboardStats {
+  total_images: number;
+  total_projects: number;
+  potential_redundancies: number;
+  quality_risk_items: number;
+  pending_reviews: number;
+  completed_reviews: number;
+  faiss_indexed_vectors: number;
+  timestamp: string;
+}
+
+export interface ResearchDashboardData {
+  status: string;
+  dataset_inventory: {
+    hcci_physical_micrographs: number;
+    carinthia_physical_images: number;
+    sem_nanoscience_records: number;
+    source_artifact: string;
+  };
+  acquisition_distributions: {
+    detectors: Record<string, number>;
+    accelerating_voltages: Record<string, number>;
+    source_artifact: string;
+  };
+  data_integrity_and_quality: {
+    nominal_images: number;
+    risk_flagged_images: number;
+    defocus_auroc: number;
+    defocus_auprc: number;
+    source_artifact: string;
+  };
+  scientific_retrieval_benchmarks: {
+    dinov2_vit_s14_r1: number;
+    resnet50_baseline_r1: number;
+    acquisition_gap_reduction_pct: number;
+    gap_reduction_p_value: number;
+    authoritative_metadata_mrr: number;
+    faiss_hnsw_latency_ms: number;
+    source_artifact: string;
+  };
+  active_curation_progress: {
+    pending_in_queue: number;
+    completed_decisions: number;
+    workload_reduction_pct: number;
+    inter_rater_kappa: number;
+    source_artifact: string;
+  };
+  experiment_registry_v2: {
+    registered_experiments_count: number;
+    canonical_experiments: any[];
+    source_artifact: string;
+  };
+}
+
+export interface ImageDetailResponse {
+  id: number;
+  project_id: number;
+  original_filename: string;
+  storage_path: string;
+  thumbnail_path: string;
+  sha256: string;
+  mime_type: string;
+  width: number;
+  height: number;
+  file_size: number;
+  processing_status: string;
+  created_at: string;
+  metadata?: {
+    microscope?: string;
+    detector?: string;
+    accelerating_voltage_kv?: number;
+    magnification?: number;
+    pixel_size_nm?: number;
+    beam_current_na?: number;
+    dwell_time_us?: number;
+    working_distance_mm?: number;
+    chamber_pressure_pa?: number;
+    metadata_source?: string;
+    metadata_completeness?: number;
+  };
+  quality?: {
+    laplacian_variance?: number;
+    edge_density?: number;
+    shannon_entropy?: number;
+    dynamic_range?: number;
+    clipping_ratio?: number;
+    high_freq_fft_ratio?: number;
+    composite_quality_risk: number;
+    quality_label: string;
+  };
+  duplicate?: {
+    duplicate_status: string;
+    matched_image_id?: number;
+    similarity_score?: number;
+    match_stage?: string;
+  };
+}
 
 export class ApiClient {
   private static token: string | null = localStorage.getItem("scidata_token");
@@ -15,13 +140,18 @@ export class ApiClient {
     localStorage.removeItem("scidata_token");
   }
 
-  private static async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  public static getToken(): string | null {
+    return this.token || localStorage.getItem("scidata_token");
+  }
+
+  public static async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const headers: Record<string, string> = {
       ...(options.headers as Record<string, string>),
     };
 
-    if (this.token) {
-      headers["Authorization"] = `Bearer ${this.token}`;
+    const token = this.getToken();
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
     }
 
     if (!(options.body instanceof FormData) && !headers["Content-Type"]) {
@@ -35,15 +165,31 @@ export class ApiClient {
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({ detail: response.statusText }));
-      throw new Error(err.detail || "API Request Failed");
+      throw new Error(err.detail || `API request failed with status ${response.status}`);
     }
 
     return response.json();
   }
 
-  // Health
+  // Health & System
   public static async getHealth(): Promise<SystemHealth> {
     return this.request<SystemHealth>("/health");
+  }
+
+  public static async getReadiness(): Promise<{ status: string; checks: Record<string, string>; version: string }> {
+    return this.request<{ status: string; checks: Record<string, string>; version: string }>("/readiness");
+  }
+
+  public static async getVersion(): Promise<Record<string, any>> {
+    return this.request<Record<string, any>>("/version");
+  }
+
+  public static async getDashboardStats(): Promise<DashboardStats> {
+    return this.request<DashboardStats>("/dashboard/stats");
+  }
+
+  public static async getResearchDashboard(): Promise<ResearchDashboardData> {
+    return this.request<ResearchDashboardData>("/research/dashboard");
   }
 
   // Auth
@@ -77,23 +223,40 @@ export class ApiClient {
   }
 
   // Images
-  public static async getImages(projectId?: number): Promise<ScientificImage[]> {
-    const query = projectId ? `?project_id=${projectId}` : "";
-    return this.request<ScientificImage[]>(`/images${query}`);
+  public static async getImages(
+    projectId?: number,
+    status?: string,
+    limit: number = 50,
+    offset: number = 0
+  ): Promise<{ total: number; items: any[] }> {
+    const params = new URLSearchParams();
+    if (projectId) params.append("project_id", projectId.toString());
+    if (status) params.append("status", status);
+    params.append("limit", limit.toString());
+    params.append("offset", offset.toString());
+    return this.request<{ total: number; items: any[] }>(`/images?${params.toString()}`);
   }
 
-  public static async getImage(id: number): Promise<ScientificImage> {
-    return this.request<ScientificImage>(`/images/${id}`);
+  public static async getImage(id: number): Promise<ImageDetailResponse> {
+    return this.request<ImageDetailResponse>(`/images/${id}`);
   }
 
-  public static async uploadImage(formData: FormData): Promise<ScientificImage> {
-    return this.request<ScientificImage>("/images/upload", {
+  public static getImageUrl(id: number): string {
+    return `${API_BASE}/images/${id}/file`;
+  }
+
+  public static getImageThumbnailUrl(id: number): string {
+    return `${API_BASE}/images/${id}/thumbnail`;
+  }
+
+  public static async uploadImage(formData: FormData): Promise<any> {
+    return this.request<any>("/images/upload", {
       method: "POST",
       body: formData,
     });
   }
 
-  // Search
+  // Vector Search
   public static async searchByVector(queryImageId: number, topK: number = 10, modality?: string): Promise<SearchResult[]> {
     return this.request<SearchResult[]>("/search/vector", {
       method: "POST",
@@ -108,16 +271,20 @@ export class ApiClient {
     });
   }
 
-  // Curation & Reviews
-  public static async getReviewQueue(status: string = "PENDING"): Promise<ReviewItem[]> {
-    return this.request<ReviewItem[]>(`/curation/reviews?status=${status}`);
+  // Curation & Workbench
+  public static async getReviewQueue(limit: number = 50): Promise<ReviewQueueItem[]> {
+    return this.request<ReviewQueueItem[]>(`/curation/review-queue?limit=${limit}`);
   }
 
-  public static async reviewAction(reviewId: number, action: "APPROVE" | "REJECT" | "QUARANTINE", notes: string): Promise<ReviewItem> {
-    return this.request<ReviewItem>(`/curation/reviews/${reviewId}/action`, {
+  public static async submitReview(submission: ReviewSubmission): Promise<any> {
+    return this.request<any>("/curation/reviews", {
       method: "POST",
-      body: JSON.stringify({ action, notes }),
+      body: JSON.stringify(submission),
     });
+  }
+
+  public static async getCompletedReviews(limit: number = 50): Promise<any[]> {
+    return this.request<any[]>(`/curation/reviews?limit=${limit}`);
   }
 
   // Models
@@ -125,8 +292,12 @@ export class ApiClient {
     return this.request<ModelVersion[]>("/models");
   }
 
-  // Provenance
+  // Provenance & Audit
   public static async getProvenance(imageId: number): Promise<any[]> {
     return this.request<any[]>(`/provenance/image/${imageId}`);
+  }
+
+  public static async getAuditLogs(limit: number = 50): Promise<any[]> {
+    return this.request<any[]>(`/admin/audit-logs?limit=${limit}`);
   }
 }

@@ -1,57 +1,104 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Layers,
+  Search,
+  CheckSquare,
+  UploadCloud,
+  Cpu,
+  Activity,
+  FileText
+} from "lucide-react";
 
 export const Sidebar: React.FC = () => {
   const location = useLocation();
 
   const navItems = [
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Projects", path: "/projects" },
-    { label: "Upload Images", path: "/upload" },
-    { label: "Search & Retrieval", path: "/search" },
-    { label: "Curation & Deduplication", path: "/curation" },
-    { label: "Review Queue", path: "/reviews" },
-    { label: "Model Registry", path: "/models" },
-    { label: "System Health & Audit", path: "/settings" },
+    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+    { label: "Dataset Explorer", path: "/explorer", icon: Layers, aliases: ["/projects"] },
+    { label: "Vector Search", path: "/search", icon: Search },
+    { label: "Curator Workbench", path: "/reviews", icon: CheckSquare, aliases: ["/curation"] },
+    { label: "Ingest Micrographs", path: "/upload", icon: UploadCloud },
+    { label: "Model Registry", path: "/models", icon: Cpu },
+    { label: "System Health & Audit", path: "/health", icon: Activity, aliases: ["/settings"] },
   ];
 
   return (
     <aside style={{
-      width: "240px",
-      backgroundColor: "#1e293b",
-      color: "#f8fafc",
+      width: "var(--sidebar-width)",
+      backgroundColor: "var(--bg-surface)",
+      borderRight: "1px solid var(--border-default)",
       display: "flex",
       flexDirection: "column",
-      padding: "20px 0",
-      borderRight: "1px solid #334155",
-      minHeight: "calc(100vh - 60px)"
+      padding: "24px 0",
+      minHeight: "calc(100vh - var(--header-height))"
     }}>
-      <div style={{ padding: "0 20px 16px 20px", fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", color: "#64748b" }}>
-        Navigation
+      <div style={{
+        padding: "0 20px 12px 20px",
+        fontSize: "11px",
+        fontWeight: 700,
+        textTransform: "uppercase",
+        letterSpacing: "0.8px",
+        color: "var(--text-muted)"
+      }}>
+        Scientific Platform
       </div>
-      <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+
+      <nav style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
         {navItems.map((item) => {
-          const isActive = location.pathname === item.path || (item.path !== "/dashboard" && location.pathname.startsWith(item.path));
+          const isCurrent =
+            location.pathname === item.path ||
+            (item.aliases && item.aliases.some((a) => location.pathname.startsWith(a))) ||
+            (item.path !== "/dashboard" && location.pathname.startsWith(item.path));
+
+          const Icon = item.icon;
+
           return (
             <Link
               key={item.path}
               to={item.path}
               style={{
-                display: "block",
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
                 padding: "10px 20px",
-                color: isActive ? "#ffffff" : "#94a3b8",
-                backgroundColor: isActive ? "#334155" : "transparent",
-                textDecoration: "none",
-                fontSize: "14px",
-                fontWeight: isActive ? "600" : "400",
-                borderLeft: isActive ? "3px solid #38bdf8" : "3px solid transparent"
+                color: isCurrent ? "var(--text-primary)" : "var(--text-secondary)",
+                backgroundColor: isCurrent ? "var(--bg-surface-elevated)" : "transparent",
+                borderLeft: isCurrent ? "3px solid var(--accent-primary)" : "3px solid transparent",
+                fontSize: "13px",
+                fontWeight: isCurrent ? 600 : 500,
+                transition: "all var(--transition-fast)"
               }}
             >
-              {item.label}
+              <Icon size={18} color={isCurrent ? "var(--accent-primary)" : "var(--text-muted)"} />
+              <span>{item.label}</span>
             </Link>
           );
         })}
       </nav>
+
+      <div style={{
+        marginTop: "auto",
+        padding: "16px 20px",
+        borderTop: "1px solid var(--border-subtle)",
+        display: "flex",
+        flexDirection: "column",
+        gap: "6px"
+      }}>
+        <div style={{ fontSize: "11px", color: "var(--text-muted)", display: "flex", justifyContent: "space-between" }}>
+          <span>Protocol:</span>
+          <span className="font-mono" style={{ color: "var(--accent-cyan)" }}>HCCI + Carinthia</span>
+        </div>
+        <div style={{ fontSize: "11px", color: "var(--text-muted)", display: "flex", justifyContent: "space-between" }}>
+          <span>Architecture:</span>
+          <span className="font-mono">DINOv2 ViT-S/14</span>
+        </div>
+        <div style={{ fontSize: "11px", color: "var(--text-muted)", display: "flex", justifyContent: "space-between" }}>
+          <span>State:</span>
+          <span style={{ color: "var(--status-nominal)", fontWeight: 600 }}>Frozen v1.0.0</span>
+        </div>
+      </div>
     </aside>
   );
 };

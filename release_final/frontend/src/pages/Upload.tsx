@@ -1,33 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { Project, ScientificImage } from "../types";
-import { ApiClient } from "../api/client";
 import { useNavigate } from "react-router-dom";
+import {
+  UploadCloud,
+  FileCheck,
+  AlertTriangle,
+  Microscope,
+  Cpu,
+  Layers,
+  CheckCircle2,
+  ShieldCheck
+} from "lucide-react";
+import { Project } from "../types";
+import { ApiClient } from "../api/client";
 
 export const Upload: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<number | "">("");
   const [file, setFile] = useState<File | null>(null);
-  const [modality, setModality] = useState("SEM");
-  const [instrument, setInstrument] = useState("Helios NanoLab");
-  const [specimenId, setSpecimenId] = useState("");
-  const [roiId, setRoiId] = useState("");
-  const [acquisitionId, setAcquisitionId] = useState("");
+
+  // Scientific Metadata Fields matching backend API
+  const [microscope, setMicroscope] = useState("Scanning Electron Microscope");
+  const [detector, setDetector] = useState("SE");
+  const [acceleratingVoltage, setAcceleratingVoltage] = useState("15.0");
+  const [magnification, setMagnification] = useState("5000");
+  const [pixelSizeNm, setPixelSizeNm] = useState("10.5");
 
   const [uploading, setUploading] = useState(false);
-  const [result, setResult] = useState<ScientificImage | null>(null);
+  const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    ApiClient.getProjects().then((data) => {
-      setProjects(data);
-      if (data.length > 0) setSelectedProject(data[0].id);
-    });
+    ApiClient.getProjects()
+      .then((data) => {
+        setProjects(data);
+        if (data.length > 0) setSelectedProject(data[0].id);
+      })
+      .catch((e) => console.error(e));
   }, []);
 
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file || !selectedProject) return;
+    if (!file) {
+      setError("Please select a valid micrograph image file.");
+      return;
+    }
 
     setUploading(true);
     setError(null);
@@ -35,134 +52,141 @@ export const Upload: React.FC = () => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("project_id", selectedProject.toString());
-    formData.append("modality", modality);
-    formData.append("instrument", instrument);
-    if (specimenId) formData.append("specimen_id", specimenId);
-    if (roiId) formData.append("roi_id", roiId);
-    if (acquisitionId) formData.append("acquisition_id", acquisitionId);
+    if (selectedProject) formData.append("project_id", selectedProject.toString());
+    if (microscope) formData.append("microscope", microscope);
+    if (detector) formData.append("detector", detector);
+    if (acceleratingVoltage) formData.append("accelerating_voltage_kv", acceleratingVoltage);
+    if (magnification) formData.append("magnification", magnification);
+    if (pixelSizeNm) formData.append("pixel_size_nm", pixelSizeNm);
 
     try {
-      const img = await ApiClient.uploadImage(formData);
-      setResult(img);
+      const res = await ApiClient.uploadImage(formData);
+      setResult(res);
     } catch (err: any) {
-      setError(err.message || "Ingestion pipeline failure");
+      setError(err.message || "Micrograph ingestion pipeline failure.");
     } finally {
       setUploading(false);
     }
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "800px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "860px" }}>
+      {/* Header */}
       <div>
-        <h1 style={{ fontSize: "24px", fontWeight: "700", color: "#0f172a" }}>Scientific Image Ingestion</h1>
-        <p style={{ fontSize: "14px", color: "#64748b" }}>
-          Executes the 14-step idempotent pipeline: validation, cryptographic hashing, immutable storage,
-          6-indicator quality profiling, 6-stage duplicate cascade, 384-D DINOv2 embedding, Phase 4 projection,
-          FAISS indexing, and relative novelty calculation.
+        <h1 style={{ fontSize: "22px", fontWeight: "700", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "10px" }}>
+          <UploadCloud size={22} color="var(--accent-primary)" />
+          <span>Scientific Micrograph Ingestion Pipeline</span>
+        </h1>
+        <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+          Executes the 14-step automated ingestion pipeline: validation, cryptographic SHA-256 fingerprinting,
+          6-indicator quality risk profiling, 6-stage redundancy cascade, DINOv2 ViT-S/14 384-D embedding, and exact FAISS indexing.
         </p>
       </div>
 
-      <div style={{
-        backgroundColor: "#ffffff",
-        padding: "24px",
-        borderRadius: "8px",
-        border: "1px solid #e2e8f0"
-      }}>
-        <form onSubmit={handleUpload} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div style={{ display: "flex", gap: "16px" }}>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-                Target Project
+      <div className="card">
+        <form onSubmit={handleUpload} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          {/* File Picker Zone */}
+          <div>
+            <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "8px" }}>
+              Micrograph File * (.png, .tif, .tiff, .jpg)
+            </label>
+            <div style={{
+              border: "2px dashed var(--border-default)",
+              borderRadius: "var(--radius-md)",
+              padding: "24px",
+              textAlign: "center",
+              backgroundColor: "var(--bg-canvas)",
+              transition: "border-color var(--transition-fast)"
+            }}>
+              <input
+                type="file"
+                id="file-input"
+                accept=".png,.tif,.tiff,.jpg,.jpeg"
+                onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+                style={{ display: "none" }}
+              />
+              <label htmlFor="file-input" style={{ cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+                <UploadCloud size={32} color="var(--accent-primary)" />
+                <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
+                  {file ? file.name : "Click to select micrograph image file"}
+                </div>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>
+                  {file ? `${(file.size / (1024 * 1024)).toFixed(2)} MB &bull; ${file.type || "image"}` : "Supported formats: TIFF, PNG, JPEG (up to 50 MB)"}
+                </div>
+              </label>
+            </div>
+          </div>
+
+          {/* Project & Acquisition Parameters */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+            <div>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                Target Project / Dataset
               </label>
               <select
                 value={selectedProject}
-                onChange={(e) => setSelectedProject(Number(e.target.value))}
-                required
-                style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "14px" }}
+                onChange={(e) => setSelectedProject(e.target.value ? Number(e.target.value) : "")}
+                className="input-field"
               >
+                <option value="">No Project Assigned</option>
                 {projects.map((p) => (
                   <option key={p.id} value={p.id}>{p.name} (#{p.id})</option>
                 ))}
               </select>
             </div>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-                Scientific Image File (.png, .tif, .tiff)
+
+            <div>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                Microscope Instrument Model
               </label>
               <input
-                type="file"
-                accept=".png,.tif,.tiff,.jpg,.jpeg"
-                onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
-                required
-                style={{ width: "100%", padding: "6px", fontSize: "13px" }}
+                type="text"
+                value={microscope}
+                onChange={(e) => setMicroscope(e.target.value)}
+                placeholder="e.g. FEI Helios NanoLab 600"
+                className="input-field"
               />
             </div>
           </div>
 
-          <div style={{ display: "flex", gap: "16px" }}>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-                Imaging Modality
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px" }}>
+            <div>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                Detector
               </label>
               <input
                 type="text"
-                value={modality}
-                onChange={(e) => setModality(e.target.value)}
-                placeholder="SEM, TEM, Confocal, Optical"
-                required
-                style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "14px" }}
+                value={detector}
+                onChange={(e) => setDetector(e.target.value)}
+                placeholder="e.g. SE, BSE, TLD"
+                className="input-field"
               />
             </div>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-                Instrument Model
-              </label>
-              <input
-                type="text"
-                value={instrument}
-                onChange={(e) => setInstrument(e.target.value)}
-                placeholder="Helios NanoLab, VEGA3 XMH, Zeiss Gemini"
-                style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "14px" }}
-              />
-            </div>
-          </div>
 
-          <div style={{ display: "flex", gap: "16px" }}>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-                Specimen ID
+            <div>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                Accelerating Voltage (kV)
               </label>
               <input
-                type="text"
-                value={specimenId}
-                onChange={(e) => setSpecimenId(e.target.value)}
-                placeholder="e.g. SPEC-441-A"
-                style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "14px" }}
+                type="number"
+                step="0.1"
+                value={acceleratingVoltage}
+                onChange={(e) => setAcceleratingVoltage(e.target.value)}
+                placeholder="e.g. 15.0"
+                className="input-field"
               />
             </div>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-                Region of Interest (ROI) ID
+
+            <div>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                Magnification (x)
               </label>
               <input
-                type="text"
-                value={roiId}
-                onChange={(e) => setRoiId(e.target.value)}
-                placeholder="e.g. ROI-02"
-                style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "14px" }}
-              />
-            </div>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: "block", fontSize: "13px", fontWeight: "500", color: "#334155", marginBottom: "6px" }}>
-                Acquisition Run ID
-              </label>
-              <input
-                type="text"
-                value={acquisitionId}
-                onChange={(e) => setAcquisitionId(e.target.value)}
-                placeholder="e.g. RUN-2026-09"
-                style={{ width: "100%", padding: "8px 12px", border: "1px solid #cbd5e1", borderRadius: "4px", fontSize: "14px" }}
+                type="number"
+                value={magnification}
+                onChange={(e) => setMagnification(e.target.value)}
+                placeholder="e.g. 5000"
+                className="input-field"
               />
             </div>
           </div>
@@ -170,70 +194,60 @@ export const Upload: React.FC = () => {
           <button
             type="submit"
             disabled={uploading || !file}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#2563eb",
-              color: "#ffffff",
-              border: "none",
-              borderRadius: "4px",
-              fontSize: "14px",
-              fontWeight: "600",
-              cursor: uploading || !file ? "not-allowed" : "pointer",
-              alignSelf: "flex-start",
-              marginTop: "8px"
-            }}
+            className="btn btn-primary"
+            style={{ height: "42px", alignSelf: "flex-start" }}
           >
-            {uploading ? "Executing 14-Step Ingestion Pipeline..." : "Ingest & Index Micrograph"}
+            {uploading ? (
+              <>
+                <Cpu size={16} className="animate-spin" />
+                <span>Executing Ingestion Pipeline...</span>
+              </>
+            ) : (
+              <>
+                <UploadCloud size={16} />
+                <span>Ingest & Index Micrograph</span>
+              </>
+            )}
           </button>
         </form>
 
         {error && (
-          <div style={{
-            marginTop: "20px",
-            padding: "12px 16px",
-            backgroundColor: "#fef2f2",
-            border: "1px solid #f87171",
-            color: "#991b1b",
-            borderRadius: "4px",
-            fontSize: "14px"
-          }}>
-            <strong>Ingestion Error:</strong> {error}
+          <div className="card" style={{ marginTop: "20px", borderLeft: "4px solid var(--status-risk)", color: "var(--status-risk)" }}>
+            <div style={{ fontWeight: 600, marginBottom: "4px" }}>Ingestion Error</div>
+            <div style={{ fontSize: "13px" }}>{error}</div>
           </div>
         )}
 
         {result && (
-          <div style={{
-            marginTop: "20px",
-            padding: "16px 20px",
-            backgroundColor: "#f0fdf4",
-            border: "1px solid #86efac",
-            borderRadius: "6px"
-          }}>
-            <h3 style={{ fontSize: "16px", color: "#166534", fontWeight: "700", marginBottom: "8px" }}>
-              Ingestion Succeeded (Image #{result.id})
-            </h3>
-            <div style={{ fontSize: "13px", color: "#14532d", display: "flex", flexDirection: "column", gap: "4px" }}>
-              <div><strong>SHA-256:</strong> <code>{result.sha256}</code></div>
-              <div><strong>Resolution:</strong> {result.width} × {result.height} ({result.channels} ch, {result.bit_depth})</div>
-              <div><strong>Quality Status:</strong> {result.quality?.quality_label} (Composite Risk: {result.quality?.composite_quality_risk.toFixed(4)})</div>
-              <div><strong>Redundancy Status:</strong> {result.duplicate?.duplicate_status} (Action: {result.duplicate?.action})</div>
-              <div><strong>Relative Novelty:</strong> {result.novelty?.novelty_score.toFixed(4)} (Percentile: {result.novelty?.novelty_percentile.toFixed(1)}%)</div>
+          <div className="card" style={{ marginTop: "20px", borderLeft: "4px solid var(--status-nominal)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--status-nominal)", fontWeight: 700 }}>
+                <CheckCircle2 size={18} />
+                <span>Ingestion Succeeded (Micrograph #{result.id})</span>
+              </div>
+              <span className="badge badge-nominal">{result.processing_status}</span>
             </div>
-            <button
-              onClick={() => navigate(`/images/${result.id}`)}
-              style={{
-                marginTop: "12px",
-                padding: "6px 12px",
-                backgroundColor: "#16a34a",
-                color: "#ffffff",
-                border: "none",
-                borderRadius: "4px",
-                fontSize: "13px",
-                cursor: "pointer"
-              }}
-            >
-              View Full Image Profile & Provenance
-            </button>
+
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)", display: "flex", flexDirection: "column", gap: "6px" }}>
+              <div><strong>Original File:</strong> {result.original_filename}</div>
+              <div className="font-mono"><strong>SHA-256:</strong> {result.sha256}</div>
+              <div>{result.message}</div>
+            </div>
+
+            <div style={{ marginTop: "14px", display: "flex", gap: "10px" }}>
+              <button
+                onClick={() => navigate(`/images/${result.id}`)}
+                className="btn btn-primary btn-sm"
+              >
+                Inspect Micrograph & Provenance
+              </button>
+              <button
+                onClick={() => navigate(`/search?query_id=${result.id}`)}
+                className="btn btn-secondary btn-sm"
+              >
+                Execute Vector Retrieval
+              </button>
+            </div>
           </div>
         )}
       </div>
