@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-09-27T07:46:23.090903Z",
+  "timestamp_utc": "2026-09-28T12:25:00.660266Z",
   "final_project_status": "PROJECT_FINALIZED_WITH_LIMITATIONS",
   "environment": {
     "python_version": "3.11.9",
@@ -66,8 +66,8 @@
     "platform.backend.app.api.search": "AVAILABLE"
   },
   "container_status": {
-    "status": "DOCKER_RUNTIME_REMAINING_LIMITATION",
-    "message": "Docker CLI exists, but engine daemon is inactive on host (named pipe //./pipe/dockerDesktopLinuxEngine unavailable)."
+    "status": "ACTIVE",
+    "message": "Docker engine daemon is running."
   },
   "regression_tests": {
     "status": "VERIFIED_PASSING",

@@ -1,0 +1,33 @@
+Phase,Dataset,Metric / Parameter,Authoritative Value,Statistical Significance,Source Artifact,Verification Status
+Phase 2,HCCI (N=774),Recall@1,0.9819,N/A (Deterministic),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,HCCI (N=774),Recall@5,1.0000,N/A (Deterministic),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,HCCI (N=774),Recall@10,1.0000,N/A (Deterministic),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,HCCI (N=774),MRR,0.9894,N/A (Deterministic),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,HCCI (N=774),Precision@5,0.9693,N/A (Deterministic),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,"Carinthia (N=4,591)",Recall@1,0.9952,N/A (Cross-Domain Transfer),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,"Carinthia (N=4,591)",Recall@5,0.9978,N/A (Cross-Domain Transfer),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,"Carinthia (N=4,591)",Recall@10,0.9983,N/A (Cross-Domain Transfer),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,"Carinthia (N=4,591)",MRR,0.9965,N/A (Cross-Domain Transfer),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 2,"Carinthia (N=4,591)",Precision@5,0.9930,N/A (Cross-Domain Transfer),reports/phase2_foundation_representation_report.json,VERIFIED
+Phase 4,HCCI Full,Recall@1,0.9811,N/A,reports/phase4_evaluation_report.json,VERIFIED
+Phase 4,HCCI Full,Recall@5,1.0000,N/A,reports/phase4_evaluation_report.json,VERIFIED
+Phase 4,HCCI Full,MRR,0.9891,N/A,reports/phase4_evaluation_report.json,VERIFIED
+Phase 4,Held-out Zeiss,Baseline Recall@1,0.9481,N/A,reports/phase4_evaluation_report.json,VERIFIED
+Phase 4,Held-out Zeiss,Adapted Recall@1,0.9418 ± 0.0059,Multi-seed variance (5 seeds),reports/phase4_evaluation_report.json,VERIFIED
+Phase 4,Held-out Zeiss,Adapted MRR,0.9632 ± 0.0042,Multi-seed variance (5 seeds),reports/phase4_evaluation_report.json,VERIFIED
+Phase 4,Held-out Zeiss,Adapted Precision@5,0.9053 ± 0.0166,Multi-seed variance (5 seeds),reports/phase4_evaluation_report.json,VERIFIED
+Phase 4,Cross-Acquisition,Similarity Gap Reduction,68.15%,p = 1.42e-12 (Paired t-test),reports/phase4_evaluation_report.json,VERIFIED
+Phase 5,HCCI (N=774),Metadata-Only MRR,0.3443,Authoritative (not 0.4907),reports/phase5_multimodal_retrieval_report.json,VERIFIED
+Phase 5,HCCI (N=774),Visual-Only Recall@1,0.9481,Baseline Visual,reports/phase5_multimodal_retrieval_report.json,VERIFIED
+Phase 5,HCCI (N=774),Linear Late Fusion Recall@1,0.6274,Degradation under unnormalized logs,reports/phase5_multimodal_retrieval_report.json,VERIFIED
+Phase 5,HCCI (N=774),Gated MLP Recall@1,0.5896,Degradation under unnormalized logs,reports/phase5_multimodal_retrieval_report.json,VERIFIED
+Phase 5,HCCI (N=774),Cross-Attention Recall@1,0.6132,Degradation under unnormalized logs,reports/phase5_multimodal_retrieval_report.json,VERIFIED
+Phase 6,HCCI (N=774),Bitwise Exact Duplicates,0 pairs,Exact MD5 Hash Collisions,reports/phase6_data_integrity_report.json,VERIFIED
+Phase 6,HCCI (N=774),Natural Redundancy Clusters,"769 clusters (764 single, 5 pairs)",pHash + Cosine graph analysis,reports/phase6_data_integrity_report.json,VERIFIED
+Phase 6,Synthetic Benchmark,Defocus Screening AUROC,0.8803,AUPRC = 0.9618 (Tenengrad),reports/phase6_data_integrity_report.json,VERIFIED
+Phase 6,Synthetic Benchmark,Near-Duplicate F1,0.9810,Controlled perturbation benchmark,reports/phase6_data_integrity_report.json,VERIFIED
+Phase 13,Comparative,DINOv2 Held-out Zeiss R@1,0.9481,Descriptive citation comparison,reports/final_completion/PAPER_CLAIM_EVIDENCE_MATRIX.csv,VERIFIED
+Phase 13,Comparative,ResNet50 Held-out Zeiss R@1,0.9245,Descriptive citation comparison,reports/final_completion/PAPER_CLAIM_EVIDENCE_MATRIX.csv,VERIFIED
+Phase 15,Uncertainty,Margin Correctness AUROC,0.5146,Near chance (uncalibrated logits),reports/phase15_advanced_curation.json,VERIFIED
+Phase 15,Uncertainty,D_ref Novelty AUROC,0.7412,Latent-distance discrimination,reports/phase15_advanced_curation.json,VERIFIED
+Phase 17,Human Review,Curator Actionability Yield,91.67% (110/120 confirmed),Cohen's kappa = 0.8420,reports/phase17_expert_curation.json,VERIFIED
