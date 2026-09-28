@@ -64,13 +64,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -e .
-          pip install pytest httpx
+          pip install pytest httpx pytest-github-actions-annotate-failures
 
       - name: Run Test Suite
         env:
           PYTHONPATH: .:platform/backend
         run: |
-          python -m pytest tests/ platform/tests/ -q -ra
+          python -m pytest tests/ platform/tests/ -ra -v --tb=short
 
   frontend-build:
     name: Frontend React Production Build
