@@ -1,7 +1,0 @@
-### Table 8: Latent Distance Novelty Screening (D_ref)
-
-| Sample Group | Sample Size (N) | Mean D_ref | Std Dev | Separation vs In-Domain | Classification AUROC |
-| --- | --- | --- | --- | --- | --- |
-| In-Domain HCCI (Reference) | 774 | 0.2410 | 0.038 | 1.00x (Baseline) | N/A |
-| External Defect SEM | 1,000 | 0.5120 | 0.074 | 2.12x Separation | AUROC = 0.8910 |
-| Operating Point (95% TPR) | 1,774 Total | Threshold = 0.382 | N/A | FPR = 24.50% | Uncalibrated Geometric Signal |

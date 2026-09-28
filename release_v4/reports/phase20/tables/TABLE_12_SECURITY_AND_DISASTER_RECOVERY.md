@@ -1,9 +1,0 @@
-### Table 12: Security Validation, RBAC Enforcement, and Disaster Recovery Audit
-
-| Security / Operations Domain | Evaluation Target | Test Description | Observed Outcome | Pass / Fail Status |
-| --- | --- | --- | --- | --- |
-| Role-Based Access Control | 5 Roles (Reader to Admin) | Unauthorized Endpoint Access | 403 Forbidden Returned | PASSED (5/5 Tests) |
-| JWT Security & Tampering | Token Signature & Expiry | Forged Payload & Expiration | 401 Unauthorized Returned | PASSED |
-| Credential Hygiene | Repository Source Tree | Entropy & Secret Scanning | 0 Committed Secrets Found | PASSED |
-| Cold Database Restore | SQLite Platform Snapshot | Bitwise Restoration from Backup | Restore Time = 0.0077 s | PASSED (RTO Compliant) |
-| Container Security | Non-Root Execution Spec | Static Dockerfile Non-Root User | UID 1000 Enforced | PASSED (Offline Validated) |

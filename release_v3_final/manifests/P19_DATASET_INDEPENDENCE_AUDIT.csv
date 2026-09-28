@@ -1,5 +1,0 @@
-dataset,source,DOI/repository,license,N_total,N_used,used_in_phase1_17,used_for_training,used_for_validation,used_for_testing,used_for_threshold_selection,used_for_model_selection,exact_image_overlap,checksum_overlap,independence_status
-Carinthia Defect SEM,Carinthia Semiconductor / Material Archive,Academic Benchmark,Academic Research,4591,4591,YES,NO,YES,YES,NO,NO,4591 images overlap Phase 2 and Phase 14,100%,PREVIOUSLY_EVALUATED
-SEM Images for Nanoscience,Nature Scientific Data / Figshare,10.1038/sdata.2018.172,CC BY 4.0,21169,21169,NO,NO,NO,YES,NO,NO,0 images overlap with HCCI/Carinthia,0%,INDEPENDENT_EXTERNAL
-Bio-Image TEM,Open Scientific Archive,Phase 14 Modality Shift Archive,Open Scientific Archive,1200,1200,YES,NO,YES,YES,NO,NO,1200 images overlap Phase 14 evaluation,100%,PREVIOUSLY_EVALUATED
-Physical EDS Spectra,Instrument Spectrometer,None,Not Applicable,0,0,NO,NO,NO,NO,NO,NO,0,0%,NOT_EXECUTED

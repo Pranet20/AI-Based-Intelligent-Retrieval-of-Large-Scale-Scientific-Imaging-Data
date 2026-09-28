@@ -1,7 +1,0 @@
-Dataset Name,Specimen Modality,Sample Count (N),Classes / Phases,Accelerating Voltage,Access & Rights Status
-HCCI Mineralogy,FE-SEM (SE / BSE),774,6 Mineral Phases,5 kV - 20 kV,Restricted (Manifests + Embeddings)
-Carinthia Defect,SEM (Defect Analysis),"4,591",6 Defect Classes,Variable,Restricted (Manifests + Embeddings)
-SEM Nanoscience,SEM (Nanomaterials),"21,169",Heterogeneous,Variable,Open Access (CC BY 4.0)
-Biological TEM,Transmission Electron,"1,200",Cellular Ultrastructure,80 kV - 120 kV,External Reference
-Synthetic EDS,Simulated X-ray Energy,"1,000",Synthetic Minerals,N/A,Open Access (In-Repo MIT)
-Perturbation Suite,Corrupted SEM,120,Synthetic Corruptions,5 kV - 20 kV,In-Repo Evaluation Subset
