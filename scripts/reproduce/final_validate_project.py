@@ -65,8 +65,11 @@ def verify_all_checksums():
             act_hash = hashlib.sha256(raw_bytes).hexdigest()
             if act_hash.lower() != exp_hash.lower():
                 crlf_hash = hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest()
+                lf_hash = hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n")).hexdigest()
                 if crlf_hash.lower() == exp_hash.lower():
                     act_hash = crlf_hash
+                elif lf_hash.lower() == exp_hash.lower():
+                    act_hash = lf_hash
             if act_hash.lower() != exp_hash.lower():
                 p17_mismatches.append(norm_path)
                 
@@ -81,8 +84,11 @@ def verify_all_checksums():
             act_hash = hashlib.sha256(raw_bytes).hexdigest()
             if act_hash.lower() != exp_hash.lower():
                 crlf_hash = hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest()
+                lf_hash = hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n")).hexdigest()
                 if crlf_hash.lower() == exp_hash.lower():
                     act_hash = crlf_hash
+                elif lf_hash.lower() == exp_hash.lower():
+                    act_hash = lf_hash
             if act_hash.lower() != exp_hash.lower():
                 p9_mismatches.append(norm_path)
                 

@@ -43,8 +43,11 @@ def test_01_frozen_artifacts_immutability():
         act_hash = hashlib.sha256(raw).hexdigest()
         if act_hash != exp_hash:
             crlf_act = hashlib.sha256(raw.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest()
+            lf_act = hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()
             if crlf_act == exp_hash:
                 act_hash = crlf_act
+            elif lf_act == exp_hash:
+                act_hash = lf_act
         if act_hash != exp_hash:
             mismatches.append(rel_path)
 

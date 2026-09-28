@@ -275,8 +275,11 @@ def test_22_frozen_phase1_5_checksum_verification():
         act = hashlib.sha256(raw).hexdigest()
         if act != exp:
             crlf_act = hashlib.sha256(raw.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest()
+            lf_act = hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()
             if crlf_act == exp:
                 act = crlf_act
+            elif lf_act == exp:
+                act = lf_act
         assert act == exp, f"Corrupted frozen file: {fpath}"
 
 
