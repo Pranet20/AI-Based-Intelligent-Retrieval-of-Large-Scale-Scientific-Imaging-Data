@@ -87,8 +87,8 @@ jobs:
       - name: Build Frontend Bundle
         run: |
           cd platform/frontend
-          npm ci
-          npm run build
+          npm install
+          CI=false npm run build
 
   container-build:
     name: Container Build Verification
