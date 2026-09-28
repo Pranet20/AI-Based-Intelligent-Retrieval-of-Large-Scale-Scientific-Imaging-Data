@@ -82,6 +82,8 @@ data/downloads/
 *.onnx
 *.safetensors
 !data/processed/phase4/checkpoints/best_checkpoint_seed42.pt
+!data/processed/phase4/checkpoints/best_checkpoint_seed123.pt
+!data/processed/phase4/checkpoints/best_checkpoint_seed2024.pt
 
 # =========================================================
 # FAISS / GENERATED INDEXES
