@@ -1,0 +1,11 @@
+# Ensure deterministic CRLF line endings across platforms for frozen research artifacts
+* text eol=crlf
+*.parquet binary
+*.pt binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tif binary
+*.tiff binary
+*.faiss binary
+*.db binary

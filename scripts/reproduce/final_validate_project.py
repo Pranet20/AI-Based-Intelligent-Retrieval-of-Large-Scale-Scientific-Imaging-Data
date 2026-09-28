@@ -56,25 +56,35 @@ def verify_all_checksums():
         
     p17_mismatches, p17_missing = [], []
     for rel_path, exp_hash in p17_data.items():
-        p = Path(rel_path)
+        norm_path = rel_path.replace("\\", "/")
+        p = Path(norm_path)
         if not p.exists():
-            p17_missing.append(rel_path)
+            p17_missing.append(norm_path)
         else:
-            with open(p, "rb") as fp:
-                act_hash = hashlib.sha256(fp.read()).hexdigest()
+            raw_bytes = p.read_bytes()
+            act_hash = hashlib.sha256(raw_bytes).hexdigest()
             if act_hash.lower() != exp_hash.lower():
-                p17_mismatches.append(rel_path)
+                crlf_hash = hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest()
+                if crlf_hash.lower() == exp_hash.lower():
+                    act_hash = crlf_hash
+            if act_hash.lower() != exp_hash.lower():
+                p17_mismatches.append(norm_path)
                 
     p9_mismatches, p9_missing = [], []
     for rel_path, exp_hash in p9_data.items():
-        p = Path(rel_path)
+        norm_path = rel_path.replace("\\", "/")
+        p = Path(norm_path)
         if not p.exists():
-            p9_missing.append(rel_path)
+            p9_missing.append(norm_path)
         else:
-            with open(p, "rb") as fp:
-                act_hash = hashlib.sha256(fp.read()).hexdigest()
+            raw_bytes = p.read_bytes()
+            act_hash = hashlib.sha256(raw_bytes).hexdigest()
             if act_hash.lower() != exp_hash.lower():
-                p9_mismatches.append(rel_path)
+                crlf_hash = hashlib.sha256(raw_bytes.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest()
+                if crlf_hash.lower() == exp_hash.lower():
+                    act_hash = crlf_hash
+            if act_hash.lower() != exp_hash.lower():
+                p9_mismatches.append(norm_path)
                 
     # Checkpoint SHA-256 verification
     ckpt_path = Path("data/processed/phase4/checkpoints/best_checkpoint_seed42.pt")

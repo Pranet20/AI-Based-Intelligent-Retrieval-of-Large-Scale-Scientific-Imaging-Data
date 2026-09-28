@@ -39,8 +39,12 @@ def test_01_frozen_artifacts_immutability():
     for rel_path, exp_hash in checksums.items():
         p = Path(rel_path.replace("\\", "/"))
         assert p.exists(), f"Frozen artifact missing: {rel_path}"
-        with open(p, "rb") as f:
-            act_hash = hashlib.sha256(f.read()).hexdigest()
+        raw = p.read_bytes()
+        act_hash = hashlib.sha256(raw).hexdigest()
+        if act_hash != exp_hash:
+            crlf_act = hashlib.sha256(raw.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest()
+            if crlf_act == exp_hash:
+                act_hash = crlf_act
         if act_hash != exp_hash:
             mismatches.append(rel_path)
 
