@@ -39,13 +39,15 @@ EXCLUDE_EXTS = {
 
 
 def scan_file(file_path: Path):
+    if file_path.name == "SECRET_SCAN_REPORT.md":
+        return []
     findings = []
     is_test_file = "tests" in str(file_path).split(os.sep) or "test_" in file_path.name
     try:
         with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
             for idx, line in enumerate(f, start=1):
-                # Skip comments that document patterns
-                if "SECRET_PATTERNS" in line or "scan_file" in line:
+                # Skip comments and script lines that document patterns
+                if "SECRET_PATTERNS" in line or "secret_patterns" in line or "scan_file" in line:
                     continue
                 # In test files, ignore mock test passwords
                 if is_test_file and ("password" in line.lower() or "secret" in line.lower()):

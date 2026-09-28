@@ -65,8 +65,10 @@ jobs:
           pip install pytest httpx
 
       - name: Run Test Suite
+        env:
+          PYTHONPATH: .:platform/backend
         run: |
-          pytest tests/ platform/tests/ -q
+          python -m pytest tests/ platform/tests/ -q -ra
 
   frontend-build:
     name: Frontend React Production Build
@@ -83,8 +85,8 @@ jobs:
       - name: Build Frontend Bundle
         run: |
           cd platform/frontend
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
-          npm run build --if-present
+          npm ci
+          npm run build
 
   container-build:
     name: Container Build Verification

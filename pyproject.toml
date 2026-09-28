@@ -55,7 +55,8 @@ where = ["."]
 include = ["src*", "scripts*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "platform/tests"]
+pythonpath = [".", "platform/backend"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
 addopts = "-v --strict-markers"

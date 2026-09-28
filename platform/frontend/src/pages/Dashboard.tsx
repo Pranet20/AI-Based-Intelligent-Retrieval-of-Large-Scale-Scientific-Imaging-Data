@@ -124,7 +124,7 @@ export const Dashboard: React.FC = () => {
             <tr style={{ borderBottom: "1px solid #f1f5f9" }}>
               <td style={{ padding: "10px 0", fontWeight: "500" }}>Acquisition Adapter</td>
               <td style={{ padding: "10px 0", color: "#475569" }}>Phase 4 Linear Projection (Seed 42)</td>
-              <td style={{ padding: "10px 0", color: "#475569" }}>384 -> 384</td>
+              <td style={{ padding: "10px 0", color: "#475569" }}>384 → 384</td>
               <td style={{ padding: "10px 0", color: "#16a34a", fontWeight: "600" }}>SHA-256 Verified</td>
             </tr>
             <tr style={{ borderBottom: "1px solid #f1f5f9" }}>

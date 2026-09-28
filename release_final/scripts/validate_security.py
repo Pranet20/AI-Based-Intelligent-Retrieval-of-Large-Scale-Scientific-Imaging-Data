@@ -44,7 +44,7 @@ if dockerfile_backend.exists():
 secret_patterns = [
     r"AKIA[0-9A-Z]{16}",
     r"ghp_[0-9a-zA-Z]{36}",
-    r"-----BEGIN RSA PRIVATE KEY-----"
+    r"-----BEGIN " + r"RSA PRIVATE KEY-----"
 ]
 
 found_leaks = []

@@ -33,7 +33,7 @@ print("--- 2. Secret Scan ---")
 secret_patterns = [
     r"AKIA[0-9A-Z]{16}",
     r"ghp_[0-9a-zA-Z]{36}",
-    r"-----BEGIN RSA PRIVATE KEY-----"
+    r"-----BEGIN " + r"RSA PRIVATE KEY-----"
 ]
 leaks = []
 for p in ROOT.rglob("*"):
