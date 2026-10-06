@@ -1,0 +1,54 @@
+{
+  "manifest_version": "1.0.0",
+  "created_at": "2026-10-05T16:17:07Z",
+  "git_commit": "0091cbdf2115251a9ac843b9515663155f4b1364",
+  "license_audits": {
+    "hcci": {
+      "dataset_name": "High-Chromium Cast Iron SEM Dataset",
+      "declared_license": "CC-BY-4.0",
+      "classification": "LICENSE_VERIFIED",
+      "redistribution_permitted": true,
+      "commercial_use_permitted": true,
+      "attribution_required": true,
+      "citation": "10.5281/zenodo.21931379"
+    },
+    "carinthia": {
+      "dataset_name": "Carinthia Lithic SEM Dataset",
+      "declared_license": "CC-BY-SA-4.0",
+      "classification": "LICENSE_VERIFIED",
+      "redistribution_permitted": true,
+      "share_alike_required": true,
+      "attribution_required": true,
+      "citation": "10.5281/zenodo.10715190"
+    },
+    "bbbc021": {
+      "dataset_name": "Broad Bioimage Benchmark Collection 021",
+      "declared_license": "CC0-1.0 (Public Domain)",
+      "classification": "LICENSE_VERIFIED",
+      "redistribution_permitted": true,
+      "restrictions": "None (Public Domain Dedication)",
+      "citation": "Ljosa et al., Nature Methods 2012"
+    },
+    "sem_nanoscience": {
+      "dataset_name": "SEM Nanoscience Records Archive",
+      "declared_license": "CC-BY-4.0",
+      "classification": "LICENSE_VERIFIED",
+      "redistribution_permitted": true,
+      "citation": "10.1038/sdata.2018.172"
+    },
+    "cigrocksem": {
+      "dataset_name": "CIGRockSEM Geological Microstructure Archive",
+      "declared_license": "Academic / Non-Commercial",
+      "classification": "LICENSE_REVIEW_REQUIRED",
+      "redistribution_permitted": false,
+      "citation": "10.5281/zenodo.14988631"
+    },
+    "microal": {
+      "dataset_name": "MicroAl Aluminum Alloy Archive",
+      "declared_license": "Academic Restrictive",
+      "classification": "LICENSE_RESTRICTED",
+      "redistribution_permitted": false,
+      "citation": "Academic Institutional Deposition"
+    }
+  }
+}

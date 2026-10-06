@@ -72,6 +72,9 @@ desktop.ini
 data/raw/
 data/external/
 data/downloads/
+BBBC021_v1_images_Week10_40111/
+data/processed/phase4_synthetic/
+
 
 # =========================================================
 # MODEL / CHECKPOINT FILES
@@ -99,6 +102,12 @@ temp/
 cache/
 scratch/
 *.tmp
+platform/storage/originals/*
+!platform/storage/originals/.gitkeep
+platform/storage/thumbnails/*
+!platform/storage/thumbnails/.gitkeep
+platform/storage/backups/*
+!platform/storage/backups/.gitkeep
 
 # =========================================================
 # PYTHON PACKAGING

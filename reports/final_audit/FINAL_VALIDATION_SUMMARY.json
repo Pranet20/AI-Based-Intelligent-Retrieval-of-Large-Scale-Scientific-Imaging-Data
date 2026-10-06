@@ -1,9 +1,9 @@
 {
-  "timestamp_utc": "2026-09-28T15:59:09.994447Z",
+  "timestamp_utc": "2026-10-06T14:49:38.370997Z",
   "final_project_status": "PROJECT_FINALIZED_WITH_LIMITATIONS",
   "environment": {
     "python_version": "3.11.9",
-    "platform": "Windows-10-10.0.26200-SP0",
+    "platform": "Windows-10-10.0.26300-SP0",
     "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
     "valid_python": true,
     "packages": {
@@ -66,8 +66,8 @@
     "platform.backend.app.api.search": "AVAILABLE"
   },
   "container_status": {
-    "status": "ACTIVE",
-    "message": "Docker engine daemon is running."
+    "status": "DOCKER_RUNTIME_REMAINING_LIMITATION",
+    "message": "Docker CLI exists, but engine daemon is inactive on host (named pipe //./pipe/dockerDesktopLinuxEngine unavailable)."
   },
   "regression_tests": {
     "status": "VERIFIED_PASSING",

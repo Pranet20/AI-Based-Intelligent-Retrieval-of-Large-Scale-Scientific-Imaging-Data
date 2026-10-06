@@ -1,0 +1,4 @@
+condition,query_count,evidence_availability,same_specimen_availability,cross_acquisition_availability,cross_instrument_availability,metadata_completeness,mean_evidence_items,duplicate_rate,provenance_completeness
+Condition A: Query image alone,55,0.0%,0.0%,0.0%,0.0%,100.0%,0.0,NOT APPLICABLE,100.0%
+Condition B: Query image + same-specimen cross-acquisition evidence,55,100.0%,100.0%,100.0%,100.0%,100.0%,2.0,0.0%,100.0%
+Condition C: Query image + general clean reference evidence,55,100.0%,NOT MEASURED,100.0%,100.0%,100.0%,2.0,0.0%,100.0%

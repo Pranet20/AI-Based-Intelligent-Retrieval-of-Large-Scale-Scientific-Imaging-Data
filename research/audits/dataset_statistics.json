@@ -1,0 +1,74 @@
+{
+  "freeze_timestamp": "2026-10-05T16:17:07Z",
+  "git_commit": "0091cbdf2115251a9ac843b9515663155f4b1364",
+  "datasets": {
+    "hcci": {
+      "dataset_id": "hcci",
+      "total_images": 774,
+      "format": "PNG",
+      "bit_depth": 8,
+      "dimensions": "2860x1922",
+      "field_completeness_pct": {
+        "specimen_id": 100.0,
+        "acquisition_id": 100.0,
+        "instrument": 100.0,
+        "voltage": 100.0,
+        "magnification": 100.0,
+        "detector": 100.0,
+        "pixel_size": 100.0,
+        "working_distance": 100.0
+      },
+      "overall_completeness_pct": 100.0
+    },
+    "carinthia": {
+      "dataset_id": "carinthia",
+      "total_images": 4591,
+      "format": "JPEG",
+      "bit_depth": 8,
+      "dimensions": "480x480",
+      "field_completeness_pct": {
+        "specimen_id": 100.0,
+        "acquisition_id": 100.0,
+        "instrument": 100.0,
+        "voltage": 100.0,
+        "magnification": 100.0,
+        "detector": 100.0,
+        "pixel_size": 0.0,
+        "working_distance": 0.0
+      },
+      "overall_completeness_pct": 75.0
+    },
+    "bbbc021": {
+      "dataset_id": "bbbc021",
+      "total_images": 720,
+      "format": "TIFF",
+      "bit_depth": 16,
+      "dimensions": "1280x1024",
+      "field_completeness_pct": {
+        "specimen_id": 100.0,
+        "acquisition_id": 100.0,
+        "instrument": 100.0,
+        "voltage": 100.0,
+        "magnification": 100.0,
+        "detector": 100.0,
+        "pixel_size": 100.0,
+        "working_distance": 0.0
+      },
+      "overall_completeness_pct": 87.5
+    }
+  },
+  "aggregate": {
+    "total_datasets": 3,
+    "total_images": 6085,
+    "formats_breakdown": {
+      "PNG": 774,
+      "JPEG": 4591,
+      "TIFF": 720
+    },
+    "bit_depth_breakdown": {
+      "8_bit": 5365,
+      "16_bit": 720
+    },
+    "average_metadata_completeness_pct": 87.5
+  }
+}

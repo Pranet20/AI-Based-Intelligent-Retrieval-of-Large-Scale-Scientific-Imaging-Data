@@ -1,0 +1,78 @@
+{
+  "manifest_version": "1.0.0",
+  "created_at": "2026-10-05T16:17:07Z",
+  "git_commit": "0091cbdf2115251a9ac843b9515663155f4b1364",
+  "datasets": {
+    "hcci": {
+      "name": "High-Chromium Cast Iron SEM Dataset",
+      "role": "PRIMARY_RETRIEVAL",
+      "status": "ACCEPTED_VERIFIED",
+      "images_on_disk": 774,
+      "doi": "10.5281/zenodo.21931379",
+      "source_url": "https://zenodo.org/records/21931379",
+      "license": "CC-BY-4.0",
+      "format": "PNG",
+      "bit_depth": 8,
+      "overall_metadata_completeness_pct": 100.0,
+      "split": "427 train / 135 val / 212 held-out test"
+    },
+    "carinthia": {
+      "name": "Carinthia Lithic Scanning Electron Microscopy Defect Dataset",
+      "role": "CROSS_DOMAIN_RETRIEVAL",
+      "status": "ACCEPTED_VERIFIED",
+      "images_on_disk": 4591,
+      "doi": "10.5281/zenodo.10715190",
+      "source_url": "https://zenodo.org/records/10715190",
+      "license": "CC-BY-SA-4.0",
+      "format": "JPEG",
+      "bit_depth": 8,
+      "overall_metadata_completeness_pct": 75.0,
+      "split": "4,591 held-out cross-domain test"
+    },
+    "bbbc021": {
+      "name": "Broad Bioimage Benchmark Collection 021",
+      "role": "INGESTION_BENCHMARK",
+      "status": "ACCEPTED_VERIFIED",
+      "images_on_disk": 720,
+      "source_url": "https://bbbc.broadinstitute.org/BBBC021",
+      "license": "CC0-1.0",
+      "format": "TIFF",
+      "bit_depth": 16,
+      "overall_metadata_completeness_pct": 87.5,
+      "split": "720 multi-channel quality & ingestion benchmark"
+    },
+    "cigrocksem": {
+      "name": "CIGRockSEM Geological Microstructure Archive",
+      "role": "REGISTERED_ONLY",
+      "status": "REGISTERED_ARCHIVE_PRESENT",
+      "archive_size_mb": 4432.6,
+      "doi": "10.5281/zenodo.14988631",
+      "source_url": "https://zenodo.org/records/14988631",
+      "license": "LICENSE_REVIEW_REQUIRED",
+      "notes": "Archive data.zip present in root (59,842 files), not extracted to active benchmark paths"
+    },
+    "sem_nanoscience": {
+      "name": "SEM Nanoscience Records Archive",
+      "role": "REGISTERED_ONLY",
+      "status": "REGISTERED_NOT_DOWNLOADED",
+      "doi": "10.1038/sdata.2018.172",
+      "source_url": "https://doi.org/10.1038/sdata.2018.172",
+      "license": "CC-BY-4.0",
+      "notes": "Metadata schema and acquisition script present in scripts/data/download_sem_nanoscience.py"
+    },
+    "atomagined": {
+      "name": "Atomagined Synthetic Atom Probe Archive",
+      "role": "REGISTERED_ONLY",
+      "status": "REJECTED_NOT_INGESTED",
+      "license": "MIT",
+      "notes": "Synthetic reference script only; not present on disk"
+    },
+    "microal": {
+      "name": "MicroAl Aluminum Alloy Archive",
+      "role": "REGISTERED_ONLY",
+      "status": "REJECTED_LICENSE_REVIEW",
+      "license": "LICENSE_REVIEW_REQUIRED",
+      "notes": "Academic restrictive redistribution; not present on disk"
+    }
+  }
+}

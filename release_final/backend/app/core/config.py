@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "SciData Platform"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
+    TESTING: bool = os.getenv("TESTING", "false").lower() in ("true", "1", "yes")
 
     # Database
     DATABASE_URL: str = os.getenv(
@@ -58,6 +60,21 @@ class Settings(BaseSettings):
         env_file=".env",
         extra="allow",
     )
+
+    def validate_production_security(self):
+        """Verify security constraints for production deployment."""
+        if self.ENVIRONMENT == "production" and not self.TESTING:
+            insecure_keys = {
+                "",
+                "CHANGE_ME",
+                "replace-with-ultra-secure-random-token-minimum-32-chars-in-prod",
+                "CHANGE_ME_TO_A_CRYPTOGRAPHICALLY_SECURE_MIN_32_CHAR_SECRET_KEY",
+            }
+            if self.SECRET_KEY in insecure_keys or len(self.SECRET_KEY) < 32:
+                raise ValueError(
+                    "FATAL SECURITY CONFIGURATION: In production mode, SECRET_KEY must be a cryptographically "
+                    "secure random token with at least 32 characters. Found missing, placeholder, or truncated key."
+                )
 
 
 settings = Settings()

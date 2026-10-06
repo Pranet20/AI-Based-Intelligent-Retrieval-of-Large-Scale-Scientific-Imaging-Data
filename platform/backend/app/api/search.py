@@ -1,14 +1,15 @@
-"""Visual & Multimodal Retrieval Endpoints."""
+"""Visual & Multimodal Retrieval Endpoints with Dual Representation Support."""
 
+import json
 import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+from fastapi import APIRouter, Depends, HTTPException, Request
 import numpy as np
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from app.core.security import get_current_user_payload
+from app.core.security import get_optional_user_payload
 from app.db.models import (
     DuplicateProfile,
     Embedding,
@@ -22,6 +23,7 @@ from app.db.session import get_db
 from app.ml.dinov2_engine import DINOv2Engine
 from app.ml.faiss_engine import FAISSEngine
 from app.ml.novelty_engine import NoveltyEngine
+from app.ml.phase4_engine import Phase4Engine
 from app.services.audit import AuditService
 from app.services.provenance import ProvenanceService
 
@@ -52,67 +54,166 @@ class SearchResponse(BaseModel):
 @router.post("/vector", response_model=SearchResponse)
 @router.post("/hybrid", response_model=SearchResponse)
 async def search_images(
-    image_id: Optional[int] = Form(None),
-    file: Optional[UploadFile] = File(None),
-    top_k: int = Form(10),
-    payload: Optional[Dict[str, Any]] = Depends(get_current_user_payload),
+    request: Request,
+    payload: Optional[Dict[str, Any]] = Depends(get_optional_user_payload),
     db: Session = Depends(get_db),
 ):
     """
     Search nearest visual neighbors by image_id or raw image upload.
-    Uses frozen DINOv2 ViT-S/14 representation and exact FAISS IndexFlatIP.
+    Supports both JSON payloads and Multipart/Urlencoded forms.
+    Supports Dual Representation:
+      - 'dinov2_base': General self-supervised foundation representation (FAISS IndexFlatIP).
+      - 'phase4_adapted': Acquisition-aware representation using frozen Phase 4 adapter head.
     """
+    content_type = request.headers.get("content-type", "")
+
+    image_id: Optional[int] = None
+    file = None
+    top_k: int = 10
+    representation: str = "dinov2_base"
+    modality_filter: Optional[str] = None
+    instrument_filter: Optional[str] = None
+    metadata_query: Optional[Dict[str, Any]] = None
+
+    if "application/json" in content_type:
+        body = await request.json()
+        image_id = body.get("query_image_id") or body.get("image_id")
+        top_k = int(body.get("top_k", 10))
+        representation = str(body.get("representation", "dinov2_base")).lower()
+        modality_filter = body.get("modality_filter")
+        instrument_filter = body.get("instrument")
+        metadata_query = body.get("metadata_query")
+    else:
+        form = await request.form()
+        if "image_id" in form and form["image_id"]:
+            try:
+                image_id = int(form["image_id"])
+            except ValueError:
+                image_id = None
+        elif "query_image_id" in form and form["query_image_id"]:
+            try:
+                image_id = int(form["query_image_id"])
+            except ValueError:
+                image_id = None
+
+        top_k = int(form.get("top_k", 10))
+        file = form.get("file")
+        representation = str(form.get("representation", "dinov2_base")).lower()
+        modality_filter = form.get("modality_filter")
+        instrument_filter = form.get("instrument")
+        meta_raw = form.get("metadata_query")
+        if meta_raw:
+            if isinstance(meta_raw, str):
+                try:
+                    metadata_query = json.loads(meta_raw)
+                except Exception:
+                    metadata_query = None
+            elif isinstance(meta_raw, dict):
+                metadata_query = meta_raw
+
+    # Merge metadata query filters if present
+    if metadata_query and isinstance(metadata_query, dict):
+        if not modality_filter and "modality" in metadata_query:
+            modality_filter = metadata_query["modality"]
+        if not instrument_filter and "instrument" in metadata_query:
+            instrument_filter = metadata_query["instrument"]
+
     dino_engine = DINOv2Engine()
     faiss_engine = FAISSEngine()
     novelty_engine = NoveltyEngine()
+    phase4_engine = Phase4Engine()
 
     q_vector: Optional[np.ndarray] = None
     query_img_record = None
+
+    is_phase4 = "phase4" in representation
 
     if image_id is not None:
         query_img_record = db.query(Image).filter(Image.id == image_id).first()
         if not query_img_record:
             raise HTTPException(status_code=404, detail="Query image_id not found")
-        emb = db.query(Embedding).filter(Embedding.image_id == image_id, Embedding.embedding_type == "dinov2_base").first()
-        if not emb:
-            raise HTTPException(status_code=400, detail="Query image has no embedding")
-        q_vector = np.array(emb.embedding_vector)
+
+        if is_phase4:
+            emb = db.query(Embedding).filter(Embedding.image_id == image_id, Embedding.embedding_type == "phase4_adapted").first()
+            if emb:
+                q_vector = np.array(emb.embedding_vector, dtype=np.float32)
+            else:
+                base_emb = db.query(Embedding).filter(Embedding.image_id == image_id, Embedding.embedding_type == "dinov2_base").first()
+                if not base_emb:
+                    raise HTTPException(status_code=400, detail="Query image has no embedding")
+                q_vector = phase4_engine.adapt_embedding(np.array(base_emb.embedding_vector, dtype=np.float32))
+        else:
+            emb = db.query(Embedding).filter(Embedding.image_id == image_id, Embedding.embedding_type == "dinov2_base").first()
+            if not emb:
+                raise HTTPException(status_code=400, detail="Query image has no embedding")
+            q_vector = np.array(emb.embedding_vector, dtype=np.float32)
+
     elif file is not None:
         file_bytes = await file.read()
         import tempfile
-        ext = Path(file.filename).suffix.lower()
+        ext = Path(getattr(file, "filename", "temp.png")).suffix.lower() or ".png"
         with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
             tmp.write(file_bytes)
             tmp_path = tmp.name
         try:
-            q_vector = dino_engine.embed_image(tmp_path)
+            raw_dino = dino_engine.embed_image(tmp_path)
+            if is_phase4:
+                q_vector = phase4_engine.adapt_embedding(raw_dino)
+            else:
+                q_vector = raw_dino
         finally:
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
     else:
-        raise HTTPException(status_code=400, detail="Must provide either image_id or file")
+        raise HTTPException(status_code=400, detail="Must provide either image_id/query_image_id or file")
 
-    # Perform FAISS search
-    raw_results = faiss_engine.search(q_vector, top_k=top_k + (1 if query_img_record else 0))
+    # Ensure query vector is unit normalized
+    q_norm = np.linalg.norm(q_vector)
+    if q_norm > 1e-12:
+        q_vector = q_vector / q_norm
+
+    raw_candidates: List[tuple[int, float]] = []
+
+    if is_phase4:
+        # Acquisition-Aware Retrieval using Phase 4 representations
+        target_embs = db.query(Embedding).filter(Embedding.embedding_type == "phase4_adapted").all()
+        for cand_emb in target_embs:
+            if query_img_record and cand_emb.image_id == query_img_record.id:
+                continue
+            cand_vec = np.array(cand_emb.embedding_vector, dtype=np.float32)
+            c_norm = np.linalg.norm(cand_vec)
+            if c_norm > 1e-12:
+                cand_vec = cand_vec / c_norm
+            sim = float(np.dot(q_vector, cand_vec))
+            raw_candidates.append((cand_emb.image_id, sim))
+        raw_candidates.sort(key=lambda x: x[1], reverse=True)
+    else:
+        # Visual Foundation Retrieval using exact FAISS IndexFlatIP
+        search_top_k = max(top_k * 4, 20) + (1 if query_img_record else 0)
+        raw_candidates = faiss_engine.search(q_vector, top_k=search_top_k)
 
     # Record RetrievalQuery in DB
-    user_id = int(payload.get("sub")) if payload else None
+    user_id = int(payload.get("sub")) if payload and "sub" in payload else None
+    query_mode_label = "acquisition_aware_phase4" if is_phase4 else "visual_only_dinov2"
+    if modality_filter or instrument_filter:
+        query_mode_label += "_hybrid_filtered"
+
     rq = RetrievalQuery(
         user_id=user_id,
         query_image_id=query_img_record.id if query_img_record else None,
-        query_mode="visual_only_alpha_1.0",
+        query_mode=query_mode_label,
         top_k=top_k,
     )
     db.add(rq)
     db.commit()
     db.refresh(rq)
 
-    results_list = []
+    results_list: List[SearchResultItem] = []
     rank_counter = 1
 
-    for cand_id, sim in raw_results:
+    for cand_id, sim in raw_candidates:
         if query_img_record and cand_id == query_img_record.id:
-            continue  # Exclude exact query image from search results
+            continue
 
         cand_img = db.query(Image).filter(Image.id == cand_id).first()
         if not cand_img:
@@ -122,6 +223,18 @@ async def search_images(
         qp = cand_img.quality_profile
         dp = cand_img.duplicate_profile
 
+        # Apply metadata filters if specified
+        if modality_filter:
+            m_scope = (meta.microscope or "").lower() if meta else ""
+            if modality_filter.lower() not in m_scope:
+                continue
+
+        if instrument_filter:
+            det = (meta.detector or "").lower() if meta else ""
+            m_scope = (meta.microscope or "").lower() if meta else ""
+            if instrument_filter.lower() not in det and instrument_filter.lower() not in m_scope:
+                continue
+
         meta_sum = {
             "microscope": meta.microscope if meta else None,
             "detector": meta.detector if meta else None,
@@ -129,7 +242,7 @@ async def search_images(
             "magnification": meta.magnification if meta else None,
         }
 
-        # Compute novelty score for candidate
+        # Novelty score
         cand_emb = db.query(Embedding).filter(Embedding.image_id == cand_id, Embedding.embedding_type == "dinov2_base").first()
         nov_score = None
         if cand_emb:
@@ -172,7 +285,7 @@ async def search_images(
             db=db,
             image_id=query_img_record.id,
             event_type="SEARCH",
-            parameters={"top_k": top_k, "results_found": len(results_list)},
+            parameters={"top_k": top_k, "representation": representation, "results_found": len(results_list)},
         )
 
     AuditService.log_action(
@@ -184,12 +297,24 @@ async def search_images(
         parameters={
             "query_image_id": query_img_record.id if query_img_record else None,
             "top_k": top_k,
+            "representation": representation,
             "results_returned": len(results_list),
         },
+    )
+
+    retrieval_mode_str = (
+        "frozen_phase4_acquisition_adapter" if is_phase4 else "frozen_visual_dinov2_vit_s14"
+    )
+    note_str = (
+        "Acquisition-aware retrieval using frozen Phase 4 adapter (SHA-256 verified)."
+        if is_phase4
+        else "Visual quality retrieval using frozen DINOv2 ViT-S/14 representation."
     )
 
     return SearchResponse(
         query_image_id=query_img_record.id if query_img_record else None,
         total_results=len(results_list),
         results=results_list,
+        retrieval_mode=retrieval_mode_str,
+        note=note_str,
     )

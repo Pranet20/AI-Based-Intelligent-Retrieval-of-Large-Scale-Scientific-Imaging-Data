@@ -76,7 +76,7 @@ export const Dashboard: React.FC = () => {
               <span className="badge badge-info">v1.0.0 Production</span>
             </div>
             <p style={{ fontSize: "14px", color: "var(--text-secondary)", maxWidth: "800px" }}>
-              Metadata-aware retrieval, acquisition-robust representation, physical data integrity assessment,
+              Metadata-aware retrieval, acquisition-robust representation, image-derived quality indicators and integrity assessment,
               and anomaly-aware curation for large-scale scanning electron microscopy.
             </p>
           </div>

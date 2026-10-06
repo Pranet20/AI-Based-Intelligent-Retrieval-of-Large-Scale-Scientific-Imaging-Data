@@ -402,7 +402,7 @@ export const ReviewQueue: React.FC = () => {
                   rows={3}
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
-                  placeholder="Document physical justification (e.g. defocus blur verified, identical inclusion cluster)..."
+                  placeholder="Document curator rationale / evidence-based justification (e.g. defocus blur verified, identical inclusion cluster)..."
                   className="input-field"
                   style={{ resize: "vertical" }}
                 />

@@ -1,0 +1,8 @@
+stage,mean_ms,median_ms,p95_ms,min_ms,max_ms,environment
+preprocessing,1.27,1.23,1.39,1.19,1.59,"Declared Benchmark Environment (Python 3.11, Local CPU Testbed)"
+representation_generation,0.04,0.04,0.05,0.04,0.09,"Declared Benchmark Environment (Python 3.11, Local CPU Testbed)"
+quality_screening,5.44,5.38,6.65,4.75,6.78,"Declared Benchmark Environment (Python 3.11, Local CPU Testbed)"
+localization,12.2,12.0,13.68,10.68,13.92,"Declared Benchmark Environment (Python 3.11, Local CPU Testbed)"
+retrieval,9.44,9.23,10.61,8.65,11.56,"Declared Benchmark Environment (Python 3.11, Local CPU Testbed)"
+evidence_aggregation,17.61,17.36,19.71,16.32,20.49,"Declared Benchmark Environment (Python 3.11, Local CPU Testbed)"
+complete_pipeline,46.0,45.18,51.05,43.17,53.15,"Declared Benchmark Environment (Python 3.11, Local CPU Testbed)"

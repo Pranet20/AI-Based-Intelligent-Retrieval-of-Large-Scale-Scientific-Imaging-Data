@@ -17,8 +17,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build"
   },
+  "proxy": "http://127.0.0.1:8000",
   "browserslist": {
     "production": [
       ">0.2%",

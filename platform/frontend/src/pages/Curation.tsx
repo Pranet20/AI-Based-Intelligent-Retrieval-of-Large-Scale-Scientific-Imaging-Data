@@ -50,7 +50,7 @@ export const Curation: React.FC = () => {
             <span>Data Integrity, Redundancy & Curation</span>
           </h1>
           <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
-            Multi-stage cascade results, physical quality-risk flagging, and active triage status.
+            Multi-stage cascade results, image-derived quality-risk indicators, and active triage status.
           </p>
         </div>
 

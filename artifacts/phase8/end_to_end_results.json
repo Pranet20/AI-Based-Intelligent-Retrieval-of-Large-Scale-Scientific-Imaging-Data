@@ -1,12 +1,12 @@
 {
   "experiment_id": "phase8_scientific_image_platform_001",
-  "validation_timestamp": "2026-09-27T05:15:20.115012+00:00",
+  "validation_timestamp": "2026-10-06T15:53:26.546899+00:00",
   "steps_completed": 20,
   "overall_status": "SUCCESS",
   "steps": {
     "1_create_user": {
       "status": "SUCCESS",
-      "username": "canonical_user_1790486118",
+      "username": "canonical_user_1791302002",
       "role": "CURATOR"
     },
     "2_login": {
@@ -62,7 +62,7 @@
     },
     "14_faiss_index": {
       "status": "SUCCESS",
-      "total_indexed": 4
+      "total_indexed": 16
     },
     "15_novelty": {
       "status": "SUCCESS",

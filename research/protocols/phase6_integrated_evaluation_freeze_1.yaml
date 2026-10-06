@@ -1,0 +1,62 @@
+protocol_name: "phase6_integrated_evaluation_freeze_1"
+protocol_version: "1.0.0"
+date_created: "2026-10-06"
+governance: "IEEE Research Reproducibility & Scientific Integrity Standards"
+
+primary_research_question: >
+  Does integrating acquisition-aware retrieval, quality-risk screening,
+  localization, uncertainty-aware abstention, and evidence aggregation
+  provide a reproducible and useful scientific microscopy curation workflow
+  compared with isolated component operation?
+
+secondary_research_questions:
+  RQ1: "Does acquisition-aware representation remain advantageous for retrieval when evaluated alongside frozen DINOv2?"
+  RQ2: "Does frozen DINOv2 remain more sensitive to controlled synthetic artifact screening than the acquisition-adapted representation?"
+  RQ3: "Does representation specialization suggest a dual-representation architecture rather than a single universally optimal representation?"
+  RQ4: "Does evidence retrieval provide additional acquisition/specimen context beyond the query image alone?"
+  RQ5: "Does uncertainty-aware abstention appropriately identify cases where the system should defer to human review?"
+  RQ6: "Does the complete evidence pipeline preserve provenance and deterministic reproducibility?"
+  RQ7: "What are the computational costs of the integrated pipeline?"
+
+hypotheses:
+  H1: "A representation optimized for acquisition robustness may trade some fine-grained artifact sensitivity for improved cross-acquisition alignment."
+  H2: "A dual-representation architecture can exploit this specialization: DINOv2 for quality/artifact sensitivity, Phase-4 for acquisition-aware retrieval, and the evidence layer for integration."
+
+evaluation_modes:
+  MODE_A: "Retrieval only (Protocol U unmasked distractor evaluation)"
+  MODE_B: "Quality only (Frozen 11-class artifact screening and binary quality risk)"
+  MODE_C: "Quality + Localization (Spatial saliency envelopes on localized artifacts)"
+  MODE_D: "Quality + Retrieval (Evidence availability, cross-acq peers, ranking determinism)"
+  MODE_E: "Full SCI-INTEL (Complete end-to-end evidence aggregation and decision support)"
+
+frozen_representations:
+  - name: "Frozen DINOv2 ViT-S/14"
+    dimension: 384
+    role: "Quality screening & controlled synthetic artifact sensitivity"
+  - name: "Phase-4 Acquisition Adapter (Seed 42)"
+    dimension: 384
+    role: "Acquisition-aware retrieval"
+  - name: "Phase-4 Acquisition Adapter (Seed 123)"
+    dimension: 384
+    role: "Acquisition-aware retrieval"
+  - name: "Phase-4 Acquisition Adapter (Seed 2024)"
+    dimension: 384
+    role: "Acquisition-aware retrieval"
+  - name: "Phase-4 3-Seed Mean / Ensemble"
+    dimension: 384
+    role: "Acquisition-aware retrieval baseline"
+
+dual_representation_architecture:
+  design: "Modular composition without learned fusion"
+  quality_representation: "Frozen DINOv2"
+  retrieval_representation: "Phase-4 Acquisition-Adapted (3-Seed Mean)"
+  fusion_training: false
+
+governance_invariants:
+  modify_frozen_phases_1_to_5: false
+  retrain_models: false
+  tune_thresholds_on_test_labels: false
+  fabricate_expert_labels: false
+  claim_clinical_diagnosis: false
+  claim_confirmed_physical_defects: false
+  claim_universal_acquisition_invariance: false

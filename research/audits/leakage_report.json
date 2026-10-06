@@ -1,0 +1,17 @@
+{
+  "audit_timestamp": "2026-10-05T16:24:17Z",
+  "target_split": "hcci_primary_retrieval",
+  "sha256_overlap": {
+    "train_val_overlap": 0,
+    "train_test_overlap": 0,
+    "val_test_overlap": 0
+  },
+  "image_id_overlap": {
+    "train_val_overlap": 0,
+    "train_test_overlap": 0,
+    "val_test_overlap": 0
+  },
+  "perceptual_hash_exact_overlap_count": 8,
+  "leakage_detected": false,
+  "verdict": "LEAKAGE_FREE_PROTOCOL_VERIFIED"
+}

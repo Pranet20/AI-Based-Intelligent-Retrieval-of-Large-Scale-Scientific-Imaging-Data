@@ -1,99 +1,141 @@
-# FINAL DEMONSTRATION RUNBOOK & OPERATIONAL PLAYBOOK
-
-**Project**: AI-Powered Scientific Image Data Management Platform  
-**Document**: Deterministic End-to-End Live Demonstration Runbook  
-**Baseline**: `PROJECT_FINAL_CLOSED_WITH_LIMITATIONS`  
+# SCI-INTEL Live Platform Demonstration Runbook
+## Operational Execution Guide for Live Demonstrations and Reviewer Audits
 
 ---
 
-## 1. Overview & Demonstration Environment
-This runbook provides the exact, deterministic script for demonstrating the platform's core scientific capabilities to reviewers, evaluators, and laboratory stakeholders using only permitted and synthetic demonstration assets.
+## 1. Prerequisites & Environment Setup
 
-- **Target URL**: `http://127.0.0.1:8000` (API & Swagger) / `http://127.0.0.1:3000` (Web Dashboard)
-- **Primary Demonstration Dataset**: Permitted synthetic mineral micrographs and open manifest samples.
-
----
-
-## 2. Step-by-Step Demonstration Workflow
-
-### Step 1: Authentication & Role Selection
-1. Navigate to the login screen (`/login`).
-2. Authenticate using credentials:
-   - **Curator**: `username: curator_user`, `role: CURATOR` (access to active triage queue).
-   - **Researcher**: `username: researcher_user`, `role: RESEARCHER` (search and export).
-3. Verify JWT token issuance with cryptographic signature and role-based permissions.
-
-### Step 2: Micrograph Ingestion & Cryptographic Provenance
-1. Open the **Ingestion Console** (`/ingest`).
-2. Upload a batch of 5 SEM micrographs (TIFF format).
-3. The platform computes SHA-256 digests in real-time and logs immutable provenance events:
-   - Event: `INGESTION_REGISTERED`
-   - Checksum: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
-   - Verified batch ingestion rate: **14.80 images/second**.
-
-### Step 3: Metadata Extraction & Completeness Scoring
-1. View extracted instrument metadata tags:
-   - Accelerating Voltage: `20.0 kV`
-   - Detector: `BSE (Backscattered Electron)`
-   - Working Distance: `8.5 mm`
-   - Magnification: `5000x`
-2. The platform calculates a **Metadata Completeness Score** ($0.88$) and stores structured attributes in the relational database.
-
-### Step 4: Foundation Representation & Embedding Extraction
-1. The frozen DINOv2 ViT-S/14 model processes the micrograph:
-   - Grayscale conversion to RGB 3-channel.
-   - Resize to $224 \times 224$ pixels.
-   - ImageNet tensor normalization.
-   - Class token (`[CLS]`) extraction: 384-dimensional vector, $L_2$-normalized.
-
-### Step 5: Sub-Millisecond Vector Retrieval & Top-K Similarity
-1. Submit a visual query image.
-2. The FAISS HNSW graph index retrieves Top-5 nearest candidates:
-   - Observed query latency: **0.12 ms** (sub-millisecond execution).
-   - Candidate 1: Cosine similarity $0.9481$ (Sphalerite).
-   - Candidate 2: Cosine similarity $0.9120$ (Sphalerite).
-   - Recall@1: **0.9481**, MRR: **0.9658**.
-
-### Step 6: Decoupled Metadata Filtering (Resolving the Metadata Paradox)
-1. In the search filter sidebar, apply categorical constraint: `detector = 'BSE' AND voltage >= 15kV`.
-2. Observe that candidate filtering is executed via the decoupled inverted index:
-   - Preserves high-fidelity visual vector space geometry.
-   - Avoids the $-38.9\%$ MRR degradation caused by naive early neural fusion.
-
-### Step 7: Automated Quality-Risk & Duplicate Screening
-1. Ingestion screen displays real-time integrity alerts:
-   - **Focus Screening**: Micrograph A exhibits Tenengrad gradient energy of $28.4$ (< threshold $42.5$); flagged as `DEFOCUS_RISK` (AUROC $0.8803$, AUPRC $0.9618$).
-   - **Duplicate Cascade**: Micrographs B and C exhibit cosine similarity $0.9650$; flagged as `NEAR_DUPLICATE_PAIR` (F1 $0.9810$).
-
-### Step 8: Relative Latent Novelty Signal ($D_{\text{ref}}$)
-1. An out-of-distribution / atypical mineral specimen is evaluated.
-2. Continuous Euclidean distance to gallery reference centroids is computed:
-   - $D_{\text{ref}} = 0.5180$ (compared to in-domain reference mean $0.2410$, representing a **2.12x** separation).
-   - System flags sample as `NOVELTY_ALERT` and routes it to the curation queue.
-
-### Step 9: Human-in-the-Loop Curation Triage
-1. Switch to Curator view (`/curation/queue`).
-2. Review flagged specimens in the Active Curation Workbench:
-   - Action Options: `KEEP`, `REVIEW_LATER`, `DUPLICATE`, `LOW_QUALITY`, `INTERESTING_NOVEL`, `INCORRECT_METADATA`.
-   - Curator clicks `LOW_QUALITY` for blurred sample; system logs decision, reason, timestamp, and curator ID.
-   - Verified actionability yield: **91.67%** (110/120 confirmed), Cohen's $\kappa = \mathbf{0.8420}$.
-   - Workload reduction: **41.2%**.
-
-### Step 10: Immutable Audit Trail & Lineage Inspection
-1. Open the **Provenance Inspector** (`/provenance`).
-2. View end-to-end DAG lineage:
-   `Source Micrograph (SHA-256) -> Ingestion -> Preprocessing -> DINOv2 Embedding -> HNSW Index -> Defocus Flag -> Curator Decision (KEEP)`.
-3. Confirm 100% provenance event auditability.
+### System Prerequisites
+- **Operating System**: Windows 10/11, macOS 12+, or Ubuntu 22.04 LTS.
+- **Python Runtime**: Python 3.11.x with active virtual environment (`.venv311`).
+- **Node.js Runtime**: Node.js 18.x or 20.x with `npm`.
+- **Repository Location**: Root directory of `AI-Based-Intelligent-Retrieval-of-Large-Scale-Scientific-Imaging-Data`.
 
 ---
 
-## 3. Demonstration Verification Checklist
-- [x] Login & JWT verification successful
-- [x] Micrograph SHA-256 ingestion provenance verified
-- [x] Metadata normalization verified
-- [x] DINOv2 384-d embedding extraction verified
-- [x] FAISS HNSW query latency < 1 ms verified
-- [x] Decoupled metadata filtering verified
-- [x] Tenengrad focus quality gate verified
-- [x] Latent distance novelty screening ($D_{\text{ref}}$) verified
-- [x] Human curation triage action recorded with audit trail
+## 2. Server Startup Sequence
+
+### Step 1: Start Backend ASGI Server
+Open a terminal in the project root:
+
+```powershell
+# Activate Python 3.11 environment
+.\.venv311\Scripts\Activate.ps1
+
+# Set PYTHONPATH and start FastAPI service
+$env:PYTHONPATH = "platform/backend;."
+uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+*Expected console confirmation*:
+```
+[Startup Diagnostic] Database connection parameters: {'dialect': 'sqlite', 'driver': 'pysqlite', ...}
+[Startup Diagnostic] Database connection verified (SELECT 1 succeeded).
+[Startup Diagnostic] Authoritative models cryptographically verified and registered:
+  - Model [dinov2]: model_id=dinov2_vits14_phase2, dim=384, hash=torch_hub_facebookresearch_dinov2_vits14, active=True
+  - Model [phase4]: model_id=phase4_acquisition_adapter_seed42, dim=384, hash=53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62, active=True
+[Startup Diagnostic] MODEL_STATUS: LOADED | CHECKPOINT_STATUS: VERIFIED | CHECKPOINT_SHA256: 53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62
+INFO: Application startup complete.
+```
+
+### Step 2: Verify Readiness & Health Probes
+In a secondary terminal, verify backend health:
+
+```powershell
+curl http://127.0.0.1:8000/api/v1/health
+# Expected: {"status":"healthy","database":"connected","faiss_index_count":...,"version":"1.0.0"}
+
+curl http://127.0.0.1:8000/api/v1/readiness
+# Expected: {"status":"READY","checks":{"database":"READY","storage":"READY","model_checkpoint":"READY","faiss_engine":"READY"}}
+```
+
+### Step 3: Start Frontend Development Server
+In a third terminal:
+
+```powershell
+cd platform/frontend
+npm start
+```
+
+*Expected confirmation*:
+Browser automatically opens to `http://localhost:3000`.
+
+---
+
+## 3. Live Demonstration Walkthrough
+
+Follow these sequential steps during a live review:
+
+### Step 1: Initial Login & Telemetry Dashboard (`http://localhost:3000`)
+1. Log in with demo curator credentials:
+   - **Username**: `admin`
+   - **Password**: `admin123`
+2. Point out the **Research Benchmark Cards**:
+   - DINOv2 Foundation $R@1$: $0.585$
+   - Acquisition Gap Reduction: $+23.4\%$
+   - Workload Reduction: $44.5\%$
+3. Highlight live database metrics and system readiness indicators.
+
+### Step 2: Ingestion & Autonomous 14-Step Profiling (`/upload`)
+1. Click **Ingestion & Upload** in the navigation menu.
+2. Select the **Sample Gallery** tab.
+3. Click **Ingest Sample** on any sample micrograph (e.g. `Week10_40111_s1_w1_DAPI.tif`).
+4. Watch the progress dialog complete in $< 1\text{ second}$.
+5. Automatically view the newly indexed micrograph in `/images/{id}`.
+
+### Step 3: Deep Canvas Viewer & Spectral Inspection (`/images/{id}`)
+1. Use the interactive canvas:
+   - Click and drag to pan across the specimen.
+   - Use the slider or `+` / `-` buttons to zoom into subcellular features.
+   - Toggle color lookup tables (Cyan, Green, Thermal).
+2. Hover over any pixel to view the **Pixel Inspector HUD** showing coordinates $(x, y)$ and intensity value.
+3. Review the **Quality Indicators Breakdown**:
+   - Focus Variance ($\sigma^2_{\nabla^2}$), Edge Density, Shannon Entropy, Dynamic Range, Clipping, and High-Frequency FFT energy.
+4. Review the **Cryptographic Provenance Trail** at the bottom of the page, demonstrating immutable event logging.
+
+### Step 4: Acquisition-Aware Retrieval Probing (`/search`)
+1. Click **Vector Search** in the navigation bar.
+2. Enter Query Micrograph ID `1`.
+3. Set **Representation Architecture** to `Phase 4 Adapter (Acquisition-Aware)`.
+4. Click **Execute Search**.
+5. Observe sub-15ms FAISS retrieval results with normalized cosine similarities.
+6. Click **Compare** on the top match to open the **Side-by-Side Micrograph Comparison Modal**, highlighting identical specimen morphology despite disparate acquisition settings.
+
+### Step 5: Rapid Curator Workbench Triage (`/reviews`)
+1. Navigate to **Curator Workbench**.
+2. Explain the scientific priority formula:
+   $$\text{Priority} = 0.50 \cdot \text{Risk} + 0.30 \cdot (\text{Novelty} / 100) + 0.20 \cdot \mathbb{I}_{\text{Redundant}}$$
+3. Select the highest priority queue item.
+4. Press keyboard shortcut `1` to select **ACCEPT / KEEP**.
+5. Enter a brief justification: *"Verified focal sharpness across granular specimen field."*
+6. Click **Submit Review Decision**.
+7. Confirm that the triage item is marked `COMPLETED` and audit logs are recorded.
+
+### Step 6: Model Registry Checkpoint Verification (`/models`)
+1. Navigate to **Models View**.
+2. Confirm the green verification shield on `Phase 4 Acquisition Adapter`.
+3. Verify that the displayed SHA-256 matches:
+   `53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62`
+4. Test the **Interactive Feature Extractor** to render the $14 \times 14$ pseudo-attention patch grid.
+
+---
+
+## 4. Demonstration Verification Checklist
+
+- [x] Backend starts with zero warnings or errors.
+- [x] Readiness probe returns HTTP 200 with `status: READY`.
+- [x] Sample micrograph ingests cleanly in $< 1\text{ second}$.
+- [x] DINOv2 and Phase 4 representations generate distinct 384-d vectors.
+- [x] FAISS IndexFlatIP executes retrieval queries in $< 15\text{ ms}$.
+- [x] Side-by-side comparison displays accurate parameter diffs.
+- [x] Review submission successfully commits to SQLite database.
+- [x] Provenance trail reflects all operations chronologically.
+
+---
+
+## 5. Teardown and Clean Shutdown
+
+To stop the demonstration servers:
+1. In the frontend terminal, press `Ctrl+C` to terminate the Webpack dev server.
+2. In the backend terminal, press `Ctrl+C` to cleanly exit Uvicorn ASGI runtime.
+3. Temporary test artifacts created during testing can be purged if desired (`platform/storage/test_scidata.db`).

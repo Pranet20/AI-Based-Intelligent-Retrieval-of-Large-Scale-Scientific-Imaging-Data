@@ -1,12 +1,12 @@
-export type Role = "ADMIN" | "RESEARCHER" | "REVIEWER";
+export type Role = "ADMIN" | "RESEARCHER" | "REVIEWER" | "CURATOR" | "SCIENTIST" | "VIEWER";
 
 export interface User {
   id: number;
   email: string;
   username: string;
-  role: Role;
+  role: Role | string;
   institution?: string;
-  created_at: string;
+  created_at?: string;
 }
 
 export interface Project {

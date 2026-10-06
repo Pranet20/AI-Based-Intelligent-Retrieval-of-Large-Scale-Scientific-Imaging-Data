@@ -1,0 +1,135 @@
+{
+  "project_title": "AI-Based Intelligent Retrieval and Quality-Aware Curation of Scientific Microscopy Images",
+  "platform_name": "SCI-INTEL — Scientific Imaging Intelligence Platform",
+  "repository_owner": "Pranet20",
+  "scientific_status": "FROZEN_AND_SEALED",
+  "platform_gate": "READY_FOR_PAPER_WRITING",
+  "timestamp_utc": "2026-10-06T14:40:00Z",
+  "research_questions": {
+    "RQ1": {
+      "title": "Acquisition-Robust Retrieval (Protocol M vs. Protocol U)",
+      "description": "Does supervised contrastive acquisition adaptation compress the cross-instrument embedding gap under Unmatched Acquisition conditions (Protocol U) without degrading fine-grained intra-acquisition discriminability under Matched Acquisition conditions (Protocol M)?"
+    },
+    "RQ2": {
+      "title": "Computational Quality-Risk Screening",
+      "description": "Can image-derived quality indicators (Laplacian focus variance, saturation/dark clipping, Shannon entropy, dynamic range) reliably flag compromised micrographs without relying on proprietary microscope hardware telemetry?"
+    },
+    "RQ3": {
+      "title": "Spatial Localization & Principled Uncertainty Abstention",
+      "description": "Can model-derived suspicious region localization combined with entropy- and margin-based uncertainty estimation identify corrupted regions and trigger reliable automated abstention?"
+    },
+    "RQ4": {
+      "title": "Grounded Evidence Retrieval & Suggested Corrective Action",
+      "description": "Does retrieving comparable cross-acquisition reference micrographs (N=55 cohort context) enable deterministic mapping to actionable microscope operational parameter adjustments?"
+    },
+    "RQ5": {
+      "title": "Human-in-the-Loop Scientific Curation",
+      "description": "Does integrating quality-risk triage, localization overlays, and grounded evidence into a unified curation workbench reduce human inspection fatigue while preserving scientific data integrity?"
+    }
+  },
+  "authoritative_frozen_benchmarks": {
+    "foundation_model_baseline": {
+      "backbone": "DINOv2 ViT-S/14 (Frozen)",
+      "embedding_dimension": 384,
+      "hcci_recall_at_1": 0.9819,
+      "phash_baseline_recall_at_1": 0.0210,
+      "evaluation_population": 774
+    },
+    "acquisition_adaptation_protocol_u": {
+      "evaluation_protocol": "Protocol U (Cross-Instrument / Cross-Acquisition Unmatched)",
+      "unadapted_baseline_gap": 0.2016,
+      "adapted_representation_gap": 0.0681,
+      "absolute_gap_reduction": 0.1335,
+      "relative_gap_reduction_pct": 66.23,
+      "p_value": 5.03e-36,
+      "paired_effect_size_cohens_dz": 2.19,
+      "query_population_size": 55
+    },
+    "acquisition_adaptation_protocol_m": {
+      "evaluation_protocol": "Protocol M (Matched Instrument / Same Acquisition)",
+      "baseline_intra_condition_discriminability": 1.0000,
+      "adapted_intra_condition_discriminability": 1.0000,
+      "delta_recall_at_1": 0.0000,
+      "degradation_observed": false
+    },
+    "held_out_generalization": {
+      "instrument": "Zeiss Crossbeam SEM (Held-out Unseen Domain)",
+      "precision_at_5_baseline": 0.8708,
+      "precision_at_5_adapted": 0.9053,
+      "p_value": 0.0028,
+      "effect_size_cohens_d": 0.65
+    },
+    "computational_quality_screening": {
+      "nature_of_indicators": "Computational heuristics derived strictly from pixel intensity distributions; NO hardware telemetry",
+      "indicators_evaluated": [
+        "laplacian_variance (Focus attenuation)",
+        "shannon_entropy (Information dispersion)",
+        "saturation_ratio (Overexposure / dynamic range ceiling)",
+        "dark_ratio (Underexposure / noise floor floor)",
+        "dynamic_range (Dynamic range span)",
+        "high_freq_fft_ratio (High frequency energy ratio)"
+      ],
+      "defocus_screening_auroc": 0.8803,
+      "defocus_screening_auprc": 0.9618,
+      "benchmark_sample_size": 120
+    },
+    "duplicate_and_redundancy_screening": {
+      "synthetic_duplicate_auroc": 0.9998,
+      "false_positive_rate": 0.0000,
+      "natural_hcci_clusters": {
+        "total_micrographs": 774,
+        "partitioned_clusters": 769,
+        "singletons": 764,
+        "flagged_pairs": 5
+      }
+    },
+    "spatial_localization": {
+      "label": "Model-Derived Suspicious Region",
+      "disclaimer": "Computational spatial anomaly heuristic; not a confirmed physical defect",
+      "saliency_threshold": 0.50,
+      "patch_size": 16
+    },
+    "uncertainty_and_abstention": {
+      "confidence_threshold": 0.45,
+      "normalized_entropy_threshold": 0.85,
+      "prediction_margin_threshold": 0.15,
+      "abstention_action": "Defer to human microscopy specialist for mandatory verification"
+    },
+    "evidence_and_action_mapping": {
+      "comparable_reference_cohort_size": 55,
+      "mapping_determinism": "100% deterministic rule-based catalog; no free-form hallucination",
+      "action_categories_count": 10,
+      "targeted_parameters": [
+        "beam_current",
+        "dwell_time",
+        "objective_lens_current",
+        "stigmators_x_y",
+        "stage_isolation",
+        "frame_averaging",
+        "contrast_bias",
+        "adc_gain"
+      ]
+    },
+    "platform_latency_and_performance": {
+      "mean_query_latency_ms": 23.40,
+      "p95_query_latency_ms": 28.30,
+      "faiss_speedup_factor": 1.99,
+      "faiss_recall_at_10": 1.0000
+    }
+  },
+  "test_suite_reconciliation": {
+    "research_tests_passed": 424,
+    "platform_tests_passed": 55,
+    "canonical_end_to_end_test": "PASSED (17-stage workflow verified)",
+    "total_tests_passed": 479,
+    "total_tests_failed": 0,
+    "total_tests_skipped": 0,
+    "pass_rate_pct": 100.0,
+    "reconciliation_explanation": "Historical reports documented 218 tests prior to the addition of Phase 5 evidence and explanation tests, Phase 6 integrated validation tests, Phase 7-9 closure suites, and Phase 10 platform closure and canonical workflow tests. Current live test suite comprises exactly 479 passed tests."
+  },
+  "cryptographic_provenance": {
+    "phase4_adapter_sha256": "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62",
+    "phase8_master_seal": "89dae3adb2b51e0a40aa076f3c0e4ffa9ac97fa01f7d25c6d90d5128486bb377",
+    "phase9_master_seal": "8a2e7ad6132161482a287f106dc91ba814c84223dc88b0d0cad3ff17c1810162"
+  }
+}

@@ -1,0 +1,160 @@
+# Protocol: Phase 4 Controlled Scientific Image Quality & Anomaly Intelligence Freeze 1
+# Date: 2026-10-05
+# Version: 1.0.0
+# Authors: Lead Scientific AI & Reproducibility Team
+
+protocol_metadata:
+  protocol_id: "phase4_quality_anomaly_freeze_1"
+  creation_timestamp: "2026-10-05T23:55:00Z"
+  version: "1.0.0"
+  status: "FROZEN"
+  description: >
+    Controlled synthetic quality-risk, novelty screening, multi-class artifact classification,
+    localization, uncertainty calibration, and OOD screening benchmark protocol.
+
+parent_dataset:
+  primary_source: "HCCI"
+  license: "CC BY 4.0"
+  total_hcci_images: 774
+  parent_split_source: "research/final_manifests/FINAL_SPLIT_MANIFEST.json"
+  parent_split_counts:
+    train: 100
+    validation: 50
+    test: 100
+    total_parents: 250
+  leakage_policy: "STRICT_PARENT_ISOLATION"
+  explanation: >
+    The unit of splitting is the PARENT IMAGE. If an original HCCI image is assigned
+    to train, validation, or test, all its synthetic children remain strictly within that
+    exact same split. Parent overlap between splits is 0.
+
+synthetic_benchmark:
+  standard_resolution: [512, 512]
+  categories:
+    - NORMAL
+    - BLUR
+    - MOTION_BLUR
+    - NOISE
+    - CONTRAST_REDUCTION
+    - OVEREXPOSURE
+    - UNDEREXPOSURE
+    - CLIPPING
+    - LOCAL_ILLUMINATION_ABNORMALITY
+    - ACQUISITION_PERTURBATION
+    - CHARGING_LIKE_SYNTHETIC_ARTIFACT
+  severities:
+    mild: 1
+    moderate: 2
+    strong: 3
+  images_per_parent: 11
+  total_benchmark_images: 2750
+
+binary_quality_risk_mapping:
+  QUALITY_PASS:
+    - NORMAL
+  QUALITY_RISK:
+    - BLUR
+    - MOTION_BLUR
+    - NOISE
+    - CONTRAST_REDUCTION
+    - OVEREXPOSURE
+    - UNDEREXPOSURE
+    - CLIPPING
+    - LOCAL_ILLUMINATION_ABNORMALITY
+    - ACQUISITION_PERTURBATION
+    - CHARGING_LIKE_SYNTHETIC_ARTIFACT
+
+generator_parameters:
+  blur:
+    method: "gaussian"
+    severity_1: {sigma: 1.5}
+    severity_2: {sigma: 3.0}
+    severity_3: {sigma: 5.0}
+    mask_policy: "none"
+  motion_blur:
+    method: "directional_linear_kernel"
+    angle: 45.0
+    severity_1: {kernel_size: 5}
+    severity_2: {kernel_size: 11}
+    severity_3: {kernel_size: 19}
+    mask_policy: "none"
+  noise:
+    method: "additive_gaussian"
+    mean: 0.0
+    severity_1: {std: 15.0}
+    severity_2: {std: 30.0}
+    severity_3: {std: 55.0}
+    mask_policy: "none"
+  contrast_reduction:
+    method: "dynamic_range_compression_toward_mean"
+    severity_1: {factor: 0.50}
+    severity_2: {factor: 0.25}
+    severity_3: {factor: 0.10}
+    mask_policy: "none"
+  overexposure:
+    method: "localized_intensity_saturation"
+    severity_1: {multiplier: 1.6, radius_fraction: 0.25}
+    severity_2: {multiplier: 2.2, radius_fraction: 0.35}
+    severity_3: {multiplier: 3.0, radius_fraction: 0.45}
+    mask_policy: "spatial_binary_mask"
+  underexposure:
+    method: "localized_intensity_attenuation"
+    severity_1: {multiplier: 0.40, radius_fraction: 0.25}
+    severity_2: {multiplier: 0.20, radius_fraction: 0.35}
+    severity_3: {multiplier: 0.05, radius_fraction: 0.45}
+    mask_policy: "spatial_binary_mask"
+  clipping:
+    method: "localized_threshold_clipping"
+    severity_1: {low: 30, high: 225, radius_fraction: 0.25}
+    severity_2: {low: 60, high: 195, radius_fraction: 0.35}
+    severity_3: {low: 90, high: 165, radius_fraction: 0.45}
+    mask_policy: "spatial_binary_mask"
+  local_illumination_abnormality:
+    method: "spatial_gaussian_gradient_spot"
+    severity_1: {amplitude: 60.0, sigma_fraction: 0.20}
+    severity_2: {amplitude: 100.0, sigma_fraction: 0.30}
+    severity_3: {amplitude: 150.0, sigma_fraction: 0.40}
+    mask_policy: "spatial_binary_mask"
+  acquisition_perturbation:
+    method: "gamma_nonlinearity_with_scanline_ripple"
+    severity_1: {gamma: 1.5, ripple_amplitude: 10.0, period: 16}
+    severity_2: {gamma: 2.0, ripple_amplitude: 20.0, period: 8}
+    severity_3: {gamma: 2.8, ripple_amplitude: 35.0, period: 4}
+    mask_policy: "none"
+  charging_like_synthetic_artifact:
+    method: "horizontal_streak_saturation_and_lateral_distortion"
+    severity_1: {height_fraction: 0.08, intensity_boost: 80.0, shift_pixels: 0}
+    severity_2: {height_fraction: 0.15, intensity_boost: 140.0, shift_pixels: 4}
+    severity_3: {height_fraction: 0.25, intensity_boost: 200.0, shift_pixels: 8}
+    mask_policy: "spatial_binary_mask"
+
+localization_benchmark:
+  evaluated_categories:
+    - OVEREXPOSURE
+    - UNDEREXPOSURE
+    - CLIPPING
+    - LOCAL_ILLUMINATION_ABNORMALITY
+    - CHARGING_LIKE_SYNTHETIC_ARTIFACT
+  primary_method: "patch_grid_dissimilarity_saliency"
+  metrics:
+    - IoU
+    - Dice
+    - pixel_precision
+    - pixel_recall
+
+ood_screening:
+  in_distribution: "HCCI"
+  ood_dataset: "Carinthia"
+  ood_sample_count: 100
+  ood_split: "test"
+  metric: "nearest_neighbor_embedding_distance"
+
+models:
+  system_a: "Handcrafted Computational Quality Indicators (10 metrics)"
+  system_b: "Frozen DINOv2 ViT-S/14 Embeddings (384-d)"
+  system_c: "Phase-4 Acquisition-Robust Adapted Representations (3-Seed Mean)"
+
+random_seeds:
+  global_seed: 42
+  generator_seed: 42
+  model_seeds: [42, 123, 2024]

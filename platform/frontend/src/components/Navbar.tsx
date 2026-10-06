@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Activity, ShieldCheck, Database, LogOut, LogIn, Microscope } from "lucide-react";
+import { Activity, Database, LogOut, Microscope, Sun, Moon } from "lucide-react";
 import { ApiClient } from "../api/client";
+import { Theme, getStoredTheme, applyTheme } from "../utils/theme";
 
 interface NavbarProps {
   user: any;
@@ -11,17 +12,28 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
   const [dbStatus, setDbStatus] = useState<string>("checking");
   const [faissCount, setFaissCount] = useState<number | null>(null);
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
+    const active = getStoredTheme();
+    setTheme(active);
+    applyTheme(active);
+
     ApiClient.getHealth()
       .then((h) => {
-        setDbStatus(h.database);
+        setDbStatus(h.database || "connected");
         setFaissCount(h.faiss_index_count);
       })
       .catch(() => {
         setDbStatus("unreachable");
       });
   }, []);
+
+  const toggleTheme = () => {
+    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    applyTheme(nextTheme);
+  };
 
   return (
     <header style={{
@@ -70,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
           gap: "8px",
           padding: "4px 10px",
           borderRadius: "var(--radius-full)",
-          backgroundColor: "rgba(16, 185, 129, 0.1)",
+          backgroundColor: "var(--status-nominal-bg)",
           border: "1px solid rgba(16, 185, 129, 0.3)",
           fontSize: "11px",
           fontWeight: 600,
@@ -87,8 +99,8 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
         </div>
       </div>
 
-      {/* Observability Telemetry & Auth */}
-      <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+      {/* Observability Telemetry, Theme Switcher & User Profile */}
+      <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
         {/* Live Vector Engine Telemetry */}
         <div style={{
           display: "flex",
@@ -123,8 +135,25 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
           </div>
         </div>
 
-        {/* User / Authentication */}
-        {user ? (
+        {/* Theme Toggle Button */}
+        <button
+          onClick={toggleTheme}
+          className="btn btn-secondary btn-sm"
+          title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            borderRadius: "var(--radius-full)",
+            padding: "5px 12px"
+          }}
+        >
+          {theme === "dark" ? <Sun size={14} color="#f59e0b" /> : <Moon size={14} color="#6366f1" />}
+          <span style={{ fontSize: "12px" }}>{theme === "dark" ? "Light" : "Dark"}</span>
+        </button>
+
+        {/* User / Authentication Pill */}
+        {user && (
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <div style={{
@@ -140,13 +169,13 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                 fontWeight: 600,
                 fontSize: "13px"
               }}>
-                {user.username.charAt(0).toUpperCase()}
+                {user.username ? user.username.charAt(0).toUpperCase() : "U"}
               </div>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text-primary)" }}>
                   {user.username}
                 </span>
-                <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
+                <span style={{ fontSize: "10px", color: "var(--text-muted)", textTransform: "uppercase" }}>
                   {user.role}
                 </span>
               </div>
@@ -162,15 +191,6 @@ export const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
               <span>Sign Out</span>
             </button>
           </div>
-        ) : (
-          <Link
-            to="/login"
-            className="btn btn-primary btn-sm"
-            style={{ display: "flex", alignItems: "center", gap: "6px" }}
-          >
-            <LogIn size={14} />
-            <span>Sign In</span>
-          </Link>
         )}
       </div>
     </header>

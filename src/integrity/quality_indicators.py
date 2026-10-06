@@ -22,24 +22,44 @@ import pandas as pd
 
 def _to_gray_array(image_input: Union[str, Path, np.ndarray, Image.Image]) -> np.ndarray:
     """Helper to convert any image input to 2D float32 numpy array in [0, 255]."""
+    arr: Optional[np.ndarray] = None
     if isinstance(image_input, np.ndarray):
-        if image_input.ndim == 2:
-            return image_input.astype(np.float32)
-        elif image_input.ndim == 3:
-            return (0.2989 * image_input[:, :, 0] + 0.5870 * image_input[:, :, 1] + 0.1140 * image_input[:, :, 2]).astype(np.float32)
-        raise ValueError(f"Unsupported array ndim: {image_input.ndim}")
-
-    if isinstance(image_input, (str, Path)):
-        img = Image.open(image_input)
+        arr = image_input
+    elif isinstance(image_input, (str, Path)):
+        try:
+            import tifffile
+            arr = tifffile.imread(str(image_input))
+        except Exception:
+            img = Image.open(image_input)
+            arr = np.asarray(img)
     elif isinstance(image_input, Image.Image):
-        img = image_input
+        arr = np.asarray(image_input)
     else:
         raise TypeError(f"Unsupported image input: {type(image_input)}")
 
-    if img.mode != "L":
-        img = img.convert("L")
+    # Handle multi-channel / extra dimensions
+    if arr.ndim == 3:
+        if arr.shape[2] in (3, 4):
+            arr = 0.2989 * arr[:, :, 0] + 0.5870 * arr[:, :, 1] + 0.1140 * arr[:, :, 2]
+        else:
+            arr = arr[:, :, 0]
+    elif arr.ndim > 3:
+        arr = np.squeeze(arr)
+        if arr.ndim > 2:
+            arr = arr[0]
 
-    return np.asarray(img, dtype=np.float32)
+    arr = arr.astype(np.float32)
+
+    # If the array was 16-bit or values exceed 255, scale gracefully to [0, 255]
+    if arr.max() > 255.0:
+        p_low, p_high = np.percentile(arr, (0.1, 99.9))
+        if p_high > p_low:
+            norm = (arr - p_low) / (p_high - p_low) * 255.0
+            return np.clip(norm, 0.0, 255.0).astype(np.float32)
+        else:
+            return np.zeros_like(arr, dtype=np.float32)
+
+    return arr
 
 
 def compute_laplacian_variance(image_input: Union[str, Path, np.ndarray, Image.Image]) -> float:

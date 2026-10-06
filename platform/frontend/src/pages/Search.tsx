@@ -23,6 +23,7 @@ export const Search: React.FC = () => {
   const [useHybrid, setUseHybrid] = useState(false);
   const [instrumentFilter, setInstrumentFilter] = useState("");
 
+  const [representation, setRepresentation] = useState<"dinov2_base" | "phase4_adapted">("dinov2_base");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [latencyMs, setLatencyMs] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
@@ -48,9 +49,9 @@ export const Search: React.FC = () => {
         const metaQuery: Record<string, any> = {};
         if (modality) metaQuery["modality"] = modality;
         if (instrumentFilter) metaQuery["instrument"] = instrumentFilter;
-        data = await ApiClient.searchHybrid(qId, metaQuery, topK);
+        data = await ApiClient.searchHybrid(qId, metaQuery, topK, representation);
       } else {
-        data = await ApiClient.searchByVector(qId, topK, modality || undefined);
+        data = await ApiClient.searchByVector(qId, topK, modality || undefined, representation);
       }
       setLatencyMs(performance.now() - start);
       setResults(data);
@@ -102,7 +103,7 @@ export const Search: React.FC = () => {
       {/* Query Formulation Form */}
       <div className="card">
         <form onSubmit={handleSearch} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 140px auto", gap: "16px", alignItems: "end" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 220px 120px auto", gap: "16px", alignItems: "end" }}>
             <div>
               <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
                 Query Micrograph ID *
@@ -119,6 +120,21 @@ export const Search: React.FC = () => {
 
             <div>
               <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+                Representation Architecture
+              </label>
+              <select
+                value={representation}
+                onChange={(e) => setRepresentation(e.target.value as any)}
+                className="input-field"
+                style={{ height: "40px" }}
+              >
+                <option value="dinov2_base">DINOv2 Foundation (Visual Quality)</option>
+                <option value="phase4_adapted">Phase 4 Adapter (Acquisition-Aware)</option>
+              </select>
+            </div>
+
+            <div>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
                 Top-K Returns
               </label>
               <input
@@ -128,6 +144,7 @@ export const Search: React.FC = () => {
                 value={topK}
                 onChange={(e) => setTopK(Number(e.target.value))}
                 className="input-field"
+                style={{ height: "40px" }}
               />
             </div>
 
@@ -138,7 +155,7 @@ export const Search: React.FC = () => {
               style={{ height: "40px" }}
             >
               <SearchIcon size={16} />
-              <span>{loading ? "Searching FAISS..." : "Execute Search"}</span>
+              <span>{loading ? "Searching..." : "Execute Search"}</span>
             </button>
           </div>
 
@@ -293,7 +310,7 @@ export const Search: React.FC = () => {
                         <td className="font-mono">{targetDetail.quality ? `${(targetDetail.quality.composite_quality_risk * 100).toFixed(1)}%` : "—"}</td>
                         <td>
                           {Math.abs((queryDetail.quality?.composite_quality_risk || 0) - (targetDetail.quality?.composite_quality_risk || 0)) < 0.1
-                            ? "Consistent Physical Quality"
+                            ? "Consistent Image-Derived Quality Risk"
                             : "Varying Signal Degradation"}
                         </td>
                       </tr>

@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Create non-root system user and group
+RUN groupadd -g 10001 appuser && \
+    useradd -u 10001 -g appuser -s /bin/sh -m appuser
+
 # Install python dependencies
 COPY platform/backend/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -19,10 +23,13 @@ COPY platform/backend/app /app/app
 COPY src /app/src
 COPY configs /app/configs
 
-# Create storage hierarchy
-RUN mkdir -p /app/platform/storage/originals /app/platform/storage/thumbnails /app/platform/storage/indexes
+# Create storage hierarchy and grant ownership to appuser
+RUN mkdir -p /app/platform/storage/originals /app/platform/storage/thumbnails /app/platform/storage/indexes && \
+    chown -R appuser:appuser /app
 
 ENV PYTHONPATH="/app:/app/app"
+
+USER appuser
 
 EXPOSE 8000
 

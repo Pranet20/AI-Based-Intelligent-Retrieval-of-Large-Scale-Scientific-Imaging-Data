@@ -1,0 +1,75 @@
+# SCI-INTEL: Scientific Imaging Intelligence Platform
+# Protocol: Acquisition Robustness Freeze 1
+# Authoritative Benchmark Specification for RQ2 Representation Geometry & Retrieval Preservation
+
+protocol_version: "1.0.0"
+date_created: "2026-10-05"
+status: "FROZEN"
+experiment_name: "acquisition_robustness_freeze_1"
+
+references:
+  dataset: "HCCI (High-Contrast Carbon/Inclusion SEM Dataset)"
+  image_manifest: "research/final_manifests/FINAL_IMAGE_MANIFEST.json"
+  image_manifest_sha256: "6c2627c65fef8df0a78cd55f5b41dbc47fc3a043651bebb20a3d540765adbbe5"
+  split_manifest: "research/final_manifests/FINAL_SPLIT_MANIFEST.json"
+  split_manifest_sha256: "c3844112cb3e2cfdfe7d8f826496e7a81cea5700113b540b8ad093c689d5018e"
+  phase2_query_manifest: "research/experiments/freeze1/query_manifest.json"
+  phase2_retrieval_report: "research/experiments/freeze1/RETRIEVAL_FREEZE_1_REPORT.md"
+  phase4_provenance_audit: "research/experiments/freeze1/PHASE4_TRAINING_PROVENANCE.md"
+
+checkpoints:
+  seed_42:
+    path: "data/processed/phase4/checkpoints/best_checkpoint_seed42.pt"
+    sha256: "53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62"
+    head_type: "linear"
+  seed_123:
+    path: "data/processed/phase4/checkpoints/best_checkpoint_seed123.pt"
+    sha256: "391fd18c95599a6956018be60b6dc8780be4b8154b899f7807c1c3950a0a931f"
+    head_type: "mlp"
+  seed_2024:
+    path: "data/processed/phase4/checkpoints/best_checkpoint_seed2024.pt"
+    sha256: "c5ebbc7187dd1e643fb4e59ee77b0ab4b49e8aacd9cb4647733a92258e0d8f7b"
+    head_type: "mlp"
+
+pair_construction_rules:
+  within_acquisition:
+    specimen_match: "equal"
+    acquisition_match: "equal"
+    sha_exclusion: "distinct"
+    phash_threshold: 3
+    phash_rule: "phash_distance > 3"
+  cross_acquisition:
+    specimen_match: "equal"
+    acquisition_match: "distinct"
+    sha_exclusion: "distinct"
+    phash_threshold: 3
+    phash_rule: "phash_distance > 3"
+
+primary_metrics:
+  acquisition_geometry_gap: "mean(within_acquisition_similarity) - mean(cross_acquisition_similarity)"
+  gap_reduction_percentage: "((delta_baseline - delta_adapted) / delta_baseline) * 100"
+
+stratifications:
+  detectors: ["SE", "BSE", "InLens"]
+  voltages: [5.0, 10.0, 20.0]
+  cross_acquisition_transitions: true
+
+retrieval_preservation:
+  dataset: "Held-Out Zeiss Gemini Test Split (N=212 queries)"
+  metrics: ["R@1", "R@5", "R@10", "MRR", "P@5"]
+  alignment_requirement: "Must match or confirm Phase 2 frozen benchmark results"
+
+statistical_testing:
+  method: "paired_specimen_level_bootstrap"
+  confidence_level: 0.95
+  n_resamples: 1000
+  random_seed: 42
+  hypothesis_test: "wilcoxon_signed_rank"
+
+historical_benchmarks:
+  within_similarity: 0.7973
+  cross_similarity: 0.5979
+  gap: 0.1994
+  adapted_gap: 0.0635
+  reduction_pct: 68.15
+  p_value: 1.42e-12

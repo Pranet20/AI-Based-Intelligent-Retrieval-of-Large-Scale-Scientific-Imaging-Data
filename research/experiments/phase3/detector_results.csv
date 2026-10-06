@@ -1,0 +1,4 @@
+detector,subset_definition,n_within,n_cross,dinov2_within,dinov2_cross,dinov2_gap,seed42_gap,seed123_gap,seed2024_gap,adapter_mean_within,adapter_mean_cross,adapter_mean_gap,gap_reduction_pct
+BSE,Same-Detector Cross-Acquisition Pairs,80,688,0.7969,0.6646,0.1323,0.0491,0.0371,0.039,0.9143,0.8725,0.0417,68.45
+InLens,Same-Detector Cross-Acquisition Pairs,88,678,0.7257,0.602,0.1237,0.0451,0.0357,0.0342,0.8832,0.8448,0.0384,69.0
+SE,Same-Detector Cross-Acquisition Pairs,85,684,0.8234,0.7057,0.1178,0.0447,0.0323,0.0368,0.9292,0.8912,0.0379,67.8

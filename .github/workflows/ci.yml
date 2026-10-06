@@ -91,7 +91,7 @@ jobs:
           CI=false npm run build
 
   container-build:
-    name: Container Build Verification
+    name: Container Build & Runtime Smoke Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -100,3 +100,25 @@ jobs:
       - name: Validate Docker Compose Configuration
         run: |
           docker compose config
+
+      - name: Build Container Stack
+        run: |
+          docker compose build
+
+      - name: Start Services
+        run: |
+          docker compose up -d
+
+      - name: Verify Service Health & Connectivity
+        run: |
+          sleep 15
+          docker compose ps
+          curl -f http://localhost:8000/api/v1/health || exit 1
+          curl -f http://localhost:8000/api/v1/readiness || exit 1
+          curl -f http://localhost:3000/ || exit 1
+          curl -f http://localhost:3000/api/v1/health || exit 1
+
+      - name: Teardown Services
+        if: always()
+        run: |
+          docker compose down -v

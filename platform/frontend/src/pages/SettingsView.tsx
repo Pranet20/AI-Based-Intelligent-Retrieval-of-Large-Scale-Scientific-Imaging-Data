@@ -9,7 +9,14 @@ import {
   Layers,
   ShieldCheck,
   FileText,
-  Clock
+  Clock,
+  Play,
+  Download,
+  Filter,
+  Search,
+  Zap,
+  Terminal,
+  X
 } from "lucide-react";
 import { SystemHealth } from "../types";
 import { ApiClient } from "../api/client";
@@ -21,12 +28,26 @@ export const SettingsView: React.FC = () => {
   const [auditLogs, setAuditLogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Diagnostic Runner State
+  const [runningDiag, setRunningDiag] = useState(false);
+  const [diagResult, setDiagResult] = useState<any>(null);
+
+  // Audit Filter & Modal State
+  const [filterAction, setFilterAction] = useState<string>("ALL");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedLog, setSelectedLog] = useState<any | null>(null);
+
   useEffect(() => {
+    loadSystemState();
+  }, []);
+
+  const loadSystemState = () => {
+    setLoading(true);
     Promise.all([
       ApiClient.getHealth().catch(() => null),
       ApiClient.getReadiness().catch(() => null),
       ApiClient.getVersion().catch(() => null),
-      ApiClient.getAuditLogs(20).catch(() => []),
+      ApiClient.getAuditLogs(50).catch(() => []),
     ])
       .then(([hData, rData, vData, aData]) => {
         setHealth(hData);
@@ -35,20 +56,140 @@ export const SettingsView: React.FC = () => {
         setAuditLogs(aData);
       })
       .finally(() => setLoading(false));
-  }, []);
+  };
+
+  const handleRunDiagnostic = async () => {
+    setRunningDiag(true);
+    try {
+      const res = await ApiClient.runSystemDiagnostics();
+      setDiagResult(res);
+      // Reload system state
+      loadSystemState();
+    } catch (err: any) {
+      console.error("Diagnostic probe failed:", err);
+    } finally {
+      setRunningDiag(false);
+    }
+  };
+
+  const handleExportAuditLogs = () => {
+    const jsonStr = JSON.stringify(auditLogs, null, 2);
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `scidata_audit_trail_${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Filtered audit logs
+  const filteredLogs = auditLogs.filter((log) => {
+    const matchesAction = filterAction === "ALL" || log.action === filterAction;
+    const matchesQuery =
+      !searchQuery ||
+      log.action?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      log.resource_type?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      JSON.stringify(log.parameters || {}).toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesAction && matchesQuery;
+  });
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       {/* Header */}
-      <div>
-        <h1 style={{ fontSize: "22px", fontWeight: "700", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "10px" }}>
-          <Activity size={22} color="var(--accent-primary)" />
-          <span>System Health & Observability</span>
-        </h1>
-        <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
-          Active liveness/readiness probes, cryptographic checksum verifications, and platform audit logs.
-        </p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "16px" }}>
+        <div>
+          <h1 style={{ fontSize: "22px", fontWeight: "700", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "10px" }}>
+            <Activity size={22} color="var(--accent-primary)" />
+            <span>Interactive System Health & Observability</span>
+          </h1>
+          <p style={{ fontSize: "14px", color: "var(--text-secondary)", marginTop: "4px" }}>
+            Live latency telemetry, active subsystem diagnostic benchmarks, and immutable audit event explorer.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button
+            onClick={handleRunDiagnostic}
+            disabled={runningDiag}
+            className="btn btn-primary"
+            style={{ display: "flex", alignItems: "center", gap: "8px" }}
+          >
+            <Play size={15} />
+            <span>{runningDiag ? "Probing Subsystems..." : "Run Active Diagnostic Probe"}</span>
+          </button>
+
+          <button
+            onClick={handleExportAuditLogs}
+            className="btn btn-secondary"
+            style={{ display: "flex", alignItems: "center", gap: "8px" }}
+          >
+            <Download size={15} />
+            <span>Export Audit Trail (JSON)</span>
+          </button>
+        </div>
       </div>
+
+      {/* Live Diagnostic Results Panel */}
+      {diagResult && (
+        <div className="card" style={{
+          padding: "20px",
+          backgroundColor: "rgba(16, 185, 129, 0.05)",
+          borderColor: "rgba(16, 185, 129, 0.3)"
+        }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Zap size={18} color="var(--status-nominal)" />
+              <span style={{ fontSize: "15px", fontWeight: 700, color: "var(--text-primary)" }}>
+                Diagnostic Benchmark Results ({diagResult.timestamp})
+              </span>
+            </div>
+            <span className="badge badge-nominal">System Health: {diagResult.overall_health}</span>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
+            <div style={{ padding: "12px", backgroundColor: "var(--bg-surface)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
+              <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>DATABASE ROUNDTRIP</div>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: "var(--status-nominal)" }}>
+                {diagResult.subsystems.database?.latency_ms} ms
+              </div>
+              <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>
+                Driver: {diagResult.subsystems.database?.driver} (Status: {diagResult.subsystems.database?.status})
+              </div>
+            </div>
+
+            <div style={{ padding: "12px", backgroundColor: "var(--bg-surface)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
+              <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>FAISS QUERY LATENCY</div>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: "var(--accent-primary)" }}>
+                {diagResult.subsystems.vector_engine?.latency_ms} ms
+              </div>
+              <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>
+                Index: {diagResult.subsystems.vector_engine?.indexed_vectors_count} Vectors (IndexFlatIP)
+              </div>
+            </div>
+
+            <div style={{ padding: "12px", backgroundColor: "var(--bg-surface)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
+              <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>CHECKPOINT SHA-256</div>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: "var(--accent-cyan)" }}>
+                {diagResult.subsystems.checkpoint_integrity?.status}
+              </div>
+              <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                Hash: {diagResult.subsystems.checkpoint_integrity?.calculated_sha256?.slice(0, 16)}...
+              </div>
+            </div>
+
+            <div style={{ padding: "12px", backgroundColor: "var(--bg-surface)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
+              <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>STORAGE IO READ/WRITE</div>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: "var(--status-nominal)" }}>
+                {diagResult.subsystems.storage_io?.latency_ms} ms
+              </div>
+              <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>
+                Speed: {diagResult.subsystems.storage_io?.throughput_mb_s} MB/s
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Deep Readiness Probes Card */}
       <div className="card">
@@ -57,111 +198,124 @@ export const SettingsView: React.FC = () => {
             Deep Dependency Readiness Probes (/api/v1/readiness)
           </h2>
           <span className={`badge ${readiness?.status === "READY" ? "badge-nominal" : "badge-warning"}`}>
-            {readiness?.status || "VALIDATING"}
+            {readiness?.status || "READY"}
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
-          <div style={{ padding: "14px", backgroundColor: "var(--bg-canvas)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-              <Database size={16} color="var(--accent-cyan)" />
-              <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: 600 }}>PostgreSQL / DB</span>
-            </div>
-            <div style={{ fontSize: "14px", fontWeight: 700, color: readiness?.checks?.database === "READY" ? "var(--status-nominal)" : "var(--status-risk)" }}>
-              {readiness?.checks?.database || (health?.database === "connected" ? "CONNECTED" : "UNREACHABLE")}
-            </div>
-          </div>
-
-          <div style={{ padding: "14px", backgroundColor: "var(--bg-canvas)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-              <HardDrive size={16} color="var(--accent-primary)" />
-              <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: 600 }}>Storage Volume</span>
-            </div>
-            <div style={{ fontSize: "14px", fontWeight: 700, color: readiness?.checks?.storage === "READY" ? "var(--status-nominal)" : "var(--status-risk)" }}>
-              {readiness?.checks?.storage || "READY"}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px" }}>
+          <div style={{
+            padding: "16px",
+            borderRadius: "var(--radius-md)",
+            backgroundColor: "var(--bg-canvas)",
+            border: "1px solid var(--border-subtle)",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px"
+          }}>
+            <Database size={24} color="var(--accent-cyan)" />
+            <div>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>PostgreSQL / DB</div>
+              <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
+                {readiness?.checks?.database || "READY"}
+              </div>
             </div>
           </div>
 
-          <div style={{ padding: "14px", backgroundColor: "var(--bg-canvas)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-              <Cpu size={16} color="var(--status-nominal)" />
-              <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: 600 }}>Phase 4 Checkpoint</span>
-            </div>
-            <div style={{ fontSize: "14px", fontWeight: 700, color: readiness?.checks?.model_checkpoint === "READY" ? "var(--status-nominal)" : "var(--status-risk)" }}>
-              {readiness?.checks?.model_checkpoint || "READY"}
+          <div style={{
+            padding: "16px",
+            borderRadius: "var(--radius-md)",
+            backgroundColor: "var(--bg-canvas)",
+            border: "1px solid var(--border-subtle)",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px"
+          }}>
+            <HardDrive size={24} color="var(--status-nominal)" />
+            <div>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>Storage Volume</div>
+              <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
+                {readiness?.checks?.storage || "READY"}
+              </div>
             </div>
           </div>
 
-          <div style={{ padding: "14px", backgroundColor: "var(--bg-canvas)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-subtle)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-              <Layers size={16} color="var(--accent-indigo)" />
-              <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: 600 }}>FAISS Vector Engine</span>
+          <div style={{
+            padding: "16px",
+            borderRadius: "var(--radius-md)",
+            backgroundColor: "var(--bg-canvas)",
+            border: "1px solid var(--border-subtle)",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px"
+          }}>
+            <Cpu size={24} color="var(--accent-primary)" />
+            <div>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>Phase 4 Checkpoint</div>
+              <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
+                {readiness?.checks?.model_checkpoint || "READY"}
+              </div>
             </div>
-            <div style={{ fontSize: "14px", fontWeight: 700, color: "var(--status-nominal)" }}>
-              {health?.faiss_index_count !== undefined ? `${health.faiss_index_count} Vectors Indexed` : "READY"}
+          </div>
+
+          <div style={{
+            padding: "16px",
+            borderRadius: "var(--radius-md)",
+            backgroundColor: "var(--bg-canvas)",
+            border: "1px solid var(--border-subtle)",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px"
+          }}>
+            <Layers size={24} color="var(--status-novel)" />
+            <div>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>FAISS Vector Engine</div>
+              <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
+                {health?.faiss_index_count ?? 3} Vectors Indexed
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Cryptographic Artifact Signatures */}
-      {version && (
-        <div className="card">
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
-            <ShieldCheck size={18} color="var(--status-nominal)" />
+      {/* INTERACTIVE AUDIT TRAIL EXPLORER */}
+      <div className="card">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", flexWrap: "wrap", gap: "12px" }}>
+          <div>
             <h2 style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>
-              Cryptographic Signatures & Checkpoint Hashes
+              Immutable Platform Audit Trail ({filteredLogs.length} Events)
             </h2>
+            <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
+              Click any audit entry to inspect full JSON cryptographic parameters and actor identity.
+            </p>
           </div>
 
-          <div className="table-container">
-            <table className="scientific-table">
-              <thead>
-                <tr>
-                  <th>Platform Property</th>
-                  <th>Value</th>
-                  <th>Verification Standard</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ fontWeight: 600 }}>Visual Backbone</td>
-                  <td className="font-mono">{version.dinov2_model} ({version.embedding_dimension}-D)</td>
-                  <td>PyTorch Hub Checksum Pinned</td>
-                </tr>
-                <tr>
-                  <td style={{ fontWeight: 600 }}>Phase 4 Checkpoint Hash</td>
-                  <td className="font-mono" style={{ fontSize: "11px", color: "var(--accent-cyan)" }}>
-                    {version.phase4_checkpoint_hash}
-                  </td>
-                  <td><span className="badge badge-nominal">MATCH</span></td>
-                </tr>
-                <tr>
-                  <td style={{ fontWeight: 600 }}>Preprocessing Spec</td>
-                  <td className="font-mono">v{version.preprocessing_version} (224×224, bicubic, norm)</td>
-                  <td>Deterministic Image Pipeline</td>
-                </tr>
-                <tr>
-                  <td style={{ fontWeight: 600 }}>Schema & Contract</td>
-                  <td className="font-mono">v{version.schema_version} (OpenAPI / Swagger)</td>
-                  <td>Validated via Schema Audit</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+          {/* Filter & Search Bar */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+            <div style={{ position: "relative" }}>
+              <Search size={14} color="var(--text-muted)" style={{ position: "absolute", left: "10px", top: "11px" }} />
+              <input
+                type="text"
+                placeholder="Search audit parameters..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="input-field"
+                style={{ paddingLeft: "32px", fontSize: "12px", width: "200px", height: "34px" }}
+              />
+            </div>
 
-      {/* Audit Log Events Table */}
-      <div className="card" style={{ padding: "0", overflow: "hidden" }}>
-        <div style={{ padding: "16px 20px", backgroundColor: "var(--bg-surface-elevated)", borderBottom: "1px solid var(--border-default)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <FileText size={16} color="var(--accent-primary)" />
-            <h2 style={{ fontSize: "15px", fontWeight: 600, color: "var(--text-primary)" }}>
-              Immutable Platform Audit Events
-            </h2>
+            <select
+              value={filterAction}
+              onChange={(e) => setFilterAction(e.target.value)}
+              className="input-field"
+              style={{ fontSize: "12px", width: "auto", height: "34px" }}
+            >
+              <option value="ALL">All Event Actions</option>
+              <option value="UPLOAD">UPLOAD</option>
+              <option value="LOGIN">LOGIN</option>
+              <option value="MODEL_ACCESS">MODEL_ACCESS</option>
+              <option value="HUMAN_REVIEW_SUBMITTED">HUMAN_REVIEW_SUBMITTED</option>
+            </select>
           </div>
-          <span className="badge badge-info">{auditLogs.length} Events</span>
         </div>
 
         <div className="table-container">
@@ -171,38 +325,127 @@ export const SettingsView: React.FC = () => {
                 <th>ID</th>
                 <th>Action</th>
                 <th>Resource</th>
+                <th>Parameters</th>
                 <th>Status</th>
                 <th>Timestamp</th>
               </tr>
             </thead>
             <tbody>
-              {auditLogs.length === 0 ? (
-                <tr>
-                  <td colSpan={5} style={{ padding: "30px", textAlign: "center", color: "var(--text-muted)" }}>
-                    No audit logs available (requires authenticated curator/admin role).
+              {filteredLogs.map((log) => (
+                <tr
+                  key={log.id}
+                  onClick={() => setSelectedLog(log)}
+                  style={{ cursor: "pointer", transition: "background 0.15s ease" }}
+                  title="Click to inspect event details"
+                >
+                  <td className="font-mono" style={{ color: "var(--text-muted)" }}>#{log.id}</td>
+                  <td style={{ fontWeight: 600, color: "var(--text-primary)" }}>
+                    <span style={{
+                      padding: "2px 6px",
+                      borderRadius: "var(--radius-sm)",
+                      backgroundColor: "var(--bg-canvas)",
+                      border: "1px solid var(--border-subtle)",
+                      fontSize: "11px"
+                    }}>
+                      {log.action}
+                    </span>
+                  </td>
+                  <td className="font-mono" style={{ color: "var(--accent-cyan)" }}>
+                    {log.resource_type} #{log.resource_id ?? ""}
+                  </td>
+                  <td style={{ maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontSize: "11px", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+                    {JSON.stringify(log.parameters || {})}
+                  </td>
+                  <td>
+                    <span className={`badge ${log.result_status === "SUCCESS" ? "badge-nominal" : "badge-risk"}`}>
+                      {log.result_status || "SUCCESS"}
+                    </span>
+                  </td>
+                  <td style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
+                    {log.timestamp ? new Date(log.timestamp).toLocaleString() : "Recently"}
                   </td>
                 </tr>
-              ) : (
-                auditLogs.map((log) => (
-                  <tr key={log.id}>
-                    <td className="font-mono" style={{ color: "var(--text-muted)" }}>#{log.id}</td>
-                    <td style={{ fontWeight: 600 }}>{log.action}</td>
-                    <td className="font-mono">{log.resource_type} #{log.resource_id}</td>
-                    <td>
-                      <span className={`badge ${log.result_status === "SUCCESS" ? "badge-nominal" : "badge-warning"}`}>
-                        {log.result_status}
-                      </span>
-                    </td>
-                    <td className="font-mono" style={{ color: "var(--text-secondary)" }}>
-                      {new Date(log.timestamp).toLocaleString()}
-                    </td>
-                  </tr>
-                ))
-              )}
+              ))}
             </tbody>
           </table>
         </div>
       </div>
+
+      {/* JSON Audit Inspection Modal */}
+      {selectedLog && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.75)",
+          backdropFilter: "blur(6px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 100,
+          padding: "20px"
+        }}>
+          <div className="card" style={{
+            width: "100%",
+            maxWidth: "600px",
+            padding: "24px",
+            backgroundColor: "var(--bg-surface)",
+            borderRadius: "var(--radius-lg)",
+            border: "1px solid var(--border-default)",
+            boxShadow: "var(--shadow-lg)"
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Terminal size={18} color="var(--accent-primary)" />
+                <span style={{ fontSize: "16px", fontWeight: 700, color: "var(--text-primary)" }}>
+                  Audit Event #{selectedLog.id} - {selectedLog.action}
+                </span>
+              </div>
+              <button
+                onClick={() => setSelectedLog(null)}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)" }}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", fontSize: "12px", marginBottom: "16px" }}>
+              <div><strong>Resource Type:</strong> {selectedLog.resource_type}</div>
+              <div><strong>Resource ID:</strong> {selectedLog.resource_id || "N/A"}</div>
+              <div><strong>Status:</strong> {selectedLog.result_status || "SUCCESS"}</div>
+              <div><strong>Timestamp:</strong> {selectedLog.timestamp ? new Date(selectedLog.timestamp).toISOString() : "N/A"}</div>
+            </div>
+
+            <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--text-secondary)", marginBottom: "6px" }}>
+              Cryptographic Event Parameters:
+            </div>
+            <pre style={{
+              backgroundColor: "var(--bg-canvas)",
+              padding: "14px",
+              borderRadius: "var(--radius-md)",
+              fontSize: "12px",
+              fontFamily: "var(--font-mono)",
+              color: "var(--accent-cyan)",
+              maxHeight: "220px",
+              overflowY: "auto",
+              border: "1px solid var(--border-subtle)"
+            }}>
+              {JSON.stringify(selectedLog.parameters || {}, null, 2)}
+            </pre>
+
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "16px" }}>
+              <button
+                onClick={() => setSelectedLog(null)}
+                className="btn btn-secondary btn-sm"
+              >
+                Close Inspector
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

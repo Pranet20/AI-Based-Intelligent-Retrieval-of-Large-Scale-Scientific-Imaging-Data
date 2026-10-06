@@ -1,0 +1,49 @@
+protocol_name: "phase5_evidence_explanation"
+protocol_version: "1.0.0"
+date_created: "2026-10-06"
+governance: "IEEE Research Reproducibility Standards"
+
+research_question: >
+  Can retrieval, quality-risk screening, localization, acquisition metadata,
+  uncertainty, and comparable-image evidence be combined into a structured,
+  interpretable evidence chain for scientific microscopy curation?
+
+pipeline_architecture:
+  stages:
+    - name: "QUALITY_RISK_ENGINE"
+      description: "Computes physical indicators, artifact classification probabilities, and uncertainty metrics."
+    - name: "SUSPICIOUS_REGION_LOCALIZATION"
+      description: "Extracts model-derived suspicious regions, bounding envelopes, and patch saliency."
+      naming_standard: "model-derived suspicious region (never confirmed defect location)"
+    - name: "ACQUISITION_CONTEXT_GOVERNANCE"
+      description: "Extracts instrument, detector, voltage, and magnification with strict null preservation."
+      null_policy: "Missing metadata must remain NULL / UNKNOWN. Silent substitution prohibited."
+    - name: "ACQUISITION_AWARE_RETRIEVAL"
+      description: "Retrieves top-k comparable database images, cross-instrument peers, and artifact exemplars."
+    - name: "EVIDENCE_RANKING_AGGREGATION"
+      description: "Ranks evidence by calibrated similarity and packages into an immutable, hashed record."
+    - name: "STRUCTURED_INTERPRETATION"
+      description: "Deterministic schema mapping of evidence items to scientific conclusions without LLMs."
+    - name: "SUGGESTED_REVIEW_ACTION"
+      description: "Deterministic mapping to operational microscopy parameters or UNCERTAIN/ABSTAIN routing."
+    - name: "HUMAN_SCIENTIST_REVIEW"
+      description: "Formats actionable decision-support payload for expert microscope specialist triage."
+
+operational_thresholds:
+  confidence_abstain_threshold: 0.40
+  entropy_abstain_threshold: 0.75
+  prediction_margin_threshold: 0.10
+  saliency_threshold: 0.50
+  retrieval_top_k: 5
+
+governance_rules:
+  modify_frozen_phases: false
+  llm_decision_maker: false
+  causal_diagnosis_claims: false
+  medical_clinical_claims: false
+  synthetic_as_physical_claims: false
+  unsupported_corrective_actions: false
+  require_traceable_evidence: true
+  require_provenance_tracking: true
+  require_abstention_support: true
+  require_strict_null_preservation: true

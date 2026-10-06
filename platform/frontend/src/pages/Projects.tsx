@@ -95,7 +95,7 @@ export const Projects: React.FC = () => {
             <span>Dataset & Micrograph Explorer</span>
           </h1>
           <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
-            Explore scientific imaging collections, inspect physical metadata, and filter by diagnostic risk indicators.
+            Explore scientific imaging collections, inspect acquisition metadata, and filter by diagnostic risk indicators.
           </p>
         </div>
 

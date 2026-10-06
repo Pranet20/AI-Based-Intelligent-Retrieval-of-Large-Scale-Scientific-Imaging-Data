@@ -1,0 +1,122 @@
+# SCI-INTEL: Scientific Imaging Intelligence Platform
+# Protocol: Retrieval Freeze 1 (Controlled Acquisition-Aware Retrieval Benchmark)
+# Authoritative Benchmark Specification
+
+protocol_version: "1.0.0"
+date_created: "2026-10-05"
+status: "FROZEN"
+benchmark_name: "retrieval_freeze_1_controlled_benchmark"
+
+references:
+  dataset_manifest: "research/final_manifests/FINAL_DATASET_MANIFEST.json"
+  image_manifest: "research/final_manifests/FINAL_IMAGE_MANIFEST.json"
+  image_manifest_sha256: "6c2627c65fef8df0a78cd55f5b41dbc47fc3a043651bebb20a3d540765adbbe5"
+  license_manifest: "research/final_manifests/FINAL_LICENSE_MANIFEST.json"
+  split_manifest: "research/final_manifests/FINAL_SPLIT_MANIFEST.json"
+
+split_specification:
+  dataset: "HCCI"
+  total_active_images: 774
+  train_count: 427
+  train_instruments:
+    - "Helios NanoLab"
+    - "Helios G4 PFIB CXe"
+  validation_count: 135
+  validation_instruments:
+    - "VEGA3 XMH"
+  test_count: 212
+  test_instruments:
+    - "Zeiss Gemini"
+  specimen_leakage_audit:
+    train_test_id_overlap: 0
+    train_test_sha_overlap: 0
+    train_test_near_duplicate_overlap: 0
+    train_specimens: ["AsCast", "Q980_0h_WC", "Q980_9h_AC"]
+    test_specimens: ["AsCast", "Q980_0h_WC", "Q980_9h_AC"]
+    specimen_overlap_count: 3
+    task_classification: "ACQUISITION_ROBUST_SAME_SPECIMEN_RETRIEVAL"
+    classification_rationale: "Images in train and test share 3 physical steel alloy specimens but are acquired on completely held-out electron microscopy instruments (Zeiss Gemini held-out test vs Helios train / VEGA3 val) under varying beam acceleration voltages, detectors (SE vs BSE), and magnifications. Evaluation measures invariance to acquisition and detector modalities, NOT zero-shot novel specimen categorization."
+
+retrieval_task:
+  primary_objective: "Retrieve images of the same physical metallurgical specimen acquired under distinct imaging conditions."
+  query_definition: "All HCCI test images having at least one valid positive target in gallery (N=212)."
+  gallery_definition: "All HCCI test images excluding query image itself (N_candidates = 211 per query)."
+  positive_ground_truth:
+    rule: "candidate.specimen_id == query.specimen_id AND candidate.acquisition_id != query.acquisition_id AND phash_distance(query, candidate) > 3"
+  negative_ground_truth:
+    rule: "candidate.specimen_id != query.specimen_id OR candidate.acquisition_id == query.acquisition_id OR phash_distance(query, candidate) <= 3"
+  cutoffs: [1, 5, 10]
+
+models:
+  - id: "phash"
+    name: "Perceptual Hash (pHash-64)"
+    type: "hash"
+    dimension: 64
+    distance: "hamming"
+    ranking_order: "ascending"
+  - id: "dhash"
+    name: "Difference Hash (dHash-64)"
+    type: "hash"
+    dimension: 64
+    distance: "hamming"
+    ranking_order: "ascending"
+  - id: "resnet50"
+    name: "ResNet-50 (ImageNet-1K Pretrained)"
+    type: "deep_cnn"
+    weights: "ResNet50_Weights.DEFAULT"
+    dimension: 2048
+    normalization: "L2"
+    similarity: "cosine"
+    ranking_order: "descending"
+  - id: "dinov2_vits14"
+    name: "DINOv2 ViT-S/14 (Frozen Foundation)"
+    type: "vision_transformer"
+    weights: "dinov2_vits14_pretrain"
+    dimension: 384
+    normalization: "L2"
+    similarity: "cosine"
+    ranking_order: "descending"
+  - id: "adapter_seed42"
+    name: "Phase-4 Adapter (Seed 42)"
+    type: "adapted_representation"
+    checkpoint: "data/processed/phase4/checkpoints/best_checkpoint_seed42.pt"
+    head_type: "linear"
+    dimension: 384
+    normalization: "L2"
+    similarity: "cosine"
+    ranking_order: "descending"
+  - id: "adapter_seed123"
+    name: "Phase-4 Adapter (Seed 123)"
+    type: "adapted_representation"
+    checkpoint: "data/processed/phase4/checkpoints/best_checkpoint_seed123.pt"
+    head_type: "mlp"
+    dimension: 384
+    normalization: "L2"
+    similarity: "cosine"
+    ranking_order: "descending"
+  - id: "adapter_seed2024"
+    name: "Phase-4 Adapter (Seed 2024)"
+    type: "adapted_representation"
+    checkpoint: "data/processed/phase4/checkpoints/best_checkpoint_seed2024.pt"
+    head_type: "mlp"
+    dimension: 384
+    normalization: "L2"
+    similarity: "cosine"
+    ranking_order: "descending"
+
+evaluation_metrics:
+  recall: [1, 5, 10]
+  mrr: true
+  precision: [5]
+  statistical_confidence_intervals:
+    method: "bootstrap_percentile"
+    confidence_level: 0.95
+    n_resamples: 1000
+    random_seed: 42
+  latency_percentiles: ["mean", "p50", "p95", "p99"]
+  hardware_memory_tracking: true
+
+reproducibility:
+  deterministic_seeds: [42]
+  exact_rerun_tolerance: 1e-6
+  evidence_hash_target: "research/experiments/freeze1/FREEZE_1_EVIDENCE_HASH.txt"

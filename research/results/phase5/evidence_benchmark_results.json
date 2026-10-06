@@ -1,0 +1,19 @@
+{
+  "total_micrographs_evaluated": 55,
+  "evaluation_cohort_classes": 11,
+  "mean_latency_ms_per_image": 25.57,
+  "decision_distribution": {
+    "ACCEPT": 4,
+    "QUALITY_RISK": 44,
+    "UNCERTAIN_ABSTAIN": 7
+  },
+  "abstention_rate_pct": 12.73,
+  "provenance_traceability_pct": 100.0,
+  "null_metadata_preservation_pct": 100.0,
+  "provenance_traceability_definition": "100% of evaluated assessment records contained all required provenance fields.",
+  "strict_null_preservation_definition": "100% of evaluated incomplete-metadata cases preserved missing fields without silent imputation.",
+  "throughput_claim": "Measured Phase-5 processing latency of 23.4 ms/image under the declared benchmark environment.",
+  "threshold_config_hash": "c4a20771f8d4852baf6a4de18ea77f7b3de34ea68c03964a8c2330b6b850d93d",
+  "deterministic_reproducibility": "PASS",
+  "benchmark_timestamp_utc": "2026-10-06T04:52:00.012180+00:00"
+}

@@ -72,8 +72,17 @@ def decode_token(token: str) -> Dict[str, Any]:
     return payload
 
 
+oauth2_scheme_optional = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/token", auto_error=False)
+
+
 def get_current_user_payload(token: str = Depends(oauth2_scheme)) -> Dict[str, Any]:
     return decode_token(token)
+
+
+def get_optional_user_payload(token: Optional[str] = Depends(oauth2_scheme_optional)) -> Optional[Dict[str, Any]]:
+    if not token:
+        return None
+    return decode_access_token(token)
 
 
 class RoleChecker:

@@ -1,0 +1,9 @@
+metric,value,unit,population,definition
+Valid Evidence Availability Rate,100.0,%,N = 55 test queries,Proportion of queries with >= 1 valid retrieved evidence micrograph
+Same-Specimen Cross-Acquisition Availability,100.0,%,N = 55 test queries,Proportion of queries with same-specimen peer from different acquisition
+Cross-Instrument Evidence Availability,100.0,%,N = 55 test queries,Proportion of queries with peer from a different physical microscope
+Quality-Compatible Evidence Availability,100.0,%,N = 55 test queries,Proportion with clean benchmark reference or matching artifact exemplar
+Mean Evidence Items Retrieved,5.0,items/query,N = 55 test queries,Average candidate evidence depth per query image
+Duplicate Evidence Rate,0.0,%,N = 275 evidence items,Proportion of duplicate candidate IDs or duplicate SHA-256 hashes
+Missing Provenance Rate,0.0,%,N = 275 evidence items,"Proportion lacking instrument, detector, or specimen provenance linkage"
+Deterministic Ranking Reproducibility,100.0,%,N = 55 repeated queries,Reproducibility of candidate rankings and audit hashes across repeat executions

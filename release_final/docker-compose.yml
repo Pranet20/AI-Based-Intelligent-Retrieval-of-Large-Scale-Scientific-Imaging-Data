@@ -4,16 +4,16 @@ services:
     container_name: scidata-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: scidata_platform
-      POSTGRES_USER: scidata_user
-      POSTGRES_PASSWORD: scidata_secure_password_2026
+      POSTGRES_DB: ${POSTGRES_DB:-scidata_platform}
+      POSTGRES_USER: ${POSTGRES_USER:-scidata_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-scidata_secure_password_2026}
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./artifacts/phase8/database_schema.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U scidata_user -d scidata_platform"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-scidata_user} -d ${POSTGRES_DB:-scidata_platform}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -31,12 +31,14 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql+psycopg2://scidata_user:scidata_secure_password_2026@postgres:5432/scidata_platform
-      SECRET_KEY: scidata-super-secret-production-key-phase8-2026
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg2://${POSTGRES_USER:-scidata_user}:${POSTGRES_PASSWORD:-scidata_secure_password_2026}@postgres:5432/${POSTGRES_DB:-scidata_platform}}
+      SECRET_KEY: ${SECRET_KEY:-scidata-super-secret-production-key-phase8-2026}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      TESTING: ${TESTING:-false}
       DINOV2_MODEL_NAME: dinov2_vits14
       DINOV2_EMBEDDING_DIM: 384
       EXPECTED_PHASE4_HASH: 53ba60a317a140ceaebdf2e152dea88fd78f2a8bffbec378fc14c84010fd0e62
-      PYTHONPATH: platform/backend:.
+      PYTHONPATH: /app:/app/app
     ports:
       - "8000:8000"
     volumes:
@@ -64,7 +66,7 @@ services:
     ports:
       - "3000:80"
     healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:80/healthz || exit 1"]
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://127.0.0.1:80/healthz || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 3

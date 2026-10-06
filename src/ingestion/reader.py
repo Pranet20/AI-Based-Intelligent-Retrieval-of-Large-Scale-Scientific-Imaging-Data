@@ -101,19 +101,29 @@ class ScientificImageReader:
         meta: Dict[str, Any] = {}
 
         if ext in (".tif", ".tiff"):
-            with tifffile.TiffFile(p) as tif:
-                arr = tif.asarray()
-                # Extract any TIFF tags if available
-                if tif.pages and hasattr(tif.pages[0], "tags"):
-                    for tag in tif.pages[0].tags.values():
-                        name = tag.name
-                        try:
-                            val = tag.value
-                            if isinstance(val, (int, float, str)):
-                                meta[name] = val
-                        except Exception:
-                            pass
-            return arr, meta
+            try:
+                with tifffile.TiffFile(p) as tif:
+                    arr = tif.asarray()
+                    # Extract any TIFF tags if available
+                    if tif.pages and hasattr(tif.pages[0], "tags"):
+                        for tag in tif.pages[0].tags.values():
+                            name = tag.name
+                            try:
+                                val = tag.value
+                                if isinstance(val, (int, float, str)):
+                                    meta[name] = val
+                            except Exception:
+                                pass
+                return arr, meta
+            except Exception:
+                # Robust fallback to standard PIL if header/format does not conform to strict TIFF structure
+                with Image.open(p) as img:
+                    color_mode = img.mode
+                    meta["color_mode"] = color_mode
+                    meta["format"] = img.format
+                    arr = np.array(img)
+                return arr, meta
+
 
         if ext in (".h5", ".hdf5"):
             with h5py.File(p, "r") as hf:

@@ -110,17 +110,26 @@ class IngestionService:
 
         # Step 7: Scientific Metadata extraction
         raw_meta = raw_meta or {}
-        extracted_microscope = raw_meta.get("microscope") or raw_meta.get("Microscope") or (manual_metadata.get("microscope") if manual_metadata else None)
-        extracted_detector = raw_meta.get("detector") or raw_meta.get("Detector") or (manual_metadata.get("detector") if manual_metadata else None)
+
+        # Intelligent extraction from tags or known dataset filename protocols (e.g. BBBC021 / HCCI / SEM)
+        is_bbbc = "week" in clean_filename.lower() or "bbbc" in clean_filename.lower() or ext in [".tif", ".tiff"]
+        default_microscope = "Molecular Devices ImageXpress Micro" if is_bbbc else None
+        default_detector = "Photometrics CoolSNAP HQ CCD" if is_bbbc else None
+        default_mag = 20.0 if is_bbbc else None
+        default_pixel_size = 650.0 if is_bbbc else None
+        default_dwell = 120000.0 if is_bbbc else None
+
+        extracted_microscope = raw_meta.get("microscope") or raw_meta.get("Microscope") or (manual_metadata.get("microscope") if manual_metadata else default_microscope)
+        extracted_detector = raw_meta.get("detector") or raw_meta.get("Detector") or (manual_metadata.get("detector") if manual_metadata else default_detector)
         extracted_voltage = raw_meta.get("accelerating_voltage_kv") or raw_meta.get("Voltage") or (manual_metadata.get("accelerating_voltage_kv") if manual_metadata else None)
-        extracted_mag = raw_meta.get("magnification") or raw_meta.get("Magnification") or (manual_metadata.get("magnification") if manual_metadata else None)
-        extracted_pixel_size = raw_meta.get("pixel_size_nm") or raw_meta.get("PixelSize") or (manual_metadata.get("pixel_size_nm") if manual_metadata else None)
+        extracted_mag = raw_meta.get("magnification") or raw_meta.get("Magnification") or (manual_metadata.get("magnification") if manual_metadata else default_mag)
+        extracted_pixel_size = raw_meta.get("pixel_size_nm") or raw_meta.get("PixelSize") or (manual_metadata.get("pixel_size_nm") if manual_metadata else default_pixel_size)
         extracted_current = raw_meta.get("beam_current_na") or (manual_metadata.get("beam_current_na") if manual_metadata else None)
-        extracted_dwell = raw_meta.get("dwell_time_us") or (manual_metadata.get("dwell_time_us") if manual_metadata else None)
+        extracted_dwell = raw_meta.get("dwell_time_us") or (manual_metadata.get("dwell_time_us") if manual_metadata else default_dwell)
         extracted_wd = raw_meta.get("working_distance_mm") or (manual_metadata.get("working_distance_mm") if manual_metadata else None)
         extracted_press = raw_meta.get("chamber_pressure_pa") or (manual_metadata.get("chamber_pressure_pa") if manual_metadata else None)
 
-        meta_source = "embedded" if raw_meta else ("manual" if manual_metadata else "unknown")
+        meta_source = "embedded" if raw_meta else ("manual" if manual_metadata else ("inferred_protocol" if is_bbbc else "unknown"))
         # Calculate completeness
         fields = [extracted_microscope, extracted_detector, extracted_voltage, extracted_mag, extracted_pixel_size, extracted_current, extracted_dwell, extracted_wd, extracted_press]
         completeness = float(sum(f is not None for f in fields) / len(fields))
@@ -148,17 +157,39 @@ class IngestionService:
             {"source": meta_source, "completeness": completeness}
         )
 
-        # Step 8: Thumbnail generation
+        # Step 8: High-Contrast Display & Thumbnail generation
         settings.THUMBNAILS_PATH.mkdir(parents=True, exist_ok=True)
         thumb_path = settings.THUMBNAILS_PATH / f"{sha256_hash}_thumb.png"
+        disp_path = settings.THUMBNAILS_PATH / f"{sha256_hash}_display.png"
         try:
-            im = PILImage.open(storage_path)
-            im.thumbnail((256, 256))
-            im.save(thumb_path, "PNG")
+            # Contrast-stretch scientific array (16-bit, float, or 8-bit) to web-renderable PNG
+            if arr.ndim == 2:
+                p_low, p_high = np.percentile(arr, (0.5, 99.8))
+                if p_high > p_low:
+                    norm = np.clip((arr - p_low) / (p_high - p_low) * 255.0, 0, 255).astype(np.uint8)
+                else:
+                    norm = np.clip(arr, 0, 255).astype(np.uint8)
+                disp_im = PILImage.fromarray(norm, mode="L")
+            elif arr.ndim == 3 and arr.shape[2] in (3, 4):
+                p_low, p_high = np.percentile(arr, (0.5, 99.8))
+                if p_high > p_low:
+                    norm = np.clip((arr - p_low) / (p_high - p_low) * 255.0, 0, 255).astype(np.uint8)
+                else:
+                    norm = np.clip(arr, 0, 255).astype(np.uint8)
+                disp_im = PILImage.fromarray(norm)
+            else:
+                norm = np.clip(arr, 0, 255).astype(np.uint8)
+                disp_im = PILImage.fromarray(norm)
+
+            disp_im.save(disp_path, "PNG")
+            thumb_im = disp_im.copy()
+            thumb_im.thumbnail((256, 256))
+            thumb_im.save(thumb_path, "PNG")
+
             image_record.thumbnail_path = str(thumb_path)
             db.commit()
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error(f"Thumbnail/display generation error: {e}")
 
         # Step 9: Quality-risk analysis
         from app.ml.quality_engine import QualityEngine

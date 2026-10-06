@@ -1,0 +1,21 @@
+query_image_id,ground_truth_artifact,predicted_artifact,confidence,top_match_parent_id,top_match_similarity,suggested_corrective_action
+syn_hcci_327_NORMAL,NORMAL,CONTRAST_REDUCTION,0.1574,hcci_27,0.9212,Optimize photomultiplier / brightness-contrast settings
+syn_hcci_327_BLUR_sev1,BLUR,CONTRAST_REDUCTION,0.1802,hcci_247,0.9169,Optimize photomultiplier / brightness-contrast settings
+syn_hcci_327_MOTION_BLUR_sev2,MOTION_BLUR,MOTION_BLUR,0.5398,hcci_246,0.8639,Inspect specimen stage vibration isolation and scan speed
+syn_hcci_327_NOISE_sev3,NOISE,NOISE,0.5243,hcci_272,0.9044,Increase frame averaging count or reduce scan frequency
+syn_hcci_327_CONTRAST_REDUCTION_sev1,CONTRAST_REDUCTION,CONTRAST_REDUCTION,0.2631,hcci_245,0.9187,Optimize photomultiplier / brightness-contrast settings
+syn_hcci_327_OVEREXPOSURE_sev2,OVEREXPOSURE,OVEREXPOSURE,0.2336,hcci_244,0.8935,Review detector gain / beam exposure parameters
+syn_hcci_327_UNDEREXPOSURE_sev3,UNDEREXPOSURE,UNDEREXPOSURE,0.684,hcci_23,0.8462,Increase beam dwell time or verify aperture alignment
+syn_hcci_327_CLIPPING_sev1,CLIPPING,CONTRAST_REDUCTION,0.1574,hcci_27,0.9212,Optimize photomultiplier / brightness-contrast settings
+syn_hcci_327_LOCAL_ILLUMINATION_ABNORMALITY_sev2,LOCAL_ILLUMINATION_ABNORMALITY,LOCAL_ILLUMINATION_ABNORMALITY,0.3969,hcci_231,0.9183,Inspect detector grid alignment and surface tilt
+syn_hcci_327_ACQUISITION_PERTURBATION_sev3,ACQUISITION_PERTURBATION,ACQUISITION_PERTURBATION,0.4559,hcci_246,0.8786,Verify scan raster synchronization and scan coil power
+syn_hcci_327_CHARGING_LIKE_SYNTHETIC_ARTIFACT_sev1,CHARGING_LIKE_SYNTHETIC_ARTIFACT,CHARGING_LIKE_SYNTHETIC_ARTIFACT,0.1619,hcci_28,0.9267,Verify conductive grounding / apply low-kV or charge-compensation
+syn_hcci_328_NORMAL,NORMAL,NORMAL,0.1593,hcci_253,0.9165,No corrective action indicated
+syn_hcci_328_BLUR_sev2,BLUR,BLUR,0.1504,hcci_28,0.9205,Perform objective focus calibration / stigmation adjustment
+syn_hcci_328_MOTION_BLUR_sev3,MOTION_BLUR,MOTION_BLUR,0.7062,hcci_224,0.8261,Inspect specimen stage vibration isolation and scan speed
+syn_hcci_328_NOISE_sev1,NOISE,NOISE,0.4396,hcci_230,0.9202,Increase frame averaging count or reduce scan frequency
+syn_hcci_328_CONTRAST_REDUCTION_sev2,CONTRAST_REDUCTION,CONTRAST_REDUCTION,0.2072,hcci_246,0.8749,Optimize photomultiplier / brightness-contrast settings
+syn_hcci_328_OVEREXPOSURE_sev3,OVEREXPOSURE,OVEREXPOSURE,0.4592,hcci_241,0.8729,Review detector gain / beam exposure parameters
+syn_hcci_328_UNDEREXPOSURE_sev1,UNDEREXPOSURE,UNDEREXPOSURE,0.2887,hcci_241,0.8915,Increase beam dwell time or verify aperture alignment
+syn_hcci_328_CLIPPING_sev2,CLIPPING,NORMAL,0.1588,hcci_253,0.9163,No corrective action indicated
+syn_hcci_328_LOCAL_ILLUMINATION_ABNORMALITY_sev3,LOCAL_ILLUMINATION_ABNORMALITY,LOCAL_ILLUMINATION_ABNORMALITY,0.3873,hcci_244,0.8957,Inspect detector grid alignment and surface tilt

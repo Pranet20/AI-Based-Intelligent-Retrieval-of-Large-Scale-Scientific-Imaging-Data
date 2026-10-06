@@ -1,0 +1,484 @@
+{
+  "metadata": {
+    "protocol": "research/protocols/retrieval_freeze_1.yaml",
+    "timestamp": "2026-10-05 22:20:57Z",
+    "n_queries": 212,
+    "gallery_size_per_query": 211,
+    "deterministic_rerun_verified": true
+  },
+  "models": {
+    "phash": {
+      "model_id": "phash",
+      "n_queries": 212,
+      "recall_at_1": 0.09905660377358491,
+      "recall_at_5": 0.9716981132075472,
+      "recall_at_10": 1.0,
+      "mrr": 0.4894317160826595,
+      "precision_at_5": 0.6735849056603774,
+      "ci_recall_at_1": [
+        0.06132075471698113,
+        0.13679245283018868
+      ],
+      "ci_mrr": [
+        0.46265582884097034,
+        0.5167939970799641
+      ],
+      "ci_precision_at_5": [
+        0.6462028301886793,
+        0.7028301886792453
+      ],
+      "latency_mean_ms": 2.920108959342371,
+      "latency_p50_ms": 2.6811000134330243,
+      "latency_p95_ms": 4.11256997322198,
+      "latency_p99_ms": 5.974207952385767,
+      "embedding_dim": 64,
+      "index_memory_kb": 1.65625
+    },
+    "dhash": {
+      "model_id": "dhash",
+      "n_queries": 212,
+      "recall_at_1": 0.10849056603773585,
+      "recall_at_5": 0.9481132075471698,
+      "recall_at_10": 0.9716981132075472,
+      "mrr": 0.4995084265838983,
+      "precision_at_5": 0.6235849056603773,
+      "ci_recall_at_1": [
+        0.0660377358490566,
+        0.1509433962264151
+      ],
+      "ci_mrr": [
+        0.4721582775191266,
+        0.5252587362846797
+      ],
+      "ci_precision_at_5": [
+        0.5914858490566038,
+        0.6537735849056602
+      ],
+      "latency_mean_ms": 2.7815169835449987,
+      "latency_p50_ms": 2.663449995452538,
+      "latency_p95_ms": 3.191315004369243,
+      "latency_p99_ms": 5.443016013596205,
+      "embedding_dim": 64,
+      "index_memory_kb": 1.65625
+    },
+    "resnet50": {
+      "model_id": "resnet50",
+      "n_queries": 212,
+      "recall_at_1": 0.08018867924528301,
+      "recall_at_5": 0.9811320754716981,
+      "recall_at_10": 1.0,
+      "mrr": 0.4835691823899371,
+      "precision_at_5": 0.5726415094339623,
+      "ci_recall_at_1": [
+        0.04245283018867924,
+        0.1179245283018868
+      ],
+      "ci_mrr": [
+        0.45878930817610064,
+        0.5090428459119498
+      ],
+      "ci_precision_at_5": [
+        0.5433962264150943,
+        0.6028301886792452
+      ],
+      "latency_mean_ms": 1.99734764080275,
+      "latency_p50_ms": 1.8692500016186386,
+      "latency_p95_ms": 2.7791199827333903,
+      "latency_p99_ms": 4.755299991811617,
+      "embedding_dim": 2048,
+      "index_memory_kb": 1696.0
+    },
+    "dinov2_vits14": {
+      "model_id": "dinov2_vits14",
+      "n_queries": 212,
+      "recall_at_1": 0.1320754716981132,
+      "recall_at_5": 0.9858490566037735,
+      "recall_at_10": 1.0,
+      "mrr": 0.5199741689128482,
+      "precision_at_5": 0.6160377358490567,
+      "ci_recall_at_1": [
+        0.08962264150943396,
+        0.1792452830188679
+      ],
+      "ci_mrr": [
+        0.49426479672057494,
+        0.5478119384546272
+      ],
+      "ci_precision_at_5": [
+        0.5886556603773584,
+        0.6452830188679246
+      ],
+      "latency_mean_ms": 0.5163160369090103,
+      "latency_p50_ms": 0.47655001981183887,
+      "latency_p95_ms": 0.6882350076921283,
+      "latency_p99_ms": 1.1724310083081937,
+      "embedding_dim": 384,
+      "index_memory_kb": 318.0
+    },
+    "adapter_seed42": {
+      "model_id": "adapter_seed42",
+      "n_queries": 212,
+      "recall_at_1": 0.1320754716981132,
+      "recall_at_5": 0.9952830188679245,
+      "recall_at_10": 1.0,
+      "mrr": 0.5230345911949685,
+      "precision_at_5": 0.6320754716981132,
+      "ci_recall_at_1": [
+        0.08962264150943396,
+        0.1792452830188679
+      ],
+      "ci_mrr": [
+        0.4974056603773585,
+        0.5501591981132076
+      ],
+      "ci_precision_at_5": [
+        0.6047169811320755,
+        0.6594339622641509
+      ],
+      "latency_mean_ms": 0.5044103800516822,
+      "latency_p50_ms": 0.48889999743551016,
+      "latency_p95_ms": 0.6165149970911439,
+      "latency_p99_ms": 0.9428320056758804,
+      "embedding_dim": 384,
+      "index_memory_kb": 318.0
+    },
+    "adapter_seed123": {
+      "model_id": "adapter_seed123",
+      "n_queries": 212,
+      "recall_at_1": 0.14622641509433962,
+      "recall_at_5": 0.9905660377358491,
+      "recall_at_10": 1.0,
+      "mrr": 0.5213574423480084,
+      "precision_at_5": 0.6216981132075472,
+      "ci_recall_at_1": [
+        0.10377358490566038,
+        0.19339622641509435
+      ],
+      "ci_mrr": [
+        0.493523322851153,
+        0.550058962264151
+      ],
+      "ci_precision_at_5": [
+        0.5943396226415094,
+        0.6490566037735848
+      ],
+      "latency_mean_ms": 0.5193433975844802,
+      "latency_p50_ms": 0.493150029797107,
+      "latency_p95_ms": 0.6183699937537313,
+      "latency_p99_ms": 0.9527309780241913,
+      "embedding_dim": 384,
+      "index_memory_kb": 318.0
+    },
+    "adapter_seed2024": {
+      "model_id": "adapter_seed2024",
+      "n_queries": 212,
+      "recall_at_1": 0.15566037735849056,
+      "recall_at_5": 0.9905660377358491,
+      "recall_at_10": 1.0,
+      "mrr": 0.5337713387241689,
+      "precision_at_5": 0.6443396226415095,
+      "ci_recall_at_1": [
+        0.10849056603773585,
+        0.2028301886792453
+      ],
+      "ci_mrr": [
+        0.5075525044923629,
+        0.5625039308176101
+      ],
+      "ci_precision_at_5": [
+        0.6160377358490565,
+        0.6717216981132076
+      ],
+      "latency_mean_ms": 0.6051438661261445,
+      "latency_p50_ms": 0.546199968084693,
+      "latency_p95_ms": 0.8309850149089469,
+      "latency_p99_ms": 1.4125789992976914,
+      "embedding_dim": 384,
+      "index_memory_kb": 318.0
+    }
+  },
+  "adapter_ensemble": {
+    "model_id": "adapter_mean_std",
+    "n_queries": 212,
+    "recall_at_1_mean": 0.14465408805031446,
+    "recall_at_1_std": 0.009692474847435496,
+    "recall_at_5_mean": 0.9921383647798742,
+    "recall_at_5_std": 0.002223606230146349,
+    "recall_at_10_mean": 1.0,
+    "recall_at_10_std": 0.0,
+    "mrr_mean": 0.526054457422382,
+    "mrr_std": 0.005499448447078852,
+    "precision_at_5_mean": 0.6327044025157232,
+    "precision_at_5_std": 0.009254049666391295,
+    "latency_mean_ms": 0.5429658812541023,
+    "embedding_dim": 384,
+    "index_memory_kb": 318.0
+  },
+  "error_analysis": {
+    "all_fail_r1_count": 155,
+    "all_fail_r1_ids": [
+      "hcci_327",
+      "hcci_328",
+      "hcci_329",
+      "hcci_330",
+      "hcci_331",
+      "hcci_332",
+      "hcci_333",
+      "hcci_334",
+      "hcci_335",
+      "hcci_337",
+      "hcci_338",
+      "hcci_341",
+      "hcci_343",
+      "hcci_344",
+      "hcci_345",
+      "hcci_346",
+      "hcci_347",
+      "hcci_348",
+      "hcci_349",
+      "hcci_350",
+      "hcci_353",
+      "hcci_356",
+      "hcci_357",
+      "hcci_358",
+      "hcci_361",
+      "hcci_362",
+      "hcci_363",
+      "hcci_364",
+      "hcci_366",
+      "hcci_367",
+      "hcci_368",
+      "hcci_369",
+      "hcci_370",
+      "hcci_371",
+      "hcci_372",
+      "hcci_373",
+      "hcci_374",
+      "hcci_375",
+      "hcci_376",
+      "hcci_377",
+      "hcci_378",
+      "hcci_379",
+      "hcci_380",
+      "hcci_382",
+      "hcci_384",
+      "hcci_386",
+      "hcci_387",
+      "hcci_388",
+      "hcci_389",
+      "hcci_390",
+      "hcci_391",
+      "hcci_392",
+      "hcci_394",
+      "hcci_395",
+      "hcci_396",
+      "hcci_397",
+      "hcci_398",
+      "hcci_399",
+      "hcci_400",
+      "hcci_403",
+      "hcci_404",
+      "hcci_405",
+      "hcci_406",
+      "hcci_409",
+      "hcci_410",
+      "hcci_412",
+      "hcci_414",
+      "hcci_415",
+      "hcci_416",
+      "hcci_417",
+      "hcci_418",
+      "hcci_420",
+      "hcci_421",
+      "hcci_422",
+      "hcci_424",
+      "hcci_425",
+      "hcci_426",
+      "hcci_427",
+      "hcci_428",
+      "hcci_429",
+      "hcci_430",
+      "hcci_431",
+      "hcci_432",
+      "hcci_433",
+      "hcci_434",
+      "hcci_726",
+      "hcci_727",
+      "hcci_728",
+      "hcci_729",
+      "hcci_730",
+      "hcci_731",
+      "hcci_732",
+      "hcci_733",
+      "hcci_734",
+      "hcci_739",
+      "hcci_740",
+      "hcci_743",
+      "hcci_744",
+      "hcci_745",
+      "hcci_746",
+      "hcci_749",
+      "hcci_750",
+      "hcci_751",
+      "hcci_752",
+      "hcci_753",
+      "hcci_754",
+      "hcci_755",
+      "hcci_756",
+      "hcci_757",
+      "hcci_758",
+      "hcci_759",
+      "hcci_760",
+      "hcci_761",
+      "hcci_762",
+      "hcci_764",
+      "hcci_765",
+      "hcci_766",
+      "hcci_767",
+      "hcci_768",
+      "hcci_769",
+      "hcci_770",
+      "hcci_773",
+      "hcci_774",
+      "hcci_775",
+      "hcci_776",
+      "hcci_778",
+      "hcci_779",
+      "hcci_780",
+      "hcci_781",
+      "hcci_782",
+      "hcci_785",
+      "hcci_786",
+      "hcci_788",
+      "hcci_790",
+      "hcci_791",
+      "hcci_792",
+      "hcci_799",
+      "hcci_800",
+      "hcci_802",
+      "hcci_804",
+      "hcci_805",
+      "hcci_806",
+      "hcci_809",
+      "hcci_810",
+      "hcci_811",
+      "hcci_812",
+      "hcci_813",
+      "hcci_815",
+      "hcci_816",
+      "hcci_817",
+      "hcci_818",
+      "hcci_820",
+      "hcci_826",
+      "hcci_827",
+      "hcci_828"
+    ],
+    "all_fail_r5_count": 0,
+    "all_fail_r5_ids": [],
+    "dinov2_wins_count": 21,
+    "dinov2_wins_ids": [
+      "hcci_336",
+      "hcci_359",
+      "hcci_407",
+      "hcci_408",
+      "hcci_723",
+      "hcci_724",
+      "hcci_725",
+      "hcci_735",
+      "hcci_736",
+      "hcci_737",
+      "hcci_738",
+      "hcci_741",
+      "hcci_742",
+      "hcci_747",
+      "hcci_748",
+      "hcci_771",
+      "hcci_783",
+      "hcci_784",
+      "hcci_798",
+      "hcci_801",
+      "hcci_803"
+    ],
+    "resnet_wins_count": 10,
+    "resnet_wins_ids": [
+      "hcci_354",
+      "hcci_365",
+      "hcci_385",
+      "hcci_411",
+      "hcci_413",
+      "hcci_419",
+      "hcci_794",
+      "hcci_808",
+      "hcci_819",
+      "hcci_830"
+    ],
+    "adapter_wins_count": 1,
+    "adapter_wins_ids": [
+      "hcci_402"
+    ],
+    "dinov2_retains_count": 1,
+    "dinov2_retains_ids": [
+      "hcci_801"
+    ],
+    "detector_breakdown": {
+      "SE": {
+        "count": 71,
+        "resnet_r1": 0.0986,
+        "dinov2_r1": 0.2254,
+        "adapter_r1": 0.2113
+      },
+      "BSE": {
+        "count": 71,
+        "resnet_r1": 0.0845,
+        "dinov2_r1": 0.1549,
+        "adapter_r1": 0.169
+      },
+      "InLens": {
+        "count": 70,
+        "resnet_r1": 0.0571,
+        "dinov2_r1": 0.0143,
+        "adapter_r1": 0.0143
+      }
+    },
+    "voltage_breakdown": {
+      "5.0": {
+        "count": 71,
+        "resnet_r1": 0.0423,
+        "dinov2_r1": 0.1549,
+        "adapter_r1": 0.1549
+      },
+      "10.0": {
+        "count": 71,
+        "resnet_r1": 0.1127,
+        "dinov2_r1": 0.1408,
+        "adapter_r1": 0.1408
+      },
+      "20.0": {
+        "count": 70,
+        "resnet_r1": 0.0857,
+        "dinov2_r1": 0.1,
+        "adapter_r1": 0.1
+      }
+    },
+    "magnification_breakdown": {
+      "low (<5kx)": {
+        "count": 212,
+        "resnet_r1": 0.0802,
+        "dinov2_r1": 0.1321,
+        "adapter_r1": 0.1321
+      },
+      "medium (5k-20kx)": {
+        "count": 0,
+        "resnet_r1": 0.0,
+        "dinov2_r1": 0.0,
+        "adapter_r1": 0.0
+      },
+      "high (>20kx)": {
+        "count": 0,
+        "resnet_r1": 0.0,
+        "dinov2_r1": 0.0,
+        "adapter_r1": 0.0
+      }
+    }
+  }
+}

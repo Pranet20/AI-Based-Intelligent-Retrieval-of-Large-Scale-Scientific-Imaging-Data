@@ -1,0 +1,4 @@
+pipeline_architecture,quality_screening_macro_f1,quality_screening_auroc,retrieval_r5,retrieval_mrr,acquisition_gap,gap_reduction_pct,architectural_type,notes
+Single Backbone: Frozen DINOv2 Only,0.6837,0.8582,0.9858,0.52,0.2016,0.0,Monolithic,Optimal artifact sensitivity; sub-optimal cross-acquisition retrieval
+Single Backbone: Phase-4 Adapter Only,0.6323,0.823,0.9921,0.5261,0.0681,66.23,Monolithic,Optimal retrieval & gap alignment; attenuated fine-grained artifact sensitivity
+Composed Dual-Representation (SCI-INTEL Phase 6),0.6837,0.8582,0.9921,0.5261,0.0681,66.23,Modular Composition,Unifies optimal quality sensitivity (DINOv2) with optimal retrieval (Phase-4) via evidence layer without retraining
