@@ -1,0 +1,16 @@
+% TABLE VI: Model-Derived Suspicious Region Localization Performance (N=500)
+\begin{table*}[t]
+\centering
+\caption{TABLE VI: Model-Derived Suspicious Region Localization Performance (N=500)}
+\label{tab:table6_localization_performance}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Evaluation Metric} & \textbf{Observed Value} & \textbf{Standard Error} & \textbf{Benchmark Context} & \textbf{Designation Note} \\
+\hline
+Macro Intersection-over-Union (IoU) \& 0.4454 \& +/- 0.012 \& Controlled synthetic artifact masks \& Model-derived suspicious region \\
+Dice Similarity Coefficient \& 0.5103 \& +/- 0.014 \& Patch-level thresholded attention \& Not physical defect confirmation \\
+Pixel-Level Precision \& 0.5259 \& +/- 0.015 \& Over positive saliency region \& Attentional localization \\
+Pixel-Level Recall \& 0.4957 \& +/- 0.016 \& Over true degraded boundary \& Attentional localization \\
+\hline
+\end{tabular}
+\end{table*}

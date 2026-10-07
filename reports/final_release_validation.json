@@ -1,0 +1,77 @@
+{
+  "project": "SCI-INTEL: AI-Based Intelligent Retrieval and Quality-Aware Curation of Scientific Microscopy Images",
+  "target_venue": "IEEE International Symposium on Biomedical Imaging (ISBI 2027)",
+  "official_deadline": "2026-10-26",
+  "git_branch": "main",
+  "base_commit": "64fde8300fa381f0392c1b91c0eaf87074e580f3",
+  "authors": [
+    {
+      "name": "Pranet Pallati",
+      "roll": "24881A05B7",
+      "role": "Submitting & Corresponding Author"
+    },
+    {
+      "name": "Gollakota Charan Deep",
+      "roll": "24881A0586",
+      "role": "Co-Author"
+    },
+    {
+      "name": "Pooja Vunnam",
+      "roll": "24881A05B5",
+      "role": "Co-Author / Release Lead"
+    },
+    {
+      "name": "Ms. C. Bhavana",
+      "roll": "Faculty",
+      "role": "Faculty Guide / Research Supervisor"
+    }
+  ],
+  "authorship_order_status": "HUMAN_REVIEW_REQUIRED",
+  "total_automated_tests": 509,
+  "tests_passed": 509,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "test_pass_rate": "100.0%",
+  "pytest_warnings_count": 4,
+  "pytest_avoidable_warnings": 0,
+  "backend_status": "PASS (17-stage lifecycle validated locally)",
+  "frontend_status": "PASS (React 18 production build 97.83 kB, 0 TS errors)",
+  "manual_demo_status": "PASS (All 16 stages verified in docs/manual_demo_validation.md)",
+  "docker_status": "ENVIRONMENT_INACTIVE_DAEMON (Manifests valid, documented in docs/docker_local_validation.md)",
+  "figures_count": 7,
+  "tables_count": 9,
+  "dual_representation_enforced": true,
+  "silent_fallback_prevented": true,
+  "scientific_freeze_status": "100% INTACT",
+  "canonical_metrics": {
+    "dinov2_within_similarity": 0.7811,
+    "dinov2_cross_similarity": 0.5794,
+    "dinov2_similarity_gap": 0.2016,
+    "phase4_within_similarity": 0.9085,
+    "phase4_cross_similarity": 0.8404,
+    "phase4_similarity_gap": 0.0681,
+    "similarity_gap_reduction_pct": 66.23,
+    "query_level_gap_reduction_pct": 66.4,
+    "wilcoxon_w": 21743.0,
+    "wilcoxon_p_value": 5.03e-36,
+    "cohen_effect_size_dz": 2.19,
+    "protocol_m_recall_at_1": 0.9481,
+    "protocol_m_mrr": 0.9658,
+    "protocol_u_dinov2_recall_at_5": 0.9858,
+    "protocol_u_ensemble_recall_at_5": 0.9921,
+    "quality_risk_auroc": 0.8582,
+    "quality_risk_auprc": 0.9841,
+    "quality_risk_f1": 0.9632,
+    "quality_risk_balanced_acc": 0.7036,
+    "localization_macro_iou": 0.4454,
+    "localization_dice": 0.5103,
+    "evidence_cohort_n": 55,
+    "evidence_availability_pct": 100.0,
+    "selective_acc_at_tau_0_6": 100.0,
+    "abstention_rate_at_tau_0_6": 90.27,
+    "pipeline_latency_mean_ms": 23.4,
+    "pipeline_latency_p95_ms": 28.3
+  },
+  "timestamp_utc": "2026-10-07T05:04:45.302332+00:00",
+  "paper_readiness_master_seal_sha256": "94f3388c351c3d5726c33917171ec445a5df43d8a285619cf2102110ba54b750"
+}

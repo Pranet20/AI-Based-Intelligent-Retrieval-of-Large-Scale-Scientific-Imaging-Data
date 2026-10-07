@@ -1,0 +1,9 @@
+### TABLE II: HCCI Benchmark Partitions & Acquisition Conditions
+
+| Split Partition | Micrograph Count | Instruments / Capture Geometry | Accelerating Voltages | Known Specimen Scope |
+| :--- | :--- | :--- | :--- | :--- |
+| Training Partition | 427 | Zeiss Sigma 300 / InLens & SE2 | 5.0 kV, 10.0 kV, 15.0 kV, 20.0 kV | Overlapping specimen classes |
+| Validation Partition | 135 | Zeiss Sigma 300 / Multi-Detector | 5.0 kV, 10.0 kV, 15.0 kV, 20.0 kV | Overlapping specimen classes |
+| Held-out Test Partition | 212 | Zeiss Sigma 300 / Held-out Conditions | 5.0 kV, 10.0 kV, 15.0 kV, 20.0 kV | Cross-condition transfer (known classes) |
+| Total Benchmark | 774 | Standardized Acquisition Grid | 5.0–20.0 kV range | Evaluates acquisition robustness, not unseen specimens |
+
