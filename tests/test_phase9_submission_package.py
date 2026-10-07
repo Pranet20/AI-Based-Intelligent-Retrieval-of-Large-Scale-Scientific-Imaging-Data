@@ -34,6 +34,11 @@ try:
 except ImportError:
     fitz = None
 
+try:
+    from docx import Document
+except ImportError:
+    Document = None
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 PHASE7_DIR = BASE_DIR / "research/phase7"
 PHASE8_DIR = BASE_DIR / "research/phase8"
@@ -105,7 +110,8 @@ def test_07_incorrect_pooja_identity_absent():
 
 # 8. Stale 91.18% absent from final manuscript
 def test_08_stale_91_18_absent():
-    from docx import Document
+    if Document is None:
+        pytest.skip("python-docx not installed")
     doc = Document(ISBI_DIR / "SCI_INTEL_ISBI2027_MANUSCRIPT.docx")
     full_text = " ".join(p.text for p in doc.paragraphs)
     assert "91.18" not in full_text
@@ -114,7 +120,8 @@ def test_08_stale_91_18_absent():
 
 # 9. Stale 118.80 ms absent from final manuscript
 def test_09_stale_118_80_absent():
-    from docx import Document
+    if Document is None:
+        pytest.skip("python-docx not installed")
     doc = Document(ISBI_DIR / "SCI_INTEL_ISBI2027_MANUSCRIPT.docx")
     full_text = " ".join(p.text for p in doc.paragraphs)
     assert "118.80" not in full_text

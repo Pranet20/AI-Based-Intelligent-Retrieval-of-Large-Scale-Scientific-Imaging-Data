@@ -112,6 +112,9 @@ def test_02_parent_sha_integrity():
 
 def test_03_synthetic_sha_integrity():
     """Verify synthetic image files exist on disk and possess valid SHA-256."""
+    synthetic_dir = Path("data/processed/phase4_synthetic")
+    if not synthetic_dir.exists() or not any(synthetic_dir.iterdir()):
+        pytest.skip("Synthetic benchmark raw image files excluded from git repository (see .gitignore)")
     df = pd.read_csv(SYNTHETIC_MANIFEST_PATH)
     sample_rows = df.sample(n=20, random_state=42)
     for _, row in sample_rows.iterrows():
@@ -185,6 +188,9 @@ def test_09_generator_version_provenance():
 
 def test_10_localized_artifact_mask_existence():
     """Verify exact mask files exist for all spatially localized artifacts."""
+    synthetic_dir = Path("data/processed/phase4_synthetic")
+    if not synthetic_dir.exists() or not any(synthetic_dir.iterdir()):
+        pytest.skip("Synthetic benchmark raw mask files excluded from git repository (see .gitignore)")
     df = pd.read_csv(SYNTHETIC_MANIFEST_PATH)
     loc_df = df[df["artifact_type"].isin(LOCALIZED_TYPES)]
     assert len(loc_df) == 1250  # 250 per localized class * 5 classes
@@ -198,6 +204,9 @@ def test_10_localized_artifact_mask_existence():
 
 def test_11_mask_image_dimensional_consistency():
     """Verify mask dimensions exactly match image dimensions (512x512)."""
+    synthetic_dir = Path("data/processed/phase4_synthetic")
+    if not synthetic_dir.exists() or not any(synthetic_dir.iterdir()):
+        pytest.skip("Synthetic benchmark raw image and mask files excluded from git repository (see .gitignore)")
     df = pd.read_csv(SYNTHETIC_MANIFEST_PATH)
     loc_df = df[df["artifact_type"].isin(LOCALIZED_TYPES)].sample(n=10, random_state=42)
 
