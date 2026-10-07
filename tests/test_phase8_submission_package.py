@@ -28,7 +28,7 @@ from pathlib import Path
 import pytest
 import pandas as pd
 
-BASE_DIR = Path("C:/Users/Pranet/Downloads/Mini Project")
+BASE_DIR = Path(__file__).resolve().parent.parent
 PHASE7_DIR = BASE_DIR / "research/phase7"
 PHASE8_DIR = BASE_DIR / "research/phase8"
 

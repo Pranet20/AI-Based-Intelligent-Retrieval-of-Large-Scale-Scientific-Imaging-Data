@@ -18,13 +18,15 @@ RUN groupadd -g 10001 appuser && \
 COPY platform/backend/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend application, frozen models, and core libraries
+# Copy backend application, frozen models, data, and core libraries
 COPY platform/backend/app /app/app
 COPY src /app/src
 COPY configs /app/configs
+COPY data /app/data
 
 # Create storage hierarchy and grant ownership to appuser
 RUN mkdir -p /app/platform/storage/originals /app/platform/storage/thumbnails /app/platform/storage/indexes && \
+    chmod -R 777 /app/platform/storage && \
     chown -R appuser:appuser /app
 
 ENV PYTHONPATH="/app:/app/app"

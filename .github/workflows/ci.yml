@@ -64,7 +64,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -e .
-          pip install pytest httpx
+          pip install pytest httpx PyMuPDF
 
       - name: Run Test Suite
         env:
@@ -104,6 +104,11 @@ jobs:
       - name: Build Container Stack
         run: |
           docker compose build
+
+      - name: Prepare Container Storage Permissions
+        run: |
+          mkdir -p platform/storage/originals platform/storage/thumbnails platform/storage/indexes
+          chmod -R 777 platform/storage
 
       - name: Start Services
         run: |

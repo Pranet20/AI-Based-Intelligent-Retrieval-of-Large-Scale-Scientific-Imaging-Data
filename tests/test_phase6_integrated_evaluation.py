@@ -30,7 +30,7 @@ from src.evidence.schemas import (
 )
 from src.evidence.threshold_config import DEFAULT_THRESHOLD_CONFIG
 
-BASE_DIR = Path("C:/Users/Pranet/Downloads/Mini Project")
+BASE_DIR = Path(__file__).resolve().parent.parent
 PHASE6_DIR = BASE_DIR / "research/results/phase6"
 
 

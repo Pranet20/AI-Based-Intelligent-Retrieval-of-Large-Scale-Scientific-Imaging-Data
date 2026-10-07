@@ -125,7 +125,7 @@ def _get_sample_dir() -> Path:
         Path("BBBC021_v1_images_Week10_40111/Week10_40111"),
         Path("../BBBC021_v1_images_Week10_40111/Week10_40111"),
         Path("../../BBBC021_v1_images_Week10_40111/Week10_40111"),
-        Path("C:/Users/Pranet/Downloads/Mini Project/BBBC021_v1_images_Week10_40111/Week10_40111"),
+        Path(__file__).resolve().parents[4] / "BBBC021_v1_images_Week10_40111/Week10_40111",
     ]
     for c in candidates:
         if c.exists() and c.is_dir():

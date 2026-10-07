@@ -29,10 +29,12 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
-import pytest
-import fitz  # PyMuPDF
+try:
+    import fitz  # PyMuPDF
+except ImportError:
+    fitz = None
 
-BASE_DIR = Path("C:/Users/Pranet/Downloads/Mini Project")
+BASE_DIR = Path(__file__).resolve().parent.parent
 PHASE7_DIR = BASE_DIR / "research/phase7"
 PHASE8_DIR = BASE_DIR / "research/phase8"
 PHASE9_DIR = BASE_DIR / "research/phase9"
@@ -61,6 +63,8 @@ def test_03_docx_exists():
 
 # 4. Page count <= 4
 def test_04_page_count_le_4():
+    if fitz is None:
+        pytest.skip("PyMuPDF not installed in test environment")
     pdf_p = ISBI_DIR / "SCI_INTEL_ISBI2027_MANUSCRIPT.pdf"
     doc = fitz.open(str(pdf_p))
     assert len(doc) <= 4, f"Page count {len(doc)} exceeds 4-page ceiling"

@@ -32,7 +32,7 @@ from src.evidence.schemas import (
     SuspiciousRegion,
 )
 
-BASE_DIR = Path("C:/Users/Pranet/Downloads/Mini Project")
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Test 01: Strict Null Preservation in Acquisition Context
