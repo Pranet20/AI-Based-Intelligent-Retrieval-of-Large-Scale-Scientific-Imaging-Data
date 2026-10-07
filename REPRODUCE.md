@@ -150,10 +150,11 @@ Expected Metrics:
 ```bash
 python scripts/reproduce/reproduce_adapter.py --eval
 ```
-Expected Metrics:
-- **Baseline Within:** `0.7973` | **Baseline Cross:** `0.5979` (Gap: 0.1994)
-- **Adapted Within:** `0.9199` | **Adapted Cross:** `0.8564` (Gap: 0.0635)
-- **Gap Reduction:** `68.15%` ($p = 1.42 \times 10^{-12}$)
+Expected Authoritative Metrics (Evaluated protocol, N=55 cohort):
+- **Baseline Within:** `0.7811` | **Baseline Cross:** `0.5794` (Gap: `0.2016`)
+- **Adapted Within:** `0.9085` | **Adapted Cross:** `0.8404` (Gap: `0.0681`)
+- **Gap Reduction:** `66.23%` (Query-level: `66.40%`, Wilcoxon $W = 21743$, $p = 5.03 \times 10^{-36}$, paired Cohen's $d_z = 2.19$)
+
 
 ---
 

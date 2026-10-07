@@ -126,7 +126,23 @@ async def search_images(
     q_vector: Optional[np.ndarray] = None
     query_img_record = None
 
-    is_phase4 = "phase4" in representation
+    if representation == "phase4_adapted":
+        try:
+            phase4_engine._ensure_loaded()
+        except Exception as e:
+            raise HTTPException(
+                status_code=503,
+                detail=f"Phase 4 acquisition-aware representation is unavailable: {str(e)}",
+            )
+        is_phase4 = True
+    elif representation == "dinov2_base":
+        is_phase4 = False
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported representation '{representation}'. Allowed: ['dinov2_base', 'phase4_adapted']",
+        )
+
 
     if image_id is not None:
         query_img_record = db.query(Image).filter(Image.id == image_id).first()

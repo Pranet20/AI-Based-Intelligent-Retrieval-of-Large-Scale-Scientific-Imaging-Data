@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python: 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3119/)
-[![Tests: 479 Passed](https://img.shields.io/badge/Tests-479%20Passed-brightgreen.svg)]()
+[![Tests: 509 Passed](https://img.shields.io/badge/Tests-509%20Passed-brightgreen.svg)]()
 [![Frozen Records: 128/128 Verified](https://img.shields.io/badge/Frozen%20Records-128%2F128%20Verified-blue.svg)](reports/final_audit/FINAL_HISTORICAL_IMMUTABILITY_REPORT.md)
 [![Status: Ready For Paper Writing](https://img.shields.io/badge/Status-READY__FOR__PAPER__WRITING-brightgreen.svg)](artifacts/final/FINAL_APPLICATION_RELEASE_REPORT.md)
 [![IEEE Paper Package](https://img.shields.io/badge/IEEE%20Paper%20Package-Complete-blue.svg)](paper/)
@@ -93,7 +93,7 @@ All numerical results below are cryptographically frozen, independently audited,
 │   │       └── pages/   # Dashboard, Search, Explorer, ImageDetail, Workbench, Admin
 │   ├── docker/          # Multi-stage Docker container definitions & compose stacks
 │   ├── storage/         # Local runtime data storage and SQLite/PostgreSQL models
-│   └── tests/           # 55 platform integration, API, security, and lifecycle tests
+│   └── tests/           # 85 platform integration, API, security, and multi-image workflow tests
 ├── reports/             # Comprehensive phase audit reports and IEEE submission package
 ├── scripts/
 │   ├── data/            # Deterministic dataset acquisition scripts
@@ -148,16 +148,16 @@ npm start
 ```
 
 ### 5.3 Automated Verification & Test Suite Execution
-The repository includes a comprehensive, verified 479-test automated test suite:
+The repository includes a comprehensive, verified 509-test automated test suite:
 - **Research Test Suite:** 424 passed tests (`pytest tests/`)
-- **Platform & Integration Suite:** 55 passed tests (`pytest platform/tests/`)
-- **Combined Total:** 479 passed / 0 failed / 0 skipped
+- **Platform & Integration Suite:** 85 passed tests (`pytest platform/tests/`)
+- **Combined Total:** 509 passed / 0 failed / 0 skipped
 
 ```bash
 # Verify all 128 frozen research checksums (immutability check)
 python scripts/reproduce/final_validate_project.py --verify-only
 
-# Run platform test suite (55 tests)
+# Run platform test suite (85 tests)
 pytest platform/tests/ -v
 
 # Run canonical 17-stage scientific workflow test
@@ -166,14 +166,14 @@ pytest platform/tests/test_canonical_scientific_flow.py -v
 # Run full research test suite (424 tests)
 pytest tests/ -v
 
-# Run combined 479-test suite
+# Run combined 509-test suite
 pytest tests/ platform/tests/ -q
 
 # Test production frontend build
 cd platform/frontend && npm run build
 ```
 
-> **Note on Test Count Reconciliation:** Early Phase 8 project reporting documented a 218-test baseline (190 research + 28 platform tests). Subsequent implementation of Phase 5 (evidence and explanation engines), Phase 6 (integrated scientific evaluation), Phase 7–9 (closure audits), and Phase 10 (platform closure and canonical end-to-end integration tests) expanded the verified test suite to 479 passed tests.
+> **Note on Test Count Reconciliation:** Early Phase 8 project reporting documented a 218-test baseline (190 research + 28 platform tests). Subsequent implementation of Phase 5 (evidence and explanation engines), Phase 6 (integrated scientific evaluation), Phase 7–9 (closure audits), and Phase 10 (platform closure, canonical end-to-end integration tests, dual-representation assertions, and multi-image workflow validation) expanded the verified test suite to 509 passed tests.
 
 ---
 

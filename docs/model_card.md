@@ -21,7 +21,7 @@
   - Mean Reciprocal Rank (MRR): **0.9658**
   - Precision@5: **0.8708**
 - **SupCon Contrastive Adaptation (Mitigating Instrument Bias)**:
-  - Bias Gap Reduction: **68.15%** ($0.0543 \to 0.0173$, paired $t$-test $p = 1.42 \times 10^{-12}$)
+  - Acquisition Gap Reduction: **66.23%** ($0.2016 \to 0.0681$, Wilcoxon $W = 21743$, $p = 5.03 \times 10^{-36}$, paired Cohen's $d_z = 2.19$)
   - Multi-seed R@1: **0.9418 ± 0.0059**, MRR: **0.9632 ± 0.0042**, P@5: **0.9053 ± 0.0166**
 - **External Zero-Shot Transfer (Carinthia Defect SEM, $N=4,591$)**:
   - Micro R@1: **0.9952**, Macro R@1: **0.9090**, MRR: **0.9961**
@@ -31,6 +31,6 @@
   - FAISS HNSW Retrieval Latency: $0.096\text{ ms}$ (5k vectors) to $0.317\text{ ms}$ (100k vectors)
 
 ## Factors & Limitations
-1. **Acquisition Sensitivity**: While SupCon reduces measured cross-acquisition similarity gap by $68.15\%$, severe optical blur ($\sigma = 3.0$) degrades feature retention to $69.83\%$.
+1. **Acquisition Sensitivity**: While SupCon reduces measured cross-acquisition similarity gap by $66.23\%$, severe optical blur ($\sigma = 3.0$) degrades feature retention to $69.83\%$.
 2. **Comparative Baselines**: Baselines against CLIP and ResNet-50 are descriptive citations from published literature; local re-execution across identical splits was not verified.
 3. **Class Imbalance**: External zero-shot transfer exhibits lower macro sensitivity ($0.9090$) on rare defect classes compared to overall micro accuracy ($0.9952$).
