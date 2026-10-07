@@ -9,3 +9,6 @@
 *.tiff binary
 *.faiss binary
 *.db binary
+*.docx binary
+*.pdf binary
+*.zip binary
