@@ -43,23 +43,28 @@ def health_check(db: Session = Depends(get_db)):
 def readiness_check(db: Session = Depends(get_db)):
     """Deep readiness probe verifying DB, storage, and model checkpoint integrity."""
     from fastapi.responses import JSONResponse
+    from sqlalchemy import text
     checks = {}
     is_ready = True
 
     # 1. Database check
     try:
-        db.execute(Image.__table__.select().limit(1))
+        db.execute(text("SELECT 1"))
         checks["database"] = "READY"
     except Exception as e:
-        checks["database"] = f"NOT_READY: {e}"
-        is_ready = False
+        try:
+            db.execute(Image.__table__.select().limit(1))
+            checks["database"] = "READY"
+        except Exception as e2:
+            checks["database"] = f"NOT_READY: {e2}"
+            is_ready = False
 
     # 2. Storage check
     try:
         settings.STORAGE_PATH.mkdir(parents=True, exist_ok=True)
         test_file = settings.STORAGE_PATH / ".readiness_probe"
         test_file.write_text("ok", encoding="utf-8")
-        test_file.unlink()
+        test_file.unlink(missing_ok=True)
         checks["storage"] = "READY"
     except Exception as e:
         import logging
@@ -73,8 +78,18 @@ def readiness_check(db: Session = Depends(get_db)):
     # 3. Model checkpoint integrity
     try:
         from app.ml.model_registry import ModelRegistryService
+        chk_path = settings.PHASE4_CHECKPOINT_PATH
+        if not chk_path.exists():
+            for candidate in [
+                Path("/app") / chk_path,
+                Path("/app/data/processed/phase4/checkpoints/best_checkpoint_seed42.pt"),
+                Path(__file__).resolve().parents[4] / chk_path,
+            ]:
+                if candidate.exists():
+                    chk_path = candidate
+                    break
         ModelRegistryService.verify_checkpoint_hash(
-            settings.PHASE4_CHECKPOINT_PATH,
+            chk_path,
             settings.EXPECTED_PHASE4_HASH,
         )
         checks["model_checkpoint"] = "READY"

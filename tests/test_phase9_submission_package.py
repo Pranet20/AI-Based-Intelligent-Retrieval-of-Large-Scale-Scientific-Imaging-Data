@@ -29,6 +29,8 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+import pytest
+
 try:
     import fitz  # PyMuPDF
 except ImportError:
