@@ -8,25 +8,25 @@
     {
       "name": "Pranet Pallati",
       "roll": "24881A05B7",
-      "role": "Submitting & Corresponding Author"
+      "role": "Primary Author, Submitting & Corresponding Author"
     },
     {
       "name": "Gollakota Charan Deep",
       "roll": "24881A0586",
-      "role": "Co-Author"
+      "role": "Author"
     },
     {
       "name": "Pooja Vunnam",
       "roll": "24881A05B5",
-      "role": "Co-Author / Release Lead"
+      "role": "Author"
     },
     {
       "name": "Ms. C. Bhavana",
       "roll": "Faculty",
-      "role": "Faculty Guide / Research Supervisor"
+      "role": "Faculty Guide / Research Supervisor, Author"
     }
   ],
-  "authorship_order_status": "HUMAN_REVIEW_REQUIRED",
+  "authorship_order_status": "CONFIRMED",
   "total_automated_tests": 509,
   "tests_passed": 509,
   "tests_failed": 0,
